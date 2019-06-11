@@ -19,7 +19,17 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
+
+// app.js
+// import Vue from 'vue'
+// import BootstrapVue from 'bootstrap-vue'
+//
+// Vue.use(BootstrapVue)
+//
+// // app.js
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +39,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    // components: {
+    //     ScannerComponent
+    // }
 });
