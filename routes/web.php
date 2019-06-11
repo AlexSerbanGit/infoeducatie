@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/scanner', 'UserScannerController@index')->name('scanner');
 
 Route::get('/results/{barcode}', 'UserScannerController@results');
+
+Route::post('/update_user', 'UserController@updateUser');
