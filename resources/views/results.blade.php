@@ -147,26 +147,45 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="row row-grid">
-                @foreach ($product -> allergies as $key => $allergy)
-                    <div class="col-lg-4">
-                      <div class="card card-lift--hover shadow border-0">
-                          <div class="card-body py-5">
-                            <div class="px-0">
-                              <img src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 150px;">
-                            </div>
-                            <h2 class="text-success text-uppercase">{{ $allergy -> allergy -> name }}</h2>
-                            @if(isset($allergy -> allergy -> description))
-                                <p class="description mt-3">$allergy -> allergy -> description</p>
-                            @endif
-                            <div>
-                              <span class="badge badge-pill badge-warning">mancare</span>
-                              <span class="badge badge-pill badge-warning">cina</span>
-                            </div>
-                            <a href="#" class="btn btn-success mt-4">Vezi</a>
+                @if(isset($product -> allergies))
+                    @foreach ($product -> allergies as $key => $allergy)
+                        <div class="col-lg-4">
+                          <div class="card card-lift--hover shadow border-0">
+                              <div class="card-body py-5">
+                                <div class="px-0">
+                                  <img src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 150px;">
+                                </div>
+                                <h2 class="text-success text-uppercase text-center mt-3">{{ $allergy -> allergy -> name }}</h2>
+                                @if(isset($allergy -> allergy -> description))
+                                    <p class="description mt-3">{{ $allergy -> allergy -> description }}</p>
+                                @endif
+                                {{-- <div>
+                                  <span class="badge badge-pill badge-warning">mancare</span>
+                                  <span class="badge badge-pill badge-warning">cina</span>
+                                </div> --}}
+                                @php
+                                    $ok = 1;
+                                @endphp
+
+                                @foreach(Auth::user()->allergies as $allergy2)
+
+                                    @if($allergy2->allergy_id == $allergy->id)
+                                        @php
+                                            $ok = 0;
+                                        @endphp
+                                    @endif
+
+                                @endforeach
+
+                                @if($ok == 1)
+                                    <a href="{{ url('/add_remove_allergy/'.$allergy->id) }}" class="btn btn-primary mt-4 w-100">Adauga</a>
+                                @else
+                                    <a href="{{ url('/add_remove_allergy/'.$allergy->id) }}" class="btn btn-danger mt-4 w-100">Sterge</a>
+                                @endif                              </div>
                           </div>
-                      </div>
-                    </div>
-                @endforeach
+                        </div>
+                    @endforeach
+                @endif
             </div>
           </div>
         </div>

@@ -54,51 +54,15 @@
                                 </li>
                             @endauth
                         </ul>
+
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
                         </ul>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-10 ml-auto justify-content-center">
-                           @include('/parts/searchbar')
-                           {{-- @include('/scanner') --}}
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
+                           {{-- @include('/parts/searchbar') --}}
 
-                           <style>
-                               .twitter-typeahead,
-                               .tt-hint,
-                               .tt-input {
-                                 width: 140% !important;
-                                 border-bottom: 1px solid #218838;
-                               }
-                               .tt-menu{
-                                 width: 140% !important;
-                                 font-weight: normal;
-                                 height:50vh;
-                                 overflow-y: scroll;
-                                 margin-left: 0px;
-                                 margin-top: 20px;
-                                 margin-bottom: 50px;
-                               }
-                           </style>
-
-
-                           {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
-                           {{-- <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script> --}}
-
-                           <div class="form-group">
-                               <form action="" method="post" class="input-group mb-4">
-                                   @csrf
-                                   {{-- <div class="input-group-prepend mt-3">
-                                       <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                   </div> --}}
-                                    {{-- <div class="col w-100">
-                                       <input id="search" class="form-control mt-3" type="search" data-provide="typeahead" placeholder="Search" type="text" required autocomplete="off"/>
-                                   </div>
-                                   <div class="input-group-prepend mt-3">
-                                       <button class="btn btn-primary"><i class=""></i> Cauta </button>
-                                   </div> --}}
-                               </form>
-                           </div>
                        </div>
                         <ul class="navbar-nav ml-auto">
 
@@ -170,17 +134,17 @@
         </footer>
     </div>
 
-            <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 
-            <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
             <!-- Optional JS -->
-            <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
-            <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
+            <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
+            <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 
             <!-- Argon JS -->
-            <script src="./assets/js/argon.js?v=1.0.0"></script>
+            <script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
 
-            <script src="{{ asset('js/app.js') }}"></script>
+            <script src="{{ asset('/js/app.js') }}"></script>
     </body>
 </html>
