@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class UserScannerController extends Controller
@@ -11,6 +12,21 @@ class UserScannerController extends Controller
     }
 
     public function results($barcode) {
-        return json_encode($barcode);
+
+        $product = Product::where('barcode', '=', $barcode) -> first();
+
+        if($product) {
+
+            $product -> foodType;
+
+            $product -> allergies;
+
+            foreach ($product -> allergies as $key => $allergy) {
+
+                $allergy -> allergy;
+            }
+        }
+
+        return view('/results', compact('product'));
     }
 }

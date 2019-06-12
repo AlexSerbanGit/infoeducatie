@@ -10,7 +10,7 @@
           <!-- Card stats -->
           <div class="row">
           @if(Auth::user()->targets()->count() > 0)
-          @php 
+          @php
 
           $id = 1;
 
@@ -40,7 +40,7 @@
               $kcalcarbo = $kcal - $fat*9 - Auth::user()->stats->protein*4;
               $carbo = $kcalcarbo/4;
             @endphp
-          @endif 
+          @endif
 
           @if($target->type == 2)
             @php
@@ -48,7 +48,7 @@
               $fat = Auth::user()->stats->fat;
               $carbo = Auth::user()->stats->carbo;
             @endphp
-          @endif    
+          @endif
 
           @if($target->type == 3)
             @php
@@ -58,7 +58,7 @@
               $kcalcarbo = $kcal - $fat*9 - Auth::user()->stats->protein*4;
               $carbo = $kcalcarbo/4;
             @endphp
-          @endif    
+          @endif
 
             <div class="col-xl-3 col-lg-6">
               <div class="card card-lift--hover card-stats mb-4 mb-xl-0">
@@ -334,7 +334,7 @@
                     </div>
                     <h1 class="text-primary text-uppercase">Progres</h1>
                     @if(Auth::user()->targets()->count() > 0)
-                        @php 
+                        @php
 
                         $id = 1;
 
@@ -355,7 +355,7 @@
                         @php
                           $id++;
                         @endphp
-                          
+
                             Tip:
                             @if($target->type == 1)
                               Slabire
@@ -365,21 +365,21 @@
                               Punere masa
                             @endif
                             @if(Auth::user()->dailyProgresses->count() > 0)
-                            
+
                             @php
 
                             $rev2 = Auth::user()->dailyProgresses->reverse();
 
                             @endphp
-                        
+
                             @foreach($rev2 as $progress)
                               @php
                               $currentProtein = $progress->protein/Auth::user()->stats->protein*100;
                               $currentCarbo = $progress->carbo/$carbo*100;
                               $currentKcal = $progress->kcal/$kcal*100;
-                              $currentFat = $progress->fat/$fat*100; 
+                              $currentFat = $progress->fat/$fat*100;
 
-                              
+
                                 break;
                               @endphp
 
@@ -528,12 +528,12 @@
                       <i class="ni ni-check-bold"></i>
                     </div>
 
-                    <h1 class="text-primary text-uppercase"> 
+                    <h1 class="text-primary text-uppercase">
                       Target-curent:
                     </h1>
                     @if(Auth::user()->targets()->count() > 0)
 
-                    @php 
+                    @php
 
                       $id = 1;
 
@@ -596,10 +596,10 @@
 
                     @if(Auth::user()->targets()->count() > 0)
 
-                      @php 
-                      
+                      @php
+
                         $id = 1;
-                      
+
                       @endphp
                       @php
 
@@ -683,7 +683,7 @@
 
         <div class="modal-body">
 
-            Alege tipul target-ului:     
+            Alege tipul target-ului:
             <select name="type" id="" class="form-control" required style="margin: 10px 0px">
                 <option value="" hidden>Alege</option>
                 <option value="1">Slabit</option>
@@ -706,7 +706,7 @@
 
 @else
     <div class="container">
-    <tag-random style="color: white;">Nu ati introdus datele. Va rugam le introduceti dand click pe butonus de mai jox:</tag-random>
+    <tag-random style="color: white;">Nu ati introdus datele. Va rugam le introduceti dand click pe butonus de mai jos:</tag-random>
     <br>
     <button class="btn btn-warning as-button-data" style="margin-top: 10px" data-toggle="modal" data-target="#modal-notification">Introdu datele</button>
     </div>
