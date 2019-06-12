@@ -42,7 +42,7 @@
                     <div class="collapse navbar-collapse"
                         id="navcol-1">
                         <div class="modal-header d-lg-none d-md-none">
-                            
+
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
