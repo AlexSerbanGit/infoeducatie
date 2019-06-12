@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="header-blue" style="padding-bottom: 0px;">
-           
+
             <div class="container hero" style="padding-bottom: 40px; margin-top: 0px">
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
@@ -77,5 +77,5 @@
             <div class="form-group"><button class="btn btn-primary" type="submit">send </button></div>
         </form>
     </div>
-    
+
 @endsection

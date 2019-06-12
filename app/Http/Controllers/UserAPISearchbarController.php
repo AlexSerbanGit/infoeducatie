@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserAPISearchbarController extends Controller
 {
-    public function getItems() {
+    public function search() {
 
         $products = Product::all();
 
