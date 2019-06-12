@@ -16,7 +16,7 @@ class CreateFoodTypesTable extends Migration
         Schema::create('food_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('product_id');
-            $table->integer('type'); // 1 - mic dejun / 2 - pranz / 3 - cina
+            $table->integer('type'); // 1 - mic dejun / 2 - pranz / 3 - cina / 4 - snack
             $table->timestamps();
         });
     }

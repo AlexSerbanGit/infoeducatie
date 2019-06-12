@@ -4,8 +4,8 @@
 
 @if(Auth::user()->stats)
 <!-- Header -->
-<div class="header pb-1 pt-5 ">
-      <div class="container-fluid">
+<div class="header pb-1 pt-2 ">
+      <div class="container">
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
@@ -60,7 +60,7 @@
             @endphp
           @endif
 
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-6 col-lg-6">
               <div class="card card-lift--hover card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -81,7 +81,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-6 col-lg-6">
               <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -102,8 +102,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
+            <div class="col-xl-6 col-lg-6">
+              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0"style="margin-top: 30px">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -123,8 +123,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
+            <div class="col-xl-6 col-lg-6">
+              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0"style="margin-top: 30px">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -148,7 +148,7 @@
             @else
 
 
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-6 col-lg-6">
               <div class="card card-lift--hover card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -169,7 +169,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-6 col-lg-6">
               <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -190,8 +190,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
+            <div class="col-xl-6 col-lg-6">
+              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0"style="margin-top: 30px">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -211,8 +211,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
+            <div class="col-xl-6 col-lg-6">
+              <div class="card card-lift--hover  card-stats mb-4 mb-xl-0"style="margin-top: 30px">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -808,7 +808,7 @@
                       <span class="badge badge-pill badge-warning">cina</span>
 
                     </div>
-                    <a href="#" class="btn btn-success mt-4">Vezi</a>
+                    <a href="{{ url('/meal') }}" class="btn btn-success mt-4">Vezi</a>
                   </div>
                 </div>
               </div>
@@ -824,7 +824,7 @@
                       <span class="badge badge-pill badge-warning">mancare</span>
                       <span class="badge badge-pill badge-warning">cina</span>
                     </div>
-                    <a href="#" class="btn btn-warning mt-4">Vezi</a>
+                    <a href="{{ url('/dinner') }}" class="btn btn-warning mt-4">Vezi</a>
                   </div>
                 </div>
               </div>
@@ -834,13 +834,13 @@
                     <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
                     <i class="fas fa-cookie-bite"></i>
                     </div>
-                    <h2 class="text-warning text-uppercase">Snack</h2>
+                    <h2 class="text-warning text-uppercase">Gustare</h2>
                     <p class="description mt-3">Meniuri si produse recomandate pentru o gustare.</p>
                     <div>
                       <span class="badge badge-pill badge-warning">mancare</span>
                       <span class="badge badge-pill badge-warning">gustare</span>
                     </div>
-                    <a href="#" class="btn btn-warning mt-4">Vezi </a>
+                    <a href="{{ url('/snack') }}" class="btn btn-warning mt-4">Vezi </a>
                   </div>
                 </div>
               </div>

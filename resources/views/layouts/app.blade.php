@@ -34,13 +34,19 @@
 <div id="app">
         <div class="header-blue" style="padding-bottom: 0px">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container-fluid">
+                <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'GoalsScanner') }}
                 </a>
-                <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <button class="navbar-toggler" data-toggle="modal" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse"
                         id="navcol-1">
+                        <div class="modal-header d-lg-none d-md-none">
+                            
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
                         <ul class="nav navbar-nav">
                             @auth
                                 <li class="nav-item">
@@ -53,7 +59,7 @@
                                 <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
                         </ul>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-xs-8 ml-auto justify-content-center">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-10 ml-auto justify-content-center">
                            @include('/parts/searchbar')
                            {{-- @include('/scanner') --}}
 
