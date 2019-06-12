@@ -36,3 +36,7 @@ Route::get('/snack', 'FoodController@snack');
 Route::post('/add_target', 'UserController@addTarget');
 
 Route::get('/your_targets', 'UserController@yourTargets');
+
+Route::get('/search', function() {
+    return view('/scanner');
+});
