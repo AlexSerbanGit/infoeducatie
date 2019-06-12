@@ -34,7 +34,7 @@
 <div id="app">
         <div class="header-blue" style="padding-bottom: 0px">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container">
+                <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'GoalsScanner') }}
                 </a>
@@ -47,35 +47,53 @@
                                     <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
                                 </li>
                             @endauth
+                        </ul>
+                        <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
-
-                            {{-- <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
-                            </li> --}}
                         </ul>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto">
+                           {{-- @include('/parts/searchbar') --}}
+                           {{-- @include('/scanner') --}}
 
-                        {{-- <div class="w-100">
-                         <div class="form-group">
-                           <div class="input-group mb-4">
-                             <div class="input-group-prepend">
-                               <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                             </div>
-                             <input class="form-control" placeholder="Search" type="text">
+                           <style>
+                               .twitter-typeahead,
+                               .tt-hint,
+                               .tt-input {
+                                 width: 140% !important;
+                                 border-bottom: 1px solid #218838;
+                               }
+                               .tt-menu{
+                                 width: 140% !important;
+                                 font-weight: normal;
+                                 height:50vh;
+                                 overflow-y: scroll;
+                                 margin-left: 0px;
+                                 margin-top: 20px;
+                                 margin-bottom: 50px;
+                               }
+                           </style>
+
+                           {{-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> --}}
+                           {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
+                           {{-- <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script> --}}
+
+                           <div class="form-group">
+                               <form action="" method="post" class="input-group mb-4">
+                                   @csrf
+                                   {{-- <div class="input-group-prepend mt-3">
+                                       <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                   </div> --}}
+                                    <div class="col w-100">
+                                       <input id="search" class="form-control mt-3" type="search" data-provide="typeahead" placeholder="Search" type="text" required autocomplete="off"/>
+                                   </div>
+                                   <div class="input-group-prepend mt-3">
+                                       <button class="btn btn-primary"><i class=""></i> Cauta </button>
+                                   </div>
+                               </form>
                            </div>
-                         </div>
-                       </div> --}}
-                       <ul class="navbar-nav ml-5">
-                           <li class="nav-item dropdown">
-                               {{-- <a class="nav-link" data-toggle="modal" data-target="#modal-notification"><i class="fas fa-search"></i> Cauta</a> --}}
-                               <div class="col-md-12">
-                                 <div class="form-group">
-                                   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                 </div>
-                               </div>
-                           </li>
-                       </ul>
+                       </div>
                         <ul class="navbar-nav ml-auto">
 
                         <!-- Authentication Links -->
@@ -89,7 +107,8 @@
                                 </li>
                             @endif
                         @else
-                                <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
+                                <li class="nav-item dropdown" style="margin-top: 10px">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
@@ -110,8 +129,7 @@
                         </ul>
                 </div>
             </nav>
-            @include('/parts/searchbar-modal')
-            <scanner-component></scanner-component>
+            {{-- <scanner-component></scanner-component> --}}
         </div>
     </div>
     </div>
@@ -133,15 +151,59 @@
         </footer>
     </div>
 
-            <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            {{-- <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
             <!-- Optional JS -->
             <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
             <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
 
             <!-- Argon JS -->
-            <script src="./assets/js/argon.js?v=1.0.0"></script>
+            <script src="./assets/js/argon.js?v=1.0.0"></script> --}}
 
-            <script src="{{ asset('js/app.js') }}" defer></script>
+            <script src="{{ asset('js/app.js') }}"></script>
+
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+       	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+         	<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+
+            <script>
+               $(document).ready(function() {
+                   var bloodhound = new Bloodhound({
+                       datumTokenizer: Bloodhound.tokenizers.whitespace,
+                       queryTokenizer: Bloodhound.tokenizers.whitespace,
+                       remote: {
+                           url: '/api/get/items',
+                           wildcard: '%QUERY%'
+                       },
+                   });
+
+                   $('#search').typeahead({
+                       hint: true,
+                       highlight: true,
+                       minLength: 3,
+                   }, {
+                       name: '',
+                       limit: 1000,
+                       source: bloodhound,
+                       display: function(data) {
+                           return data.name  //Input value to be set when you select a suggestion.
+                       },
+                       templates: {
+                           empty: [
+                               '<div class="list-group search-results-dropdown"><div class="list-group-item"> Nu au fost găsite rezultate.</div></div>'
+                           ],
+                           header: [
+                               '<div class="list-group search-results-dropdown col-md-12">'
+                           ],
+                           suggestion: function(data) {
+                               return '<div style="font-weight:normal! important;" class="list-group-item">' + data.name + '</div></div>'
+                           }
+                       }
+                   });
+                 });
+            </script>
+
     </body>
 </html>
