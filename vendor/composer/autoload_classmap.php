@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Allergy' => $baseDir . '/app/Allergy.php',
+    'App\\Console\\Commands\\SetUsersProgress' => $baseDir . '/app/Console/Commands/SetUsersProgress.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\DailyProgress' => $baseDir . '/app/DailyProgress.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -19,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\FoodController' => $baseDir . '/app/Http/Controllers/FoodController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\UserAPISearchbarController' => $baseDir . '/app/Http/Controllers/UserAPISearchbarController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\UserScannerController' => $baseDir . '/app/Http/Controllers/UserScannerController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
@@ -42,6 +44,7 @@ return array(
     'App\\Target' => $baseDir . '/app/Target.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\UserStats' => $baseDir . '/app/UserStats.php',
+    'App\\UserToAllergy' => $baseDir . '/app/UserToAllergy.php',
     'BeyondCode\\DumpServer\\DumpServerCommand' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
     'BeyondCode\\DumpServer\\DumpServerServiceProvider' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
     'BeyondCode\\DumpServer\\Dumper' => $vendorDir . '/beyondcode/laravel-dump-server/src/Dumper.php',

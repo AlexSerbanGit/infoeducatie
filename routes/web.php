@@ -40,3 +40,7 @@ Route::get('/your_targets', 'UserController@yourTargets');
 Route::get('/search', function() {
     return view('/scanner');
 });
+
+Route::get('/all_allergies', 'UserController@allAllergies');
+
+Route::get('/add_remove_allergy/{id}', 'UserController@addRemoveAllergy');

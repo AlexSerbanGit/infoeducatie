@@ -7,6 +7,8 @@ use Auth;
 use App\User;
 use App\UserStats;
 use App\Target;
+use App\Allergy;
+use App\UserToAllergy;
 
 class UserController extends Controller
 {
@@ -123,7 +125,7 @@ class UserController extends Controller
         $stats->user_id = $user->id;
         $stats->save();
 
-        return redirect()->back()->with('message', 'Informations updated!');
+        return redirect()->back()->with('message', 'Informatii actualizate!');
     }
 
     public function addTarget(Request $request){
@@ -143,6 +145,45 @@ class UserController extends Controller
     public function yourTargets(){
 
         return view('user.targets');
+
+    }
+
+    public function allAllergies(){
+
+        $allergies = Allergy::all();
+
+        return view('allergies')->with('allergies', $allergies);
+    }
+
+    public function addRemoveAllergy($id){
+
+        $allergy = Allergy::find($id);
+        if($allergy){
+            
+            $ok = 1;
+
+            foreach(Auth::user()->allergies as $allergy2){
+              
+                if($allergy2->allergy_id == $id){
+                    $ok = 0;$allergy2->delete();
+                }    
+            }
+        
+        if($ok == 1){
+
+            $allergy21 = new UserToAllergy;
+            $allergy21->allergy_id = $id;
+            $allergy21->user_id = Auth::user()->id;
+            $allergy21->save();
+            return redirect()->back()->with('message', 'Alergie adaugata cu succes!');
+
+        }else{
+            return redirect()->back()->with('message', 'Alergie stearsa cu succes!');
+        }
+
+        }
+
+        return redirect()->back();
 
     }
 

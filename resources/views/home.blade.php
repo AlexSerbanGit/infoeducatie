@@ -240,7 +240,86 @@
       </div>
     </div>
 
-   
+<section class="section section-lg pt-lg-0 mt--400" style="margin-top: 30px">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="row row-grid">
+        <div class="col-lg-12">
+          <div class="card card-lift--hover shadow border-0">
+            <div class="card-body py-5">
+              <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
+              <i class="fas fa-allergies"></i>
+              </div>
+              <h1 class="text-primary text-uppercase">Alergiile tale</h1>
+              @if(Auth::user()->allergies->count() > 0)
+                <div class="row">
+
+                  @foreach(Auth::user()->allergies as $allergy)
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                      <div class="alert alert-primary">
+                        {{$allergy->allergy->name}}
+
+                        <div class="buttons" style="position: absolute; top: 5px; right: 10px">
+                          <a data-toggle="modal" data-target="#removeAllergy{{$allergy->id}}" class="btn btn-danger">X</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  @endforeach
+
+                </div>
+              @else
+                <h2>Momentan nu ati declarat nicio alergie</h2>
+              @endif
+
+              <a href="{{ url('all_allergies') }}">
+                <button class="btn btn-danger">Adauga</button>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+@if(Auth::user()->allergies->count() > 0)
+             
+    @foreach(Auth::user()->allergies as $allergy)
+    <div class="modal fade" id="removeAllergy{{$allergy->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default"><h1>Elimini alergia din lista ta?</h1></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <h2>Aceasta alergie va fi stearsa din contul tau!</h2>
+
+            </div>
+
+            <div class="modal-footer">
+                <a href="{{ url('add_remove_allergy/'.$allergy->allergy_id) }}">
+                  <button type="button" class="btn btn-danger">Sterge</button>
+                </a>
+                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Inchide</button>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    @endforeach
+
+@endif
+
     <section class="section section-lg pt-lg-0 mt--400" style="margin-top: 30px">
 
       <div class="container">
@@ -253,7 +332,7 @@
                     <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
                       <i class="fas fa-bullseye"></i>
                     </div>
-                    <h1 class="text-primary text-uppercase">Target activ</h1>
+                    <h1 class="text-primary text-uppercase">Progres</h1>
                     @if(Auth::user()->targets()->count() > 0)
                         @php 
 
@@ -428,7 +507,6 @@
                       Nu aveti target-uri active
                     @endif
                     <br>
-                    <a href="{{ url('/breakfast') }}" class="btn btn-primary mt-4">Vezi</a>
                   </div>
                 </div>
               </div>
@@ -686,7 +764,7 @@
 
             <div class="modal-footer">
                 <button type="submit" class="btn btn-white">Salveaza</button>
-                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Inchide</button>
             </div>
 
             </form>
@@ -707,7 +785,7 @@
                     <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
                       <i class="fas fa-bacon"></i>
                     </div>
-                    <h6 class="text-primary text-uppercase">Mic dejun</h6>
+                    <h2 class="text-primary text-uppercase">Mic dejun</h2>
                     <p class="description mt-3">Meniuri si produse recomandate pentru micul dejun.</p>
                     <div>
                       <span class="badge badge-pill badge-primary">mancare</span>
@@ -723,7 +801,7 @@
                     <div class="icon icon-shape icon-shape-success rounded-circle mb-4">
                       <i class="fas fa-utensils"></i>
                     </div>
-                    <h6 class="text-success text-uppercase">Masa de pranz</h6>
+                    <h2 class="text-success text-uppercase">Masa de pranz</h2>
                     <p class="description mt-3">Meniuri si produse recomandate pentru pranz.</p>
                     <div>
                       <span class="badge badge-pill badge-warning">mancare</span>
@@ -740,7 +818,7 @@
                     <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
                       <i class="fas fa-drumstick-bite"></i>
                     </div>
-                    <h6 class="text-warning text-uppercase">Cina</h6>
+                    <h2 class="text-warning text-uppercase">Cina</h2>
                     <p class="description mt-3">Meniuri si produse recomandate pentru cina.</p>
                     <div>
                       <span class="badge badge-pill badge-warning">mancare</span>
@@ -756,7 +834,7 @@
                     <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
                     <i class="fas fa-cookie-bite"></i>
                     </div>
-                    <h3 class="text-warning text-uppercase">Snack</h3>
+                    <h2 class="text-warning text-uppercase">Snack</h2>
                     <p class="description mt-3">Meniuri si produse recomandate pentru o gustare.</p>
                     <div>
                       <span class="badge badge-pill badge-warning">mancare</span>

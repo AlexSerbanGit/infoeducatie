@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function dailyProgresses(){
         return $this->hasMany('App\DailyProgress');
     }
+
+    public function allergies(){
+        return $this->hasMany('App\UserToAllergy', 'user_id');
+    }
 }
