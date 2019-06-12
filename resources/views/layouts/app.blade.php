@@ -75,7 +75,7 @@
                                     <button href="#!" class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
                                 </form>
                                 </div>
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown" style="margin-top: 10px">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>

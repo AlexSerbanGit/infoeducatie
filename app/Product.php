@@ -13,4 +13,8 @@ class Product extends Model
     public function menus(){
         return $this->hasMany('App\ProductToMenu', 'product_id');
     }
+
+    public function foodType(){
+        return $this->hasMany('App\FoodType', 'product_id');
+    }
 }
