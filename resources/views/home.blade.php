@@ -100,14 +100,14 @@
 @else
     <div class="container">
     <tag-random style="color: white;">Nu ati introdus datele. Va rugam le introduceti dand click pe butonus de mai jox:</tag-random>
-    <br> 
+    <br>
     <button class="btn btn-warning as-button-data" style="margin-top: 10px" data-toggle="modal" data-target="#modal-notification">Introdu datele</button>
     </div>
-   
+
     <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
     <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
         <div class="modal-content bg-gradient-danger">
-        	
+
             <form action="{{ url('update_user') }}" method="POST">
             @csrf
 
@@ -117,13 +117,13 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            
+
             <div class="modal-body">
-            	
+
                 <div class="py-3 text-center">
                     <i class="ni ni-bell-55 ni-3x"></i>
                     <h4 class="heading mt-4">Te rugam sa-ti introduci datele intai!</h4>
-                    
+
                     <div class="form-group">
                         <label>Sexul:</label>
                         <select name="gender" id="" class="form-control" required>
@@ -152,21 +152,21 @@
                     </div>
 
                 </div>
-                
+
             </div>
-            
+
             <div class="modal-footer">
                 <button type="submit" class="btn btn-white">Salveaza</button>
-                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button> 
+                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
             </div>
-            
+
             </form>
 
         </div>
     </div>
 </div>
- 
-@endif   
 
-    
+@endif
+
+
 @endsection

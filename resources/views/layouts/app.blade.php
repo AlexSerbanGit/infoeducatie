@@ -55,7 +55,29 @@
                                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
                             </li> --}}
                         </ul>
+
+                        {{-- <div class="w-100">
+                         <div class="form-group">
+                           <div class="input-group mb-4">
+                             <div class="input-group-prepend">
+                               <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                             </div>
+                             <input class="form-control" placeholder="Search" type="text">
+                           </div>
+                         </div>
+                       </div> --}}
+                       <ul class="navbar-nav ml-5">
+                           <li class="nav-item dropdown">
+                               {{-- <a class="nav-link" data-toggle="modal" data-target="#modal-notification"><i class="fas fa-search"></i> Cauta</a> --}}
+                               <div class="col-md-12">
+                                 <div class="form-group">
+                                   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                 </div>
+                               </div>
+                           </li>
+                       </ul>
                         <ul class="navbar-nav ml-auto">
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -67,14 +89,6 @@
                                 </li>
                             @endif
                         @else
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <form class="form-inline ml-auto">
-                                    <div class="md-form my-0">
-                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                    </div>
-                                    <button href="#!" class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
-                                </form>
-                                </div>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
@@ -96,6 +110,7 @@
                         </ul>
                 </div>
             </nav>
+            @include('/parts/searchbar-modal')
             <scanner-component></scanner-component>
         </div>
     </div>
