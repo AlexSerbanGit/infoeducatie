@@ -32,3 +32,7 @@ Route::get('/meal', 'FoodController@meal');
 Route::get('/dinner', 'FoodController@dinner');
 
 Route::get('/snack', 'FoodController@snack');
+
+Route::post('/add_target', 'UserController@addTarget');
+
+Route::get('/your_targets', 'UserController@yourTargets');

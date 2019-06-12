@@ -40,4 +40,12 @@ class User extends Authenticatable
     public function stats(){
         return $this->hasOne('App\UserStats', 'user_id');
     }
+
+    public function targets(){
+        return $this->hasMany('App\Target', 'user_id');
+    }
+
+    public function dailyProgresses(){
+        return $this->hasMany('App\DailyProgress');
+    }
 }

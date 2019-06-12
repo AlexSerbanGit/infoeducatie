@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\UserStats;
+use App\Target;
 
 class UserController extends Controller
 {
@@ -124,4 +125,25 @@ class UserController extends Controller
 
         return redirect()->back()->with('message', 'Informations updated!');
     }
+
+    public function addTarget(Request $request){
+        $request->validate([
+            'type' => 'required|min:1|max:3',
+        ]);
+
+        $target = new Target;
+        $target->user_id = Auth::user()->id;
+        $target->type = $request->type;
+        $target->save();
+
+        return redirect()->back()->with('message', 'Target creat!');
+
+    }
+
+    public function yourTargets(){
+
+        return view('user.targets');
+
+    }
+
 }

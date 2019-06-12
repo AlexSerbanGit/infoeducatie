@@ -381,6 +381,7 @@ class ComposerStaticInit3c0612e49a67958a2932b41d19dbd0a7
     public static $classMap = array (
         'App\\Allergy' => __DIR__ . '/../..' . '/app/Allergy.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DailyProgress' => __DIR__ . '/../..' . '/app/DailyProgress.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\FoodTyoe' => __DIR__ . '/../..' . '/app/FoodTyoe.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -411,6 +412,7 @@ class ComposerStaticInit3c0612e49a67958a2932b41d19dbd0a7
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Target' => __DIR__ . '/../..' . '/app/Target.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserStats' => __DIR__ . '/../..' . '/app/UserStats.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',

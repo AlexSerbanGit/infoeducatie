@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/Header-Blue.css')}}">
         <link rel="stylesheet" href="{{ asset('assets/css/Highlight-Clean.css')}}">
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
-        <link href="./assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-        <link href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
 
         <link type="text/css" href="./assets/css/argon.css?v=1.0.0" rel="stylesheet">
         <style>
@@ -102,6 +102,19 @@
     </div>
 
         <div class="header-blue" style="min-height: 75vh">
+        @if(Session::has('message'))
+        <div class="container">   
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+
+        @endif
+
         @yield('content')
         </div>
         <div class="footer-basic">
@@ -118,15 +131,15 @@
         </footer>
     </div>
 
-            <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+            <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{ asset('js/app.js') }}" defer></script>
             <!-- Optional JS -->
-            <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
-            <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
+            <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
+            <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 
             <!-- Argon JS -->
-            <script src="./assets/js/argon.js?v=1.0.0"></script>
-
-            <script src="{{ asset('js/app.js') }}" defer></script>
+            <script src="{{ asset('assets/js/argon.js?v=1.0.0')}}"></script>
+            <!-- <script src="{{ asset('') }}"></script> -->
+           
     </body>
 </html>
