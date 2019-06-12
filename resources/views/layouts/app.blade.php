@@ -118,7 +118,6 @@
         </footer>
     </div>
 
-            <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
             <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
             <!-- Optional JS -->
