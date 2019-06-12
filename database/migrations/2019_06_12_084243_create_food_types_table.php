@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFoodTyoesTable extends Migration
+class CreateFoodTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFoodTyoesTable extends Migration
      */
     public function up()
     {
-        Schema::create('food_tyoes', function (Blueprint $table) {
+        Schema::create('food_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->integer('type'); // 1 - mic dejun / 2 - pranz / 3 - cina
@@ -28,6 +28,6 @@ class CreateFoodTyoesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food_tyoes');
+        Schema::dropIfExists('food_types');
     }
 }

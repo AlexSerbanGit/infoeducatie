@@ -15,16 +15,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name'); 
+            $table->string('name');
             $table->integer('weight'); // in grame
             $table->integer('protein'); // per 100 g
             $table->integer('fat'); // per 100 g
             $table->integer('carbo'); // per 100 g
             $table->integer('kcal'); // per 100 g
-            $table->string('barcode');  
+            $table->string('barcode');
             $table->string('image');
             $table->integer('category'); // 1 - mancare sanatoasa / 2 - intre sanatos si nesanatos / 3 - nesanatoasa
-            $table->integer('type'); // 1 - de mancat / 2 - de baut 
+            $table->integer('type'); // 1 - de mancat / 2 - de baut
             $table->timestamps();
         });
     }

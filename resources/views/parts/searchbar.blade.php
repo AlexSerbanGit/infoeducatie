@@ -1,5 +1,5 @@
 
-<style>
+{{-- <style>
     .twitter-typeahead,
     .tt-hint,
     .tt-input {
@@ -15,7 +15,7 @@
       margin-top: 20px;
       margin-bottom: 50px;
     }
-</style>
+</style> --}}
 
 {{-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> --}}
 {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
@@ -35,7 +35,7 @@
         </div>
     </form>
 </div>
-<script>
+{{-- <script>
    $(document).ready(function() {
        var bloodhound = new Bloodhound({
            datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -70,4 +70,4 @@
            }
        });
      });
-</script>
+</script> --}}

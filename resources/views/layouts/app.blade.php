@@ -21,7 +21,7 @@
         <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
 
-        <link type="text/css" href="./assets/css/argon.css?v=1.0.0" rel="stylesheet">
+        <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
         <style>
         html body{
             font-family: 'Oswald', sans-serif;
@@ -53,8 +53,8 @@
                                 <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
                         </ul>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto">
-                           {{-- @include('/parts/searchbar') --}}
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-xs-8 ml-auto justify-content-center">
+                           @include('/parts/searchbar')
                            {{-- @include('/scanner') --}}
 
                            <style>
@@ -75,7 +75,7 @@
                                }
                            </style>
 
-                         
+
                            {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
                            {{-- <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script> --}}
 
@@ -85,12 +85,12 @@
                                    {{-- <div class="input-group-prepend mt-3">
                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                    </div> --}}
-                                    <div class="col w-100">
+                                    {{-- <div class="col w-100">
                                        <input id="search" class="form-control mt-3" type="search" data-provide="typeahead" placeholder="Search" type="text" required autocomplete="off"/>
                                    </div>
                                    <div class="input-group-prepend mt-3">
                                        <button class="btn btn-primary"><i class=""></i> Cauta </button>
-                                   </div>
+                                   </div> --}}
                                </form>
                            </div>
                        </div>
@@ -129,14 +129,14 @@
                         </ul>
                 </div>
             </nav>
-            {{-- <scanner-component></scanner-component> --}}
+            <scanner-component></scanner-component>
         </div>
     </div>
     </div>
 
         <div class="header-blue" style="min-height: 75vh">
         @if(Session::has('message'))
-        <div class="container">   
+        <div class="container">
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <span class="alert-inner--icon"><i class="far fa-star"></i></span>
                 <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
@@ -165,7 +165,7 @@
     </div>
 
             <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-           
+
             <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
             <!-- Optional JS -->
@@ -173,52 +173,8 @@
             <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 
             <!-- Argon JS -->
-            <script src="./assets/js/argon.js?v=1.0.0"></script> 
+            <script src="./assets/js/argon.js?v=1.0.0"></script>
 
             <script src="{{ asset('js/app.js') }}"></script>
-
-            
-
-       	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-         	<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
-
-            <script>
-               $(document).ready(function() {
-                   var bloodhound = new Bloodhound({
-                       datumTokenizer: Bloodhound.tokenizers.whitespace,
-                       queryTokenizer: Bloodhound.tokenizers.whitespace,
-                       remote: {
-                           url: '/api/get/items',
-                           wildcard: '%QUERY%'
-                       },
-                   });
-
-                   $('#search').typeahead({
-                       hint: true,
-                       highlight: true,
-                       minLength: 3,
-                   }, {
-                       name: '',
-                       limit: 1000,
-                       source: bloodhound,
-                       display: function(data) {
-                           return data.name  //Input value to be set when you select a suggestion.
-                       },
-                       templates: {
-                           empty: [
-                               '<div class="list-group search-results-dropdown"><div class="list-group-item"> Nu au fost găsite rezultate.</div></div>'
-                           ],
-                           header: [
-                               '<div class="list-group search-results-dropdown col-md-12">'
-                           ],
-                           suggestion: function(data) {
-                               return '<div style="font-weight:normal! important;" class="list-group-item">' + data.name + '</div></div>'
-                           }
-                       }
-                   });
-                 });
-            </script>
-
     </body>
 </html>
