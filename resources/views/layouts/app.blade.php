@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>Infoeducatie | Scanner</title>
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome.min.css')}}">
         <link rel="stylesheet" href="{{ asset('assets/fonts/ionicons.min.css')}}">
@@ -28,11 +30,11 @@
     </head>
     <body>
 
-    
-<div>
+
+<div id="app">
         <div class="header-blue" style="padding-bottom: 0px">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container"> 
+                <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'GoalsScanner') }}
                 </a>
@@ -41,15 +43,17 @@
                         id="navcol-1">
                         <ul class="nav navbar-nav">
                             @auth
-
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
                                 </li>
-
                             @endauth
-                            <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
+
+                            {{-- <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
+                            </li> --}}
                         </ul>
                         <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -63,7 +67,14 @@
                                 </li>
                             @endif
                         @else
-                                
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <form class="form-inline ml-auto">
+                                    <div class="md-form my-0">
+                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                    </div>
+                                    <button href="#!" class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
+                                </form>
+                                </div>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
@@ -85,6 +96,7 @@
                         </ul>
                 </div>
             </nav>
+            <scanner-component></scanner-component>
         </div>
     </div>
     </div>
@@ -105,15 +117,17 @@
             <p class="copyright">GoalsScanner © 2019</p>
         </footer>
     </div>
-           
+
             <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
             <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            
+
             <!-- Optional JS -->
             <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
             <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
-            
+
             <!-- Argon JS -->
             <script src="./assets/js/argon.js?v=1.0.0"></script>
+
+            <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>

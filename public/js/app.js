@@ -1749,12 +1749,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
  // register component 'v-quagga'
 
@@ -40474,19 +40468,6 @@ var render = function() {
   return _c("div", [
     _c("div", [
       _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": ".bd-example-modal-lg"
-          }
-        },
-        [_vm._v("Large modal")]
-      ),
-      _vm._v(" "),
-      _c(
         "div",
         {
           staticClass: "modal fade bd-example-modal-lg",
@@ -40500,8 +40481,6 @@ var render = function() {
         [
           _c("div", { staticClass: "modal-dialog modal-lg" }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(0),
-              _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { attrs: { "v-bind": _vm.code } }, [
                   _vm._v(_vm._s(_vm.code))
@@ -40528,9 +40507,7 @@ var render = function() {
                     )
                   ]
                 )
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
+              ])
             ])
           ])
         ]
@@ -40538,49 +40515,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n                        Scanner\n                        "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Save changes")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
