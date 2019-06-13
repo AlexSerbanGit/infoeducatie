@@ -17,7 +17,7 @@
             </div>
             <div class="dropdown-menu w-100 mt-2">
                 <ul class="list-group">
-                    <button class="list-group-item" v-for="result in results" v-on:click="redirectPage(result.id )">{{ result.name }}</button>
+                    <button class="list-group-item" v-for="result in results" v-on:click="redirectPage(result.name )">{{ result.name }}</button>
                     <!-- <li class="list-group-item">Documents</li>
                     <li class="list-group-item">Music</li>
                     <li class="list-group-item">Videos</li> -->
@@ -52,8 +52,8 @@
                     // console.log(response.data)
                 });
             },
-            redirectPage(id) {
-                window.location.href = "/seacrch/results/" + id;
+            redirectPage(name) {
+                window.location.href = "/seacrch/results/" + name;
             }
         }
     }

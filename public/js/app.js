@@ -1771,8 +1771,8 @@ __webpack_require__.r(__webpack_exports__);
         }); // console.log(response.data)
       });
     },
-    redirectPage: function redirectPage(id) {
-      window.location.href = "/seacrch/results/" + id;
+    redirectPage: function redirectPage(name) {
+      window.location.href = "/seacrch/results/" + name;
     }
   }
 });
@@ -40574,7 +40574,7 @@ var render = function() {
                 staticClass: "list-group-item",
                 on: {
                   click: function($event) {
-                    return _vm.redirectPage(result.id)
+                    return _vm.redirectPage(result.name)
                   }
                 }
               },

@@ -212,17 +212,15 @@ class UserController extends Controller
         return redirect()->back()->with('message', 'Produs adaugat la target-ul zilnic!');
     }
 
-    public function search($item_id) {
+    public function search($key) {
 
-        $product = Product::find($item_id);
+        $product = Product::where('name', $key) -> first();
 
-        $product -> allergies;
-
-        $allergy = Allergy::find($item_id);
-
-        if($allergy !== null) {
-            return view('/search-results', compact('allergy'));
+        if($product !== null) {
+            $product -> allergies;
         }
-        return view('/results', compact('product'));
+        $allergy = Allergy::where('name', $key) -> first();
+
+        return view('/search-results', compact('allergy', 'product'));
     }
 }
