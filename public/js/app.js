@@ -1725,7 +1725,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('ww');
+  },
   data: function data() {
     return {
       'queryString': ''
@@ -1733,13 +1743,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getResults: function getResults() {
-      console.log('ww'); // axios.get('/api/search', {
-      //     params: {
-      //         queryString: this.queryString
-      //     }
-      // }).then(response => {
-      //     console.log(response.data)
-      // });
+      axios.get('/api/search', {
+        params: {
+          queryString: this.queryString
+        }
+      }).then(function (response) {
+        console.log(response.data);
+      });
     }
   }
 });
@@ -40495,34 +40505,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.queryString,
-          expression: "queryString"
-        }
-      ],
-      staticClass: "form-control",
-      attrs: { type: "text" },
-      domProps: { value: _vm.queryString },
-      on: {
-        keyup: function($event) {
-          return _vm.getResults()
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _c("div", {}, [
+    _c("div", { staticClass: "input-group mb-4" }, [
+      _c("div", { staticClass: "col w-100 mt-3" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.queryString,
+              expression: "queryString"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Cauta.." },
+          domProps: { value: _vm.queryString },
+          on: {
+            keyup: function($event) {
+              return _vm.getResults()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.queryString = $event.target.value
+            }
           }
-          _vm.queryString = $event.target.value
-        }
-      }
-    })
+        })
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend mt-3" }, [
+      _c("button", { staticClass: "btn btn-primary" }, [
+        _c("i", {}),
+        _vm._v(" Cauta ")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

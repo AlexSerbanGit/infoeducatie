@@ -28,6 +28,7 @@
             <div class="buttons"><a class="btn btn-primary" role="button" href="#">Sign-up</a><button class="btn btn-light" type="button">Login</button></div>
         </div>
     </div>
+
     <div class="features-boxed">
         <div class="container">
             <div class="intro">
