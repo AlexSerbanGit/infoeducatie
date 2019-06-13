@@ -32,7 +32,7 @@
 
 
 <div id="app">
-        <div class="header-blue" style="padding-bottom: 0px">
+        <div class="header-blue" style="padding-bottom: 100px">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
                 <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

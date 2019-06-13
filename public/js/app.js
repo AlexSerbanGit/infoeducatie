@@ -1732,23 +1732,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('ww');
   },
   data: function data() {
     return {
-      'queryString': ''
+      'queryString': '',
+      'results': []
     };
   },
   methods: {
     getResults: function getResults() {
+      var _this = this;
+
       axios.get('/api/search', {
         params: {
           queryString: this.queryString
         }
       }).then(function (response) {
-        console.log(response.data);
+        response.data.forEach(function (name) {
+          _this.results.push(name);
+        }); // console.log(response.data)
       });
     }
   }
@@ -40505,36 +40526,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c("div", { staticClass: "input-group mb-4" }, [
-      _c("div", { staticClass: "col w-100 mt-3" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.queryString,
-              expression: "queryString"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Cauta.." },
-          domProps: { value: _vm.queryString },
-          on: {
-            keyup: function($event) {
-              return _vm.getResults()
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.queryString = $event.target.value
-            }
+  return _c("div", [
+    _c("div", { staticClass: "btn-group w-100" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.queryString,
+            expression: "queryString"
           }
-        })
-      ]),
+        ],
+        staticClass: "col w-100 btn btn-secondary btn-sm dropdown-toggle w-100",
+        attrs: {
+          type: "text",
+          placeholder: "Cauta..",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        },
+        domProps: { value: _vm.queryString },
+        on: {
+          keyup: function($event) {
+            return _vm.getResults()
+          },
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.queryString = $event.target.value
+          }
+        }
+      }),
       _vm._v(" "),
-      _vm._m(0)
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "dropdown-menu w-100 mt-2" }, [
+        _c(
+          "ul",
+          { staticClass: "list-group" },
+          _vm._l(_vm.results, function(result) {
+            return _c("li", { staticClass: "list-group-item" }, [
+              _vm._v(_vm._s(result.name))
+            ])
+          }),
+          0
+        )
+      ])
     ])
   ])
 }
@@ -40543,7 +40581,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend mt-3" }, [
+    return _c("div", { staticClass: "input-group-prepend" }, [
       _c("button", { staticClass: "btn btn-primary" }, [
         _c("i", {}),
         _vm._v(" Cauta ")
