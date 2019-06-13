@@ -9,6 +9,8 @@ use App\UserStats;
 use App\Target;
 use App\Allergy;
 use App\UserToAllergy;
+use App\DailyProgress;
+use App\Product;
 
 class UserController extends Controller
 {
@@ -189,9 +191,25 @@ class UserController extends Controller
 
     public function addToYourTarget($id){
         $progress = Auth::user()->dailyProgresses->reverse()->first();
+        if($progress){
+            $product = Product::find($id);
+            $progress->protein += $product->protein;
+            $progress->fat += $product->fat;
+            $progress->kcal += $product->kcal;
+            $progress->carbo += $product->carbo;
+            $progress->save();
+        }else{
+            $progress = new DailyProgress;
+            $product = Product::find($id);
+            $progress->protein += $product->protein;
+            $progress->fat += $product->fat;
+            $progress->kcal += $product->kcal;
+            $progress->carbo += $product->carbo;
+            $progress->save();
+        }
+     
 
-        $product = Produce::find($id);
-      
+        return redirect()->back()->with('message', 'Produs adaugat la target-ul zilnic!');
     }
 
 }
