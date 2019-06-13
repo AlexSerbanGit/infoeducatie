@@ -57,5 +57,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('/admin/allergies', 'AdminController@allergies');
 
+    Route::post('/admin_add_allergy', 'AdminController@addAllergy');
+
+    Route::post('/admin_edit_allergy/{allergy_id}', 'AdminController@editAllergy');
+
+    Route::get('/admin_delete_allergy/{allergy_id}', 'AdminController@deleteAllergy');
+
 });
 
