@@ -15,14 +15,14 @@ use App\Product;
 class UserController extends Controller
 {
     public function updateUser(Request $request){
-        
+
         $request->validate([
             'gender' => 'required|min:1|max:2|numeric',
             'age' => 'required|numeric',
             'weight' => 'required|numeric',
             'height' => 'required|numeric',
             'lifestyle' => 'required|numeric|min:1|max:4',
-        ]);  
+        ]);
 
         $user = Auth::user();
         $user->gender = $request->gender;
@@ -34,8 +34,8 @@ class UserController extends Controller
 
         // rata metabolica pentru barbati
         if($user->gender == 1){
-            
-            // rata metabolica 
+
+            // rata metabolica
             $rate = 10*$user->weight + 6.25*$user->height - 5*$request->age + 5;
 
             // Factor metabolica + proteine recomandate
@@ -48,7 +48,7 @@ class UserController extends Controller
                     $factor = 1.375;
                     $protein = 1.2*$user->weight;
                     break;
-                case 3: 
+                case 3:
                     $factor = 1.5;
                     $protein = 1.8*$user->weight;
                     break;
@@ -62,22 +62,22 @@ class UserController extends Controller
             $kcal = $rate * $factor;
 
             $kcalfat = $kcal*3/10;
-            
+
             // grame grasime recomandate
             $fat = $kcalfat/9;
 
             $kcalpro = $protein * 4;
-            
+
             $kcalcarbo = $kcal - $kcalpro - $kcalfat;
 
             // grame carbo
             $carbo = $kcalcarbo/4;
 
-          
+
 
         }else {
-            
-        // rata metabolica 
+
+        // rata metabolica
             $rate = 10*$user->weight + 6.25*$user->height - 5*$request->age - 161;
 
             // Factor metabolica + proteine recomandate
@@ -90,7 +90,7 @@ class UserController extends Controller
                     $factor = 1.375;
                     $protein = 1.2*$user->weight;
                     break;
-                case 3: 
+                case 3:
                     $factor = 1.5;
                     $protein = 1.8*$user->weight;
                     break;
@@ -105,12 +105,12 @@ class UserController extends Controller
 
 
             $kcalfat = $kcal*3/10;
-            
+
             // grame grasime recomandate
             $fat = $kcalfat/9;
 
             $kcalpro = $protein * 4;
-            
+
             $kcalcarbo = $kcal - $kcalpro - $kcalfat;
 
             // grame carbo
@@ -119,7 +119,7 @@ class UserController extends Controller
 
         }
         $kccal = $kcal;
-        $stats = new UserStats; 
+        $stats = new UserStats;
         $stats->protein = (int)$protein;
         $stats->fat = (int)$fat;
         $stats->carbo = (int)$carbo;
@@ -161,16 +161,16 @@ class UserController extends Controller
 
         $allergy = Allergy::find($id);
         if($allergy){
-            
+
             $ok = 1;
 
             foreach(Auth::user()->allergies as $allergy2){
-              
+
                 if($allergy2->allergy_id == $id){
                     $ok = 0;$allergy2->delete();
-                }    
+                }
             }
-        
+
         if($ok == 1){
 
             $allergy21 = new UserToAllergy;
@@ -207,9 +207,22 @@ class UserController extends Controller
             $progress->carbo += $product->carbo;
             $progress->save();
         }
-     
+
 
         return redirect()->back()->with('message', 'Produs adaugat la target-ul zilnic!');
     }
 
+    public function search($item_id) {
+
+        $product = Product::find($item_id);
+
+        $product -> allergies;
+
+        $allergy = Allergy::find($item_id);
+
+        if($allergy !== null) {
+            return view('/search-results', compact('allergy'));
+        }
+        return view('/results', compact('product'));
+    }
 }

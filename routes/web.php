@@ -39,9 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/your_targets', 'UserController@yourTargets');
 
-    Route::get('/search', function() {
-        return view('/scanner');
-    });
+    Route::get('/seacrch/results/{item_id}', 'UserController@search');
 
     Route::get('/all_allergies', 'UserController@allAllergies');
 

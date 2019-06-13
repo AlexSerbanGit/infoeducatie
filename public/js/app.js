@@ -1770,6 +1770,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.results.push(name);
         }); // console.log(response.data)
       });
+    },
+    redirectPage: function redirectPage(id) {
+      window.location.href = "/seacrch/results/" + id;
     }
   }
 });
@@ -40565,9 +40568,18 @@ var render = function() {
           "ul",
           { staticClass: "list-group" },
           _vm._l(_vm.results, function(result) {
-            return _c("li", { staticClass: "list-group-item" }, [
-              _vm._v(_vm._s(result.name))
-            ])
+            return _c(
+              "button",
+              {
+                staticClass: "list-group-item",
+                on: {
+                  click: function($event) {
+                    return _vm.redirectPage(result.id)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(result.name))]
+            )
           }),
           0
         )
@@ -40582,8 +40594,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("button", { staticClass: "btn btn-primary" }, [
-        _c("i", {}),
-        _vm._v(" Cauta ")
+        _c("i", { staticClass: "fas fa-search" })
       ])
     ])
   }

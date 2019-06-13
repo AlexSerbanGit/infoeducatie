@@ -5,7 +5,7 @@
 <div class="header pb-1 pt-5 mb-5">
     <section class="section section-lg pt-lg-0 mt--350">
       <div class="container">
-        <div class="row justify-content-center" style="margin-top: 30px">
+        <div class="row justify-content-center" style="margin-top: 0px">
           <div class="col-lg-8">
             <div class="row row-grid">
               <div class="w-100">
@@ -29,7 +29,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <h1 class="text-primary mt-3 text-center">
-                                      Rezultat produs: {{ $product -> name }}
+                                      Rezultat scanare: {{ $product -> name }}
                                   </h1>
                               </div>
                               @if($product -> type == 1)
