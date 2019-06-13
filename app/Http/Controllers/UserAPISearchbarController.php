@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Allergy;
 use Illuminate\Http\Request;
 
 class UserAPISearchbarController extends Controller
 {
-    public function search() {
+    public function search(Request $request) {
 
-        $products = Product::all();
+        $products = Product::where('name', 'like', '%'.$request -> queryString.'%') -> get();
 
-        // $items = [];
-        // $customKey = 0;
-        // foreach ($products as $key => $product) {
-        //     $items[$customKey++] = $product;
-        // }
-        //
-        // foreach ($allergies as $key => $allergy) {
-        //     $items[$customKey++] = $allergy;
-        // }
+        $allergies = Allergy::where('name', 'like', '%'.$request -> queryString.'%') -> get();
 
-        return response() -> json($products);
+        $merged = $products -> merge($allergies);
+
+        return response() -> json($merged);
     }
 }

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    
+
     Route::get('/admin', 'AdminController@menu');
 
     Route::get('/admin/allergies', 'AdminController@allergies');
@@ -72,4 +72,3 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin_delete_product/{id}', 'AdminController@deleteProduct');
 
 });
-
