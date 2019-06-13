@@ -63,5 +63,13 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('/admin_delete_allergy/{allergy_id}', 'AdminController@deleteAllergy');
 
+    Route::get('/admin/products', 'AdminController@products');
+
+    Route::post('/admin_add_product', 'AdminController@addProduct');
+
+    Route::post('/admin_edit_product/{id}', 'AdminController@editProduct');
+
+    Route::get('/admin_delete_product/{id}', 'AdminController@deleteProduct');
+
 });
 

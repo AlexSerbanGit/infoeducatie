@@ -141,7 +141,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Produse</a>
+                  <a class="nav-link" href="{{ url('/admin/products') }}">Produse</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-success" href="#">Mic dejun</a>
