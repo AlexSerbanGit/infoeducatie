@@ -5,7 +5,7 @@
 <div class="header pb-1 pt-5 mb-5">
     <section class="section section-lg pt-lg-0 mt--350">
       <div class="container">
-        <div class="row justify-content-center" style="margin-top: 30px">
+        <div class="row justify-content-center" style="margin-top: 0px">
           <div class="col-lg-8">
             <div class="row row-grid">
               <div class="w-100">
@@ -23,13 +23,13 @@
                               </div>
                           @endif
                           <div class="px-0">
-                            <img src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                            <img src="{{ asset('/products/' . $product -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="width: 250px; height: 250px; border-radius: 50%;">
                           </div>
 
                           <div class="row">
                               <div class="col-md-12">
                                   <h1 class="text-primary mt-3 text-center">
-                                      Rezultat produs: {{ $product -> name }}
+                                      Rezultat scanare: {{ $product -> name }}
                                   </h1>
                               </div>
                               @if($product -> type == 1)
@@ -153,7 +153,7 @@
                           <div class="card card-lift--hover shadow border-0">
                               <div class="card-body py-5">
                                 <div class="px-0">
-                                  <img src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 150px;">
+                                  <img src="{{ asset('/products/' . $allergy -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="width: 150px; height: 150px; border-radius: 50%;">
                                 </div>
                                 <h2 class="text-success text-uppercase text-center mt-3">{{ $allergy -> allergy -> name }}</h2>
                                 @if(isset($allergy -> allergy -> description))
@@ -178,9 +178,9 @@
                                 @endforeach
 
                                 @if($ok == 1)
-                                    <a href="{{ url('/add_remove_allergy/'.$allergy->id) }}" class="btn btn-primary mt-4 w-100">Adauga</a>
+                                    <a href="{{ url('/add_remove_allergy/'.$allergy->id) }}" class="btn btn-primary mt-4 w-100">Adauga la profil</a>
                                 @else
-                                    <a href="{{ url('/add_remove_allergy/'.$allergy->id) }}" class="btn btn-danger mt-4 w-100">Sterge</a>
+                                    <a href="{{ url('/add_remove_allergy/'.$allergy->id) }}" class="btn btn-danger mt-4 w-100">Sterge de la profil</a>
                                 @endif                              </div>
                           </div>
                         </div>

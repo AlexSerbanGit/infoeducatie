@@ -10,6 +10,10 @@ class UserAPISearchbarController extends Controller
 {
     public function search(Request $request) {
 
+        $products = [];
+
+        $allergies = [];
+
         $products = Product::where('name', 'like', '%'.$request -> queryString.'%') -> get();
 
         $allergies = Allergy::where('name', 'like', '%'.$request -> queryString.'%') -> get();

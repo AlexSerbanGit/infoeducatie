@@ -39,9 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/your_targets', 'UserController@yourTargets');
 
-    Route::get('/search', function() {
-        return view('/scanner');
-    });
+    Route::get('/seacrch/results/{item_id}', 'UserController@search');
 
     Route::get('/all_allergies', 'UserController@allAllergies');
 
@@ -70,5 +68,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/admin_edit_product/{id}', 'AdminController@editProduct');
 
     Route::get('/admin_delete_product/{id}', 'AdminController@deleteProduct');
+
+    Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
 });
