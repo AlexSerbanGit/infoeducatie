@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('target')->nullable(); // 1 - slabit / 2 -mentinere / 3 - pune masa 
-            $table->integer('role')->default(0); // 0 - user / 1 - profesor/doctor / 2 - admin
+            $table->integer('role')->default(0); // 0 - user / 1 - profesor / doctor / 2 - admin
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('language')->default('Romanian'); // Romanian / English

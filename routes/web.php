@@ -17,32 +17,45 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/scanner', 'UserScannerController@index')->name('scanner');
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/results/{barcode}', 'UserScannerController@results');
+    Route::get('/scanner', 'UserScannerController@index')->name('scanner');
 
-Route::post('/update_user', 'UserController@updateUser');
+    Route::get('/results/{barcode}', 'UserScannerController@results');
 
-Route::get('/breakfast', 'FoodController@breakfast');
+    Route::post('/update_user', 'UserController@updateUser');
 
-Route::get('/meal', 'FoodController@meal');
+    Route::get('/breakfast', 'FoodController@breakfast');
 
-Route::get('/dinner', 'FoodController@dinner');
+    Route::get('/meal', 'FoodController@meal');
 
-Route::get('/snack', 'FoodController@snack');
+    Route::get('/dinner', 'FoodController@dinner');
 
-Route::post('/add_target', 'UserController@addTarget');
+    Route::get('/snack', 'FoodController@snack');
 
-Route::get('/your_targets', 'UserController@yourTargets');
+    Route::post('/add_target', 'UserController@addTarget');
 
-Route::get('/search', function() {
-    return view('/scanner');
+    Route::get('/your_targets', 'UserController@yourTargets');
+
+    Route::get('/search', function() {
+        return view('/scanner');
+    });
+
+    Route::get('/all_allergies', 'UserController@allAllergies');
+
+    Route::get('/add_remove_allergy/{id}', 'UserController@addRemoveAllergy');
+
+    Route::get('/add_to_your_target/{id}', 'UserController@addToYourTarget');
+
 });
 
-Route::get('/all_allergies', 'UserController@allAllergies');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    
+    Route::get('/admin', 'AdminController@menu');
 
-Route::get('/add_remove_allergy/{id}', 'UserController@addRemoveAllergy');
+    Route::get('/admin/allergies', 'AdminController@allergies');
 
-Route::get('/add_to_your_target/{id}', 'UserController@addToYourTarget');
+});
+

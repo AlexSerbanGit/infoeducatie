@@ -111,6 +111,52 @@
     </div>
     </div>
 
+<div class="" style="background: linear-gradient(90deg, rgb(23, 42, 116), rgb(33, 169, 175))">
+    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div class="container">
+            <a class="navbar-brand" href="#">Admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-primary">
+              <div class="navbar-collapse-header">
+                <div class="row">
+                  <div class="col-6 collapse-brand">
+                    <a href="index.html">
+                      <img src="assets/img/brand/blue.png">
+                    </a>
+                  </div>
+                  <div class="col-6 collapse-close">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+                      <span></span>
+                      <span></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <ul class="navbar-nav ml-lg-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url('/admin/allergies') }}">Alergii
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Produse</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-success" href="#">Mic dejun</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-success" href="#">Pranza</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-success" href="#">Cina</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav></div></div>
+
         <div class="header-blue" style="min-height: 75vh">
         @if(Session::has('message'))
         <div class="container">
