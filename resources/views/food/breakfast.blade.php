@@ -46,10 +46,14 @@
                                         <div>
                                         <span class="badge badge-pill badge-primary">produs</span>
                                         </div>
-                                            <a href="" class="btn btn-primary mt-4">Adauga</a>
+                                            <a class="btn btn-primary mt-4" data-toggle="modal" data-target="#eat-pro{{$product->id}}">Adauga</a>
+
+                                            <a class="btn btn-success mt-4" data-toggle="modal" data-target="#about-pro{{$product->id}}">Despre</a>
                                     </div>
                                     </div>
                                 </div>
+
+                                
                                 @endif
 
                             @endif
@@ -94,9 +98,68 @@
                                         <div>
                                         <span class="badge badge-pill badge-primary">produs</span>
                                         </div>
-                                            <a href="" class="btn btn-primary mt-4">Adauga</a>
+                                            <a class="btn btn-primary mt-4" data-toggle="modal" data-target="#eat-pro{{$product->id}}">Adauga</a>
+
+                                            <a class="btn btn-success mt-4" data-toggle="modal" data-target="#about-pro{{$product->id}}">Despre</a>
                                     </div>
                                     </div>
+                                </div>
+
+
+                                <div class="modal fade" id="about-pro{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="modal-title-default">{{ $product->name }}</h2>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            Proteine: {{$product->protein}}g / 100g <br>
+                                            Carbohidrati: {{$product->carbo}}g / 100g <br>
+                                            Grasimi: {{$product->fat}}g / 100g <br>
+                                            Calorii: {{$product->kcal}}g / 100g <br>
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Inchide</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="modal fade" id="eat-pro{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="modal-title-default">Adaugi acest produs la target-ul tau?</h2>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            <h2>Doresti sa adaugi acest produs la target-ul tau?</h2>
+                                            
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <a href="{{ url('/add_to_your_target/'.$product->id) }}">
+                                                <button type="button" class="btn btn-primary">Da</button>
+                                            </a>
+                                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Incide</button>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 </div>
                             @endif
                         @endforeach

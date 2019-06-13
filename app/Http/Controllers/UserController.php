@@ -187,4 +187,11 @@ class UserController extends Controller
 
     }
 
+    public function addToYourTarget($id){
+        $progress = Auth::user()->dailyProgresses->reverse()->first();
+
+        $product = Produce::find($id);
+      
+    }
+
 }

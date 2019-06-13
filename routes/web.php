@@ -44,3 +44,5 @@ Route::get('/search', function() {
 Route::get('/all_allergies', 'UserController@allAllergies');
 
 Route::get('/add_remove_allergy/{id}', 'UserController@addRemoveAllergy');
+
+Route::get('/add_to_your_target/{id}', 'UserController@addToYourTarget');
