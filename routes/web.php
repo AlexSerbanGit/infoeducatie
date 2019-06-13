@@ -52,10 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    
+
     Route::get('/admin', 'AdminController@menu');
 
     Route::get('/admin/allergies', 'AdminController@allergies');
 
 });
-

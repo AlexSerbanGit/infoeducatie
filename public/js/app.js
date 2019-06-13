@@ -1749,9 +1749,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('ww');
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       'queryString': '',
@@ -1762,6 +1760,7 @@ __webpack_require__.r(__webpack_exports__);
     getResults: function getResults() {
       var _this = this;
 
+      this.results = [];
       axios.get('/api/search', {
         params: {
           queryString: this.queryString

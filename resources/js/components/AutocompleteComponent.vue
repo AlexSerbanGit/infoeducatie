@@ -30,7 +30,7 @@
 <script>
     export default {
         mounted() {
-            console.log('ww')
+
         },
         data() {
             return {
@@ -40,6 +40,7 @@
         },
         methods: {
             getResults() {
+                this.results = [];
                 axios.get('/api/search', {
                     params: {
                         queryString: this.queryString
