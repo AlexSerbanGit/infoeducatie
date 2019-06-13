@@ -86,6 +86,30 @@
                        
                         @foreach($product->foodType as $type)
                         @if($type -> type == 4)
+                        @php
+                                    $verif = 1;
+                                @endphp
+
+                                @foreach($product->allergies as $allergy)
+
+                                    @foreach(Auth::user()->allergies as $algo)
+                                        
+                                        @if($algo->allergy_id == $allergy->allergy_id)
+
+                                            @php
+
+                                                $verif = 0;
+                                                break;
+
+                                            @endphp
+
+                                        @endif
+
+                                    @endforeach
+
+                                @endforeach
+
+                                @if($verif == 1)
                                 <div class="col-lg-4" style="margin-top: 10px">
                                     <div class="card alert-primary shadow border-0">
                                     <div class="card-body py-5">
@@ -130,6 +154,7 @@
                                     </div>
                                 </div>
                                 </div>
+                                @endif
                             @endif
                         @endforeach
                     @endif
