@@ -2,6 +2,6 @@
 
 @section('content')
 
-    da
+    da - bine!
 
 @endsection

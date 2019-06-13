@@ -14,15 +14,15 @@
               <i class="fab fa-product-hunt"></i>
               </div>
               <h1 class="text-primary text-uppercase">Toate produsele</h1>
-            @if($products->count() > 0) 
+            @if($products->count() > 0)
             @foreach($products as $product)
 
                 <div class="col-lg-4" style="margin-top: 10px">
                     <div class="card alert-primary shadow border-0">
                     <div class="card-body py-5">
-                        
+
                         <img src="{{ asset('/products/'.$product->image) }}" alt="" style="max-width: 100%; margin-top: 10px">
-                        
+
                         <h2 class="text-uppercase" style="color: white">{{$product->name}}</h2>
                         <div>
                         <span class="badge badge-pill badge-primary">produs</span>
@@ -74,13 +74,13 @@
                                 <label>Carbohidrati(g)</label>
                                 <input type="number" name="carbo" class="form-control" required placeholder="carbohidrati" value="{{ $product->carbo }}">
 
-                                <label>Calorii</label> 
+                                <label>Calorii</label>
                                 <input type="number" name="kcal" class="form-control" required placeholder="calorii" value="{{ $product->kcal }}">
 
                                 <label>Cod de bare</label>
                                 <input type="text" name="barcode" class="form-control" required placeholder="cod de bare" value="{{ $product->barcode }}">
 
-                                @if($product->category == 1) 
+                                @if($product->category == 1)
                                 <label>Categorie aliment</label>
                                 <select name="category" required class="form-control">
                                     <option value="1" selected>Mancare sanatoasa</option>
@@ -89,7 +89,7 @@
                                 </select>
                                 @endif
 
-                                @if($product->category == 2) 
+                                @if($product->category == 2)
                                 <label>Categorie aliment</label>
                                 <select name="category" required class="form-control">
                                     <option value="1">Mancare sanatoasa</option>
@@ -98,7 +98,7 @@
                                 </select>
                                 @endif
 
-                                @if($product->category == 3) 
+                                @if($product->category == 3)
                                 <label>Categorie aliment</label>
                                 <select name="category" required class="form-control">
                                     <option value="1">Mancare sanatoasa</option>
@@ -106,7 +106,7 @@
                                     <option value="3" selected>Mancare nesanatoasa</option>
                                 </select>
                                 @endif
-                                
+
                                 @if($product->type == 1)
                                 <label>Tip aliment</label>
                                 <select name="type" requried class="form-control">
@@ -124,7 +124,7 @@
                                 @endif
 
                             </div>
-                            
+
                         </div>
 
                         <div class="modal-footer">
@@ -172,8 +172,8 @@
 
             @endif
 
-            <button class="btn btn-primary" style="margin-top: 10px " data-toggle="modal" data-target="#addProduct">Adauga produs</button>
-
+            <button class="btn btn-primary mt-5 ml-3" data-toggle="modal" data-target="#addProduct"><i class="fas fa-plus-square" style="font-size:22px;"></i> Adauga produs</button>
+            <button class="btn btn-primary mt-5 ml-3" data-toggle="modal" data-target="#addProductByCSV"><i class="fas fa-file-csv" style="font-size:22px;"></i> Adauga fisier</button>
             </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
                 <label>Carbohidrati(g)</label>
                 <input type="number" name="carbo" class="form-control" required placeholder="carbohidrati">
 
-                <label>Calorii</label> 
+                <label>Calorii</label>
                 <input type="number" name="kcal" class="form-control" required placeholder="calorii">
 
                 <label>Cod de bare</label>
@@ -244,11 +244,42 @@
                 </select>
 
             </div>
-            
+
         </div>
 
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Salveaza produs</button>
+            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Inchide</button>
+        </div>
+        </form>
+
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="addProductByCSV" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+<div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+    <div class="modal-content">
+
+        <form action="{{ url('/admin/add/products/csv') }}" enctype="multipart/form-data" method="POST">
+        @csrf
+        <div class="modal-header">
+            <h2 class="modal-title" id="modal-title-default">Adauga noi produse</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Incarca fisier cu extensia</label>
+                <input type="file" name="csv-file" required class="form-control">
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Parseaza fisierul</button>
             <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Inchide</button>
         </div>
         </form>

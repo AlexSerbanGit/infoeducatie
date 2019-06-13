@@ -69,4 +69,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('/admin_delete_product/{id}', 'AdminController@deleteProduct');
 
+    Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
+
 });
