@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
 
     public function menu(){
-        return view('admin.menu');
+         return redirect('/admin/allergies');
     }
 
     public function allergies(){
@@ -202,8 +202,8 @@ class AdminController extends Controller
                 $product -> kcal = $content[$key][6];
                 $product -> barcode = $content[$key][7];
                 $product -> image = 'default_picture.jpg';
-                $product -> category = 0;
-                $product -> type = 0;
+                $product -> category = 1;
+                $product -> type = 1;
                 $product -> save();
             }
             return redirect() -> back() -> with('message', 'Fisierul a fost parsat cu succes!');

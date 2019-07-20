@@ -15,7 +15,24 @@
               </div>
               <h1 class="text-primary text-uppercase">Toate produsele</h1>
             @if($products->count() > 0)
+            <div class="row">
+
             @foreach($products as $product)
+
+                <script>
+                function readURL{{$product->id}}(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#blah{{$product->id}}')
+                                .attr('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                </script>
 
                 <div class="col-lg-4" style="margin-top: 10px">
                     <div class="card alert-primary shadow border-0">
@@ -58,9 +75,9 @@
                                 <input type="text" name="name" required placeholder="nume" class="form-control" value="{{$product->name}}">
 
                                 <label>Imaginea produsului:</label> <br>
-                                <img id="blah" src="{{ asset('/products/'.$product->image) }}" alt="your image" style="max-width: 180px; margin: 20px 10%;"/>
+                                <img id="blah{{$product->id}}" src="{{ asset('/products/'.$product->image) }}" alt="your image" style="max-width: 180px; margin: 20px 10%;"/>
 
-                                <input type='file' name="image" onchange="readURL(this);" class="form-control-file" style="margin: 10px 0px" />
+                                <input type='file' name="image" onchange="readURL{{$product->id}}(this);" class="form-control-file" style="margin: 10px 0px" />
 
                                 <label>Greutatea(g)</label>
                                 <input type="number" name="weight" class="form-control" required placeholder="greutatea" value="{{ $product->weight }}">
@@ -166,6 +183,7 @@
                 </div>
                 </div>
             @endforeach
+            </div>
             @else
 
                 <h2>Momentan nu exista produse</h2>
@@ -181,6 +199,22 @@
     </div>
     </div>
 </div>
+
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah')
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
 </section>
 
 <!-- Add product modal -->
@@ -287,19 +321,4 @@
     </div>
 </div>
 </div>
-
-<script>
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#blah')
-                .attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
 @endsection
