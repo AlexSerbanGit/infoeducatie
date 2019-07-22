@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
 Vue.component('autocomplete-component', require('./components/AutocompleteComponent.vue').default);
+Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,7 +31,4 @@ Vue.component('autocomplete-component', require('./components/AutocompleteCompon
 
 const app = new Vue({
     el: '#app'
-    // components: {
-    //     AutocompleteComponent
-    // }
 });

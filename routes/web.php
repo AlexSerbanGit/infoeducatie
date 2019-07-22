@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Start User's login routes
+
+// Route::get('/user/login', 'UserLoginController@login');
+
+// Stop User's login routes
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
@@ -71,4 +77,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
+});
+
+Route::get('/test', function() {
+    return view('/test');
 });

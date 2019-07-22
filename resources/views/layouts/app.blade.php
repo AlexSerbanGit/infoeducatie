@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
         <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
-
         <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
         <style>
         html body{
@@ -106,7 +105,7 @@
                         </ul>
                 </div>
             </nav>
-            <scanner-component></scanner-component>
+            {{-- <scanner-component></scanner-component> --}}
         </div>
     </div>
     </div>
