@@ -2,54 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use Cookie;
 use App\User;
 use Carbon\Carbon;
 use App\UserLoginToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserLoginController extends Controller
+class UserRegisterController extends Controller
 {
-    public function find_user_by_phone_number(Request $request) {
+    public function register(Request $request) {
 
-        $user = User::where('phone_number', $request -> phone_number) -> first();
+        $validator = Validator::make($request -> all(), [
+            'name' => 'required',
+            'phone_number' => 'required|unique:users,phone_number'
+        ], [
+            'name.required' => 'Numele este necesar!',
+            'phone_number.required' => 'Numarul de telefon este necesar!',
+            'phone_number.unique' => 'Numarul de telefon este deja asociat cu un cont de utilizator!'
+        ]);
 
-        if($user == null) {
-
-            return json_encode([
-                'success' => false
-            ]);
-        } else {
-
-            $user -> lastToken = $user -> tokens -> last();
-
-            $user -> makeHidden('tokens');
-
-            return json_encode([
-                'success' => true,
-                'user' => $user
-            ]);
-        }
-    }
-
-    public function login(Request $request, $user_id) {
-
-        $user = User::find($user_id);
-
-        if($user == null) {
-
+        if($validator -> fails()) {
             return json_encode([
                 'success' => false,
-                'message' => 'Utilizator inexistent!'
+                'message' => $validator -> errors()
             ]);
         }
 
-        $last_token = $user -> tokens -> last();
+        $user = new User();
 
-        if($last_token != null) {
+        $user -> name = $request -> name;
 
-            $last_token -> delete();
-        }
+        $user -> phone_number = $request -> phone_number;
+
+        $user -> save();
 
         $coordinates = explode(",", json_decode(file_get_contents("http://ipinfo.io/")) -> loc);
 
@@ -59,7 +45,7 @@ class UserLoginController extends Controller
 
         $token -> token = str_random(65);
 
-        $token -> expire_date = now() -> addMonth(1);
+        $token -> expire_date = now() -> addMonth(3);
 
         $token -> ip = $request -> getClientIp();
 
@@ -72,7 +58,9 @@ class UserLoginController extends Controller
         $token -> save();
 
         return json_encode([
-            'success' => true,
+            'succes' => true,
+            'message' => 'Urmatorul pas este sa activati contul folosind codul primit in sms.
+                          Codul este activ 30 de minute, daca nu va fi confirmat contul va fi sters!',
             'user' => $user
         ]);
     }
@@ -118,6 +106,8 @@ class UserLoginController extends Controller
 
         if($token -> created_at -> addMinutes(30) < Carbon::now()) {
 
+            $user -> delete();
+
             $user -> tokens() -> delete();
 
             return json_encode([
@@ -127,6 +117,8 @@ class UserLoginController extends Controller
         }
 
         if($request -> sms_code == $token -> sms_code) {
+
+            // Cookie::queue('token', $token -> token, 43800);
 
             $token -> confirmed = true;
 
@@ -138,7 +130,7 @@ class UserLoginController extends Controller
 
             return json_encode([
                 'success' => true,
-                'message' => 'Autentificarea a fost realizata cu succes!',
+                'message' => 'Inregistrarea a fost realizata cu succes!',
                 'user' => $user
             ]);
         } else {

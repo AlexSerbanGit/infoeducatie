@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @foreach ($errors->all() as $error)
+
+      <div class="alert alert-danger">{{ $error }}</div>
+
+    @endforeach
     <div>
         <div class="header-blue" style="padding-bottom: 0px;">
 

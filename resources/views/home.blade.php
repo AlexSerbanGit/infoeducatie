@@ -287,7 +287,7 @@
 </div>
 </section>
 @if(Auth::user()->allergies->count() > 0)
-             
+
     @foreach(Auth::user()->allergies as $allergy)
     <div class="modal fade" id="removeAllergy{{$allergy->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
