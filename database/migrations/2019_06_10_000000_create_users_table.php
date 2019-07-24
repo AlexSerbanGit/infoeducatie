@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table -> increments('id');
             $table -> string('name');
             $table -> string('phone_number') -> unique();
-            $table -> string('email') -> unique();
+            $table -> string('email') -> nullable();
 
             $table -> integer('role_id') -> default(0); // 0 - user / 1 - profesor / doctor / 2 - admin
             $table -> integer('target') -> nullable(); // 1 - slabit / 2 -mentinere / 3 - pune masa

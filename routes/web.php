@@ -13,15 +13,27 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+}) -> name('welcome');
 
 Auth::routes();
 
-// Start User's login routes
+// Start test
 
-// Route::get('/user/login', 'UserLoginController@login');
+Route::group(['middleware' => ['user-auth']], function () {
 
-// Stop User's login routes
+    // Asta e ruta de test pentru middleware...Trebuie trimisi ca si GET user_id-ul si token-ul
+    // Token-ul este salvat la register sau login in storage (client side) si la fiecare
+    // request de ruta trebuie trimisi cei 2 parametri
+    // Preluare token din storage: sessionStorage.getItem("token")
+    Route::get('/middleware', function() {
+        return json_encode([
+            'user_id' => $_GET['user_id'],
+            'token' => $_GET['token']
+        ]);
+    }) -> name('middleware');
+});
+
+// Stop test
 
 Route::group(['middleware' => ['auth']], function () {
 

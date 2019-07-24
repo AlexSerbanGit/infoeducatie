@@ -1900,6 +1900,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   data: function data() {
@@ -1909,7 +1925,13 @@ __webpack_require__.r(__webpack_exports__);
       'validAccount': false,
       'lastActiveStatus': '',
       'user': '',
-      'goForLastSection': true
+      'goForLastSection': true,
+      'registerName': '',
+      'registerPhoneNumber': '',
+      'registerEmail': '',
+      'registerCity': '',
+      'sms': '',
+      'registerError': ''
     };
   },
   methods: {
@@ -1927,6 +1949,7 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.phoneNumber.lenght < 5 || this.phoneNumber.lenght > 12) {
         return true;
       } else {
+        this.registerPhoneNumber = this.phoneNumber;
         return false;
       }
     },
@@ -1936,16 +1959,70 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('http://localhost:8000/api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
-        _this.validAccount = response.data.success, _this.lastActiveStatus = response.data.user.lastToken.created_at, _this.user = response.data.user, console.log(response);
-      })["catch"](function (e) {});
+        _this.user = response.data.user, _this.validAccount = response.data.success;
+
+        if (response.data.user.lastToken != null) {
+          _this.lastActiveStatus = response.data.user.lastToken.created_at;
+        }
+      });
     },
     loginSendSMS: function loginSendSMS() {
+      var _this2 = this;
+
       axios.post('http://localhost:8000/api/user/' + this.user.id + '/login').then(function (response) {
-        console.log(response);
-      })["catch"](function (e) {});
+        _this2.user = response.data.user;
+      });
+    },
+    registerSendSMS: function registerSendSMS() {
+      var _this3 = this;
+
+      axios.post('http://localhost:8000/api/user/register', {
+        'name': this.registerName,
+        'phone_number': this.registerPhoneNumber
+      }).then(function (response) {
+        _this3.user = response.data.user;
+      });
     },
     verifyLoginResponse: function verifyLoginResponse() {
       console.log('d');
+    },
+    validateRegisterFields: function validateRegisterFields() {
+      if (this.registerName.length.toString() < 1 || this.registerPhoneNumber.length.toString() < 1) {
+        // this.errorMessage = 'Toate field-urile sunt obligatorii!';
+        return true;
+      } else {
+        return false;
+      }
+    },
+    registerConfirmSMS: function registerConfirmSMS() {
+      var _this4 = this;
+
+      axios.post('http://localhost:8000/api/user/register/sms/confirm', {
+        'sms_code': this.sms,
+        'user_id': this.user.id
+      }).then(function (response) {
+        if (response.data.success == true) {
+          sessionStorage.setItem("token", response.data.user.token.token);
+          window.location.replace("http://localhost:8000/middleware?user_id=" + _this4.user.id + "&token=" + sessionStorage.getItem("token"));
+        } else {
+          _this4.registerError = response.data.message;
+        }
+      });
+    },
+    loginConfirmSMS: function loginConfirmSMS() {
+      var _this5 = this;
+
+      axios.post('http://localhost:8000/api/user/login/sms/confirm', {
+        'sms_code': this.sms,
+        'user_id': this.user.id
+      }).then(function (response) {
+        if (response.data.success == true) {
+          sessionStorage.setItem("token", response.data.user.token.token);
+          window.location.replace("http://localhost:8000/middleware?user_id=" + _this5.user.id + "&token=" + sessionStorage.getItem("token"));
+        } else {
+          _this5.registerError = response.data.message;
+        }
+      });
     }
   }
 });
@@ -40898,23 +40975,15 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticClass: "next action-button-xl",
-            class: { disabled: _vm.goForLastSection },
             attrs: {
               type: "button",
               name: "next",
-              value: "Trimite-mi sms de confirmare",
-              disabled: _vm.goForLastSection
+              value: "Trimite-mi sms de confirmare"
             },
             on: {
-              click: [
-                function($event) {
-                  return _vm.loginSendSMS()
-                },
-                function($event) {
-                  $event.preventDefault()
-                  return _vm.verifyLoginResponse()
-                }
-              ]
+              click: function($event) {
+                return _vm.loginSendSMS()
+              }
             }
           })
         ])
@@ -40930,32 +40999,54 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.registerName,
+                expression: "registerName"
+              }
+            ],
             attrs: {
               type: "text",
               name: "name",
               placeholder: "Nume si prenume"
+            },
+            domProps: { value: _vm.registerName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.registerName = $event.target.value
+              }
             }
           }),
           _vm._v(" "),
           _c("input", {
-            attrs: {
-              type: "text",
-              name: "phone_number",
-              placeholder: "Numar de telefon - modificare"
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.registerPhoneNumber,
+                expression: "registerPhoneNumber"
+              }
+            ],
+            attrs: { type: "text", name: "phone_number" },
+            domProps: { value: _vm.registerPhoneNumber },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.registerPhoneNumber = $event.target.value
+              }
             }
           }),
           _vm._v(" "),
-          _c("input", {
-            attrs: { type: "text", name: "email", placeholder: "Email" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: { type: "text", name: "city", placeholder: "Oras" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: { type: "text", name: "tara", placeholder: "Tara" }
-          }),
+          _c("p", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errorMessage))
+          ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "previous action-button-previous",
@@ -40964,15 +41055,132 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticClass: "next action-button-xl",
+            class: { disabled: _vm.validateRegisterFields() },
             attrs: {
               type: "button",
               name: "next",
-              value: "Salveaza si trimite sms"
+              value: "Salveaza si trimite sms",
+              disabled: _vm.validateRegisterFields()
+            },
+            on: {
+              click: [
+                function($event) {
+                  return _vm.registerSendSMS()
+                },
+                function($event) {
+                  $event.preventDefault()
+                  return _vm.validateRegisterFields()
+                }
+              ]
             }
           })
         ]),
     _vm._v(" "),
-    _vm._m(3)
+    _vm.validAccount == true
+      ? _c("fieldset", [
+          _c("h2", { staticClass: "fs-title mt-4" }, [
+            _vm._v("Confirmare sms autentificare")
+          ]),
+          _vm._v(" "),
+          _c("h3", { staticClass: "fs-subtitle" }, [
+            _vm._v("Confirma codul primit in sms")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.sms,
+                expression: "sms"
+              }
+            ],
+            attrs: {
+              type: "text",
+              name: "twitter",
+              placeholder: "Cod de confirmare"
+            },
+            domProps: { value: _vm.sms },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.sms = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "fs-subtitle text-danger" }, [
+            _vm._v(_vm._s(_vm.registerError))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "previous action-button-previous",
+            attrs: { type: "button", name: "previous", value: "Inapoi" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "submit action-button",
+            attrs: { type: "submit", name: "submit", value: "Salveaza" },
+            on: {
+              click: function($event) {
+                return _vm.loginConfirmSMS()
+              }
+            }
+          })
+        ])
+      : _c("fieldset", [
+          _c("h2", { staticClass: "fs-title mt-4" }, [
+            _vm._v("Confirmare sms inregistrare")
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.sms,
+                expression: "sms"
+              }
+            ],
+            attrs: {
+              type: "text",
+              name: "twitter",
+              placeholder: "Cod de confirmare"
+            },
+            domProps: { value: _vm.sms },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.sms = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "fs-subtitle text-danger" }, [
+            _vm._v(_vm._s(_vm.registerError))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "previous action-button-previous",
+            attrs: { type: "button", name: "previous", value: "Inapoi" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "submit action-button",
+            attrs: { type: "submit", name: "submit", value: "Salveaza" },
+            on: {
+              click: function($event) {
+                return _vm.registerConfirmSMS()
+              }
+            }
+          })
+        ])
   ])
 }
 var staticRenderFns = [
@@ -41014,30 +41222,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", [
-      _c("h2", { staticClass: "fs-title mt-4" }, [_vm._v("Confirmare sms")]),
-      _vm._v(" "),
-      _c("h3", { staticClass: "fs-subtitle" }, [
-        _vm._v("Confirma codul primit in sms")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "text",
-          name: "twitter",
-          placeholder: "Cod de confirmare"
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "previous action-button-previous",
-        attrs: { type: "button", name: "previous", value: "Inapoi" }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "submit action-button",
-        attrs: { type: "submit", name: "submit", value: "Salveaza" }
-      })
+    return _c("h3", { staticClass: "fs-subtitle" }, [
+      _vm._v("Confirma codul primit in sms - acesta este activ "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("30 de minute")]),
+      _vm._v(". Contul va fi sters dupa cele 30 de minute!")
     ])
   }
 ]
@@ -56063,20 +56251,22 @@ function filterStats(result, track, outbound) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // import Vue from 'vue'
+// import VueRouter from 'vue-router'
+//
+// Vue.use(VueRouter)
 
 Vue.component('scanner-component', __webpack_require__(/*! ./components/ScannerComponent.vue */ "./resources/js/components/ScannerComponent.vue")["default"]);
 Vue.component('autocomplete-component', __webpack_require__(/*! ./components/AutocompleteComponent.vue */ "./resources/js/components/AutocompleteComponent.vue")["default"]);
-Vue.component('user-login-register-component', __webpack_require__(/*! ./components/UserLoginRegisterComponent.vue */ "./resources/js/components/UserLoginRegisterComponent.vue")["default"]);
+Vue.component('user-login-register-component', __webpack_require__(/*! ./components/UserLoginRegisterComponent.vue */ "./resources/js/components/UserLoginRegisterComponent.vue")["default"]); // const router = new VueRouter({
+//   routes: [
+//     {
+//       path: '/home',
+//       component: require('./components/UserHomeComponent.vue')
+//     }
+//   ]
+// })
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -56084,7 +56274,8 @@ Vue.component('user-login-register-component', __webpack_require__(/*! ./compone
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app' // router
+
 });
 
 /***/ }),
