@@ -1917,13 +1917,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    sessionStorage.removeItem("token");
-
-    if (sessionStorage.getItem("token") == null) {
-      // window.alert('Sunteti deja logat!');
-      history.go(-1);
-    }
+  mounted: function mounted() {// sessionStorage.removeItem("token");
+    // if(sessionStorage.getItem("token") == null) {
+    //     // window.alert('Sunteti deja logat!');
+    //     history.go(-1);
+    // }
   },
   data: function data() {
     return {

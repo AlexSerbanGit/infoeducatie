@@ -69,11 +69,11 @@
 <script>
     export default {
         mounted() {
-            sessionStorage.removeItem("token");
-            if(sessionStorage.getItem("token") == null) {
-                // window.alert('Sunteti deja logat!');
-                history.go(-1);
-            }
+            // sessionStorage.removeItem("token");
+            // if(sessionStorage.getItem("token") == null) {
+            //     // window.alert('Sunteti deja logat!');
+            //     history.go(-1);
+            // }
         },
         data() {
             return {
