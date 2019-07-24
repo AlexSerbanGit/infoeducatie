@@ -10,15 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::group(['middleware' => ['guest']], function () {
 
-Route::get('/', function () {
-    return view('welcome');
-}) -> name('welcome');
+    Route::get('/', function () {
+        return view('welcome');
+    }) -> name('welcome');
 
-Auth::routes();
+    Route::get('/user/login_register', 'UserLoginController@loginOrRegister') -> name('login_register');
+// });
 
 // Start test
-
 Route::group(['middleware' => ['user-auth']], function () {
 
     // Asta e ruta de test pentru middleware...Trebuie trimisi ca si GET user_id-ul si token-ul
@@ -32,10 +33,9 @@ Route::group(['middleware' => ['user-auth']], function () {
         ]);
     }) -> name('middleware');
 });
-
 // Stop test
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['user-auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -89,8 +89,4 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
-});
-
-Route::get('/test', function() {
-    return view('/test');
 });

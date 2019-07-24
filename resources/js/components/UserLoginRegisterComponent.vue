@@ -69,7 +69,11 @@
 <script>
     export default {
         mounted() {
-
+            sessionStorage.removeItem("token");
+            if(sessionStorage.getItem("token") == null) {
+                // window.alert('Sunteti deja logat!');
+                history.go(-1);
+            }
         },
         data() {
             return {
@@ -156,7 +160,7 @@
 
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("http://localhost:8000/middleware?user_id=" + this.user.id + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("http://localhost:8000/home?user_id=" + this.user.id + "&token=" + sessionStorage.getItem("token"));
 
                     } else {
                         this.registerError = response.data.message
@@ -175,7 +179,7 @@
 
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("http://localhost:8000/middleware?user_id=" + this.user.id + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("http://localhost:8000/home?user_id=" + this.user.id + "&token=" + sessionStorage.getItem("token"));
 
                     } else {
                         this.registerError = response.data.message

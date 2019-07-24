@@ -16,9 +16,9 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role != 2){
-            return redirect()->back()->with('message', 'Nu aveti acces!');
-        }
+        // if(Auth::user()->role != 2){
+        //     return redirect()->back()->with('message', 'Nu aveti acces!');
+        // }
         return $next($request);
     }
 }

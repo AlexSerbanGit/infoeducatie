@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\User;
-use App\UserLoginToken;
 
-class UserAuthentication
+class GuestVerification
 {
     /**
      * Handle an incoming request.
@@ -17,10 +15,6 @@ class UserAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if(!isset($_GET['user_id']) || $_GET['user_id'] == null) {
-            return redirect(route('welcome')) -> withErrors('User id-ul este necesar!');
-        }
-
         if(!isset($_GET['token']) || $_GET['token'] == null) {
             return redirect(route('welcome')) -> withErrors('Token-ul este necesar!');
         }

@@ -1917,7 +1917,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    sessionStorage.removeItem("token");
+
+    if (sessionStorage.getItem("token") == null) {
+      // window.alert('Sunteti deja logat!');
+      history.go(-1);
+    }
+  },
   data: function data() {
     return {
       'phoneNumber': '',
@@ -2003,7 +2010,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.data.success == true) {
           sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("http://localhost:8000/middleware?user_id=" + _this4.user.id + "&token=" + sessionStorage.getItem("token"));
+          window.location.replace("http://localhost:8000/home?user_id=" + _this4.user.id + "&token=" + sessionStorage.getItem("token"));
         } else {
           _this4.registerError = response.data.message;
         }
@@ -2018,7 +2025,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.data.success == true) {
           sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("http://localhost:8000/middleware?user_id=" + _this5.user.id + "&token=" + sessionStorage.getItem("token"));
+          window.location.replace("http://localhost:8000/home?user_id=" + _this5.user.id + "&token=" + sessionStorage.getItem("token"));
         } else {
           _this5.registerError = response.data.message;
         }

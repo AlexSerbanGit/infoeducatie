@@ -35,7 +35,7 @@
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
                 <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'GoalsScanner') }}
+                    {{ config('app.name', 'Bee Scanner') }}
                 </a>
                 <button class="navbar-toggler" data-toggle="modal" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse"
@@ -68,20 +68,15 @@
                         </ul>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
                            {{-- @include('/parts/searchbar') --}}
-                           <autocomplete-component></autocomplete-component>
+                           {{-- <autocomplete-component></autocomplete-component> --}}
                        </div>
                         <ul class="navbar-nav ml-auto">
 
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <li class="nav-item dropdown" style="margin-top: 10px">
