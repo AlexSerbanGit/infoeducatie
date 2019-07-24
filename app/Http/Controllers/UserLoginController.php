@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserLoginController extends Controller
 {
+
+    public function loginOrRegister() {
+
+        return view('/login-register');
+    }
+
     public function find_user_by_phone_number(Request $request) {
 
         $user = User::where('phone_number', $request -> phone_number) -> first();
