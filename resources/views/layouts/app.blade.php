@@ -100,7 +100,7 @@
                         </ul>
                 </div>
             </nav>
-            {{-- <scanner-component></scanner-component> --}}
+            <scanner-component></scanner-component>
         </div>
     </div>
     </div>

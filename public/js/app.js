@@ -1917,12 +1917,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+<<<<<<< HEAD
   mounted: function mounted() {// sessionStorage.removeItem("token");
     // if(sessionStorage.getItem("token") == null) {
     //     // window.alert('Sunteti deja logat!');
     //     history.go(-1);
     // }
   },
+=======
+>>>>>>> 6ffb0873cbc53f3d06393af8a02bce128f47ba91
   data: function data() {
     return {
       'phoneNumber': '',
@@ -40788,9 +40791,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("button", { staticClass: "btn btn-primary" }, [
-        _c("i", { staticClass: "fas fa-search" })
-      ])
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          staticStyle: { background: "#3F862C !important" }
+        },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
     ])
   }
 ]
@@ -56563,8 +56571,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

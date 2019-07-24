@@ -90,3 +90,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
 });
+
+Route::get('/test', function() {
+    return view('/test');
+});
+
+Route::get('/sanatate', function() {
+    return view('health.home');
+});

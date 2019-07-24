@@ -13,7 +13,7 @@
                 <input class="col w-100 btn btn-secondary btn-sm dropdown-toggle w-100" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="Cauta.." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
             <!-- </div> -->
             <div class="input-group-prepend">
-                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                <button class="btn btn-primary"  style="background: #3F862C !important;"><i class="fas fa-search"></i></button>
             </div>
             <div class="dropdown-menu w-100 mt-2">
                 <ul class="list-group">
