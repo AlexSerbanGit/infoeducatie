@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+var base_url = 'hht'
+
 // import Vue from 'vue'
 // import VueRouter from 'vue-router'
 //
@@ -16,15 +18,7 @@ window.Vue = require('vue');
 Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
 Vue.component('autocomplete-component', require('./components/AutocompleteComponent.vue').default);
 Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
-
-// const router = new VueRouter({
-//   routes: [
-//     {
-//       path: '/home',
-//       component: require('./components/UserHomeComponent.vue')
-//     }
-//   ]
-// })
+Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,6 +27,6 @@ Vue.component('user-login-register-component', require('./components/UserLoginRe
  */
 
 const app = new Vue({
-    el: '#app'
-    // router
+    el: '#app',
+    base_url
 });

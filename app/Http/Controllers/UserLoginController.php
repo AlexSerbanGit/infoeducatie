@@ -65,6 +65,8 @@ class UserLoginController extends Controller
 
         $token -> token = str_random(65);
 
+        $token -> user_agent = $_SERVER['HTTP_USER_AGENT'];
+
         $token -> expire_date = now() -> addMonth(1);
 
         $token -> ip = $request -> getClientIp();
@@ -153,5 +155,51 @@ class UserLoginController extends Controller
                 'message' => 'Codul de verificare este invalid!'
             ]);
         }
+    }
+
+    public function logout() {
+
+        $user = User::find($_GET['user_id']);
+
+        if($user == null) {
+            return json_encode([
+                'success' => false,
+                'message' => 'User id-ul este necesar!'
+            ]);
+        }
+
+        $token = $_GET['token'];
+
+        if($token == null) {
+            return json_encode([
+                'success' => false,
+                'message' => 'Token-ul este necesar!'
+            ]);
+        }
+
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+        if($user_agent == null) {
+            return json_encode([
+                'success' => false,
+                'message' => 'User agent invalid!'
+            ]);
+        }
+
+        $token = $user -> tokens -> where('token', $_GET['token']) -> where('user_agent', $_SERVER['HTTP_USER_AGENT']) -> first();
+
+        if($token == null) {
+            return json_encode([
+                'success' => false,
+                'message' => 'Nu sunteti logat!'
+            ]);
+        }
+
+        $token -> delete();
+
+        return json_encode([
+            'success' => true,
+            'message' => 'Ati fost delogat cu succes!'
+        ]);
     }
 }

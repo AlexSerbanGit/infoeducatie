@@ -21,7 +21,8 @@ class CreateUserLoginTokensTable extends Migration
         Schema::create($this -> set_schema_table, function (Blueprint $table) {
             $table -> increments('id');
             $table -> unsignedInteger('user_id');
-            $table -> string('token', 190) -> nullable();
+            $table -> longText('token');
+            $table -> longText('user_agent');
             $table -> date('expire_date') -> nullable();
             $table -> double('latitude') -> nullable();
             $table -> double('longitude') -> nullable();

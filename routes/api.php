@@ -28,3 +28,8 @@ Route::post('/user/register/sms/confirm', 'UserRegisterController@confirm');
 Route::post('/user/{user_id}/login', 'UserLoginController@login');
 
 Route::post('/user/login/sms/confirm', 'UserloginController@confirm');
+
+// Route for getting the current user object
+Route::get('/user', 'UserController@getCurrentUser');
+
+Route::get('/user/logout', 'UserLoginController@logout');

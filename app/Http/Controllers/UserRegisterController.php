@@ -45,6 +45,8 @@ class UserRegisterController extends Controller
 
         $token -> token = str_random(65);
 
+        $token -> user_agent = $_SERVER['HTTP_USER_AGENT'];
+
         $token -> expire_date = now() -> addMonth(3);
 
         $token -> ip = $request -> getClientIp();

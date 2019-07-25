@@ -70,10 +70,10 @@
     export default {
         mounted() {
             // sessionStorage.removeItem("token");
-            // if(sessionStorage.getItem("token") == null) {
-            //     // window.alert('Sunteti deja logat!');
-            //     history.go(-1);
-            // }
+            if(sessionStorage.getItem("token") != null) {
+                // window.alert('Sunteti deja logat!');
+                history.go(-1);
+            }
         },
         data() {
             return {
@@ -111,6 +111,7 @@
                 }
             },
             searchByPhoneNumber: function() {
+
                 axios.post('http://localhost:8000/api/find_user_by_phone_number', {
                     'phone_number': this.phoneNumber
                 })
@@ -158,9 +159,11 @@
 
                     if(response.data.success == true) {
 
+                        sessionStorage.setItem("user_id", response.data.user.id);
+
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("http://localhost:8000/home?user_id=" + this.user.id + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("http://localhost:8000/home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
 
                     } else {
                         this.registerError = response.data.message
@@ -177,9 +180,11 @@
 
                     if(response.data.success == true) {
 
+                        sessionStorage.setItem("user_id", response.data.user.id);
+                        
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("http://localhost:8000/home?user_id=" + this.user.id + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("http://localhost:8000/home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
 
                     } else {
                         this.registerError = response.data.message

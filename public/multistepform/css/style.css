@@ -71,7 +71,7 @@ body {
 }
 /* xl button for login next step at found account */
 #msform .action-button-xl {
-    width: 210px;
+    width: 250px;
     background: #ee0979;
     font-weight: bold;
     color: white;
@@ -83,7 +83,7 @@ body {
 }
 
 #msform .action-button {
-    width: 110px;
+    width: 120px;
     background: #ee0979;
     font-weight: bold;
     color: white;

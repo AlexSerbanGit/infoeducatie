@@ -14,6 +14,24 @@ use App\Product;
 
 class UserController extends Controller
 {
+    public function getCurrentUser() {
+
+        $user = User::find($request -> user_id);
+
+        if($user == null) {
+            return json_encode([
+                'success' => false,
+                'message' => 'User inexistent!'
+            ]);
+        }
+
+        $token = UserLoginToken::where('user_id', $user -> id)
+            -> where('user_agent', $_GET['user_agent'])
+            -> where('token', $_GET['token']) -> last();
+
+        return json_encode($token);
+    }
+
     public function updateUser(Request $request){
 
         $request->validate([

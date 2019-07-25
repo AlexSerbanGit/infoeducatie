@@ -72,11 +72,10 @@
                        </div>
                         <ul class="navbar-nav ml-auto">
 
-                        <!-- Authentication Links -->
+                        <profile-or-logout></profile-or-logout>
+
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
-                            </li>
+
                         @else
                             <li class="nav-item dropdown">
                                 <li class="nav-item dropdown" style="margin-top: 10px">
@@ -100,7 +99,7 @@
                         </ul>
                 </div>
             </nav>
-            <scanner-component></scanner-component>
+            {{-- <scanner-component></scanner-component> --}}
         </div>
     </div>
     </div>
