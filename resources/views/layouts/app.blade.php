@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
         <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
-
         <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
         <style>
         html body{
@@ -36,7 +35,7 @@
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
                 <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'GoalsScanner') }}
+                    {{ config('app.name', 'Bee Scanner') }}
                 </a>
                 <button class="navbar-toggler" data-toggle="modal" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse"
@@ -69,20 +68,14 @@
                         </ul>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
                            {{-- @include('/parts/searchbar') --}}
-                           <autocomplete-component></autocomplete-component>
+                           {{-- <autocomplete-component></autocomplete-component> --}}
                        </div>
                         <ul class="navbar-nav ml-auto">
 
-                        <!-- Authentication Links -->
+                        <profile-or-logout></profile-or-logout>
+
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+
                         @else
                             <li class="nav-item dropdown">
                                 <li class="nav-item dropdown" style="margin-top: 10px">
@@ -106,7 +99,7 @@
                         </ul>
                 </div>
             </nav>
-            <scanner-component></scanner-component>
+            {{-- <scanner-component></scanner-component> --}}
         </div>
     </div>
     </div>

@@ -8,19 +8,17 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+var base_url = 'hht'
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
+//
+// Vue.use(VueRouter)
 
 Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
 Vue.component('autocomplete-component', require('./components/AutocompleteComponent.vue').default);
+Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
+Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,8 +27,6 @@ Vue.component('autocomplete-component', require('./components/AutocompleteCompon
  */
 
 const app = new Vue({
-    el: '#app'
-    // components: {
-    //     AutocompleteComponent
-    // }
+    el: '#app',
+    base_url
 });

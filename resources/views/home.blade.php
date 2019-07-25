@@ -2,14 +2,14 @@
 
 @section('content')
 
-@if(Auth::user()->stats)
+@if($user -> stats)
 <!-- Header -->
 <div class="header pb-1 pt-2 ">
       <div class="container">
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
-          @if(Auth::user()->targets()->count() > 0)
+          @if($user -> targets()->count() > 0)
           @php
 
           $id = 1;
@@ -17,7 +17,7 @@
           @endphp
           @php
 
-          $rev = Auth::user()->targets->reverse();
+          $rev = $user -> targets->reverse();
 
           @endphp
 
@@ -34,28 +34,28 @@
           <!-- Recalcularea in functie de target -->
           @if($target->type == 1)
             @php
-              $kcal = Auth::user()->stats->kcal - 500;
+              $kcal = $user -> stats->kcal - 500;
               $fat = $kcal*3/10/9;
 
-              $kcalcarbo = $kcal - $fat*9 - Auth::user()->stats->protein*4;
+              $kcalcarbo = $kcal - $fat*9 - $user -> stats->protein*4;
               $carbo = $kcalcarbo/4;
             @endphp
           @endif
 
           @if($target->type == 2)
             @php
-              $kcal = Auth::user()->stats->kcal;
-              $fat = Auth::user()->stats->fat;
-              $carbo = Auth::user()->stats->carbo;
+              $kcal = $user -> stats->kcal;
+              $fat = $user -> stats->fat;
+              $carbo = $user -> stats->carbo;
             @endphp
           @endif
 
           @if($target->type == 3)
             @php
-              $kcal = Auth::user()->stats->kcal + 200;
+              $kcal = $user -> stats->kcal + 200;
               $fat = $kcal*3/10/9;
 
-              $kcalcarbo = $kcal - $fat*9 - Auth::user()->stats->protein*4;
+              $kcalcarbo = $kcal - $fat*9 - $user -> stats->protein*4;
               $carbo = $kcalcarbo/4;
             @endphp
           @endif
@@ -66,7 +66,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Proteine</h5>
-                      <span class="h2 font-weight-bold mb-0">{{Auth::user()->stats->protein}}</span>
+                      <span class="h2 font-weight-bold mb-0">{{$user -> stats->protein}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -154,7 +154,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Proteine</h5>
-                      <span class="h2 font-weight-bold mb-0">{{Auth::user()->stats->protein}}</span>
+                      <span class="h2 font-weight-bold mb-0">{{$user -> stats->protein}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -175,7 +175,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Carbo</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ Auth::user()->stats->carbo }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ $user -> stats->carbo }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -196,7 +196,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Grasimi</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ Auth::user()->stats->fat }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ $user -> stats->fat }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -217,7 +217,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Calorii</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ Auth::user()->stats->kcal }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ $user -> stats->kcal }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -252,10 +252,10 @@
               <i class="fas fa-allergies"></i>
               </div>
               <h1 class="text-primary text-uppercase">Alergiile tale</h1>
-              @if(Auth::user()->allergies->count() > 0)
+              @if($user -> allergies->count() > 0)
                 <div class="row">
 
-                  @foreach(Auth::user()->allergies as $allergy)
+                  @foreach($user -> allergies as $allergy)
 
                     <div class="col-md-4 col-sm-6 col-xs-12">
                       <div class="alert alert-primary">
@@ -286,9 +286,9 @@
   </div>
 </div>
 </section>
-@if(Auth::user()->allergies->count() > 0)
-             
-    @foreach(Auth::user()->allergies as $allergy)
+@if($user -> allergies->count() > 0)
+
+    @foreach($user -> allergies as $allergy)
     <div class="modal fade" id="removeAllergy{{$allergy->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
         <div class="modal-content">
@@ -333,7 +333,7 @@
                       <i class="fas fa-bullseye"></i>
                     </div>
                     <h1 class="text-primary text-uppercase">Progres</h1>
-                    @if(Auth::user()->targets()->count() > 0)
+                    @if($user -> targets()->count() > 0)
                         @php
 
                         $id = 1;
@@ -341,7 +341,7 @@
                         @endphp
                         @php
 
-                        $rev = Auth::user()->targets->reverse();
+                        $rev = $user -> targets->reverse();
 
                         @endphp
 
@@ -364,17 +364,17 @@
                             @elseif($target->type == 3)
                               Punere masa
                             @endif
-                            @if(Auth::user()->dailyProgresses->count() > 0)
+                            @if($user -> dailyProgresses->count() > 0)
 
                             @php
 
-                            $rev2 = Auth::user()->dailyProgresses->reverse();
+                            $rev2 = $user -> dailyProgresses->reverse();
 
                             @endphp
 
                             @foreach($rev2 as $progress)
                               @php
-                              $currentProtein = $progress->protein/Auth::user()->stats->protein*100;
+                              $currentProtein = $progress->protein/$user -> stats->protein*100;
                               $currentCarbo = $progress->carbo/$carbo*100;
                               $currentKcal = $progress->kcal/$kcal*100;
                               $currentFat = $progress->fat/$fat*100;
@@ -395,7 +395,7 @@
                               </div>
                             </div>
                             <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="{{Auth::user()->protein}}" style="width: {{$currentProtein}}%;"></div>
+                              <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="{{$user -> protein}}" style="width: {{$currentProtein}}%;"></div>
                             </div>
                           </div>
 
@@ -531,7 +531,7 @@
                     <h1 class="text-primary text-uppercase">
                       Target-curent:
                     </h1>
-                    @if(Auth::user()->targets()->count() > 0)
+                    @if($user -> targets()->count() > 0)
 
                     @php
 
@@ -540,7 +540,7 @@
                     @endphp
                     @php
 
-                      $rev = Auth::user()->targets->reverse();
+                      $rev = $user -> targets->reverse();
 
                     @endphp
 
@@ -594,7 +594,7 @@
                     <h1 class="text-primary text-uppercase">Ultimele target-url</h1>
                     <h2>Mai jos sunt ultimele tale target-uri.</h2>
 
-                    @if(Auth::user()->targets()->count() > 0)
+                    @if($user -> targets()->count() > 0)
 
                       @php
 
@@ -603,7 +603,7 @@
                       @endphp
                       @php
 
-                        $rev = Auth::user()->targets->reverse();
+                        $rev = $user -> targets->reverse();
 
                       @endphp
 

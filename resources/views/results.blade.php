@@ -153,7 +153,10 @@
                           <div class="card card-lift--hover shadow border-0">
                               <div class="card-body py-5">
                                 <div class="px-0">
-                                  <img src="{{ asset('/products/' . $allergy -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="width: 150px; height: 150px; border-radius: 50%;">
+                                    <div class="icon icon-shape icon-shape-primary rounded-circle mb-4 text-center">
+                                    <i class="fas fa-allergies"></i>
+                                    </div>
+                                  {{-- <img src="{{ asset('/products/' . $allergy -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="width: 150px; height: 150px; border-radius: 50%;"> --}}
                                 </div>
                                 <h2 class="text-success text-uppercase text-center mt-3">{{ $allergy -> allergy -> name }}</h2>
                                 @if(isset($allergy -> allergy -> description))
