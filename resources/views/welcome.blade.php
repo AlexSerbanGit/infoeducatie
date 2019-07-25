@@ -8,18 +8,7 @@
 
     @endforeach
 
-    @auth
-        da
-        {{Auth::user()->id}}
-    @else
-        nu
-    @endauth
-
-    @guest 
-        da
-    @else
-        nu
-    @endguest
+  
 
     <div>
         <div class="header-blue" style="padding-bottom: 0px;">
