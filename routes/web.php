@@ -67,7 +67,7 @@ Route::group(['middleware' => ['user-auth']], function () {
 
 });
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['auth', 'admin', 'user-auth']], function () {
 
     Route::get('/admin', 'AdminController@menu');
 

@@ -14297,7 +14297,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .togglebutton label input[type=checkbox][disabled]+.toggle:after,
 .togglebutton label input[type=checkbox][disabled]:checked+.toggle:after {
-  background-color: #BDBDBD;
+  background-color: rgb(184, 147, 147);
 }
 
 .togglebutton label input[type=checkbox]+.toggle:active:after,
@@ -14774,7 +14774,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-color="purple"] li.active>a {
-  background-color: #9c27b0;
+  background-color: #f49515;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 

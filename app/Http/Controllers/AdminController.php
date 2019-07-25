@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Allergy;
 use App\Product;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -19,8 +20,8 @@ class AdminController extends Controller
 
     public function users(){
 
-        return view('admin.users');
-
+        $users = User::all();
+        return view('admin.users')->with('users', $users);
     }
 
     public function doctors(){

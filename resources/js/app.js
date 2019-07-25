@@ -20,6 +20,7 @@ Vue.component('autocomplete-component', require('./components/AutocompleteCompon
 Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
 Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').default);
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -80,6 +80,7 @@
     </div>
     <div class="contact-clean">
         <form method="post">
+        @csrf
             <h2 class="text-center">Contacteaza-ne</h2>
             <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Nume"></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
