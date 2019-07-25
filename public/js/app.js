@@ -1803,12 +1803,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // Verify if the user is logged in
     if (sessionStorage.getItem("token") != null && sessionStorage.getItem("user_id") != null) {
-      this.url = "/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
+      this.url = "./api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
       this.button = true;
     } else {
       sessionStorage.removeItem("user_id");
       sessionStorage.removeItem("token");
-      this.url = "/user/login_register";
+      this.url = "./user/login_register";
       this.button = false;
     }
   },
@@ -1821,7 +1821,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      axios.get("/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token")).then(function (response) {
+      axios.get("./api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token")).then(function (response) {
         sessionStorage.removeItem("user_id");
         sessionStorage.removeItem("token");
         window.location.replace("?success=" + response.data.success);
@@ -2015,7 +2015,7 @@ __webpack_require__.r(__webpack_exports__);
     searchByPhoneNumber: function searchByPhoneNumber() {
       var _this = this;
 
-      axios.post('/api/find_user_by_phone_number', {
+      axios.post('../api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
         _this.user = response.data.user, _this.validAccount = response.data.success;
@@ -2028,14 +2028,14 @@ __webpack_require__.r(__webpack_exports__);
     loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post('/api/user/' + this.user.id + '/login').then(function (response) {
+      axios.post('../api/user/' + this.user.id + '/login').then(function (response) {
         _this2.user = response.data.user;
       });
     },
     registerSendSMS: function registerSendSMS() {
       var _this3 = this;
 
-      axios.post('/api/user/register', {
+      axios.post('../api/user/register', {
         'name': this.registerName,
         'phone_number': this.registerPhoneNumber
       }).then(function (response) {
@@ -2056,14 +2056,14 @@ __webpack_require__.r(__webpack_exports__);
     registerConfirmSMS: function registerConfirmSMS() {
       var _this4 = this;
 
-      axios.post('/api/user/register/sms/confirm', {
+      axios.post('../api/user/register/sms/confirm', {
         'sms_code': this.sms,
         'user_id': this.user.id
       }).then(function (response) {
         if (response.data.success == true) {
           sessionStorage.setItem("user_id", response.data.user.id);
           sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("/home?user_id=" + _this4.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+          window.location.replace("../home?user_id=" + _this4.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
         } else {
           _this4.registerError = response.data.message;
         }
@@ -2072,14 +2072,14 @@ __webpack_require__.r(__webpack_exports__);
     loginConfirmSMS: function loginConfirmSMS() {
       var _this5 = this;
 
-      axios.post('/api/user/login/sms/confirm', {
+      axios.post('../api/user/login/sms/confirm', {
         'sms_code': this.sms,
         'user_id': this.user.id
       }).then(function (response) {
         if (response.data.success == true) {
           sessionStorage.setItem("user_id", response.data.user.id);
           sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("/home?user_id=" + _this5.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+          window.location.replace("../home?user_id=" + _this5.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
         } else {
           _this5.registerError = response.data.message;
         }

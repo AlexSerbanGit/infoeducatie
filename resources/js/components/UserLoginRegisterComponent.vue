@@ -112,7 +112,7 @@
             },
             searchByPhoneNumber: function() {
 
-                axios.post('/api/find_user_by_phone_number', {
+                axios.post('../api/find_user_by_phone_number', {
                     'phone_number': this.phoneNumber
                 })
                 .then(response => {
@@ -125,13 +125,13 @@
                 })
             },
             loginSendSMS: function() {
-                axios.post('/api/user/' + this.user.id + '/login')
+                axios.post('../api/user/' + this.user.id + '/login')
                 .then(response => {
                     this.user = response.data.user
                 })
             },
             registerSendSMS: function() {
-                axios.post('/api/user/register', {
+                axios.post('../api/user/register', {
                     'name': this.registerName,
                     'phone_number': this.registerPhoneNumber
                 })
@@ -151,7 +151,7 @@
                 }
             },
             registerConfirmSMS: function() {
-                axios.post('/api/user/register/sms/confirm', {
+                axios.post('../api/user/register/sms/confirm', {
                     'sms_code': this.sms,
                     'user_id': this.user.id
                 })
@@ -163,7 +163,7 @@
 
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("/home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("../home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
 
                     } else {
                         this.registerError = response.data.message
@@ -172,7 +172,7 @@
             },
             loginConfirmSMS: function() {
 
-                axios.post('/api/user/login/sms/confirm', {
+                axios.post('../api/user/login/sms/confirm', {
                     'sms_code': this.sms,
                     'user_id': this.user.id
                 })
@@ -184,7 +184,7 @@
                         
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("/home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("../home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
 
                     } else {
                         this.registerError = response.data.message

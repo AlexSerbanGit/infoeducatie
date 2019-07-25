@@ -158,7 +158,7 @@ class UserLoginController extends Controller
     }
 
     public function logout() {
-
+        
         $user = User::find($_GET['user_id']);
 
         if($user == null) {

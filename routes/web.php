@@ -98,3 +98,5 @@ Route::get('/test', function() {
 Route::get('/sanatate', function() {
     return view('health.home');
 });
+
+Auth::routes();
