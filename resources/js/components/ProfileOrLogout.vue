@@ -15,12 +15,12 @@
 
             // Verify if the user is logged in
             if(sessionStorage.getItem("token") != null && sessionStorage.getItem("user_id") != null) {
-                this.url = "http://localhost:8000/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
+                this.url = "/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
                 this.button = true;
             } else {
                 sessionStorage.removeItem("user_id");
                 sessionStorage.removeItem("token");
-                this.url = "http://localhost:8000/user/login_register";
+                this.url = "/user/login_register";
                 this.button = false
             }
         },
@@ -33,11 +33,11 @@
         },
         methods: {
             logout() {
-                axios.get("http://localhost:8000/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"))
+                axios.get("/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"))
                     .then(response => {
                         sessionStorage.removeItem("user_id");
                         sessionStorage.removeItem("token");
-                        window.location.replace("http://localhost:8000?success=" + response.data.success);
+                        window.location.replace("?success=" + response.data.success);
                     })
             }
         }

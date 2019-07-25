@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>
+            window.Laravel = { csrfToken: '{{ csrf_token() }}' }
+        </script>
 
         <title>Infoeducatie | Scanner</title>
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
@@ -21,6 +24,8 @@
         <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
         <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
+        <meta name="api-base-url" content="{{ url('/') }}" />
+
         <style>
         html body{
             font-family: 'Oswald', sans-serif;

@@ -1803,12 +1803,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // Verify if the user is logged in
     if (sessionStorage.getItem("token") != null && sessionStorage.getItem("user_id") != null) {
-      this.url = "http://localhost:8000/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
+      this.url = "/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
       this.button = true;
     } else {
       sessionStorage.removeItem("user_id");
       sessionStorage.removeItem("token");
-      this.url = "http://localhost:8000/user/login_register";
+      this.url = "/user/login_register";
       this.button = false;
     }
   },
@@ -1821,10 +1821,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      axios.get("http://localhost:8000/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token")).then(function (response) {
+      axios.get("/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token")).then(function (response) {
         sessionStorage.removeItem("user_id");
         sessionStorage.removeItem("token");
-        window.location.replace("http://localhost:8000?success=" + response.data.success);
+        window.location.replace("?success=" + response.data.success);
       });
     }
   }
@@ -2015,7 +2015,7 @@ __webpack_require__.r(__webpack_exports__);
     searchByPhoneNumber: function searchByPhoneNumber() {
       var _this = this;
 
-      axios.post('http://localhost:8000/api/find_user_by_phone_number', {
+      axios.post('/api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
         _this.user = response.data.user, _this.validAccount = response.data.success;
@@ -2028,14 +2028,14 @@ __webpack_require__.r(__webpack_exports__);
     loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post('http://localhost:8000/api/user/' + this.user.id + '/login').then(function (response) {
+      axios.post('/api/user/' + this.user.id + '/login').then(function (response) {
         _this2.user = response.data.user;
       });
     },
     registerSendSMS: function registerSendSMS() {
       var _this3 = this;
 
-      axios.post('http://localhost:8000/api/user/register', {
+      axios.post('/api/user/register', {
         'name': this.registerName,
         'phone_number': this.registerPhoneNumber
       }).then(function (response) {
@@ -2056,14 +2056,14 @@ __webpack_require__.r(__webpack_exports__);
     registerConfirmSMS: function registerConfirmSMS() {
       var _this4 = this;
 
-      axios.post('http://localhost:8000/api/user/register/sms/confirm', {
+      axios.post('/api/user/register/sms/confirm', {
         'sms_code': this.sms,
         'user_id': this.user.id
       }).then(function (response) {
         if (response.data.success == true) {
           sessionStorage.setItem("user_id", response.data.user.id);
           sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("http://localhost:8000/home?user_id=" + _this4.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+          window.location.replace("/home?user_id=" + _this4.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
         } else {
           _this4.registerError = response.data.message;
         }
@@ -2072,14 +2072,14 @@ __webpack_require__.r(__webpack_exports__);
     loginConfirmSMS: function loginConfirmSMS() {
       var _this5 = this;
 
-      axios.post('http://localhost:8000/api/user/login/sms/confirm', {
+      axios.post('/api/user/login/sms/confirm', {
         'sms_code': this.sms,
         'user_id': this.user.id
       }).then(function (response) {
         if (response.data.success == true) {
           sessionStorage.setItem("user_id", response.data.user.id);
           sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("http://localhost:8000/home?user_id=" + _this5.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+          window.location.replace("/home?user_id=" + _this5.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
         } else {
           _this5.registerError = response.data.message;
         }
@@ -56511,15 +56511,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./resources/js/components/ProfileOrLogout.vue ***!
   \*****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProfileOrLogout_vue_vue_type_template_id_51be1f7b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileOrLogout.vue?vue&type=template&id=51be1f7b& */ "./resources/js/components/ProfileOrLogout.vue?vue&type=template&id=51be1f7b&");
 /* harmony import */ var _ProfileOrLogout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileOrLogout.vue?vue&type=script&lang=js& */ "./resources/js/components/ProfileOrLogout.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ProfileOrLogout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ProfileOrLogout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -56549,7 +56548,7 @@ component.options.__file = "resources/js/components/ProfileOrLogout.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/ProfileOrLogout.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
