@@ -17,16 +17,84 @@ class AdminController extends Controller
 
     }
 
-    public function menu(){
-         return redirect('/admin/allergies');
+    public function users(){
+
+        return view('admin.users');
+
+    }
+
+    public function doctors(){
+
+        return view('admin.doctors');
+
+    }
+
+    public function pharmacies(){
+
+        return view('admin.pharmacies');
+
+    }
+
+    public function moderators(){
+
+        return view('admin.moderators');
+
+    }
+
+    public function products(){
+
+        return view('admin.products');
+
+    }
+
+    public function drugs(){
+
+        return view('admin.drugs');
+
+    }
+
+    public function messages(){
+
+        return view('admin.messages');
+
+    }
+
+    public function notifications(){
+
+        return view('admin.notifications');
+
+    }
+
+    public function drivers()
+    {
+
+        return view('admin.drivers');
+
     }
 
     public function allergies(){
 
-        $allergies = Allergy::all();
+        return view('admin.allergies');
 
-        return view('admin.allergies')->with('allergies', $allergies);
     }
+
+    public function restaurants()
+    {
+
+        return view('admin.restaurants');
+
+    }
+
+    public function menu(){
+         return redirect('/admin/allergies');
+    }
+
+    // public function allergies(){
+
+    //     $allergies = Allergy::all();
+
+    //     return view('admin.allergies')->with('allergies', $allergies);
+    // }
 
     public function addAllergy(Request $request){
         $request->validate([
@@ -75,12 +143,12 @@ class AdminController extends Controller
 
     }
 
-    public function products(){
+    // public function products(){
 
-        $products = Product::all();
-        return view('admin.products')->with('products', $products);
+    //     $products = Product::all();
+    //     return view('admin.products')->with('products', $products);
 
-    }
+    // }
 
     public function addProduct(Request $request){
 

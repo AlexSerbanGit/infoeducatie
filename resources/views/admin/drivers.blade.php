@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Alergii
+    Soferi
 
 @endsection

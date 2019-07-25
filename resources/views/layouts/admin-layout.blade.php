@@ -24,7 +24,7 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="{{ asset('assets-admin/img/sidebar-1.jpg')}}">
+    <div class="sidebar" data-color="purple" data-background-color="white">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -39,60 +39,137 @@
         <ul class="nav">
           @if(Route::currentRouteName() == "Panou de administrare" )
             <li class="nav-item active">
+            <a class="nav-link" href="#">
           @else
             <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/home') }}">
           @endif
-            <a class="nav-link" href="./dashboard.html">
               <i class="material-icons">dashboard</i>
               <p>Acasa</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./user.html">
+          @if(Route::currentRouteName() == "Utilizatori" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/users') }}">
+          @endif
               <i class="material-icons">person</i>
               <p>Utilizatori</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./map.html">
+          @if(Route::currentRouteName() == "Doctori" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/doctors') }}">
+          @endif
               <i class="fas fa-user-md"></i>
               <p>Doctori</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./typography.html">
+          @if(Route::currentRouteName() == "Detinatori de farmacii" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/pharmacies') }}">
+          @endif
               <i class="fas fa-clinic-medical"></i>
               <p>Detinatori de farmacii</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./typography.html">
+          @if(Route::currentRouteName() == "Moderatori" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/moderators') }}">
+          @endif
               <i class="fas fa-users-cog"></i>
               <p>Moderatori</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
+          @if(Route::currentRouteName() == "Produse" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/products') }}">
+          @endif
               <i class="fab fa-product-hunt"></i>
               <p>Produse</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./icons.html">
+          @if(Route::currentRouteName() == "Medicamente" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/drugs') }}">
+          @endif
               <i class="fas fa-prescription-bottle-alt"></i>
               <p>Medicamente</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./map.html">
+          @if(Route::currentRouteName() == "Mesaje" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/messages') }}">
+          @endif
               <i class="fas fa-comments"></i>
               <p>Mesaje</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./notifications.html">
+          @if(Route::currentRouteName() == "Notificari" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/notifications') }}">
+          @endif
               <i class="material-icons">notifications</i>
-              <p>Notifications</p>
+              <p>Notificari</p>
+            </a>
+          </li>
+
+          @if(Route::currentRouteName() == "Alergii" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/allergies') }}">
+          @endif
+              <i class="fas fa-allergies"></i>
+              <p>Alergii</p>
+            </a>
+          </li>
+
+          @if(Route::currentRouteName() == "Soferi" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/drivers') }}">
+          @endif
+          <i class="fas fa-car"></i>
+          <p>Soferi</p>
+            </a>
+          </li>
+
+          @if(Route::currentRouteName() == "Restaurante" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/restaurants') }}">
+          @endif
+            <i class="fas fa-utensils"></i>
+            <p>Restaurante</p>
             </a>
           </li>
       
@@ -135,7 +212,15 @@
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Log out</a>
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
               </li>
             </ul>

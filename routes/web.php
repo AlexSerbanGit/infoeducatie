@@ -111,5 +111,27 @@ Route::post('admin/password/reset', 'Auth\ResetPasswordController@reset')->name(
 Route::group(['middleware' => ['auth', 'admin']], function () { 
 
     Route::get('/admin/home', 'AdminController@home')->name('Panou de administrare');
+    
+    Route::get('/admin/users', 'AdminController@users')->name('Utilizatori');
+
+    Route::get('/admin/doctors', 'AdminController@doctors')->name('Doctori');
+
+    Route::get('/admin/pharmacies', 'AdminController@pharmacies')->name('Detinatori de farmacii');
+
+    Route::get('/admin/moderators', 'AdminController@moderators')->name('Moderatori');
+
+    Route::get('/admin/products', 'AdminController@products')->name('Produse');
+
+    Route::get('/admin/drugs', 'AdminController@drugs')->name('Medicamente');
+
+    Route::get('/admin/messages', 'AdminController@messages')->name('Mesaje');
+
+    Route::get('/admin/notifications', 'AdminController@notifications')->name('Notificari');
+
+    Route::get('/admin/drivers', 'AdminController@drivers')->name('Soferi');
+
+    Route::get('/admin/allergies', 'AdminController@allergies')->name('Alergii');
+
+    Route::get('/admin/restaurants', 'AdminController@restaurants')->name('Restaurante');
 
 });

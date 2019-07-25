@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Alergii
+    Moderatori
 
 @endsection
