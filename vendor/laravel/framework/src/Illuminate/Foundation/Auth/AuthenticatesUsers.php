@@ -30,6 +30,14 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
+
+        if(!$request->password){
+            return json_encode([
+                'success' => false,
+                'message' => 'Autentificare nereusita!'
+            ]);
+        }
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
