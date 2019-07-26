@@ -44,6 +44,11 @@ trait AuthenticatesUsers
 
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
+        }else{
+            return json_encode([
+                'success' => false,
+                'message' => 'Utilizator inexistent!'
+            ]);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
