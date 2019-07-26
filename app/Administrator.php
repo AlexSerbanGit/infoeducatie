@@ -11,7 +11,7 @@ class Administrator extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone_number', 'code',
     ];
 /**
      * The attributes that should be hidden for arrays.
@@ -21,4 +21,8 @@ class Administrator extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function getAuthCode()
+    {
+        return $this->code;
+    }
 }

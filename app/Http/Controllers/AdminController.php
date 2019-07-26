@@ -24,7 +24,7 @@ class AdminController extends Controller
         return view('admin.users')->with('users', $users);
     }
 
-    public function doctors(){
+    public function doctors(Request $request){
 
         return view('admin.doctors');
 

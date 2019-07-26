@@ -32,7 +32,7 @@
             <td>{{$user->phone_number}}</td>
             <td class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#viewCategory">Vezi</button></td>
             <td class="td-actions text-right">
-                <button type="button" rel="tooltip" class="btn btn-warning" data-toggle="modal" data-target="#editCategory">
+                <button type="button" rel="tooltip" class="btn btn-warning" data-toggle="modal" data-target="#editUser{{$user->id}}">
                     <i class="material-icons">edit</i>
                 </button>
                 <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategory">
@@ -48,4 +48,40 @@
 </div>
 </div>
 </div>
+@foreach($users as $user)
+
+<!-- Modal -->
+<div class="modal fade" id="editUser{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{{ url('/admin/doctors') }}" method="GET"> 
+        @csrf
+        <button class="btn btn-success">da</button>
+    </form>
+    <form action="{{ url('/admin/update_user/'.$user->id) }}" method="POST">
+      @csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+
+        <label>Nume:</label>
+        <input type="text" name="name" class="form-control" value="{{$user->name}}" required>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button class="btn btn-warning">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+@endforeach
 @endsection

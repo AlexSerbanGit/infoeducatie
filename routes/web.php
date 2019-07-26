@@ -107,31 +107,32 @@ Route::get('admin/password/reset', 'Auth\ForgotPasswordController@showLinkReques
 Route::post('admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::get('/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/admin/register', 'Auth\RegisterController@register');
+Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'admin'], function () { 
 
-Route::group(['middleware' => ['auth', 'admin']], function () { 
-
-    Route::get('/admin/home', 'AdminController@home')->name('Panou de administrare');
+    Route::get('/home', 'AdminController@home')->name('Panou de administrare');
     
-    Route::get('/admin/users', 'AdminController@users')->name('Utilizatori');
+    Route::get('/users', 'AdminController@users')->name('Utilizatori');
 
-    Route::get('/admin/doctors', 'AdminController@doctors')->name('Doctori');
+    Route::get('/doctors', 'AdminController@doctors')->name('Doctori');
 
-    Route::get('/admin/pharmacies', 'AdminController@pharmacies')->name('Detinatori de farmacii');
+    Route::get('/pharmacies', 'AdminController@pharmacies')->name('Detinatori de farmacii');
 
-    Route::get('/admin/moderators', 'AdminController@moderators')->name('Moderatori');
+    Route::get('/moderators', 'AdminController@moderators')->name('Moderatori');
 
-    Route::get('/admin/products', 'AdminController@products')->name('Produse');
+    Route::get('/products', 'AdminController@products')->name('Produse');
 
-    Route::get('/admin/drugs', 'AdminController@drugs')->name('Medicamente');
+    Route::get('/drugs', 'AdminController@drugs')->name('Medicamente');
 
-    Route::get('/admin/messages', 'AdminController@messages')->name('Mesaje');
+    Route::get('/messages', 'AdminController@messages')->name('Mesaje');
 
-    Route::get('/admin/notifications', 'AdminController@notifications')->name('Notificari');
+    Route::get('/notifications', 'AdminController@notifications')->name('Notificari');
 
-    Route::get('/admin/drivers', 'AdminController@drivers')->name('Soferi');
+    Route::get('/drivers', 'AdminController@drivers')->name('Soferi');
 
-    Route::get('/admin/allergies', 'AdminController@allergies')->name('Alergii');
+    Route::get('/allergies', 'AdminController@allergies')->name('Alergii');
 
-    Route::get('/admin/restaurants', 'AdminController@restaurants')->name('Restaurante');
+    Route::get('/restaurants', 'AdminController@restaurants')->name('Restaurante');
 
 });
