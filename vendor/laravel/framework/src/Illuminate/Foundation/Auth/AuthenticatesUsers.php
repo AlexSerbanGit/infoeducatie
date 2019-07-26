@@ -47,7 +47,7 @@ trait AuthenticatesUsers
         }else{
             return json_encode([
                 'success' => false,
-                'message' => 'Utilizator inexistent!'
+                'message' => 'Autentificare nereusita!'
             ]);
         }
 
