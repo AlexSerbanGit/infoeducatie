@@ -52,6 +52,7 @@ trait AuthenticatesUsers
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+        return 'ce se intampla';
     }
 
     /**
