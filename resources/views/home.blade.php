@@ -9,6 +9,7 @@
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
+         
           @if($user -> targets()->count() > 0)
           @php
 

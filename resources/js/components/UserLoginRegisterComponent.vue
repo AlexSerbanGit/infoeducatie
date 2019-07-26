@@ -163,7 +163,7 @@
 
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("../home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("../home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + $('meta[name="csrf-token"]').attr('content'));
 
                     } else {
                         this.registerError = response.data.message
@@ -184,7 +184,7 @@
                         
                         sessionStorage.setItem("token", response.data.user.token.token);
 
-                        window.location.replace("../home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
+                        window.location.replace("../home?user_id=" + this.user.id + "&user_agent="+ navigator.userAgent + "&token=" + $('meta[name="csrf-token"]').attr('content'));
 
                     } else {
                         this.registerError = response.data.message
