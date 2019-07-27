@@ -20,7 +20,7 @@
       />
     </fieldset>
     <fieldset v-if="validAccount == true">
-      <h2 class="fs-title mt-4">Buna, Andrei Preda</h2>
+      <h2 class="fs-title mt-4">Buna, {{ user.name }}</h2>
       <h3 class="fs-subtitle mt-3">A fost gasit un cont asociat cu numarul de telefon <span class="text-danger">0740794880</span></h3>
       <input type="button" name="previous" class="previous action-button-previous" value="Inapoi"/>
       <input type="button" name="next" class="next action-button-xl" value="Trimite-mi sms"
