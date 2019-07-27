@@ -41098,7 +41098,12 @@ var render = function() {
             _vm._v("Buna, " + _vm._s(_vm.user.name))
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("h3", { staticClass: "fs-subtitle mt-3" }, [
+            _vm._v("A fost gasit un cont asociat cu numarul de telefon "),
+            _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(this.phoneNumber))
+            ])
+          ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "previous action-button-previous",
@@ -41396,7 +41401,7 @@ var render = function() {
             _vm._v("Confirmare sms inregistrare")
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "confirmCode col-md-12" }, [
             _c("input", {
@@ -41601,15 +41606,6 @@ var staticRenderFns = [
         "Numarul de telefon trebuie sa fie unul valid, pentru a activa actiunea de logare"
       ),
       _c("span", { staticClass: "text-danger" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "fs-subtitle mt-3" }, [
-      _vm._v("A fost gasit un cont asociat cu numarul de telefon "),
-      _c("span", { staticClass: "text-danger" }, [_vm._v("0740794880")])
     ])
   },
   function() {
