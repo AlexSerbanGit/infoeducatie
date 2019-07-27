@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table -> string('phone_number') -> unique();
             $table -> string('email') -> nullable();
 
-            $table -> integer('role_id') -> default(0); // 0 - user / 1 - profesor / doctor / 2 - admin
+            $table -> integer('role_id') -> default(0); // 0 - user / 1 - profesor / doctor / 2 - admin / 3 - detinator de farmacie
             $table -> integer('target') -> nullable(); // 1 - slabit / 2 -mentinere / 3 - pune masa
             $table -> string('language') -> default('Romanian'); // Romanian / English
             $table -> string('city') -> nullable();
