@@ -60,8 +60,6 @@ class UserRegisterController extends Controller
 
         $user -> expire_code = now() -> addMinutes(30);
 
-        // $user -> code = '666666';
-
         $user -> code = mt_rand(100000, 999999);
 
         $user -> save();

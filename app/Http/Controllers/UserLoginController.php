@@ -61,9 +61,7 @@ class UserLoginController extends Controller
 
         $user -> expire_code = now() -> addMinutes(30);
 
-        $user -> code = '222222';
-
-        // $user -> code = mt_rand(100000, 999999);
+        $user -> code = mt_rand(100000, 999999);
 
         $user -> save();
 
