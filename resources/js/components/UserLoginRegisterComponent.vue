@@ -139,7 +139,6 @@
         }
       },
       searchByPhoneNumber: function() {
-
         axios.post('../api/find_user_by_phone_number', {
           'phone_number': this.phoneNumber
         })
@@ -150,10 +149,15 @@
         })
       },
       loginSendSMS: function() {
-        // axios.post('../api/user/' + this.user.id + '/login')
-        // .then(response => {
-        //   this.user = response.data.user
-        // })
+          console.log('g');
+          axios.post('../api/user/login/sms/send', {
+            'phone_number': this.phoneNumber,
+            '_token': document.querySelector('meta[name="csrf-token"]').content
+          })
+          .then(response => {
+              console.log(response);
+              this.user = response.data.user
+          })
       },
       registerSendSMS: function() {
         axios.post('../api/user/account/add', {
@@ -162,7 +166,6 @@
           '_token': document.querySelector('meta[name="csrf-token"]').content
         })
         .then(response => {
-            console.log(response);
             this.user = response.data.user
         })
       },
@@ -171,20 +174,18 @@
       },
       validateRegisterFields: function() {
         if(this.registerName.length.toString() < 1 || this.phoneNumber.length.toString() < 1) {
-          // this.errorMessage = 'Toate field-urile sunt obligatorii!';
+          this.errorMessage = 'Toate field-urile sunt obligatorii!';
           return true;
         } else {
           return false;
         }
       },
       loginConfirmSMS: function() {
-
         let i;
         let codeConstruct = this.sms_numbers[0];
         for (i = 1; i < this.sms_numbers.length; i++) {
           codeConstruct = codeConstruct + this.sms_numbers[i].toString();
         }
-        console.log(codeConstruct);
         axios.post('../user/login', {
           'password': codeConstruct,
           'email': this.phoneNumber,

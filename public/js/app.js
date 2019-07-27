@@ -2055,16 +2055,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.user = response.data.user, _this.validAccount = response.data.success;
       });
     },
-    loginSendSMS: function loginSendSMS() {// axios.post('../api/user/' + this.user.id + '/login')
-      // .then(response => {
-      //   this.user = response.data.user
-      // })
-    },
-    registerSendSMS: function registerSendSMS() {
+    loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post('../api/user/account/add', {
-        'name': this.registerName,
+      console.log('g');
+      axios.post('../api/user/login/sms/send', {
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
@@ -2072,19 +2067,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.user = response.data.user;
       });
     },
+    registerSendSMS: function registerSendSMS() {
+      var _this3 = this;
+
+      axios.post('../api/user/account/add', {
+        'name': this.registerName,
+        'phone_number': this.phoneNumber,
+        '_token': document.querySelector('meta[name="csrf-token"]').content
+      }).then(function (response) {
+        _this3.user = response.data.user;
+      });
+    },
     verifyLoginResponse: function verifyLoginResponse() {
       console.log('d');
     },
     validateRegisterFields: function validateRegisterFields() {
       if (this.registerName.length.toString() < 1 || this.phoneNumber.length.toString() < 1) {
-        // this.errorMessage = 'Toate field-urile sunt obligatorii!';
+        this.errorMessage = 'Toate field-urile sunt obligatorii!';
         return true;
       } else {
         return false;
       }
     },
     loginConfirmSMS: function loginConfirmSMS() {
-      var _this3 = this;
+      var _this4 = this;
 
       var i;
       var codeConstruct = this.sms_numbers[0];
@@ -2093,19 +2099,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         codeConstruct = codeConstruct + this.sms_numbers[i].toString();
       }
 
-      console.log(codeConstruct);
       axios.post('../user/login', {
         'password': codeConstruct,
         'email': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
         if (response.data.success == false) {
-          _this3.errorMessage = response.data.message;
+          _this4.errorMessage = response.data.message;
         } else if (response.data) {
           window.location.replace("../home");
         }
       })["catch"](function (error) {
-        _this3.errorMessage = 'A aparut o eroare!';
+        _this4.errorMessage = 'A aparut o eroare!';
       });
     }
   }

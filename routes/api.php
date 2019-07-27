@@ -22,3 +22,5 @@ Route::get('/search', 'UserAPISearchbarController@search');
 Route::post('/find_user_by_phone_number', 'UserLoginController@find_user_by_phone_number');
 
 Route::post('/user/account/add', 'UserRegisterController@adddAcount');
+
+Route::post('/api/user/login/sms/send', 'UserLoginController@sendSms');

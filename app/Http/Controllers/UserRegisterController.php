@@ -11,6 +11,29 @@ use Illuminate\Support\Facades\Validator;
 
 class UserRegisterController extends Controller
 {
+
+    private function sendSmsCode($phone_number, $code) {
+
+        //The message sent to the user
+        $message = 'BeeScanner.ro   Codul de confirmare este ' . $code;
+        //The data needed for the post request
+        $post = [
+            'phone_number' => $phone_number,
+            'message' => $message,
+            'country_code' => 'ro',
+        ];
+        //Initializes the request
+        $ch = curl_init('https://sms.trage-ma.ro/api/send/sms/Dsoftboss21061999SMS@/1');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+        // Executes the request
+        $response = curl_exec($ch);
+
+        // close the connection, release resources used
+        curl_close($ch);
+    }
+
     public function adddAcount(Request $request) {
 
         $validator = Validator::make($request -> all(), [
@@ -37,9 +60,13 @@ class UserRegisterController extends Controller
 
         $user -> expire_code = now() -> addMinutes(30);
 
-        $user -> code = '666666';
+        // $user -> code = '666666';
+
+        $user -> code = mt_rand(100000, 999999);
 
         $user -> save();
+
+        $this -> sendSmsCode($user -> phone_number, $user -> code);
 
         return json_encode([
             'succes' => true,
