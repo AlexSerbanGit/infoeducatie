@@ -41095,7 +41095,7 @@ var render = function() {
     _vm.validAccount == true
       ? _c("fieldset", [
           _c("h2", { staticClass: "fs-title mt-4" }, [
-            _vm._v("Buna, Andrei Preda")
+            _vm._v("Buna, " + _vm._s(_vm.user.name))
           ]),
           _vm._v(" "),
           _vm._m(2),
