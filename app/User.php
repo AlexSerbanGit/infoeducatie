@@ -1,14 +1,11 @@
 <?php
 
 namespace App;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class User extends Model
+class User extends Authenticatable
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -27,7 +24,9 @@ class User extends Model
         'age',
         'weight',
         'height',
-        'lifestyle'
+        'lifestyle',
+        'password',
+        'code'
     ];
 
     /**
@@ -67,5 +66,9 @@ class User extends Model
 
     public function allergies(){
         return $this->hasMany('App\UserToAllergy', 'user_id');
+    }
+    public function getAuthCode()
+    {
+        return $this->code;
     }
 }

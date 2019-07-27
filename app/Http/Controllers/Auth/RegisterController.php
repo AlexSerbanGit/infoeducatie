@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Administrator;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -54,7 +54,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return User::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|max:255|unique:administrators',
             'password' => 'required|min:1',
@@ -68,7 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Administrator::create([
+        return User::create([
             'name' => $data['name'],
             'phone_number' => $data['email'],
             'code' => $data['password'],

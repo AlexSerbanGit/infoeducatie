@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration
             $table -> string('country') -> nullable(); // sau 'Alta';
             $table -> tinyInteger('gender') -> nullable(); // 1 - barbat / 2 - femeie
             $table -> integer('age') -> nullable(); // ani
+            $table -> string('code') -> nullable(); // cod 
+            $table -> longText('password') -> nullable(); // parola
             $table -> integer('weight') -> nullable(); // kg
             $table -> integer('height') -> nullable(); // cm
             $table -> integer('lifestyle') -> nullable(); // 1 - sedentar / 2 - normal / 3 - sportiv / 4 - atlet
