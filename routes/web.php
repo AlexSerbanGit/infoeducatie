@@ -107,7 +107,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 });
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'admin'], function () {
+Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/home', 'AdminController@home')->name('Panou de administrare');
 
