@@ -64,7 +64,7 @@ class UserRegisterController extends Controller
 
         $user -> save();
 
-        $this -> sendSmsCode($user -> phone_number, $user -> code);
+        // $this -> sendSmsCode($user -> phone_number, $user -> code);
 
         return json_encode([
             'succes' => true,
