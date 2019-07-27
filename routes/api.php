@@ -21,15 +21,4 @@ Route::get('/search', 'UserAPISearchbarController@search');
 
 Route::post('/find_user_by_phone_number', 'UserLoginController@find_user_by_phone_number');
 
-Route::post('/user/register', 'UserRegisterController@register');
-
-Route::post('/user/register/sms/confirm', 'UserRegisterController@confirm');
-
-Route::post('/user/{user_id}/login', 'UserLoginController@login');
-
-Route::post('/user/login/sms/confirm', 'UserloginController@confirm');
-
-// Route for getting the current user object
-Route::get('/user', 'UserController@getCurrentUser');
-
-Route::get('/user/logout', 'UserLoginController@logout');
+Route::post('/user/account/add', 'UserRegisterController@adddAcount');

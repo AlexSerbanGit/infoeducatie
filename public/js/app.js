@@ -1901,6 +1901,21 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_quaggajs__WEBPACK_IMPORTED_MO
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1975,23 +1990,41 @@ __webpack_require__.r(__webpack_exports__);
     if (sessionStorage.getItem("token") != null) {
       // window.alert('Sunteti deja logat!');
       history.go(-1);
-    }
+    } // Get the next box
+
+
+    var confirmCode = document.getElementsByClassName("confirmCode")[0];
+
+    confirmCode.onkeyup = function (e) {
+      var target = e.srcElement;
+      var lenght = parseInt(target.attributes["maxlength"].value, 10);
+      var idk_lenght = target.value.length;
+
+      if (idk_lenght >= lenght) {
+        var next = target;
+
+        while (next = next.nextElementSibling) {
+          if (next == null) break;
+
+          if (next.tagName.toLowerCase() == "input") {
+            next.focus();
+            break;
+          }
+        }
+      }
+    };
   },
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       'phoneNumber': '',
       'errorMessage': '',
       'validAccount': false,
-      'lastActiveStatus': '',
       'user': '',
       'goForLastSection': true,
-      'registerName': '',
-      'registerPhoneNumber': '',
-      'registerEmail': '',
-      'registerCity': '',
-      'sms': '',
-      'registerError': ''
-    };
+      'registerName': ''
+    }, _defineProperty(_ref, "phoneNumber", ''), _defineProperty(_ref, 'sms', ''), _defineProperty(_ref, 'sms_numbers', []), _ref;
   },
   methods: {
     validatePhoneNumber: function validatePhoneNumber() {
@@ -2008,7 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.phoneNumber.lenght < 5 || this.phoneNumber.lenght > 12) {
         return true;
       } else {
-        this.registerPhoneNumber = this.phoneNumber;
+        this.phoneNumber = this.phoneNumber;
         return false;
       }
     },
@@ -2018,71 +2051,61 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('../api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
+        // console.log(response.data);
         _this.user = response.data.user, _this.validAccount = response.data.success;
-
-        if (response.data.user.lastToken != null) {
-          _this.lastActiveStatus = response.data.user.lastToken.created_at;
-        }
       });
     },
-    loginSendSMS: function loginSendSMS() {
-      var _this2 = this;
-
-      axios.post('../api/user/' + this.user.id + '/login').then(function (response) {
-        _this2.user = response.data.user;
-      });
+    loginSendSMS: function loginSendSMS() {// axios.post('../api/user/' + this.user.id + '/login')
+      // .then(response => {
+      //   this.user = response.data.user
+      // })
     },
     registerSendSMS: function registerSendSMS() {
-      var _this3 = this;
+      var _this2 = this;
 
-      axios.post('../api/user/register', {
+      axios.post('../api/user/account/add', {
         'name': this.registerName,
-        'phone_number': this.registerPhoneNumber
+        'phone_number': this.phoneNumber,
+        '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
-        _this3.user = response.data.user;
+        console.log(response);
+        _this2.user = response.data.user;
       });
     },
     verifyLoginResponse: function verifyLoginResponse() {
       console.log('d');
     },
     validateRegisterFields: function validateRegisterFields() {
-      if (this.registerName.length.toString() < 1 || this.registerPhoneNumber.length.toString() < 1) {
+      if (this.registerName.length.toString() < 1 || this.phoneNumber.length.toString() < 1) {
         // this.errorMessage = 'Toate field-urile sunt obligatorii!';
         return true;
       } else {
         return false;
       }
     },
-    registerConfirmSMS: function registerConfirmSMS() {
-      var _this4 = this;
-
-      axios.post('../api/user/register/sms/confirm', {
-        'sms_code': this.sms,
-        'user_id': this.user.id
-      }).then(function (response) {
-        if (response.data.success == true) {
-          sessionStorage.setItem("user_id", response.data.user.id);
-          sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("../home?user_id=" + _this4.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
-        } else {
-          _this4.registerError = response.data.message;
-        }
-      });
-    },
     loginConfirmSMS: function loginConfirmSMS() {
-      var _this5 = this;
+      var _this3 = this;
 
-      axios.post('../api/user/login/sms/confirm', {
-        'sms_code': this.sms,
-        'user_id': this.user.id
+      var i;
+      var codeConstruct = this.sms_numbers[0];
+
+      for (i = 1; i < this.sms_numbers.length; i++) {
+        codeConstruct = codeConstruct + this.sms_numbers[i].toString();
+      }
+
+      console.log(codeConstruct);
+      axios.post('../user/login', {
+        'password': codeConstruct,
+        'email': this.phoneNumber,
+        '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
-        if (response.data.success == true) {
-          sessionStorage.setItem("user_id", response.data.user.id);
-          sessionStorage.setItem("token", response.data.user.token.token);
-          window.location.replace("../home?user_id=" + _this5.user.id + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"));
-        } else {
-          _this5.registerError = response.data.message;
+        if (response.data.success == false) {
+          _this3.errorMessage = response.data.message;
+        } else if (response.data) {
+          window.location.replace("../home");
         }
+      })["catch"](function (error) {
+        _this3.errorMessage = 'A aparut o eroare!';
       });
     }
   }
@@ -17261,7 +17284,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -17272,7 +17295,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -19931,16 +19954,10 @@ return jQuery;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -20864,8 +20881,8 @@ return jQuery;
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -22682,7 +22699,7 @@ return jQuery;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -23865,7 +23882,7 @@ return jQuery;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -23873,6 +23890,10 @@ return jQuery;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -27673,6 +27694,7 @@ return jQuery;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -32059,9 +32081,12 @@ return jQuery;
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -32094,7 +32119,9 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -34299,10 +34326,11 @@ return jQuery;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -41032,13 +41060,13 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("p", { staticClass: "text-danger" }, [
+      _c("h3", { staticClass: "fs-subtitle text-danger" }, [
         _vm._v(_vm._s(_vm.errorMessage))
       ]),
       _vm._v(" "),
       _c("input", {
         staticClass: "next action-button",
-        class: { disabled: _vm.isDisabled() },
+        class: { disabled: _vm.isDisabled },
         attrs: {
           type: "button",
           name: "next",
@@ -41067,13 +41095,6 @@ var render = function() {
           _vm._v(" "),
           _vm._m(2),
           _vm._v(" "),
-          _c("h3", { staticClass: "fs-subtitle" }, [
-            _vm._v("Ultima logare a fost inregistrata pe data de "),
-            _c("span", { staticClass: "text-danger" }, [
-              _vm._v(_vm._s(_vm.lastActiveStatus))
-            ])
-          ]),
-          _vm._v(" "),
           _c("input", {
             staticClass: "previous action-button-previous",
             attrs: { type: "button", name: "previous", value: "Inapoi" }
@@ -41081,11 +41102,7 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticClass: "next action-button-xl",
-            attrs: {
-              type: "button",
-              name: "next",
-              value: "Trimite-mi sms de confirmare"
-            },
+            attrs: { type: "button", name: "next", value: "Trimite-mi sms" },
             on: {
               click: function($event) {
                 return _vm.loginSendSMS()
@@ -41134,23 +41151,23 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.registerPhoneNumber,
-                expression: "registerPhoneNumber"
+                value: _vm.phoneNumber,
+                expression: "phoneNumber"
               }
             ],
             attrs: { type: "text", name: "phone_number" },
-            domProps: { value: _vm.registerPhoneNumber },
+            domProps: { value: _vm.phoneNumber },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.registerPhoneNumber = $event.target.value
+                _vm.phoneNumber = $event.target.value
               }
             }
           }),
           _vm._v(" "),
-          _c("p", { staticClass: "text-danger" }, [
+          _c("h3", { staticClass: "fs-subtitle text-danger" }, [
             _vm._v(_vm._s(_vm.errorMessage))
           ]),
           _vm._v(" "),
@@ -41165,7 +41182,7 @@ var render = function() {
             attrs: {
               type: "button",
               name: "next",
-              value: "Salveaza si trimite sms",
+              value: "Trimite-mi sms",
               disabled: _vm.validateRegisterFields()
             },
             on: {
@@ -41192,33 +41209,166 @@ var render = function() {
             _vm._v("Confirma codul primit in sms")
           ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.sms,
-                expression: "sms"
-              }
-            ],
-            attrs: {
-              type: "text",
-              name: "twitter",
-              placeholder: "Cod de confirmare"
-            },
-            domProps: { value: _vm.sms },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c("div", { staticClass: "confirmCode col-md-12 mt-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[0],
+                  expression: "sms_numbers[0]"
                 }
-                _vm.sms = $event.target.value
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[0] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 0, $event.target.value)
+                }
               }
-            }
-          }),
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[1],
+                  expression: "sms_numbers[1]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[1] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 1, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[2],
+                  expression: "sms_numbers[2]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[2] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 2, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[3],
+                  expression: "sms_numbers[3]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[3] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 3, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[4],
+                  expression: "sms_numbers[4]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[4] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 4, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[5],
+                  expression: "sms_numbers[5]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[5] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 5, $event.target.value)
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
           _c("h3", { staticClass: "fs-subtitle text-danger" }, [
-            _vm._v(_vm._s(_vm.registerError))
+            _vm._v(_vm._s(_vm.errorMessage))
           ]),
           _vm._v(" "),
           _c("input", {
@@ -41243,33 +41393,166 @@ var render = function() {
           _vm._v(" "),
           _vm._m(3),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.sms,
-                expression: "sms"
-              }
-            ],
-            attrs: {
-              type: "text",
-              name: "twitter",
-              placeholder: "Cod de confirmare"
-            },
-            domProps: { value: _vm.sms },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c("div", { staticClass: "confirmCode col-md-12" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[0],
+                  expression: "sms_numbers[0]"
                 }
-                _vm.sms = $event.target.value
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[0] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 0, $event.target.value)
+                }
               }
-            }
-          }),
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[1],
+                  expression: "sms_numbers[1]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[1] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 1, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[2],
+                  expression: "sms_numbers[2]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[2] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 2, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[3],
+                  expression: "sms_numbers[3]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[3] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 3, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[4],
+                  expression: "sms_numbers[4]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[4] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 4, $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sms_numbers[5],
+                  expression: "sms_numbers[5]"
+                }
+              ],
+              staticStyle: { width: "50px" },
+              attrs: {
+                type: "text sms-code-item",
+                name: "sms_numbers[]",
+                maxlength: "1"
+              },
+              domProps: { value: _vm.sms_numbers[5] },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.sms_numbers, 5, $event.target.value)
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
           _c("h3", { staticClass: "fs-subtitle text-danger" }, [
-            _vm._v(_vm._s(_vm.registerError))
+            _vm._v(_vm._s(_vm.errorMessage))
           ]),
           _vm._v(" "),
           _c("input", {
@@ -41282,7 +41565,7 @@ var render = function() {
             attrs: { type: "submit", name: "submit", value: "Salveaza" },
             on: {
               click: function($event) {
-                return _vm.registerConfirmSMS()
+                return _vm.loginConfirmSMS()
               }
             }
           })
@@ -53832,47 +54115,48 @@ function shimOnTrack(window) {
     });
     const origSetRemoteDescription =
         window.RTCPeerConnection.prototype.setRemoteDescription;
-    window.RTCPeerConnection.prototype.setRemoteDescription = function() {
-      if (!this._ontrackpoly) {
-        this._ontrackpoly = (e) => {
-          // onaddstream does not fire when a track is added to an existing
-          // stream. But stream.onaddtrack is implemented so we use that.
-          e.stream.addEventListener('addtrack', te => {
-            let receiver;
-            if (window.RTCPeerConnection.prototype.getReceivers) {
-              receiver = this.getReceivers()
-                .find(r => r.track && r.track.id === te.track.id);
-            } else {
-              receiver = {track: te.track};
-            }
+    window.RTCPeerConnection.prototype.setRemoteDescription =
+      function setRemoteDescription() {
+        if (!this._ontrackpoly) {
+          this._ontrackpoly = (e) => {
+            // onaddstream does not fire when a track is added to an existing
+            // stream. But stream.onaddtrack is implemented so we use that.
+            e.stream.addEventListener('addtrack', te => {
+              let receiver;
+              if (window.RTCPeerConnection.prototype.getReceivers) {
+                receiver = this.getReceivers()
+                  .find(r => r.track && r.track.id === te.track.id);
+              } else {
+                receiver = {track: te.track};
+              }
 
-            const event = new Event('track');
-            event.track = te.track;
-            event.receiver = receiver;
-            event.transceiver = {receiver};
-            event.streams = [e.stream];
-            this.dispatchEvent(event);
-          });
-          e.stream.getTracks().forEach(track => {
-            let receiver;
-            if (window.RTCPeerConnection.prototype.getReceivers) {
-              receiver = this.getReceivers()
-                .find(r => r.track && r.track.id === track.id);
-            } else {
-              receiver = {track};
-            }
-            const event = new Event('track');
-            event.track = track;
-            event.receiver = receiver;
-            event.transceiver = {receiver};
-            event.streams = [e.stream];
-            this.dispatchEvent(event);
-          });
-        };
-        this.addEventListener('addstream', this._ontrackpoly);
-      }
-      return origSetRemoteDescription.apply(this, arguments);
-    };
+              const event = new Event('track');
+              event.track = te.track;
+              event.receiver = receiver;
+              event.transceiver = {receiver};
+              event.streams = [e.stream];
+              this.dispatchEvent(event);
+            });
+            e.stream.getTracks().forEach(track => {
+              let receiver;
+              if (window.RTCPeerConnection.prototype.getReceivers) {
+                receiver = this.getReceivers()
+                  .find(r => r.track && r.track.id === track.id);
+              } else {
+                receiver = {track};
+              }
+              const event = new Event('track');
+              event.track = track;
+              event.receiver = receiver;
+              event.transceiver = {receiver};
+              event.streams = [e.stream];
+              this.dispatchEvent(event);
+            });
+          };
+          this.addEventListener('addstream', this._ontrackpoly);
+        }
+        return origSetRemoteDescription.apply(this, arguments);
+      };
   } else {
     // even if RTCRtpTransceiver is in window, it is only used and
     // emitted in unified-plan. Unfortunately this means we need
@@ -53911,31 +54195,33 @@ function shimGetSendersWithDtmf(window) {
 
     // augment addTrack when getSenders is not available.
     if (!window.RTCPeerConnection.prototype.getSenders) {
-      window.RTCPeerConnection.prototype.getSenders = function() {
+      window.RTCPeerConnection.prototype.getSenders = function getSenders() {
         this._senders = this._senders || [];
         return this._senders.slice(); // return a copy of the internal state.
       };
       const origAddTrack = window.RTCPeerConnection.prototype.addTrack;
-      window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-        let sender = origAddTrack.apply(this, arguments);
-        if (!sender) {
-          sender = shimSenderWithDtmf(this, track);
-          this._senders.push(sender);
-        }
-        return sender;
-      };
+      window.RTCPeerConnection.prototype.addTrack =
+        function addTrack(track, stream) {
+          let sender = origAddTrack.apply(this, arguments);
+          if (!sender) {
+            sender = shimSenderWithDtmf(this, track);
+            this._senders.push(sender);
+          }
+          return sender;
+        };
 
       const origRemoveTrack = window.RTCPeerConnection.prototype.removeTrack;
-      window.RTCPeerConnection.prototype.removeTrack = function(sender) {
-        origRemoveTrack.apply(this, arguments);
-        const idx = this._senders.indexOf(sender);
-        if (idx !== -1) {
-          this._senders.splice(idx, 1);
-        }
-      };
+      window.RTCPeerConnection.prototype.removeTrack =
+        function removeTrack(sender) {
+          origRemoveTrack.apply(this, arguments);
+          const idx = this._senders.indexOf(sender);
+          if (idx !== -1) {
+            this._senders.splice(idx, 1);
+          }
+        };
     }
     const origAddStream = window.RTCPeerConnection.prototype.addStream;
-    window.RTCPeerConnection.prototype.addStream = function(stream) {
+    window.RTCPeerConnection.prototype.addStream = function addStream(stream) {
       this._senders = this._senders || [];
       origAddStream.apply(this, [stream]);
       stream.getTracks().forEach(track => {
@@ -53944,24 +54230,25 @@ function shimGetSendersWithDtmf(window) {
     };
 
     const origRemoveStream = window.RTCPeerConnection.prototype.removeStream;
-    window.RTCPeerConnection.prototype.removeStream = function(stream) {
-      this._senders = this._senders || [];
-      origRemoveStream.apply(this, [stream]);
+    window.RTCPeerConnection.prototype.removeStream =
+      function removeStream(stream) {
+        this._senders = this._senders || [];
+        origRemoveStream.apply(this, [stream]);
 
-      stream.getTracks().forEach(track => {
-        const sender = this._senders.find(s => s.track === track);
-        if (sender) { // remove sender
-          this._senders.splice(this._senders.indexOf(sender), 1);
-        }
-      });
-    };
+        stream.getTracks().forEach(track => {
+          const sender = this._senders.find(s => s.track === track);
+          if (sender) { // remove sender
+            this._senders.splice(this._senders.indexOf(sender), 1);
+          }
+        });
+      };
   } else if (typeof window === 'object' && window.RTCPeerConnection &&
              'getSenders' in window.RTCPeerConnection.prototype &&
              'createDTMFSender' in window.RTCPeerConnection.prototype &&
              window.RTCRtpSender &&
              !('dtmf' in window.RTCRtpSender.prototype)) {
     const origGetSenders = window.RTCPeerConnection.prototype.getSenders;
-    window.RTCPeerConnection.prototype.getSenders = function() {
+    window.RTCPeerConnection.prototype.getSenders = function getSenders() {
       const senders = origGetSenders.apply(this, []);
       senders.forEach(sender => sender._pc = this);
       return senders;
@@ -53988,9 +54275,8 @@ function shimGetStats(window) {
   }
 
   const origGetStats = window.RTCPeerConnection.prototype.getStats;
-  window.RTCPeerConnection.prototype.getStats = function(selector,
-      successCallback, errorCallback) {
-    const args = arguments;
+  window.RTCPeerConnection.prototype.getStats = function getStats() {
+    const [selector, onSucc, onErr] = arguments;
 
     // If selector is a function then we are in the old style stats so just
     // pass back the original getStats format to avoid breaking old users.
@@ -54001,7 +54287,7 @@ function shimGetStats(window) {
     // When spec-style getStats is supported, return those when called with
     // either no arguments or the selector argument is null.
     if (origGetStats.length === 0 && (arguments.length === 0 ||
-        typeof arguments[0] !== 'function')) {
+        typeof selector !== 'function')) {
       return origGetStats.apply(this, []);
     }
 
@@ -54033,11 +54319,11 @@ function shimGetStats(window) {
 
     if (arguments.length >= 2) {
       const successCallbackWrapper_ = function(response) {
-        args[1](makeMapStats(fixChromeStats_(response)));
+        onSucc(makeMapStats(fixChromeStats_(response)));
       };
 
       return origGetStats.apply(this, [successCallbackWrapper_,
-        arguments[0]]);
+        selector]);
     }
 
     // promise-support
@@ -54046,7 +54332,7 @@ function shimGetStats(window) {
         function(response) {
           resolve(makeMapStats(fixChromeStats_(response)));
         }, reject]);
-    }).then(successCallback, errorCallback);
+    }).then(onSucc, onErr);
   };
 }
 
@@ -54060,7 +54346,7 @@ function shimSenderReceiverGetStats(window) {
   if (!('getStats' in window.RTCRtpSender.prototype)) {
     const origGetSenders = window.RTCPeerConnection.prototype.getSenders;
     if (origGetSenders) {
-      window.RTCPeerConnection.prototype.getSenders = function() {
+      window.RTCPeerConnection.prototype.getSenders = function getSenders() {
         const senders = origGetSenders.apply(this, []);
         senders.forEach(sender => sender._pc = this);
         return senders;
@@ -54069,13 +54355,13 @@ function shimSenderReceiverGetStats(window) {
 
     const origAddTrack = window.RTCPeerConnection.prototype.addTrack;
     if (origAddTrack) {
-      window.RTCPeerConnection.prototype.addTrack = function() {
+      window.RTCPeerConnection.prototype.addTrack = function addTrack() {
         const sender = origAddTrack.apply(this, arguments);
         sender._pc = this;
         return sender;
       };
     }
-    window.RTCRtpSender.prototype.getStats = function() {
+    window.RTCRtpSender.prototype.getStats = function getStats() {
       const sender = this;
       return this._pc.getStats().then(result =>
         /* Note: this will include stats of all senders that
@@ -54090,17 +54376,18 @@ function shimSenderReceiverGetStats(window) {
   if (!('getStats' in window.RTCRtpReceiver.prototype)) {
     const origGetReceivers = window.RTCPeerConnection.prototype.getReceivers;
     if (origGetReceivers) {
-      window.RTCPeerConnection.prototype.getReceivers = function() {
-        const receivers = origGetReceivers.apply(this, []);
-        receivers.forEach(receiver => receiver._pc = this);
-        return receivers;
-      };
+      window.RTCPeerConnection.prototype.getReceivers =
+        function getReceivers() {
+          const receivers = origGetReceivers.apply(this, []);
+          receivers.forEach(receiver => receiver._pc = this);
+          return receivers;
+        };
     }
     _utils_js__WEBPACK_IMPORTED_MODULE_0__["wrapPeerConnectionEvent"](window, 'track', e => {
       e.receiver._pc = e.srcElement;
       return e;
     });
-    window.RTCRtpReceiver.prototype.getStats = function() {
+    window.RTCRtpReceiver.prototype.getStats = function getStats() {
       const receiver = this;
       return this._pc.getStats().then(result =>
         _utils_js__WEBPACK_IMPORTED_MODULE_0__["filterStats"](result, receiver.track, false));
@@ -54114,7 +54401,7 @@ function shimSenderReceiverGetStats(window) {
 
   // shim RTCPeerConnection.getStats(track).
   const origGetStats = window.RTCPeerConnection.prototype.getStats;
-  window.RTCPeerConnection.prototype.getStats = function() {
+  window.RTCPeerConnection.prototype.getStats = function getStats() {
     if (arguments.length > 0 &&
         arguments[0] instanceof window.MediaStreamTrack) {
       const track = arguments[0];
@@ -54161,30 +54448,32 @@ function shimAddTrackRemoveTrackWithNative(window) {
   // shim addTrack/removeTrack with native variants in order to make
   // the interactions with legacy getLocalStreams behave as in other browsers.
   // Keeps a mapping stream.id => [stream, rtpsenders...]
-  window.RTCPeerConnection.prototype.getLocalStreams = function() {
-    this._shimmedLocalStreams = this._shimmedLocalStreams || {};
-    return Object.keys(this._shimmedLocalStreams)
-      .map(streamId => this._shimmedLocalStreams[streamId][0]);
-  };
+  window.RTCPeerConnection.prototype.getLocalStreams =
+    function getLocalStreams() {
+      this._shimmedLocalStreams = this._shimmedLocalStreams || {};
+      return Object.keys(this._shimmedLocalStreams)
+        .map(streamId => this._shimmedLocalStreams[streamId][0]);
+    };
 
   const origAddTrack = window.RTCPeerConnection.prototype.addTrack;
-  window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-    if (!stream) {
-      return origAddTrack.apply(this, arguments);
-    }
-    this._shimmedLocalStreams = this._shimmedLocalStreams || {};
+  window.RTCPeerConnection.prototype.addTrack =
+    function addTrack(track, stream) {
+      if (!stream) {
+        return origAddTrack.apply(this, arguments);
+      }
+      this._shimmedLocalStreams = this._shimmedLocalStreams || {};
 
-    const sender = origAddTrack.apply(this, arguments);
-    if (!this._shimmedLocalStreams[stream.id]) {
-      this._shimmedLocalStreams[stream.id] = [stream, sender];
-    } else if (this._shimmedLocalStreams[stream.id].indexOf(sender) === -1) {
-      this._shimmedLocalStreams[stream.id].push(sender);
-    }
-    return sender;
-  };
+      const sender = origAddTrack.apply(this, arguments);
+      if (!this._shimmedLocalStreams[stream.id]) {
+        this._shimmedLocalStreams[stream.id] = [stream, sender];
+      } else if (this._shimmedLocalStreams[stream.id].indexOf(sender) === -1) {
+        this._shimmedLocalStreams[stream.id].push(sender);
+      }
+      return sender;
+    };
 
   const origAddStream = window.RTCPeerConnection.prototype.addStream;
-  window.RTCPeerConnection.prototype.addStream = function(stream) {
+  window.RTCPeerConnection.prototype.addStream = function addStream(stream) {
     this._shimmedLocalStreams = this._shimmedLocalStreams || {};
 
     stream.getTracks().forEach(track => {
@@ -54202,28 +54491,30 @@ function shimAddTrackRemoveTrackWithNative(window) {
   };
 
   const origRemoveStream = window.RTCPeerConnection.prototype.removeStream;
-  window.RTCPeerConnection.prototype.removeStream = function(stream) {
-    this._shimmedLocalStreams = this._shimmedLocalStreams || {};
-    delete this._shimmedLocalStreams[stream.id];
-    return origRemoveStream.apply(this, arguments);
-  };
+  window.RTCPeerConnection.prototype.removeStream =
+    function removeStream(stream) {
+      this._shimmedLocalStreams = this._shimmedLocalStreams || {};
+      delete this._shimmedLocalStreams[stream.id];
+      return origRemoveStream.apply(this, arguments);
+    };
 
   const origRemoveTrack = window.RTCPeerConnection.prototype.removeTrack;
-  window.RTCPeerConnection.prototype.removeTrack = function(sender) {
-    this._shimmedLocalStreams = this._shimmedLocalStreams || {};
-    if (sender) {
-      Object.keys(this._shimmedLocalStreams).forEach(streamId => {
-        const idx = this._shimmedLocalStreams[streamId].indexOf(sender);
-        if (idx !== -1) {
-          this._shimmedLocalStreams[streamId].splice(idx, 1);
-        }
-        if (this._shimmedLocalStreams[streamId].length === 1) {
-          delete this._shimmedLocalStreams[streamId];
-        }
-      });
-    }
-    return origRemoveTrack.apply(this, arguments);
-  };
+  window.RTCPeerConnection.prototype.removeTrack =
+    function removeTrack(sender) {
+      this._shimmedLocalStreams = this._shimmedLocalStreams || {};
+      if (sender) {
+        Object.keys(this._shimmedLocalStreams).forEach(streamId => {
+          const idx = this._shimmedLocalStreams[streamId].indexOf(sender);
+          if (idx !== -1) {
+            this._shimmedLocalStreams[streamId].splice(idx, 1);
+          }
+          if (this._shimmedLocalStreams[streamId].length === 1) {
+            delete this._shimmedLocalStreams[streamId];
+          }
+        });
+      }
+      return origRemoveTrack.apply(this, arguments);
+    };
 }
 
 function shimAddTrackRemoveTrack(window) {
@@ -54241,14 +54532,15 @@ function shimAddTrackRemoveTrack(window) {
   // to return the original streams.
   const origGetLocalStreams = window.RTCPeerConnection.prototype
       .getLocalStreams;
-  window.RTCPeerConnection.prototype.getLocalStreams = function() {
-    const nativeStreams = origGetLocalStreams.apply(this);
-    this._reverseStreams = this._reverseStreams || {};
-    return nativeStreams.map(stream => this._reverseStreams[stream.id]);
-  };
+  window.RTCPeerConnection.prototype.getLocalStreams =
+    function getLocalStreams() {
+      const nativeStreams = origGetLocalStreams.apply(this);
+      this._reverseStreams = this._reverseStreams || {};
+      return nativeStreams.map(stream => this._reverseStreams[stream.id]);
+    };
 
   const origAddStream = window.RTCPeerConnection.prototype.addStream;
-  window.RTCPeerConnection.prototype.addStream = function(stream) {
+  window.RTCPeerConnection.prototype.addStream = function addStream(stream) {
     this._streams = this._streams || {};
     this._reverseStreams = this._reverseStreams || {};
 
@@ -54271,61 +54563,63 @@ function shimAddTrackRemoveTrack(window) {
   };
 
   const origRemoveStream = window.RTCPeerConnection.prototype.removeStream;
-  window.RTCPeerConnection.prototype.removeStream = function(stream) {
-    this._streams = this._streams || {};
-    this._reverseStreams = this._reverseStreams || {};
+  window.RTCPeerConnection.prototype.removeStream =
+    function removeStream(stream) {
+      this._streams = this._streams || {};
+      this._reverseStreams = this._reverseStreams || {};
 
-    origRemoveStream.apply(this, [(this._streams[stream.id] || stream)]);
-    delete this._reverseStreams[(this._streams[stream.id] ?
-        this._streams[stream.id].id : stream.id)];
-    delete this._streams[stream.id];
-  };
+      origRemoveStream.apply(this, [(this._streams[stream.id] || stream)]);
+      delete this._reverseStreams[(this._streams[stream.id] ?
+          this._streams[stream.id].id : stream.id)];
+      delete this._streams[stream.id];
+    };
 
-  window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-    if (this.signalingState === 'closed') {
-      throw new DOMException(
-        'The RTCPeerConnection\'s signalingState is \'closed\'.',
-        'InvalidStateError');
-    }
-    const streams = [].slice.call(arguments, 1);
-    if (streams.length !== 1 ||
-        !streams[0].getTracks().find(t => t === track)) {
-      // this is not fully correct but all we can manage without
-      // [[associated MediaStreams]] internal slot.
-      throw new DOMException(
-        'The adapter.js addTrack polyfill only supports a single ' +
-        ' stream which is associated with the specified track.',
-        'NotSupportedError');
-    }
+  window.RTCPeerConnection.prototype.addTrack =
+    function addTrack(track, stream) {
+      if (this.signalingState === 'closed') {
+        throw new DOMException(
+          'The RTCPeerConnection\'s signalingState is \'closed\'.',
+          'InvalidStateError');
+      }
+      const streams = [].slice.call(arguments, 1);
+      if (streams.length !== 1 ||
+          !streams[0].getTracks().find(t => t === track)) {
+        // this is not fully correct but all we can manage without
+        // [[associated MediaStreams]] internal slot.
+        throw new DOMException(
+          'The adapter.js addTrack polyfill only supports a single ' +
+          ' stream which is associated with the specified track.',
+          'NotSupportedError');
+      }
 
-    const alreadyExists = this.getSenders().find(s => s.track === track);
-    if (alreadyExists) {
-      throw new DOMException('Track already exists.',
-          'InvalidAccessError');
-    }
+      const alreadyExists = this.getSenders().find(s => s.track === track);
+      if (alreadyExists) {
+        throw new DOMException('Track already exists.',
+            'InvalidAccessError');
+      }
 
-    this._streams = this._streams || {};
-    this._reverseStreams = this._reverseStreams || {};
-    const oldStream = this._streams[stream.id];
-    if (oldStream) {
-      // this is using odd Chrome behaviour, use with caution:
-      // https://bugs.chromium.org/p/webrtc/issues/detail?id=7815
-      // Note: we rely on the high-level addTrack/dtmf shim to
-      // create the sender with a dtmf sender.
-      oldStream.addTrack(track);
+      this._streams = this._streams || {};
+      this._reverseStreams = this._reverseStreams || {};
+      const oldStream = this._streams[stream.id];
+      if (oldStream) {
+        // this is using odd Chrome behaviour, use with caution:
+        // https://bugs.chromium.org/p/webrtc/issues/detail?id=7815
+        // Note: we rely on the high-level addTrack/dtmf shim to
+        // create the sender with a dtmf sender.
+        oldStream.addTrack(track);
 
-      // Trigger ONN async.
-      Promise.resolve().then(() => {
-        this.dispatchEvent(new Event('negotiationneeded'));
-      });
-    } else {
-      const newStream = new window.MediaStream([track]);
-      this._streams[stream.id] = newStream;
-      this._reverseStreams[newStream.id] = stream;
-      this.addStream(newStream);
-    }
-    return this.getSenders().find(s => s.track === track);
-  };
+        // Trigger ONN async.
+        Promise.resolve().then(() => {
+          this.dispatchEvent(new Event('negotiationneeded'));
+        });
+      } else {
+        const newStream = new window.MediaStream([track]);
+        this._streams[stream.id] = newStream;
+        this._reverseStreams[newStream.id] = stream;
+        this.addStream(newStream);
+      }
+      return this.getSenders().find(s => s.track === track);
+    };
 
   // replace the internal stream id with the external one and
   // vice versa.
@@ -54357,7 +54651,7 @@ function shimAddTrackRemoveTrack(window) {
   }
   ['createOffer', 'createAnswer'].forEach(function(method) {
     const nativeMethod = window.RTCPeerConnection.prototype[method];
-    window.RTCPeerConnection.prototype[method] = function() {
+    const methodObj = {[method]() {
       const args = arguments;
       const isLegacyCall = arguments.length &&
           typeof arguments[0] === 'function';
@@ -54376,18 +54670,20 @@ function shimAddTrackRemoveTrack(window) {
       }
       return nativeMethod.apply(this, arguments)
       .then(description => replaceInternalStreamId(this, description));
-    };
+    }};
+    window.RTCPeerConnection.prototype[method] = methodObj[method];
   });
 
   const origSetLocalDescription =
       window.RTCPeerConnection.prototype.setLocalDescription;
-  window.RTCPeerConnection.prototype.setLocalDescription = function() {
-    if (!arguments.length || !arguments[0].type) {
+  window.RTCPeerConnection.prototype.setLocalDescription =
+    function setLocalDescription() {
+      if (!arguments.length || !arguments[0].type) {
+        return origSetLocalDescription.apply(this, arguments);
+      }
+      arguments[0] = replaceExternalStreamId(this, arguments[0]);
       return origSetLocalDescription.apply(this, arguments);
-    }
-    arguments[0] = replaceExternalStreamId(this, arguments[0]);
-    return origSetLocalDescription.apply(this, arguments);
-  };
+    };
 
   // TODO: mangle getStats: https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamstats-streamidentifier
 
@@ -54404,47 +54700,48 @@ function shimAddTrackRemoveTrack(window) {
         }
       });
 
-  window.RTCPeerConnection.prototype.removeTrack = function(sender) {
-    if (this.signalingState === 'closed') {
-      throw new DOMException(
-        'The RTCPeerConnection\'s signalingState is \'closed\'.',
-        'InvalidStateError');
-    }
-    // We can not yet check for sender instanceof RTCRtpSender
-    // since we shim RTPSender. So we check if sender._pc is set.
-    if (!sender._pc) {
-      throw new DOMException('Argument 1 of RTCPeerConnection.removeTrack ' +
-          'does not implement interface RTCRtpSender.', 'TypeError');
-    }
-    const isLocal = sender._pc === this;
-    if (!isLocal) {
-      throw new DOMException('Sender was not created by this connection.',
-          'InvalidAccessError');
-    }
-
-    // Search for the native stream the senders track belongs to.
-    this._streams = this._streams || {};
-    let stream;
-    Object.keys(this._streams).forEach(streamid => {
-      const hasTrack = this._streams[streamid].getTracks()
-        .find(track => sender.track === track);
-      if (hasTrack) {
-        stream = this._streams[streamid];
+  window.RTCPeerConnection.prototype.removeTrack =
+    function removeTrack(sender) {
+      if (this.signalingState === 'closed') {
+        throw new DOMException(
+          'The RTCPeerConnection\'s signalingState is \'closed\'.',
+          'InvalidStateError');
       }
-    });
-
-    if (stream) {
-      if (stream.getTracks().length === 1) {
-        // if this is the last track of the stream, remove the stream. This
-        // takes care of any shimmed _senders.
-        this.removeStream(this._reverseStreams[stream.id]);
-      } else {
-        // relying on the same odd chrome behaviour as above.
-        stream.removeTrack(sender.track);
+      // We can not yet check for sender instanceof RTCRtpSender
+      // since we shim RTPSender. So we check if sender._pc is set.
+      if (!sender._pc) {
+        throw new DOMException('Argument 1 of RTCPeerConnection.removeTrack ' +
+            'does not implement interface RTCRtpSender.', 'TypeError');
       }
-      this.dispatchEvent(new Event('negotiationneeded'));
-    }
-  };
+      const isLocal = sender._pc === this;
+      if (!isLocal) {
+        throw new DOMException('Sender was not created by this connection.',
+            'InvalidAccessError');
+      }
+
+      // Search for the native stream the senders track belongs to.
+      this._streams = this._streams || {};
+      let stream;
+      Object.keys(this._streams).forEach(streamid => {
+        const hasTrack = this._streams[streamid].getTracks()
+          .find(track => sender.track === track);
+        if (hasTrack) {
+          stream = this._streams[streamid];
+        }
+      });
+
+      if (stream) {
+        if (stream.getTracks().length === 1) {
+          // if this is the last track of the stream, remove the stream. This
+          // takes care of any shimmed _senders.
+          this.removeStream(this._reverseStreams[stream.id]);
+        } else {
+          // relying on the same odd chrome behaviour as above.
+          stream.removeTrack(sender.track);
+        }
+        this.dispatchEvent(new Event('negotiationneeded'));
+      }
+    };
 }
 
 function shimPeerConnection(window) {
@@ -54463,27 +54760,35 @@ function shimPeerConnection(window) {
     ['setLocalDescription', 'setRemoteDescription', 'addIceCandidate']
         .forEach(function(method) {
           const nativeMethod = window.RTCPeerConnection.prototype[method];
-          window.RTCPeerConnection.prototype[method] = function() {
+          const methodObj = {[method]() {
             arguments[0] = new ((method === 'addIceCandidate') ?
                 window.RTCIceCandidate :
                 window.RTCSessionDescription)(arguments[0]);
             return nativeMethod.apply(this, arguments);
-          };
+          }};
+          window.RTCPeerConnection.prototype[method] = methodObj[method];
         });
   }
 
   // support for addIceCandidate(null or undefined)
   const nativeAddIceCandidate =
       window.RTCPeerConnection.prototype.addIceCandidate;
-  window.RTCPeerConnection.prototype.addIceCandidate = function() {
-    if (!arguments[0]) {
-      if (arguments[1]) {
-        arguments[1].apply(null);
+  window.RTCPeerConnection.prototype.addIceCandidate =
+    function addIceCandidate() {
+      if (!arguments[0]) {
+        if (arguments[1]) {
+          arguments[1].apply(null);
+        }
+        return Promise.resolve();
       }
-      return Promise.resolve();
-    }
-    return nativeAddIceCandidate.apply(this, arguments);
-  };
+      // Firefox 68+ emits and processes {candidate: "", ...}, ignore
+      // in older versions. Native support planned for Chrome M77.
+      if (browserDetails.version < 78 &&
+        arguments[0] && arguments[0].candidate === '') {
+        return Promise.resolve();
+      }
+      return nativeAddIceCandidate.apply(this, arguments);
+    };
 }
 
 function fixNegotiationNeeded(window) {
@@ -54533,29 +54838,31 @@ function shimGetDisplayMedia(window, getSourceId) {
         'a function');
     return;
   }
-  window.navigator.mediaDevices.getDisplayMedia = function(constraints) {
-    return getSourceId(constraints)
-      .then(sourceId => {
-        const widthSpecified = constraints.video && constraints.video.width;
-        const heightSpecified = constraints.video && constraints.video.height;
-        const frameRateSpecified = constraints.video &&
-          constraints.video.frameRate;
-        constraints.video = {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: sourceId,
-            maxFrameRate: frameRateSpecified || 3
+  window.navigator.mediaDevices.getDisplayMedia =
+    function getDisplayMedia(constraints) {
+      return getSourceId(constraints)
+        .then(sourceId => {
+          const widthSpecified = constraints.video && constraints.video.width;
+          const heightSpecified = constraints.video &&
+            constraints.video.height;
+          const frameRateSpecified = constraints.video &&
+            constraints.video.frameRate;
+          constraints.video = {
+            mandatory: {
+              chromeMediaSource: 'desktop',
+              chromeMediaSourceId: sourceId,
+              maxFrameRate: frameRateSpecified || 3
+            }
+          };
+          if (widthSpecified) {
+            constraints.video.mandatory.maxWidth = widthSpecified;
           }
-        };
-        if (widthSpecified) {
-          constraints.video.mandatory.maxWidth = widthSpecified;
-        }
-        if (heightSpecified) {
-          constraints.video.mandatory.maxHeight = heightSpecified;
-        }
-        return window.navigator.mediaDevices.getUserMedia(constraints);
-      });
-  };
+          if (heightSpecified) {
+            constraints.video.mandatory.maxHeight = heightSpecified;
+          }
+          return window.navigator.mediaDevices.getUserMedia(constraints);
+        });
+    };
 }
 
 
@@ -54805,7 +55112,7 @@ function shimRTCIceCandidate(window) {
   }
 
   const NativeRTCIceCandidate = window.RTCIceCandidate;
-  window.RTCIceCandidate = function(args) {
+  window.RTCIceCandidate = function RTCIceCandidate(args) {
     // Remove the a= which shouldn't be part of the candidate string.
     if (typeof args === 'object' && args.candidate &&
         args.candidate.indexOf('a=') === 0) {
@@ -54821,7 +55128,7 @@ function shimRTCIceCandidate(window) {
           parsedCandidate);
 
       // Add a serializer that does not serialize the extra attributes.
-      augmentedCandidate.toJSON = function() {
+      augmentedCandidate.toJSON = function toJSON() {
         return {
           candidate: augmentedCandidate.candidate,
           sdpMid: augmentedCandidate.sdpMid,
@@ -54849,7 +55156,7 @@ function shimRTCIceCandidate(window) {
 }
 
 function shimMaxMessageSize(window) {
-  if (window.RTCSctpTransport || !window.RTCPeerConnection) {
+  if (!window.RTCPeerConnection) {
     return;
   }
   const browserDetails = _utils__WEBPACK_IMPORTED_MODULE_1__["detectBrowser"](window);
@@ -54947,42 +55254,58 @@ function shimMaxMessageSize(window) {
 
   const origSetRemoteDescription =
       window.RTCPeerConnection.prototype.setRemoteDescription;
-  window.RTCPeerConnection.prototype.setRemoteDescription = function() {
-    this._sctp = null;
-
-    if (sctpInDescription(arguments[0])) {
-      // Check if the remote is FF.
-      const isFirefox = getRemoteFirefoxVersion(arguments[0]);
-
-      // Get the maximum message size the local peer is capable of sending
-      const canSendMMS = getCanSendMaxMessageSize(isFirefox);
-
-      // Get the maximum message size of the remote peer.
-      const remoteMMS = getMaxMessageSize(arguments[0], isFirefox);
-
-      // Determine final maximum message size
-      let maxMessageSize;
-      if (canSendMMS === 0 && remoteMMS === 0) {
-        maxMessageSize = Number.POSITIVE_INFINITY;
-      } else if (canSendMMS === 0 || remoteMMS === 0) {
-        maxMessageSize = Math.max(canSendMMS, remoteMMS);
-      } else {
-        maxMessageSize = Math.min(canSendMMS, remoteMMS);
+  window.RTCPeerConnection.prototype.setRemoteDescription =
+    function setRemoteDescription() {
+      this._sctp = null;
+      // Chrome decided to not expose .sctp in plan-b mode.
+      // As usual, adapter.js has to do an 'ugly worakaround'
+      // to cover up the mess.
+      if (browserDetails.browser === 'chrome' && browserDetails.version >= 76) {
+        const {sdpSemantics} = this.getConfiguration();
+        if (sdpSemantics === 'plan-b') {
+          Object.defineProperty(this, 'sctp', {
+            get() {
+              return typeof this._sctp === 'undefined' ? null : this._sctp;
+            },
+            enumerable: true,
+            configurable: true,
+          });
+        }
       }
 
-      // Create a dummy RTCSctpTransport object and the 'maxMessageSize'
-      // attribute.
-      const sctp = {};
-      Object.defineProperty(sctp, 'maxMessageSize', {
-        get() {
-          return maxMessageSize;
-        }
-      });
-      this._sctp = sctp;
-    }
+      if (sctpInDescription(arguments[0])) {
+        // Check if the remote is FF.
+        const isFirefox = getRemoteFirefoxVersion(arguments[0]);
 
-    return origSetRemoteDescription.apply(this, arguments);
-  };
+        // Get the maximum message size the local peer is capable of sending
+        const canSendMMS = getCanSendMaxMessageSize(isFirefox);
+
+        // Get the maximum message size of the remote peer.
+        const remoteMMS = getMaxMessageSize(arguments[0], isFirefox);
+
+        // Determine final maximum message size
+        let maxMessageSize;
+        if (canSendMMS === 0 && remoteMMS === 0) {
+          maxMessageSize = Number.POSITIVE_INFINITY;
+        } else if (canSendMMS === 0 || remoteMMS === 0) {
+          maxMessageSize = Math.max(canSendMMS, remoteMMS);
+        } else {
+          maxMessageSize = Math.min(canSendMMS, remoteMMS);
+        }
+
+        // Create a dummy RTCSctpTransport object and the 'maxMessageSize'
+        // attribute.
+        const sctp = {};
+        Object.defineProperty(sctp, 'maxMessageSize', {
+          get() {
+            return maxMessageSize;
+          }
+        });
+        this._sctp = sctp;
+      }
+
+      return origSetRemoteDescription.apply(this, arguments);
+    };
 }
 
 function shimSendThrowTypeError(window) {
@@ -54997,7 +55320,7 @@ function shimSendThrowTypeError(window) {
 
   function wrapDcSend(dc, pc) {
     const origDataChannelSend = dc.send;
-    dc.send = function() {
+    dc.send = function send() {
       const data = arguments[0];
       const length = data.length || data.size || data.byteLength;
       if (dc.readyState === 'open' &&
@@ -55010,11 +55333,12 @@ function shimSendThrowTypeError(window) {
   }
   const origCreateDataChannel =
     window.RTCPeerConnection.prototype.createDataChannel;
-  window.RTCPeerConnection.prototype.createDataChannel = function() {
-    const dataChannel = origCreateDataChannel.apply(this, arguments);
-    wrapDcSend(dataChannel, this);
-    return dataChannel;
-  };
+  window.RTCPeerConnection.prototype.createDataChannel =
+    function createDataChannel() {
+      const dataChannel = origCreateDataChannel.apply(this, arguments);
+      wrapDcSend(dataChannel, this);
+      return dataChannel;
+    };
   _utils__WEBPACK_IMPORTED_MODULE_1__["wrapPeerConnectionEvent"](window, 'datachannel', e => {
     wrapDcSend(e.channel, e.target);
     return e;
@@ -55095,7 +55419,8 @@ function removeAllowExtmapMixed(window) {
     return;
   }
   const nativeSRD = window.RTCPeerConnection.prototype.setRemoteDescription;
-  window.RTCPeerConnection.prototype.setRemoteDescription = function(desc) {
+  window.RTCPeerConnection.prototype.setRemoteDescription =
+  function setRemoteDescription(desc) {
     if (desc && desc.sdp && desc.sdp.indexOf('\na=extmap-allow-mixed') !== -1) {
       desc.sdp = desc.sdp.split('\n').filter((line) => {
         return line.trim() !== 'a=extmap-allow-mixed';
@@ -55151,12 +55476,12 @@ function shimPeerConnection(window) {
 
   if (window.RTCIceGatherer) {
     if (!window.RTCIceCandidate) {
-      window.RTCIceCandidate = function(args) {
+      window.RTCIceCandidate = function RTCIceCandidate(args) {
         return args;
       };
     }
     if (!window.RTCSessionDescription) {
-      window.RTCSessionDescription = function(args) {
+      window.RTCSessionDescription = function RTCSessionDescription(args) {
         return args;
       };
     }
@@ -55201,7 +55526,7 @@ function shimPeerConnection(window) {
 
   const RTCPeerConnectionShim = rtcpeerconnection_shim__WEBPACK_IMPORTED_MODULE_2___default()(window,
       browserDetails.version);
-  window.RTCPeerConnection = function(config) {
+  window.RTCPeerConnection = function RTCPeerConnection(config) {
     if (config && config.iceServers) {
       config.iceServers = Object(_filtericeservers__WEBPACK_IMPORTED_MODULE_1__["filterIceServers"])(config.iceServers,
         browserDetails.version);
@@ -55438,23 +55763,31 @@ function shimPeerConnection(window) {
     ['setLocalDescription', 'setRemoteDescription', 'addIceCandidate']
         .forEach(function(method) {
           const nativeMethod = window.RTCPeerConnection.prototype[method];
-          window.RTCPeerConnection.prototype[method] = function() {
+          const methodObj = {[method]() {
             arguments[0] = new ((method === 'addIceCandidate') ?
                 window.RTCIceCandidate :
                 window.RTCSessionDescription)(arguments[0]);
             return nativeMethod.apply(this, arguments);
-          };
+          }};
+          window.RTCPeerConnection.prototype[method] = methodObj[method];
         });
   }
 
   // support for addIceCandidate(null or undefined)
   const nativeAddIceCandidate =
       window.RTCPeerConnection.prototype.addIceCandidate;
-  window.RTCPeerConnection.prototype.addIceCandidate = function() {
+  window.RTCPeerConnection.prototype.addIceCandidate =
+  function addIceCandidate() {
     if (!arguments[0]) {
       if (arguments[1]) {
         arguments[1].apply(null);
       }
+      return Promise.resolve();
+    }
+    // Firefox 68+ emits and processes {candidate: "", ...}, ignore
+    // in older versions.
+    if (browserDetails.version < 68 &&
+      arguments[0] && arguments[0].candidate === '') {
       return Promise.resolve();
     }
     return nativeAddIceCandidate.apply(this, arguments);
@@ -55469,11 +55802,8 @@ function shimPeerConnection(window) {
   };
 
   const nativeGetStats = window.RTCPeerConnection.prototype.getStats;
-  window.RTCPeerConnection.prototype.getStats = function(
-    selector,
-    onSucc,
-    onErr
-  ) {
+  window.RTCPeerConnection.prototype.getStats = function getStats() {
+    const [selector, onSucc, onErr] = arguments;
     return nativeGetStats.apply(this, [selector || null])
       .then(stats => {
         if (browserDetails.version < 53 && !onSucc) {
@@ -55511,7 +55841,7 @@ function shimSenderGetStats(window) {
   }
   const origGetSenders = window.RTCPeerConnection.prototype.getSenders;
   if (origGetSenders) {
-    window.RTCPeerConnection.prototype.getSenders = function() {
+    window.RTCPeerConnection.prototype.getSenders = function getSenders() {
       const senders = origGetSenders.apply(this, []);
       senders.forEach(sender => sender._pc = this);
       return senders;
@@ -55520,13 +55850,13 @@ function shimSenderGetStats(window) {
 
   const origAddTrack = window.RTCPeerConnection.prototype.addTrack;
   if (origAddTrack) {
-    window.RTCPeerConnection.prototype.addTrack = function() {
+    window.RTCPeerConnection.prototype.addTrack = function addTrack() {
       const sender = origAddTrack.apply(this, arguments);
       sender._pc = this;
       return sender;
     };
   }
-  window.RTCRtpSender.prototype.getStats = function() {
+  window.RTCRtpSender.prototype.getStats = function getStats() {
     return this.track ? this._pc.getStats(this.track) :
         Promise.resolve(new Map());
   };
@@ -55542,7 +55872,7 @@ function shimReceiverGetStats(window) {
   }
   const origGetReceivers = window.RTCPeerConnection.prototype.getReceivers;
   if (origGetReceivers) {
-    window.RTCPeerConnection.prototype.getReceivers = function() {
+    window.RTCPeerConnection.prototype.getReceivers = function getReceivers() {
       const receivers = origGetReceivers.apply(this, []);
       receivers.forEach(receiver => receiver._pc = this);
       return receivers;
@@ -55552,7 +55882,7 @@ function shimReceiverGetStats(window) {
     e.receiver._pc = e.srcElement;
     return e;
   });
-  window.RTCRtpReceiver.prototype.getStats = function() {
+  window.RTCRtpReceiver.prototype.getStats = function getStats() {
     return this._pc.getStats(this.track);
   };
 }
@@ -55562,14 +55892,15 @@ function shimRemoveStream(window) {
       'removeStream' in window.RTCPeerConnection.prototype) {
     return;
   }
-  window.RTCPeerConnection.prototype.removeStream = function(stream) {
-    _utils__WEBPACK_IMPORTED_MODULE_0__["deprecated"]('removeStream', 'removeTrack');
-    this.getSenders().forEach(sender => {
-      if (sender.track && stream.getTracks().includes(sender.track)) {
-        this.removeTrack(sender);
-      }
-    });
-  };
+  window.RTCPeerConnection.prototype.removeStream =
+    function removeStream(stream) {
+      _utils__WEBPACK_IMPORTED_MODULE_0__["deprecated"]('removeStream', 'removeTrack');
+      this.getSenders().forEach(sender => {
+        if (sender.track && stream.getTracks().includes(sender.track)) {
+          this.removeTrack(sender);
+        }
+      });
+    };
 }
 
 function shimRTCDataChannel(window) {
@@ -55611,22 +55942,23 @@ function shimGetDisplayMedia(window, preferredMediaSource) {
   if (!(window.navigator.mediaDevices)) {
     return;
   }
-  window.navigator.mediaDevices.getDisplayMedia = function(constraints) {
-    if (!(constraints && constraints.video)) {
-      const err = new DOMException('getDisplayMedia without video ' +
-          'constraints is undefined');
-      err.name = 'NotFoundError';
-      // from https://heycam.github.io/webidl/#idl-DOMException-error-names
-      err.code = 8;
-      return Promise.reject(err);
-    }
-    if (constraints.video === true) {
-      constraints.video = {mediaSource: preferredMediaSource};
-    } else {
-      constraints.video.mediaSource = preferredMediaSource;
-    }
-    return window.navigator.mediaDevices.getUserMedia(constraints);
-  };
+  window.navigator.mediaDevices.getDisplayMedia =
+    function getDisplayMedia(constraints) {
+      if (!(constraints && constraints.video)) {
+        const err = new DOMException('getDisplayMedia without video ' +
+            'constraints is undefined');
+        err.name = 'NotFoundError';
+        // from https://heycam.github.io/webidl/#idl-DOMException-error-names
+        err.code = 8;
+        return Promise.reject(err);
+      }
+      if (constraints.video === true) {
+        constraints.video = {mediaSource: preferredMediaSource};
+      } else {
+        constraints.video.mediaSource = preferredMediaSource;
+      }
+      return window.navigator.mediaDevices.getUserMedia(constraints);
+    };
 }
 
 
@@ -55748,16 +56080,17 @@ function shimLocalStreamsAPI(window) {
     return;
   }
   if (!('getLocalStreams' in window.RTCPeerConnection.prototype)) {
-    window.RTCPeerConnection.prototype.getLocalStreams = function() {
-      if (!this._localStreams) {
-        this._localStreams = [];
-      }
-      return this._localStreams;
-    };
+    window.RTCPeerConnection.prototype.getLocalStreams =
+      function getLocalStreams() {
+        if (!this._localStreams) {
+          this._localStreams = [];
+        }
+        return this._localStreams;
+      };
   }
   if (!('addStream' in window.RTCPeerConnection.prototype)) {
     const _addTrack = window.RTCPeerConnection.prototype.addTrack;
-    window.RTCPeerConnection.prototype.addStream = function(stream) {
+    window.RTCPeerConnection.prototype.addStream = function addStream(stream) {
       if (!this._localStreams) {
         this._localStreams = [];
       }
@@ -55772,34 +56105,37 @@ function shimLocalStreamsAPI(window) {
         stream));
     };
 
-    window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-      if (stream) {
-        if (!this._localStreams) {
-          this._localStreams = [stream];
-        } else if (!this._localStreams.includes(stream)) {
-          this._localStreams.push(stream);
+    window.RTCPeerConnection.prototype.addTrack =
+      function addTrack(track) {
+        const stream = arguments[1];
+        if (stream) {
+          if (!this._localStreams) {
+            this._localStreams = [stream];
+          } else if (!this._localStreams.includes(stream)) {
+            this._localStreams.push(stream);
+          }
         }
-      }
-      return _addTrack.call(this, track, stream);
-    };
+        return _addTrack.apply(this, arguments);
+      };
   }
   if (!('removeStream' in window.RTCPeerConnection.prototype)) {
-    window.RTCPeerConnection.prototype.removeStream = function(stream) {
-      if (!this._localStreams) {
-        this._localStreams = [];
-      }
-      const index = this._localStreams.indexOf(stream);
-      if (index === -1) {
-        return;
-      }
-      this._localStreams.splice(index, 1);
-      const tracks = stream.getTracks();
-      this.getSenders().forEach(sender => {
-        if (tracks.includes(sender.track)) {
-          this.removeTrack(sender);
+    window.RTCPeerConnection.prototype.removeStream =
+      function removeStream(stream) {
+        if (!this._localStreams) {
+          this._localStreams = [];
         }
-      });
-    };
+        const index = this._localStreams.indexOf(stream);
+        if (index === -1) {
+          return;
+        }
+        this._localStreams.splice(index, 1);
+        const tracks = stream.getTracks();
+        this.getSenders().forEach(sender => {
+          if (tracks.includes(sender.track)) {
+            this.removeTrack(sender);
+          }
+        });
+      };
   }
 }
 
@@ -55808,9 +56144,10 @@ function shimRemoteStreamsAPI(window) {
     return;
   }
   if (!('getRemoteStreams' in window.RTCPeerConnection.prototype)) {
-    window.RTCPeerConnection.prototype.getRemoteStreams = function() {
-      return this._remoteStreams ? this._remoteStreams : [];
-    };
+    window.RTCPeerConnection.prototype.getRemoteStreams =
+      function getRemoteStreams() {
+        return this._remoteStreams ? this._remoteStreams : [];
+      };
   }
   if (!('onaddstream' in window.RTCPeerConnection.prototype)) {
     Object.defineProperty(window.RTCPeerConnection.prototype, 'onaddstream', {
@@ -55841,26 +56178,27 @@ function shimRemoteStreamsAPI(window) {
     });
     const origSetRemoteDescription =
       window.RTCPeerConnection.prototype.setRemoteDescription;
-    window.RTCPeerConnection.prototype.setRemoteDescription = function() {
-      const pc = this;
-      if (!this._onaddstreampoly) {
-        this.addEventListener('track', this._onaddstreampoly = function(e) {
-          e.streams.forEach(stream => {
-            if (!pc._remoteStreams) {
-              pc._remoteStreams = [];
-            }
-            if (pc._remoteStreams.indexOf(stream) >= 0) {
-              return;
-            }
-            pc._remoteStreams.push(stream);
-            const event = new Event('addstream');
-            event.stream = stream;
-            pc.dispatchEvent(event);
+    window.RTCPeerConnection.prototype.setRemoteDescription =
+      function setRemoteDescription() {
+        const pc = this;
+        if (!this._onaddstreampoly) {
+          this.addEventListener('track', this._onaddstreampoly = function(e) {
+            e.streams.forEach(stream => {
+              if (!pc._remoteStreams) {
+                pc._remoteStreams = [];
+              }
+              if (pc._remoteStreams.indexOf(stream) >= 0) {
+                return;
+              }
+              pc._remoteStreams.push(stream);
+              const event = new Event('addstream');
+              event.stream = stream;
+              pc.dispatchEvent(event);
+            });
           });
-        });
-      }
-      return origSetRemoteDescription.apply(pc, arguments);
-    };
+        }
+        return origSetRemoteDescription.apply(pc, arguments);
+      };
   }
 }
 
@@ -55869,31 +56207,33 @@ function shimCallbacksAPI(window) {
     return;
   }
   const prototype = window.RTCPeerConnection.prototype;
-  const createOffer = prototype.createOffer;
-  const createAnswer = prototype.createAnswer;
+  const origCreateOffer = prototype.createOffer;
+  const origCreateAnswer = prototype.createAnswer;
   const setLocalDescription = prototype.setLocalDescription;
   const setRemoteDescription = prototype.setRemoteDescription;
   const addIceCandidate = prototype.addIceCandidate;
 
-  prototype.createOffer = function(successCallback, failureCallback) {
-    const options = (arguments.length >= 2) ? arguments[2] : arguments[0];
-    const promise = createOffer.apply(this, [options]);
-    if (!failureCallback) {
-      return promise;
-    }
-    promise.then(successCallback, failureCallback);
-    return Promise.resolve();
-  };
+  prototype.createOffer =
+    function createOffer(successCallback, failureCallback) {
+      const options = (arguments.length >= 2) ? arguments[2] : arguments[0];
+      const promise = origCreateOffer.apply(this, [options]);
+      if (!failureCallback) {
+        return promise;
+      }
+      promise.then(successCallback, failureCallback);
+      return Promise.resolve();
+    };
 
-  prototype.createAnswer = function(successCallback, failureCallback) {
-    const options = (arguments.length >= 2) ? arguments[2] : arguments[0];
-    const promise = createAnswer.apply(this, [options]);
-    if (!failureCallback) {
-      return promise;
-    }
-    promise.then(successCallback, failureCallback);
-    return Promise.resolve();
-  };
+  prototype.createAnswer =
+    function createAnswer(successCallback, failureCallback) {
+      const options = (arguments.length >= 2) ? arguments[2] : arguments[0];
+      const promise = origCreateAnswer.apply(this, [options]);
+      if (!failureCallback) {
+        return promise;
+      }
+      promise.then(successCallback, failureCallback);
+      return Promise.resolve();
+    };
 
   let withCallback = function(description, successCallback, failureCallback) {
     const promise = setLocalDescription.apply(this, [description]);
@@ -55940,7 +56280,7 @@ function shimGetUserMedia(window) {
 
   if (!navigator.getUserMedia && navigator.mediaDevices &&
     navigator.mediaDevices.getUserMedia) {
-    navigator.getUserMedia = function(constraints, cb, errcb) {
+    navigator.getUserMedia = function getUserMedia(constraints, cb, errcb) {
       navigator.mediaDevices.getUserMedia(constraints)
       .then(cb, errcb);
     }.bind(navigator);
@@ -55961,26 +56301,27 @@ function shimConstraints(constraints) {
 function shimRTCIceServerUrls(window) {
   // migrate from non-spec RTCIceServer.url to RTCIceServer.urls
   const OrigPeerConnection = window.RTCPeerConnection;
-  window.RTCPeerConnection = function(pcConfig, pcConstraints) {
-    if (pcConfig && pcConfig.iceServers) {
-      const newIceServers = [];
-      for (let i = 0; i < pcConfig.iceServers.length; i++) {
-        let server = pcConfig.iceServers[i];
-        if (!server.hasOwnProperty('urls') &&
-            server.hasOwnProperty('url')) {
-          _utils__WEBPACK_IMPORTED_MODULE_0__["deprecated"]('RTCIceServer.url', 'RTCIceServer.urls');
-          server = JSON.parse(JSON.stringify(server));
-          server.urls = server.url;
-          delete server.url;
-          newIceServers.push(server);
-        } else {
-          newIceServers.push(pcConfig.iceServers[i]);
+  window.RTCPeerConnection =
+    function RTCPeerConnection(pcConfig, pcConstraints) {
+      if (pcConfig && pcConfig.iceServers) {
+        const newIceServers = [];
+        for (let i = 0; i < pcConfig.iceServers.length; i++) {
+          let server = pcConfig.iceServers[i];
+          if (!server.hasOwnProperty('urls') &&
+              server.hasOwnProperty('url')) {
+            _utils__WEBPACK_IMPORTED_MODULE_0__["deprecated"]('RTCIceServer.url', 'RTCIceServer.urls');
+            server = JSON.parse(JSON.stringify(server));
+            server.urls = server.url;
+            delete server.url;
+            newIceServers.push(server);
+          } else {
+            newIceServers.push(pcConfig.iceServers[i]);
+          }
         }
+        pcConfig.iceServers = newIceServers;
       }
-      pcConfig.iceServers = newIceServers;
-    }
-    return new OrigPeerConnection(pcConfig, pcConstraints);
-  };
+      return new OrigPeerConnection(pcConfig, pcConstraints);
+    };
   window.RTCPeerConnection.prototype = OrigPeerConnection.prototype;
   // wrap static methods. Currently just generateCertificate.
   if ('generateCertificate' in window.RTCPeerConnection) {
@@ -55994,11 +56335,9 @@ function shimRTCIceServerUrls(window) {
 
 function shimTrackEventTransceiver(window) {
   // Add event.transceiver member over deprecated event.receiver
-  if (typeof window === 'object' && window.RTCPeerConnection &&
-      ('receiver' in window.RTCTrackEvent.prototype) &&
-      // can't check 'transceiver' in window.RTCTrackEvent.prototype, as it is
-      // defined for some reason even when window.RTCTransceiver is not.
-      !window.RTCTransceiver) {
+  if (typeof window === 'object' && window.RTCTrackEvent &&
+      'receiver' in window.RTCTrackEvent.prototype &&
+      !('transceiver' in window.RTCTrackEvent.prototype)) {
     Object.defineProperty(window.RTCTrackEvent.prototype, 'transceiver', {
       get() {
         return {receiver: this.receiver};
@@ -56009,60 +56348,63 @@ function shimTrackEventTransceiver(window) {
 
 function shimCreateOfferLegacy(window) {
   const origCreateOffer = window.RTCPeerConnection.prototype.createOffer;
-  window.RTCPeerConnection.prototype.createOffer = function(offerOptions) {
-    if (offerOptions) {
-      if (typeof offerOptions.offerToReceiveAudio !== 'undefined') {
-        // support bit values
-        offerOptions.offerToReceiveAudio = !!offerOptions.offerToReceiveAudio;
-      }
-      const audioTransceiver = this.getTransceivers().find(transceiver =>
-        transceiver.receiver.track.kind === 'audio');
-      if (offerOptions.offerToReceiveAudio === false && audioTransceiver) {
-        if (audioTransceiver.direction === 'sendrecv') {
-          if (audioTransceiver.setDirection) {
-            audioTransceiver.setDirection('sendonly');
-          } else {
-            audioTransceiver.direction = 'sendonly';
-          }
-        } else if (audioTransceiver.direction === 'recvonly') {
-          if (audioTransceiver.setDirection) {
-            audioTransceiver.setDirection('inactive');
-          } else {
-            audioTransceiver.direction = 'inactive';
-          }
+  window.RTCPeerConnection.prototype.createOffer =
+    function createOffer(offerOptions) {
+      if (offerOptions) {
+        if (typeof offerOptions.offerToReceiveAudio !== 'undefined') {
+          // support bit values
+          offerOptions.offerToReceiveAudio =
+            !!offerOptions.offerToReceiveAudio;
         }
-      } else if (offerOptions.offerToReceiveAudio === true &&
-          !audioTransceiver) {
-        this.addTransceiver('audio');
-      }
+        const audioTransceiver = this.getTransceivers().find(transceiver =>
+          transceiver.receiver.track.kind === 'audio');
+        if (offerOptions.offerToReceiveAudio === false && audioTransceiver) {
+          if (audioTransceiver.direction === 'sendrecv') {
+            if (audioTransceiver.setDirection) {
+              audioTransceiver.setDirection('sendonly');
+            } else {
+              audioTransceiver.direction = 'sendonly';
+            }
+          } else if (audioTransceiver.direction === 'recvonly') {
+            if (audioTransceiver.setDirection) {
+              audioTransceiver.setDirection('inactive');
+            } else {
+              audioTransceiver.direction = 'inactive';
+            }
+          }
+        } else if (offerOptions.offerToReceiveAudio === true &&
+            !audioTransceiver) {
+          this.addTransceiver('audio');
+        }
 
-      if (typeof offerOptions.offerToReceiveVideo !== 'undefined') {
-        // support bit values
-        offerOptions.offerToReceiveVideo = !!offerOptions.offerToReceiveVideo;
-      }
-      const videoTransceiver = this.getTransceivers().find(transceiver =>
-        transceiver.receiver.track.kind === 'video');
-      if (offerOptions.offerToReceiveVideo === false && videoTransceiver) {
-        if (videoTransceiver.direction === 'sendrecv') {
-          if (videoTransceiver.setDirection) {
-            videoTransceiver.setDirection('sendonly');
-          } else {
-            videoTransceiver.direction = 'sendonly';
-          }
-        } else if (videoTransceiver.direction === 'recvonly') {
-          if (videoTransceiver.setDirection) {
-            videoTransceiver.setDirection('inactive');
-          } else {
-            videoTransceiver.direction = 'inactive';
-          }
+        if (typeof offerOptions.offerToReceiveVideo !== 'undefined') {
+          // support bit values
+          offerOptions.offerToReceiveVideo =
+            !!offerOptions.offerToReceiveVideo;
         }
-      } else if (offerOptions.offerToReceiveVideo === true &&
-          !videoTransceiver) {
-        this.addTransceiver('video');
+        const videoTransceiver = this.getTransceivers().find(transceiver =>
+          transceiver.receiver.track.kind === 'video');
+        if (offerOptions.offerToReceiveVideo === false && videoTransceiver) {
+          if (videoTransceiver.direction === 'sendrecv') {
+            if (videoTransceiver.setDirection) {
+              videoTransceiver.setDirection('sendonly');
+            } else {
+              videoTransceiver.direction = 'sendonly';
+            }
+          } else if (videoTransceiver.direction === 'recvonly') {
+            if (videoTransceiver.setDirection) {
+              videoTransceiver.setDirection('inactive');
+            } else {
+              videoTransceiver.direction = 'inactive';
+            }
+          }
+        } else if (offerOptions.offerToReceiveVideo === true &&
+            !videoTransceiver) {
+          this.addTransceiver('video');
+        }
       }
-    }
-    return origCreateOffer.apply(this, arguments);
-  };
+      return origCreateOffer.apply(this, arguments);
+    };
 }
 
 
@@ -56732,8 +57074,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

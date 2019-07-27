@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,11 @@ class HomeController extends Controller
     public function index()
     {
 
-        $user = User::find($_GET['user_id']);
+        $user = Auth::user();
+
+        if($user == null) {
+            return redirect(route('/')) -> withErrors('Nu sunteti autentificat!');
+        }
 
         $user -> stats;
 

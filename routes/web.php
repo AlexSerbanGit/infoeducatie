@@ -19,23 +19,39 @@
     Route::get('/user/login_register', 'UserLoginController@loginOrRegister') -> name('login_register');
 // });
 
-// Start test
-Route::group(['middleware' => ['user-auth']], function () {
-
-    // Asta e ruta de test pentru middleware...Trebuie trimisi ca si GET user_id-ul si token-ul
-    // Token-ul este salvat la register sau login in storage (client side) si la fiecare
-    // request de ruta trebuie trimisi cei 2 parametri
-    // Preluare token din storage: sessionStorage.getItem("token")
-    Route::get('/middleware', function() {
-        return json_encode([
-            'user_id' => $_GET['user_id'],
-            'token' => $_GET['token']
-        ]);
-    }) -> name('middleware');
+Route::get('/test', function() {
+    return view('/test');
 });
-// Stop test
 
-Route::group(['middleware' => ['user-auth']], function () {
+Route::get('/sanatate', function() {
+    return view('health.home');
+});
+
+// Start user's auth routes
+Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/user/login', 'Auth\LoginController@login');
+Route::post('/user/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/user/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/user/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/user/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/user/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::get('/user/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/user/register', 'Auth\RegisterController@register');
+// Stop user's auth routes
+
+// Start admin's auth routes
+Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/admin/login', 'Auth\LoginController@login');
+Route::post('/admin/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+// Start admin's auth routes
+
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -67,7 +83,7 @@ Route::group(['middleware' => ['user-auth']], function () {
 
 });
 
-Route::group(['middleware' => ['auth', 'admin', 'user-auth']], function () {
+Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('/admin', 'AdminController@menu');
 
@@ -91,28 +107,10 @@ Route::group(['middleware' => ['auth', 'admin', 'user-auth']], function () {
 
 });
 
-Route::get('/test', function() {
-    return view('/test');
-});
-
-Route::get('/sanatate', function() {
-    return view('health.home');
-});
-
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/admin/login', 'Auth\LoginController@login');
-Route::post('/admin/logout', 'Auth\LoginController@logout')->name('logout');
-
-Route::get('admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-Route::get('/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('/admin/register', 'Auth\RegisterController@register');
-Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'admin'], function () { 
+Route::group(['middleware' => ['auth', 'admin'], 'prefix'=>'admin'], function () {
 
     Route::get('/home', 'AdminController@home')->name('Panou de administrare');
-    
+
     Route::get('/users', 'AdminController@users')->name('Utilizatori');
 
     Route::get('/doctors', 'AdminController@doctors')->name('Doctori');
