@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/dinner', 'FoodController@dinner');
 
-    Route::get('/snack', 'FoodController@snack');
+    Route::get('/snack', 'FoodController@snack'); 
 
     Route::post('/add_target', 'UserController@addTarget');
 
