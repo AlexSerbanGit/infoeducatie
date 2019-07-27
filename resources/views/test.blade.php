@@ -6,7 +6,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
-    Launch demo modal sideout small
+    Modifica profil
 </button>
 
 @include('/parts/profile-part')
