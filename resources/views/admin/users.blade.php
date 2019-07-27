@@ -54,14 +54,10 @@
 <div class="modal fade" id="editUser{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form action="{{ url('/admin/doctors') }}" method="GET"> 
-        @csrf
-        <button class="btn btn-success">da</button>
-    </form>
     <form action="{{ url('/admin/update_user/'.$user->id) }}" method="POST">
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifica datele utilizatorului</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -71,12 +67,38 @@
 
         <label>Nume:</label>
         <input type="text" name="name" class="form-control" value="{{$user->name}}" required>
+        
+        </div>
+        <div class="form-group">
+        
+        <label>Numar de telefon:</label>
+        <input type="text" name="phone_number" class="form-control" value="{{$user->phone_number}}" required>
+        
+        </div>
+        <div class="form-group">
 
+        <label>Limba:</label>
+        <select name="language" class="form-control">
+          @if($user->language == 'Romanian')
+            <option value="Romanian">Romana</option>
+            <option value="English">Engleza</option>
+          @else
+            <option value="English">Engleza</option>
+            <option value="Romanian">Romana</option>   
+          @endif
+        </select>
+
+        </div>
+        <div class="form-group">
+        
+        <label>Email:</label>
+        <input type="text" name="phone_number" class="form-control" value="{{$user->email}}">
+        
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-warning">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button class="btn btn-warning">Salveaza modificarile</button>
       </div>
     </form>
     </div>
