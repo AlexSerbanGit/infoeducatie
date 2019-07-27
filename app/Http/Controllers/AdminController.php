@@ -26,19 +26,22 @@ class AdminController extends Controller
 
     public function doctors(Request $request){
 
-        return view('admin.doctors');
+        $users = User::where('role_id', '=', 1)->get();
+        return view('admin.doctors')->with('users', $users);
 
     }
 
     public function pharmacies(){
 
-        return view('admin.pharmacies');
+        $users = User::where('role_id', '=', 3)->get();
+        return view('admin.pharmacies')->with('users', $users);
 
     }
 
     public function moderators(){
 
-        return view('admin.moderators');
+        $users = User::where('role_id', '=', 4)->get();
+        return view('admin.moderators')->with('users', $users);
 
     }
 

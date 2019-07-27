@@ -19,11 +19,19 @@
   <link href="{{ asset('assets-admin/css/material-dashboard.css')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('assets-admin/demo/demo.css')}}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
+
   <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
 
 </head>
 
 <body class="">
+<div id="overlayer" style="width: 100vw; z-index: 99998;
+position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
+"></div>
+<span class="loader">
+<span class="loader-inner"></span>
+</span>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
       <!--
@@ -31,12 +39,12 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Panou de administrare
+      <div class="logo" style="background-color: white">
+        <a href="#" class="simple-text logo-normal">
+          <img src="{{ asset('/images/beescanner.png') }}" alt="Logo" style="max-width: 100%; height: auto">
         </a>
       </div>
-      <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper" style="background-color: white">
         <ul class="nav">
           @if(Route::currentRouteName() == "Panou de administrare" )
             <li class="nav-item active">
@@ -246,6 +254,10 @@
   
   <!--   Core JS Files   -->
   <script src="{{ asset('assets-admin/js/core/jquery.min.js')}}"></script>
+  <script>
+    $(".loader").delay(500).fadeOut("slow");
+    $("#overlayer").delay(500).fadeOut("slow");
+  </script>
   <script src="{{ asset('assets-admin/js/core/popper.min.js')}}"></script>
   <script src="{{ asset('assets-admin/js/core/bootstrap-material-design.min.js')}}"></script>
   <script src="{{ asset('assets-admin/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
@@ -292,6 +304,9 @@
       md.initDashboardPageCharts();
 
     });
+  </script>
+
+ <script>
   </script>
 </body>
 
