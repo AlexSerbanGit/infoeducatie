@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Cookie;
+use App\User;
 use Carbon\Carbon;
-use App\Administrator;
 use App\UserLoginToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +38,7 @@ class UserRegisterController extends Controller
 
         $validator = Validator::make($request -> all(), [
             'name' => 'required',
-            'phone_number' => 'required|unique:administrators,phone_number'
+            'phone_number' => 'required|unique:users,phone_number'
         ], [
             'name.required' => 'Numele este necesar!',
             'phone_number.required' => 'Numarul de telefon este necesar!',
@@ -52,7 +52,7 @@ class UserRegisterController extends Controller
             ]);
         }
 
-        $user = new Administrator();
+        $user = new User();
 
         $user -> name = $request -> name;
 

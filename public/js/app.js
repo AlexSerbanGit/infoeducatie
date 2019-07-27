@@ -2083,7 +2083,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     validateRegisterFields: function validateRegisterFields() {
       if (this.registerName.length.toString() < 1 || this.phoneNumber.length.toString() < 1) {
-        this.errorMessage = 'Toate field-urile sunt obligatorii!';
+        // this.errorMessage = 'Toate field-urile sunt obligatorii!';
         return true;
       } else {
         return false;
