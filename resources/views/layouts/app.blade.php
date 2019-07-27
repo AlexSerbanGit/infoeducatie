@@ -84,8 +84,8 @@
                             <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
                         </li>
                     @else
-                        <li class="nav-item dropdown">
-                            <li class="nav-item row" style="margin-top: 10px">
+                   
+                            <!-- <li class="nav-item row" style="margin-top: 10px"> -->
                                 {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a> --}}
@@ -102,20 +102,12 @@
                                     </form>
                                 </div> --}}
 
-                                <a class="nav-link ml-3" data-toggle="modal" data-target="#profile">
+                                <a class="nav-link" data-toggle="modal" data-target="#profile">
                                     <i class="fas fa-user-edit"></i></i> {{ Auth::user()->name }}
                                 </a>
-
-                                <a class="nav-link" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt"></i> Deconectare
-                                </a class="btn btn-danger">
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
+                                
+                             
+                            
                         @endguest
                     </ul>
             </div>

@@ -231,7 +231,11 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-               
+        @if(Session::has('message'))
+        <div class="alert alert-warning" role="alert">
+          {{Session::get('message')}}
+        </div>
+        @endif
            @yield('content')
           
         </div>

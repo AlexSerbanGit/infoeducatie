@@ -20,7 +20,7 @@ class AdminController extends Controller
 
     public function users(){
 
-        $users = User::all();
+        $users = User::where('role_id', '=', 0)->get();
         return view('admin.users')->with('users', $users);
     }
 
@@ -88,6 +88,72 @@ class AdminController extends Controller
 
     public function menu(){
          return redirect('/admin/allergies');
+    }
+
+    public function updateUser(Request $request, $id){
+        
+        $validator = Validator::make($request->all(), [
+            'phone_number' => 'required|numeric',
+            'name' => 'required|string',
+            'language' => 'required|string',
+            'role_id' => 'required|numeric',
+        ]);
+
+        if($validator -> fails()){
+            return redirect()->back()->with('message', 'Utilizatorul nu a putut fi modificat deoarece informatiile trimise nu sunt valide!');
+        }
+
+        $user = User::find($id);
+        if($user){
+
+            if($user->role_id != 2){
+
+                $user->phone_number = $request->phone_number;
+                $user->name = $request->name;
+                $user->language = $request->language;
+                $user->email = $request->email;
+                $user->role_id = $request->role_id;
+                $user->save(); 
+                return redirect()->back()->with('message', 'Utilizator modificat cu succes!');  
+
+            }else{
+
+                return redirect()->back()->with('message', 'Nu aveti voie sa modificati administratori');
+
+            }
+           
+        }else{
+
+            return redirect()->back()->with('message', 'Utilizatorul nu a fost gasit');
+
+        }
+
+    }
+
+    public function banUser($id){
+
+        $user = User::find($id);
+
+        if($user){
+
+            if($user->banned == 0){
+                $user->banned = 1;
+                $user->save();
+                return redirect()->back()->with('message', 'Utilizatorul a fost banat cu succes!');
+
+            }else{
+                $user->banned = 0;
+                $user->save();
+                return redirect()->back()->with('message', 'Utilizatorul a fost de-banat cu succes!');
+
+            }
+
+        }else{
+
+            return redirect()->back()->with('message', 'Utilizatorul nu a fost gasit!');
+
+        }
+
     }
 
     // public function allergies(){

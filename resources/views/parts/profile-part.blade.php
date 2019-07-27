@@ -8,7 +8,17 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <button class="btn btn-primary">
+        <a class="nav-link" href="{{ route('logout') }}" style="color: white"
+          onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+              <i class="fas fa-sign-out-alt"></i> Deconectare
+          </a class="btn btn-danger">
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+        </button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
