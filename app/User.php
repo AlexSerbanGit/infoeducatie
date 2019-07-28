@@ -73,4 +73,13 @@ class User extends Authenticatable
     public function products(){
         return $this->hasMany('App\Product', 'restaurant_id');
     }
+    // Restaurant locations
+    public function locations(){
+        return $this->hasMany('App\Location', 'restaurant_id');
+    }
+
+    // The city of the user
+    public function city(){
+        return $this->hasOne('App\City', 'city_id');
+    }
 }
