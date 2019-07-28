@@ -9,7 +9,7 @@
                 <form class="form-inline ml-2">
                     <div class="row" style="width: 100%">
                         <div class="col-sm-10">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Farmacii, doctori si medicamente" aria-label="Search" style="width: 100%">
+                            <input v-model="keyword" v-on:keyup="searchRestaurants()" class="form-control mr-sm-2" type="search" placeholder="Farmacii, doctori si medicamente" aria-label="Search" style="width: 100%">
                         </div>
                         <div class="col-sm-2">
                             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Cauta</button>
@@ -21,7 +21,7 @@
 
         <!-- PREZENTARE RESTAURANTE  -->
         <div class="row" style="margin-top: 18px">
-            <div v-for="restaurant in restaurants" class="col-xl-3 col-lg-4 col-sm-6 col-xs-6">
+            <div v-for="restaurant in filtered_restaurants" class="col-xl-3 col-lg-4 col-sm-6 col-xs-6">
                 <div class="card card-stats mb-4 mb-xl-0" style="height: 100%">
                     <div class="card-body">
                         <div class="row">
@@ -49,7 +49,8 @@
         mounted() {
             axios.get('../api/restaurants')
             .then(response => {
-                this.restaurants = response.data
+                this.restaurants = response.data,
+                this.filtered_restaurants = this.restaurants
             })
             .catch(error => {
 
@@ -57,7 +58,25 @@
         },
         data() {
             return {
-                'restaurants': []
+                'restaurants': [],
+                'filtered_restaurants': [],
+                'keyword': '',
+                'timer': ''
+            }
+        },
+        methods: {
+            searchRestaurants() {
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                    this.timer = null;
+                }
+                this.timer = setTimeout(() => {
+                    this.filtered_restaurants = [];
+                    let i;
+                    for (i = 1; i < this.restaurants.length; i++) {
+                      console.log(this.restaurants[i].name.includes(this.keyword));
+                    }
+                }, 1000);
             }
         }
     }

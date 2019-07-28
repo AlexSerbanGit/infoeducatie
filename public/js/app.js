@@ -1839,13 +1839,35 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('../api/restaurants').then(function (response) {
-      _this.restaurants = response.data;
+      _this.restaurants = response.data, _this.filtered_restaurants = _this.restaurants;
     })["catch"](function (error) {});
   },
   data: function data() {
     return {
-      'restaurants': []
+      'restaurants': [],
+      'filtered_restaurants': [],
+      'keyword': '',
+      'timer': ''
     };
+  },
+  methods: {
+    searchRestaurants: function searchRestaurants() {
+      var _this2 = this;
+
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.timer = setTimeout(function () {
+        _this2.filtered_restaurants = [];
+        var i;
+
+        for (i = 1; i < _this2.restaurants.length; i++) {
+          console.log(_this2.restaurants[i].name.includes(_this2.keyword));
+        }
+      }, 1000);
+    }
   }
 });
 
@@ -40927,12 +40949,66 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "row mt-3" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "col-md-2 col-sm-2 col-xs-2 col-lg-1",
+        staticStyle: { "margin-top": "5px" }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col-md-8 col-sm-12 col-xs-8 col-lg-9",
+          staticStyle: { "margin-top": "5px" }
+        },
+        [
+          _c("form", { staticClass: "form-inline ml-2" }, [
+            _c("div", { staticClass: "row", staticStyle: { width: "100%" } }, [
+              _c("div", { staticClass: "col-sm-10" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.keyword,
+                      expression: "keyword"
+                    }
+                  ],
+                  staticClass: "form-control mr-sm-2",
+                  staticStyle: { width: "100%" },
+                  attrs: {
+                    type: "search",
+                    placeholder: "Farmacii, doctori si medicamente",
+                    "aria-label": "Search"
+                  },
+                  domProps: { value: _vm.keyword },
+                  on: {
+                    keyup: function($event) {
+                      return _vm.searchRestaurants()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.keyword = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "row", staticStyle: { "margin-top": "18px" } },
-      _vm._l(_vm.restaurants, function(restaurant) {
+      _vm._l(_vm.filtered_restaurants, function(restaurant) {
         return _c(
           "div",
           { staticClass: "col-xl-3 col-lg-4 col-sm-6 col-xs-6" },
@@ -41033,59 +41109,31 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-3" }, [
-      _c(
-        "div",
-        {
-          staticClass: "col-md-2 col-sm-3 col-xs-12 col-lg-2 w-100",
-          staticStyle: { "margin-top": "5px" }
-        },
-        [
-          _c("button", { staticClass: "btn btn-danger" }, [
-            _vm._v("Cel mai aproiat restaurant")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "col-md-2 col-sm-2 col-xs-2 col-lg-1",
+    return _c(
+      "div",
+      {
+        staticClass: "col-md-2 col-sm-3 col-xs-12 col-lg-2 w-100",
         staticStyle: { "margin-top": "5px" }
-      }),
-      _vm._v(" "),
+      },
+      [
+        _c("button", { staticClass: "btn btn-danger" }, [
+          _vm._v("Cel mai aproiat restaurant")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2" }, [
       _c(
-        "div",
+        "button",
         {
-          staticClass: "col-md-8 col-sm-12 col-xs-8 col-lg-9",
-          staticStyle: { "margin-top": "5px" }
+          staticClass: "btn btn-outline-danger my-2 my-sm-0",
+          attrs: { type: "submit" }
         },
-        [
-          _c("form", { staticClass: "form-inline ml-2" }, [
-            _c("div", { staticClass: "row", staticStyle: { width: "100%" } }, [
-              _c("div", { staticClass: "col-sm-10" }, [
-                _c("input", {
-                  staticClass: "form-control mr-sm-2",
-                  staticStyle: { width: "100%" },
-                  attrs: {
-                    type: "search",
-                    placeholder: "Farmacii, doctori si medicamente",
-                    "aria-label": "Search"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-2" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-danger my-2 my-sm-0",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Cauta")]
-                )
-              ])
-            ])
-          ])
-        ]
+        [_vm._v("Cauta")]
       )
     ])
   }
