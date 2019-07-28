@@ -8,6 +8,7 @@ use App\Allergy;
 use App\Product;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Drug;
 
 class AdminController extends Controller
 {
@@ -53,7 +54,8 @@ class AdminController extends Controller
 
     public function drugs(){
 
-        return view('admin.drugs');
+        $drugs = Drug::all();
+        return view('admin.drugs')->with('drugs', $drugs);
 
     }
 

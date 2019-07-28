@@ -44,8 +44,8 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
           <img src="{{ asset('/images/beescanner.png') }}" alt="Logo" style="max-width: 100%; height: auto">
         </a>
       </div>
-      <div class="sidebar-wrapper" style="background-color: white">
-        <ul class="nav">
+      <div class="sidebar-wrapper" style="background-color: white; text-align: left;">
+        <ul class="nav" style="min-height: 850px">
           @if(Route::currentRouteName() == "Panou de administrare" )
             <li class="nav-item active">
             <a class="nav-link" href="#">
