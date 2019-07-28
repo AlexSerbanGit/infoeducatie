@@ -23,10 +23,6 @@ Route::get('/test', function() {
     return view('/test');
 });
 
-Route::get('/sanatate', function() {
-    return view('health.home');
-});
-
 // Start user's auth routes
 Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/user/login', 'Auth\LoginController@login');
@@ -82,6 +78,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/add_to_your_target/{id}', 'UserController@addToYourTarget');
 
     Route::post('/user/profile/edit', 'UserProfileController@update') -> name('user-update');
+
+
+    Route::get('/restaurants', 'UserRestaurantsController@restaurants') -> name('restaurants');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {

@@ -60,15 +60,18 @@
                     </ul>
 
                     <ul class="nav navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
-                        </li>
                         @auth
-                            @if(Auth::user()->role == 2)
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/restaurants') }}"><i class="fas fa-utensils"></i> Restaurante</a>
+                            </li>
+                            {{-- @if(Auth::user()->role == 2)
                                 <li class="nav-item">
                                     <a href="{{ url('/admin') }}" class="nav-link">Administrare</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @endauth
                     </ul>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
