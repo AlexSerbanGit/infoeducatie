@@ -1,3 +1,5 @@
+@auth
+
 <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-slideout modal-sm" role="document">
     <div class="modal-content">
@@ -14,6 +16,7 @@
               <div class="py-3 text-center">
                   {{-- <h4 class="heading mt-4"></h4> --}}
                   <div class="form-group">
+
                       @if(Auth::user() -> picture != null)
                           <img class="img-responsive rounded-circle" src="{{ URL::asset('/pictures/' . Auth::user() -> picture) }}" style="height: 150px; whdth:150px;">
                       @else
@@ -120,3 +123,4 @@
 .modal-dialog-slideout .modal-header, .modal-dialog-slideout .modal-footer {height: 69px; display: block;}
 .modal-dialog-slideout .modal-header h5 {float:left;}
 </style>
+@endauth

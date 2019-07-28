@@ -76,9 +76,9 @@
                        {{-- <autocomplete-component></autocomplete-component> --}}
                    </div>
                     <ul class="navbar-nav ml-auto">
-
+                    @auth
                     {{-- <profile-or-logout></profile-or-logout> --}}
-
+                    @endauth
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
