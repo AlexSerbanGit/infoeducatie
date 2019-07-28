@@ -24,3 +24,9 @@ Route::post('/find_user_by_phone_number', 'UserLoginController@find_user_by_phon
 Route::post('/user/account/add', 'UserRegisterController@adddAcount');
 
 Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
+
+// API routes for logged users
+// Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/restaurants', 'UserRestaurantsController@getRestaurants') -> name('restaurants');
+// });
