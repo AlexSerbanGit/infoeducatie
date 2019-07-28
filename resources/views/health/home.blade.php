@@ -6,7 +6,7 @@
         background: linear-gradient(90deg, #156D27, #A3C239); !important;
     }
 </style>
-<div class="container-fluid" style="margin-top: -50px;">
+<div class="container" style="margin-top: -50px;">
     <div class="col-xl-12 col-lg-12">
         <div class="card card-stats mb-4 mb-xl-0" style=" min-height: 80vh">
         <div class="card-body">
@@ -39,7 +39,7 @@
                     </div>
                 </form>
                 </div>
-                
+
             </div>
 
             <!-- PREZENTARE PRODUSE / FARMACII / DOCTORI  -->
@@ -49,7 +49,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="box" style="width: 100%; height: 200px;text-align: center;  white-space: nowrap;
-    
+
     text-align: center; margin: 1em 0;">
                     <span style="  display: inline-block;
     height: 100%;
@@ -64,7 +64,7 @@
                       <h4 class="card-title">Locatie: locatie farmacie</h4>
                       <button class="btn btn-warning">Vezi pe harta</button>
                       <span class="h2 font-weight-bold mb-0"></span>
-                    </div>    
+                    </div>
                   </div>
 
 
@@ -77,7 +77,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="box" style="width: 100%; height: 200px;text-align: center;  white-space: nowrap;
-    
+
     text-align: center; margin: 1em 0;">
                     <span style="  display: inline-block;
     height: 100%;
@@ -92,7 +92,7 @@
                       <h4 class="card-title">Locatie: locatie farmacie</h4>
                       <button class="btn btn-warning">Vezi pe harta</button>
                       <span class="h2 font-weight-bold mb-0"></span>
-                    </div>    
+                    </div>
                   </div>
 
 
@@ -105,6 +105,6 @@
         </div>
     </div>
 </div>
-    
+
 
 @endsection

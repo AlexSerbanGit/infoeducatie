@@ -54,7 +54,7 @@
       </div>
       <h3 class="fs-subtitle text-danger">{{ errorMessage }}</h3>
       <input type="button" name="previous" class="previous action-button-previous" value="Inapoi"/>
-      <input type="submit" name="submit" class="submit action-button" value="Salveaza"
+      <input type="submit" name="submit" class="submit action-button" value="Autentifica-te"
         v-on:click="loginConfirmSMS()"
       />
     </fieldset>

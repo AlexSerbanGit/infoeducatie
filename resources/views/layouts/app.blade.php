@@ -111,7 +111,9 @@
         {{-- <scanner-component></scanner-component> --}}
     </div>
 </div>
-@include('/parts/profile-part')
+@if(Auth::user())
+    @include('/parts/profile-part')
+@endif
 </div>
 
     <div class="header-blue" style="min-height: 75vh">
