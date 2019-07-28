@@ -80,6 +80,6 @@ class User extends Authenticatable
 
     // The city of the user
     public function city(){
-        return $this->hasOne('App\City', 'city_id');
+        return $this->belongsTo('App\City', 'city_id');
     }
 }

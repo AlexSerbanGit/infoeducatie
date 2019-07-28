@@ -10,18 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::group(['middleware' => ['guest']], function () {
 
-Route::get('/', function () {
-    return view('welcome');
-}) -> name('welcome');
-
-Route::group(['middleware' => ['guest']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    }) -> name('welcome');
 
     Route::get('/user/login_register', 'UserLoginController@loginOrRegister') -> name('login_register');
-});
+// });
 
 Route::get('/test', function() {
     return view('/test');
+});
+
+Route::get('/sanatate', function() {
+    return view('health.home');
 });
 
 // Start user's auth routes
@@ -79,11 +82,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/add_to_your_target/{id}', 'UserController@addToYourTarget');
 
     Route::post('/user/profile/edit', 'UserProfileController@update') -> name('user-update');
-
-    Route::get('/restaurants', 'UserRestaurantsController@restaurants') -> name('restaurants');
 });
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/admin', 'AdminController@menu');
 

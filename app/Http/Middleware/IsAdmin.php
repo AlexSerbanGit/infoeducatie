@@ -16,10 +16,14 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id == 2){
-            return $next($request);
+        if(Auth::user()){
+            if(Auth::user()->role_id == 2){
+                return $next($request);
+            }else{
+                return redirect()->back()->with('message', 'Nu poti accesa aceasta pagina');
+            }
         }else{
             return redirect()->back()->with('message', 'Nu poti accesa aceasta pagina');
-        }
+        }    
     }
 }
