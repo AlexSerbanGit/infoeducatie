@@ -9,10 +9,10 @@
                 <form class="form-inline ml-2">
                     <div class="row" style="width: 100%">
                         <div class="col-sm-10">
-                            <input v-model="keyword" v-on:keyup="searchRestaurants()" class="form-control mr-sm-2" type="search" placeholder="Farmacii, doctori si medicamente" aria-label="Search" style="width: 100%">
+                            <input v-model="keyword" v-on:click="searchRestaurants()" class="form-control mr-sm-2" type="search" placeholder="Farmacii, doctori si medicamente" aria-label="Search" style="width: 100%">
                         </div>
                         <div class="col-sm-2">
-                            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Cauta</button>
+                            <button class="btn btn-outline-danger my-2 my-sm-0" type="button">Cauta</button>
                         </div>
                     </div>
                 </form>
@@ -66,18 +66,22 @@
         },
         methods: {
             searchRestaurants() {
-                if (this.timer) {
-                    clearTimeout(this.timer);
-                    this.timer = null;
-                }
-                this.timer = setTimeout(() => {
-                    this.filtered_restaurants = [];
-                    let i;
-                    for (i = 1; i < this.restaurants.length; i++) {
-                        console.log(this.restaurants[i]);
-                        // console.log(this.restaurants[i].name.includes(this.keyword));
+                // if (this.timer) {
+                //     clearTimeout(this.timer);
+                //     this.timer = null;
+                // }
+                // this.timer = setTimeout(() => {
+                //     this.filtered_restaurants = [];
+                //
+                // }, 400);
+                let i;
+                for (i = 0; i < this.restaurants.length; i++) {
+                    if(this.restaurants[i].name.toLowerCase().search(this.keyword) > -1) {
+                        this.filtered_restaurants.push(this.restaurants[i]);
                     }
-                }, 1000);
+                }
+                console.log(this.filtered_restaurants);
+                this.keyword = [];
             }
         }
     }

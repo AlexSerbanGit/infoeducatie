@@ -1852,21 +1852,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     searchRestaurants: function searchRestaurants() {
-      var _this2 = this;
+      // if (this.timer) {
+      //     clearTimeout(this.timer);
+      //     this.timer = null;
+      // }
+      // this.timer = setTimeout(() => {
+      //     this.filtered_restaurants = [];
+      //
+      // }, 400);
+      var i;
 
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = null;
+      for (i = 0; i < this.restaurants.length; i++) {
+        if (this.restaurants[i].name.toLowerCase().search(this.keyword) > -1) {
+          this.filtered_restaurants.push(this.restaurants[i]);
+        }
       }
 
-      this.timer = setTimeout(function () {
-        _this2.filtered_restaurants = [];
-        var i;
-
-        for (i = 1; i < _this2.restaurants.length; i++) {
-          console.log(_this2.restaurants[i]); // console.log(this.restaurants[i].name.includes(this.keyword));
-        }
-      }, 1000);
+      console.log(this.filtered_restaurants);
+      this.keyword = [];
     }
   }
 });
@@ -40985,7 +40988,7 @@ var render = function() {
                   },
                   domProps: { value: _vm.keyword },
                   on: {
-                    keyup: function($event) {
+                    click: function($event) {
                       return _vm.searchRestaurants()
                     },
                     input: function($event) {
@@ -41131,7 +41134,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "btn btn-outline-danger my-2 my-sm-0",
-          attrs: { type: "submit" }
+          attrs: { type: "button" }
         },
         [_vm._v("Cauta")]
       )

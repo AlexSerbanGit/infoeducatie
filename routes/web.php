@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::group(['middleware' => ['guest']], function () {
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +23,10 @@ Route::get('/', function () {
 
 Route::get('/test', function() {
     return view('/test');
+});
+
+Route::get('/sanatate', function() {
+    return view('health.home');
 });
 
 // Start user's auth routes
@@ -83,7 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/restaurants', 'UserRestaurantsController@restaurants') -> name('restaurants');
 });
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/admin', 'AdminController@menu');
 
