@@ -84,32 +84,28 @@
                             <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
                         </li>
                     @else
-                   
-                            <!-- <li class="nav-item row" style="margin-top: 10px"> -->
-                                {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a> --}}
+                        <!-- <li class="nav-item row" style="margin-top: 10px"> -->
+                        {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a> --}}
 
-                                {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                        {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div> --}}
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div> --}}
 
-                                <a class="nav-link" data-toggle="modal" data-target="#profile">
-                                    <i class="fas fa-user-edit"></i></i> {{ Auth::user()->name }}
-                                </a>
-                                
-                             
-                            
-                        @endguest
-                    </ul>
+                        <a class="nav-link" data-toggle="modal" data-target="#profile">
+                            <i class="fas fa-user-edit"></i></i> {{ Auth::user()->name }}
+                        </a>
+                    @endguest
+                </ul>
             </div>
         </nav>
         {{-- <scanner-component></scanner-component> --}}
@@ -120,16 +116,26 @@
 
     <div class="header-blue" style="min-height: 75vh">
     @if(Session::has('message'))
-    <div class="container">
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-            <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="container">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
-    </div>
-
+    @endif
+    @if(Session::has('errors'))
+        <div class="container">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
     @endif
 
     @yield('content')
@@ -146,15 +152,15 @@
     </footer>
 </div>
 
-        <!-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> -->
+<!-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> -->
 
-        <!-- Optional JS -->
-        <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
-        <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
-        <script src="{{ asset('/js/app.js') }}"></script>
+<!-- Optional JS -->
+<script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
+<script src="{{ asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
+<script src="{{ asset('/js/app.js') }}"></script>
 
-        <!-- Argon JS -->
-        <script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
+<!-- Argon JS -->
+<script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
 
 </body>
 </html>

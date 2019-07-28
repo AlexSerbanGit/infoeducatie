@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/dinner', 'FoodController@dinner');
 
-    Route::get('/snack', 'FoodController@snack'); 
+    Route::get('/snack', 'FoodController@snack');
 
     Route::post('/add_target', 'UserController@addTarget');
 
@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/add_to_your_target/{id}', 'UserController@addToYourTarget');
 
+    Route::post('/user/profile/edit', 'UserProfileController@update') -> name('user-update');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -138,7 +139,7 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::post('/update_user/{user_id}', 'AdminController@updateUser')->name('Midifica utilizator - POST');
 
     Route::get('/ban_user/{user_id}', 'AdminController@banUser')->name('Baneaza / De-baneaza utilizatorul');
-  
+
 });
 // route::get('/lol', function(){
 //     return bcrypt('password');
