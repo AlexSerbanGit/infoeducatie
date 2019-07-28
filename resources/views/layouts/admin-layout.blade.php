@@ -79,15 +79,15 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
               <p>Doctori</p>
             </a>
           </li>
-          @if(Route::currentRouteName() == "Detinatori de farmacii" )
+          @if(Route::currentRouteName() == "Restaurante" )
             <li class="nav-item active">
             <a class="nav-link" href="#">
           @else
             <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/pharmacies') }}">
+            <a class="nav-link" href="{{ url('/admin/restaurants') }}">
           @endif
-              <i class="fas fa-clinic-medical"></i>
-              <p>Detinatori de farmacii</p>
+            <i class="fas fa-utensils"></i>
+            <p>Restaurante</p>
             </a>
           </li>
           @if(Route::currentRouteName() == "Moderatori" )
@@ -112,17 +112,6 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
               <p>Produse</p>
             </a>
           </li>
-          @if(Route::currentRouteName() == "Medicamente" )
-            <li class="nav-item active">
-            <a class="nav-link" href="#">
-          @else
-            <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/drugs') }}">
-          @endif
-              <i class="fas fa-prescription-bottle-alt"></i>
-              <p>Medicamente</p>
-            </a>
-          </li>
           @if(Route::currentRouteName() == "Mesaje" )
             <li class="nav-item active">
             <a class="nav-link" href="#">
@@ -142,7 +131,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             <a class="nav-link" href="{{ url('/admin/notifications') }}">
           @endif
               <i class="material-icons">notifications</i>
-              <p>Notificari</p>
+              <p>Cereri de produse</p>
             </a>
           </li>
 
@@ -167,18 +156,6 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
           @endif
           <i class="fas fa-car"></i>
           <p>Soferi</p>
-            </a>
-          </li>
-
-          @if(Route::currentRouteName() == "Restaurante" )
-            <li class="nav-item active">
-            <a class="nav-link" href="#">
-          @else
-            <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/restaurants') }}">
-          @endif
-            <i class="fas fa-utensils"></i>
-            <p>Restaurante</p>
             </a>
           </li>
       

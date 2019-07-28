@@ -116,13 +116,9 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
     Route::get('/doctors', 'AdminController@doctors')->name('Doctori');
 
-    Route::get('/pharmacies', 'AdminController@pharmacies')->name('Detinatori de farmacii');
-
     Route::get('/moderators', 'AdminController@moderators')->name('Moderatori');
 
     Route::get('/products', 'AdminController@products')->name('Produse');
-
-    Route::get('/drugs', 'AdminController@drugs')->name('Medicamente');
 
     Route::get('/messages', 'AdminController@messages')->name('Mesaje');
 

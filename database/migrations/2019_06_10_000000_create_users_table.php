@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table -> string('expire_code')->nullable();
             $table -> string('password')->nullable();
             $table -> boolean('banned')->default(0); // 0 - not banned / 1 - banned :(
-            $table -> integer('role_id') -> default(0); // 0 - user / 1 - profesor / doctor / 2 - admin / 3 - detinator de farmacie / 4 - moderator
+            $table -> integer('role_id') -> default(0); // 0 - user / 1 - profesor / doctor / 2 - admin / 3 - restaurant / 4 - moderator
             $table -> integer('target') -> nullable(); // 1 - slabit / 2 -mentinere / 3 - pune masa
             $table -> string('language') -> default('Romanian'); // Romanian / English
             $table -> string('city') -> nullable();

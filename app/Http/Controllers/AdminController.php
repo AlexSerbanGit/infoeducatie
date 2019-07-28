@@ -32,10 +32,11 @@ class AdminController extends Controller
 
     }
 
-    public function pharmacies(){
+    public function restaurants()
+    {
 
         $users = User::where('role_id', '=', 3)->get();
-        return view('admin.pharmacies')->with('users', $users);
+        return view('admin.restaurants')->with('users', $users);
 
     }
 
@@ -49,13 +50,6 @@ class AdminController extends Controller
     public function products(){
 
         return view('admin.products');
-
-    }
-
-    public function drugs(){
-
-        $drugs = Drug::all();
-        return view('admin.drugs')->with('drugs', $drugs);
 
     }
 
@@ -81,13 +75,6 @@ class AdminController extends Controller
     public function allergies(){
 
         return view('admin.allergies');
-
-    }
-
-    public function restaurants()
-    {
-
-        return view('admin.restaurants');
 
     }
 

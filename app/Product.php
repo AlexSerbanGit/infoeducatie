@@ -17,4 +17,7 @@ class Product extends Model
     public function foodType(){
         return $this->hasMany('App\FoodType', 'product_id');
     }
+    public function restaurant(){
+        return $this->belongsTo('App\User', 'restaurant_id');
+    }
 }

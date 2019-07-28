@@ -67,8 +67,10 @@ class User extends Authenticatable
     public function allergies(){
         return $this->hasMany('App\UserToAllergy', 'user_id');
     }
-    public function getAuthCode()
-    {
+    public function getAuthCode(){
         return $this->code;
+    }
+    public function products(){
+        return $this->hasMany('App\Product', 'restaurant_id');
     }
 }

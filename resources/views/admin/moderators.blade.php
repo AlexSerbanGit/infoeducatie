@@ -84,7 +84,7 @@
         <label>Rol:</label>
         <select name="role_id" class="form-control">
           <option value="4">Moderator</option>
-          <option value="3">Farmacie</option>
+          <option value="3">Restaurant</option>
           <option value="1">Doctor</option>
           <option value="0">Utilizator</option>  
         </select>
