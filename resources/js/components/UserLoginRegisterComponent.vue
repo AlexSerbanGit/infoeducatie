@@ -149,7 +149,6 @@
         })
       },
       loginSendSMS: function() {
-          console.log('g');
           axios.post('../api/user/login/sms/send', {
             'phone_number': this.phoneNumber,
             '_token': document.querySelector('meta[name="csrf-token"]').content
@@ -170,7 +169,7 @@
         })
       },
       verifyLoginResponse: function() {
-        console.log('d');
+        // console.log('d');
       },
       validateRegisterFields: function() {
         if(this.registerName.length.toString() < 1 || this.phoneNumber.length.toString() < 1) {

@@ -6,19 +6,15 @@
 
 require('./bootstrap');
 
+import Vue from 'vue/dist/vue.min.js'
+
 window.Vue = require('vue');
-
-var base_url = 'hht'
-
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
-//
-// Vue.use(VueRouter)
 
 Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
 Vue.component('autocomplete-component', require('./components/AutocompleteComponent.vue').default);
 Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
-Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').default);
+// Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').default);
+Vue.component('restaurants-search', require('./components/RestaurantsPageSearchComponent.vue').default);
 
 
 /**
@@ -28,6 +24,5 @@ Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').d
  */
 
 const app = new Vue({
-    el: '#app',
-    base_url
+    el: '#app'
 });

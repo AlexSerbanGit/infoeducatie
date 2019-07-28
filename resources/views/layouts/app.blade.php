@@ -33,139 +33,135 @@
         </style>
     </head>
     <body>
+        <div id="app">
+            <div class="header-blue" style="padding-bottom: 100px">
+                <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+                    <div class="container">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Bee Scanner') }}
+                    </a>
+                    <button class="navbar-toggler" data-toggle="modal" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse"
+                            id="navcol-1">
+                            <div class="modal-header d-lg-none d-md-none">
 
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                @auth
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
+                                    </li>
+                                @endauth
+                            </ul>
 
-<div id="app">
-    <div class="header-blue" style="padding-bottom: 100px">
-        <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Bee Scanner') }}
-            </a>
-            <button class="navbar-toggler" data-toggle="modal" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse"
-                    id="navcol-1">
-                    <div class="modal-header d-lg-none d-md-none">
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <ul class="nav navbar-nav">
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
-                            </li>
-                        @endauth
-                    </ul>
-
-                    <ul class="nav navbar-nav">
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/restaurants') }}"><i class="fas fa-utensils"></i> Restaurante</a>
-                            </li>
-                            {{-- @if(Auth::user()->role == 2)
+                            <ul class="nav navbar-nav">
+                                @auth
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/restaurants') }}"><i class="fas fa-utensils"></i> Restaurante</a>
+                                    </li>
+                                    {{-- @if(Auth::user()->role == 2)
+                                        <li class="nav-item">
+                                            <a href="{{ url('/admin') }}" class="nav-link">Administrare</a>
+                                        </li>
+                                    @endif --}}
+                                @endauth
+                            </ul>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
+                               {{-- @include('/parts/searchbar') --}}
+                               {{-- <autocomplete-component></autocomplete-component> --}}
+                           </div>
+                            <ul class="navbar-nav ml-auto">
+                            @auth
+                            {{-- <profile-or-logout></profile-or-logout> --}}
+                            @endauth
+                            @guest
                                 <li class="nav-item">
-                                    <a href="{{ url('/admin') }}" class="nav-link">Administrare</a>
+                                    <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
                                 </li>
-                            @endif --}}
-                        @endauth
+                            @else
+                                <!-- <li class="nav-item row" style="margin-top: 10px"> -->
+                                {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a> --}}
+
+                                {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div> --}}
+
+                                <a class="nav-link" data-toggle="modal" data-target="#profile">
+                                    <i class="fas fa-user-edit"></i></i> {{ Auth::user()->name }}
+                                </a>
+                            @endguest
+                        </ul>
+                    </div>
+                </nav>
+                {{-- <scanner-component></scanner-component> --}}
+        </div>
+        @if(Auth::user())
+            @include('/parts/profile-part')
+        @endif
+
+            <div class="header-blue" style="min-height: 75vh">
+                @if(Session::has('message'))
+                    <div class="container">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                            <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                @endif
+                @if(Session::has('errors'))
+                    <div class="container">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                            <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                @endif
+                @yield('content')
+            </div>
+            <div class="footer-basic">
+                <footer>
+                    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="{{ url('/') }}">Acasa</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/register')}}">Creare cont</a></li>
+                        <li class="list-inline-item"><a href="{{ url('/login') }}">Inregistrare</a></li>
                     </ul>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
-                       {{-- @include('/parts/searchbar') --}}
-                       {{-- <autocomplete-component></autocomplete-component> --}}
-                   </div>
-                    <ul class="navbar-nav ml-auto">
-                    @auth
-                    {{-- <profile-or-logout></profile-or-logout> --}}
-                    @endauth
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
-                        </li>
-                    @else
-                        <!-- <li class="nav-item row" style="margin-top: 10px"> -->
-                        {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a> --}}
-
-                        {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div> --}}
-
-                        <a class="nav-link" data-toggle="modal" data-target="#profile">
-                            <i class="fas fa-user-edit"></i></i> {{ Auth::user()->name }}
-                        </a>
-                    @endguest
-                </ul>
-            </div>
-        </nav>
-        {{-- <scanner-component></scanner-component> --}}
-    </div>
-</div>
-@if(Auth::user())
-    @include('/parts/profile-part')
-@endif
-</div>
-
-    <div class="header-blue" style="min-height: 75vh">
-    @if(Session::has('message'))
-        <div class="container">
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-                <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    <p class="copyright">GoalsScanner © 2019</p>
+                </footer>
             </div>
         </div>
-    @endif
-    @if(Session::has('errors'))
-        <div class="container">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-                <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    @endif
 
-    @yield('content')
-    </div>
-    <div class="footer-basic">
-    <footer>
-        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="{{ url('/') }}">Acasa</a></li>
-            <li class="list-inline-item"><a href="{{ url('/register')}}">Creare cont</a></li>
-            <li class="list-inline-item"><a href="{{ url('/login') }}">Inregistrare</a></li>
-        </ul>
-        <p class="copyright">GoalsScanner © 2019</p>
-    </footer>
-</div>
+    <!-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> -->
 
-<!-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> -->
+    <!-- Optional JS -->
+    <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
+    <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
 
-<!-- Optional JS -->
-<script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
-<script src="{{ asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
-<script src="{{ asset('/js/app.js') }}"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
 
-<!-- Argon JS -->
-<script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
-
-</body>
+    </body>
 </html>

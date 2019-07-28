@@ -1,69 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-    .header-blue,
-    .footer-basic {
-        /* background: linear-gradient(90deg, #156D27, #A3C239); !important; */
-    }
-</style>
-<div class="container" style="margin-top: -50px;">
-    <div class="col-xl-12 col-lg-12">
-        <div class="card card-stats mb-4 mb-xl-0" style=" min-height: 80vh">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Restaurante</h5>
-                        <span class="h2 font-weight-bold mb-0"></span>
-                    </div>
-                    {{-- <div class="col-auto">
-                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                    </div> --}}
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-2 col-sm-3 col-xs-12 col-lg-2 w-100" style="margin-top: 5px">
-                        <button class="btn btn-danger">Cel mai aproiat restaurant</button>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 col-lg-1" style="margin-top: 5px"></div>
-                    <div class="col-md-8 col-sm-12 col-xs-8 col-lg-9" style="margin-top: 5px">
-                        <form class="form-inline">
-                            <div class="row" style="width: 100%">
-                                <div class="col-sm-10">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Farmacii, doctori si medicamente" aria-label="Search" style="width: 100%">
-                                </div>
-                                <div class="col-sm-2">
-                                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Cauta</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
-                <!-- PREZENTARE RESTAURANTE  -->
-                <div class="row" style="margin-top: 18px">
-                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6">
-                        <div class="card card-stats mb-4 mb-xl-0" style="height: 100%">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="box" style="width: 100%; height: 200px;text-align: center;  white-space: nowrap; text-align: center; margin: 1em 0;">
-                                        <span style="  display: inline-block; height: 100%;vertical-align: middle;"></span>
-                                        <img src="http://www.pharmasavebroadmead.com/pharmasavebroadmead_com/bank/pageimages/dsc_8314.jpg" alt="imagine" style="width: 100%; height:auto ;max-width: 100%; max-height: 100%; display: inline-block;vertical-align: middle;">
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="card-title text-uppercass mb-0">Nume restaurant</h5>
-                                        <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> Popas pacurari</h4>
-                                        <button class="btn btn-danger w-100">Pagina restaurantului</button>
-                                        <span class="h2 font-weight-bold mb-0"></span>
-                                    </div>
-                                </div>
+    <style>
+        .header-blue,
+        .footer-basic {
+            /* background: linear-gradient(90deg, #156D27, #A3C239); !important; */
+        }
+    </style>
+
+    <div class="container" style="margin-top: -50px;">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card card-stats mb-4 mb-xl-0" style=" min-height: 80vh">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Restaurante</h5>
+                            <span class="h2 font-weight-bold mb-0"></span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-heartbeat"></i>
                             </div>
                         </div>
                     </div>
+                    <restaurants-search></restaurants-search>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
