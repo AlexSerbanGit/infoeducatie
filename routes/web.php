@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 }) -> name('welcome');
 
-Route::group(['middleware' => ['guest']], function () {
+// Route::group(['middleware' => ['guest']], function () {
 
     Route::get('/user/login_register', 'UserLoginController@loginOrRegister') -> name('login_register');
-});
+// });
 
 Route::get('/test', function() {
     return view('/test');

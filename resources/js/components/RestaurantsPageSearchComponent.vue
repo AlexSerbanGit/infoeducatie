@@ -74,7 +74,8 @@
                     this.filtered_restaurants = [];
                     let i;
                     for (i = 1; i < this.restaurants.length; i++) {
-                      console.log(this.restaurants[i].name.includes(this.keyword));
+                        console.log(this.restaurants[i]);
+                        // console.log(this.restaurants[i].name.includes(this.keyword));
                     }
                 }, 1000);
             }

@@ -1864,7 +1864,7 @@ __webpack_require__.r(__webpack_exports__);
         var i;
 
         for (i = 1; i < _this2.restaurants.length; i++) {
-          console.log(_this2.restaurants[i].name.includes(_this2.keyword));
+          console.log(_this2.restaurants[i]); // console.log(this.restaurants[i].name.includes(this.keyword));
         }
       }, 1000);
     }
