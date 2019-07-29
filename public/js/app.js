@@ -1838,10 +1838,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // console.log({{ Auth::user() }});
-    axios.get('../api/restaurants').then(function (response) {
+    axios.get('./api/restaurants').then(function (response) {
       _this.restaurants = response.data;
     });
-    axios.get('../api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
+    axios.get('./api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
       _this.near_restaurants = response.data, _this.filtered_restaurants = response.data;
     });
   },
@@ -57328,8 +57328,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

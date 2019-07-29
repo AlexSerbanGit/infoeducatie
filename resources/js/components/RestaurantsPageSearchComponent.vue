@@ -47,11 +47,11 @@
     export default {
         mounted() {
             // console.log({{ Auth::user() }});
-            axios.get('../api/restaurants')
+            axios.get('./api/restaurants')
                 .then(response => {
                     this.restaurants = response.data
                 })
-            axios.get('../api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants')
+            axios.get('./api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants')
                 .then(response => {
                     this.near_restaurants = response.data,
                     this.filtered_restaurants = response.data
