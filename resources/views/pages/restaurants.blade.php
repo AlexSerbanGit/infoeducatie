@@ -9,7 +9,7 @@
         }
     </style>
 
-    <div class="container" style="margin-top: -50px;">
+    <div class="container">
         <div class="col-xl-12 col-lg-12">
             <div class="card card-stats mb-4 mb-xl-0" style=" min-height: 80vh">
                 <div class="card-body">

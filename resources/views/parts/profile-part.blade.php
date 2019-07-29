@@ -87,7 +87,16 @@
                       </select>
 
                       <label>Oras</label>
-                      <input type="text" min="1" class="form-control" name="city" placeholder="Ex: Iasi" value="{{ Auth::user() -> city }}">
+                      <select name="city" class="form-control" required>
+                          <option value="{{ Auth::user() -> city_id }}">{{ Auth::user() -> city -> name }}</option>
+                          @if(isset($cities))
+                              @foreach ($cities as $key => $city)
+                                  @if($city -> id != Auth::user() -> city_id)
+                                      <option value="{{ $city -> id }}">{{ $city -> name }}</option>
+                                  @endif
+                              @endforeach
+                          @endif
+                      </select>
 
                       <label>Tara</label>
                       <input type="text" min="1" class="form-control" name="county" placeholder="Romania" value="{{ Auth::user() -> county }}">
