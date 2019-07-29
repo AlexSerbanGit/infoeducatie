@@ -139,7 +139,8 @@ class AdminController extends Controller
 
     public function allergies(){
 
-        return view('admin.allergies');
+        $allergies = Allergy::paginate(20);
+        return view('admin.allergies')->with('allergies', $allergies);
 
     }
 

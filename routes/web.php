@@ -144,6 +144,13 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::post('/answer_message/{id}', 'AdminController@answer')->name('Raspunde mesajelor utilizatorului');
 
     Route::get('/delete_message/{id}', 'AdminController@deleteMessage')->name('Sterge mesajul');
+    
+    Route::post('/add_allergy', 'AdminController@addAllergy');
+
+    Route::post('/edit_allergy/{id}', 'AdminController@editAllergy');
+
+    Route::get('/delete_allergy/{id}', 'AdminController@deleteAllergy');
+
 });
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');

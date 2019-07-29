@@ -132,13 +132,13 @@
         </div>
         <div class="form-group">
 
-        <label>Rol:</label>
+        <!-- <label>Rol:</label>
         <select name="role_id" class="form-control">
           <option value="3">Restaurant</option>
           <option value="1">Doctor</option>
           <option value="0">Utilizator</option>
           <option value="4">Moderator</option>
-        </select>
+        </select> -->
 
         </div>
         <div class="form-group">
