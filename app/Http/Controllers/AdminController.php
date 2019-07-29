@@ -9,6 +9,7 @@ use App\Product;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Drug;
+use App\Message;
 
 class AdminController extends Controller
 {
@@ -40,6 +41,30 @@ class AdminController extends Controller
 
     }
 
+    public function addRestaurant(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'phone_number' => 'required|numeric',
+            'name' => 'required|string',
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if($validator -> fails()){
+            return redirect()->back()->with('message', 'Datele restaurantului au fost introduse gresit!');
+        }
+
+        $user = new User;
+        $user->phone_number = $request->phone_number;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_id = 3;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->back()->with('message', 'Restaurant adaugat cu succes!');
+
+    }
+
     public function moderators(){
 
         $users = User::where('role_id', '=', 4)->get();
@@ -55,7 +80,8 @@ class AdminController extends Controller
 
     public function messages(){
 
-        return view('admin.messages');
+        $messages = Message::paginate(4);
+        return view('admin.messages')->with('messages', $messages);
 
     }
 
@@ -80,6 +106,28 @@ class AdminController extends Controller
 
     public function menu(){
          return redirect('/admin/allergies');
+    }
+
+    public function contactUs(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:190', 
+            'email' => 'required|email|max:190',
+            'message' => 'required|string|max:511',
+        ]);
+
+        if($validator -> fails()){
+            return redirect()->back()->with('message', 'Datele introduse sunt invalide! Incercati din nou');
+        }
+
+        $message = new Message;
+        $message->name = $request->name; 
+        $message->email = $request->email;
+        $message->message = $request->message;
+        $message->save();
+
+        return redirect()->back()->with('message', 'Mesaj trimis cu succes! Veti fi contactat de echipa Bee Scanner pe email');
+
     }
 
     public function updateUser(Request $request, $id){

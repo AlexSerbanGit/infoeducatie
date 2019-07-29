@@ -47,11 +47,62 @@
     @endforeach 
     </tbody>
 </table>
+
+<button class="btn btn-warning" data-toggle="modal" data-target="#addRestaurant">Adauga restaurant</button>
+
 </div>
 
 </div>
 </div>
 </div>
+
+<!-- Modal add restaurant -->
+<div class="modal fade" id="addRestaurant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{{ url('/admin/add_restaurant') }}" method="POST">
+    @csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adauga restaurant</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+        
+          <label>Nume restaurant:</label>
+          <input type="text" class="form-control" required name="name" placeholder="">
+
+        </div>
+        <div class="form-group">
+          
+          <label>Numar de telefon:</label>
+          <input type="text" class="form-control" required name="phone_number" placeholder="">
+
+        </div>
+        <div class="form-group">
+          
+          <label>Email:</label>
+          <input type="text" class="form-control" required name="email" placeholder="">
+
+        </div>
+        <div class="form-group">
+          
+          <label>Parola restaurant:</label>
+          <input type="text" class="form-control" required name="password" placeholder="">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="submit" class="btn btn-warning">Adauga restaurant</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 @foreach($users as $user)
 
 <!-- Modal -->

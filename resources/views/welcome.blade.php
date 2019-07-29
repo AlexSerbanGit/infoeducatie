@@ -79,13 +79,21 @@
         </div>
     </div>
     <div class="contact-clean">
-        <form method="post">
+        <form method="POST" action="{{ url('/contact_us') }}">
         @csrf
             <h2 class="text-center">Contacteaza-ne</h2>
-            <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Nume"></div>
-            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-            <div class="form-group"><textarea class="form-control" rows="14" name="message" placeholder="Mesaj"></textarea></div>
-            <div class="form-group"><button class="btn btn-primary" type="submit">Trimite </button></div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Nume" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="14" name="message" placeholder="Mesaj" required></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Trimite </button>
+            </div>
         </form>
     </div>
 

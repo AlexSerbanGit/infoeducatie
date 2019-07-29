@@ -134,6 +134,8 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
     Route::get('/restaurants', 'AdminController@restaurants')->name('Restaurante');
 
+    Route::post('/add_restaurant', 'AdminController@addRestaurant')->name('Adauga restaurant');
+
     Route::post('/update_user/{user_id}', 'AdminController@updateUser')->name('Midifica utilizator - POST');
 
     Route::post('/update_user/{user_id}', 'AdminController@updateUser')->name('Midifica utilizator - POST');
@@ -141,6 +143,9 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::get('/ban_user/{user_id}', 'AdminController@banUser')->name('Baneaza / De-baneaza utilizatorul');
 
 });
+
+Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
+
 // route::get('/lol', function(){
 //     return bcrypt('password');
 // });
