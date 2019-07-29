@@ -2,13 +2,6 @@
 
 @section('content')
 
-    <style>
-        .header-blue,
-        .footer-basic {
-            /* background: linear-gradient(90deg, #156D27, #A3C239); !important; */
-        }
-    </style>
-
     @if(Auth::user() && isset(Auth::user() -> city_id))
         <meta name="city_id" content="{{ Auth::user() -> city_id}}">
     @endif

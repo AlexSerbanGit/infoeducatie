@@ -1,44 +1,29 @@
-{{-- @extends('layouts.app') --}}
+@extends('layouts.app')
 
-{{-- @section('content') --}}
+@section('content')
+    @if(Auth::user() && isset(Auth::user() -> city_id))
+        <meta name="city_id" content="{{ Auth::user() -> city_id}}">
+    @endif
 
-    {{-- <scanner-component></scanner-component> --}}
-
-{{-- @endsection --}}
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        {{-- <link rel="stylesheet" href="{{ asset('/css/app.css')}}"> --}}
-
-        {{-- <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}"> --}}
-        <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/fonts/ionicons.min.css')}}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-        <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('assets/css/Contact-Form-Clean.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/css/Features-Boxed.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/css/Footer-Basic.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/css/Header-Blue.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/css/Highlight-Clean.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
-        <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
-        {{-- <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet"> --}}
-        <meta name="api-base-url" content="{{ url('/') }}" />
-
-    </head>
-    <body>
-
-        <div id="app">
-            <scanner-component></scanner-component>
+    <div class="container">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card card-stats mb-4 mb-xl-0" style=" min-height: 80vh">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Restaurante</h5>
+                            <span class="h2 font-weight-bold mb-0"></span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <restaurants-search></restaurants-search>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <script src="{{ asset('/js/app.js') }}"></script>
-
-    </body>
-</html>
+@endsection

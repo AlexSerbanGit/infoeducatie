@@ -41153,14 +41153,9 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          directives: [{ name: "href", rawName: "v-href" }],
-                          staticClass: "btn btn-danger w-100"
-                        },
-                        [_vm._v("Pagina restaurantului")]
-                      ),
+                      _c("button", { staticClass: "btn btn-danger w-100" }, [
+                        _vm._v("Pagina restaurantului")
+                      ]),
                       _vm._v(" "),
                       _c("span", { staticClass: "h2 font-weight-bold mb-0" })
                     ])

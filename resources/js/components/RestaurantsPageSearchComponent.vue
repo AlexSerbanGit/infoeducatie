@@ -32,7 +32,7 @@
                             <div class="col">
                                 <h3 class="card-title text-uppercase mb-0">{{ restaurant.name }}</h3>
                                 <h4 v-if="restaurant.city" class="card-title"><i class="fas fa-map-marker-alt"></i> {{ restaurant.city.name }}</h4>
-                                <button v-href="" class="btn btn-danger w-100">Pagina restaurantului</button>
+                                <button class="btn btn-danger w-100">Pagina restaurantului</button>
                                 <span class="h2 font-weight-bold mb-0"></span>
                             </div>
                         </div>

@@ -104,7 +104,7 @@
                             </div> --}}
 
                             <a class="nav-link" data-toggle="modal" data-target="#profile">
-                                <i class="fas fa-user-edit"></i></i> {{ Auth::user()->name }}
+                                <i class="fas fa-user-edit"></i> {{ Auth::user()->name }}
                             </a>
                             @endguest
                         </ul>
@@ -115,26 +115,27 @@
         </div>
         <div class="header-blue" style="min-height: 75vh">
             @if(Session::has('message'))
-            <div class="container">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-                    <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="container">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                        <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
             @endif @if(Session::has('errors'))
-            <div class="container">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-                    <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                        <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            @endif @yield('content')
+            @endif
+            @yield('content')
         </div>
         <div class="footer-basic">
             <footer>
@@ -148,8 +149,8 @@
             </footer>
         </div>
     </div>
-    {{-- @if(Auth::user()) @include('/parts/profile-part') @endif --}}
-    <!-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> -->
+    @if(Auth::user()) @include('/parts/profile-part') @endif
+    {{-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     <!-- Optional JS -->
     <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
