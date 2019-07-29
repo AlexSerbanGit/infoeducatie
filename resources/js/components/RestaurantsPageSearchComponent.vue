@@ -1,25 +1,24 @@
 <template>
     <div>
         <div class="row mt-3">
-            <div class="col-md-2 col-sm-3 col-xs-12 col-lg-2 w-100" style="margin-top: 5px">
-                <button class="btn btn-danger">Cel mai aproiat restaurant</button>
+            <div class="col-md-2 col-sm-3 col-xs-12 col-lg-2" style="margin-top: 5px">
+                <button v-on:click="restaurantsFilter()" class="btn" v-bind:class="filterClass">{{ filterName }} <i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 col-lg-1" style="margin-top: 5px"></div>
-            <div class="col-md-8 col-sm-12 col-xs-8 col-lg-9" style="margin-top: 5px">
-                <form class="form-inline ml-2">
+            <div class="col-md-12 col-sm-12 col-xs-8 col-lg-9" style="margin-top: 5px">
+                <form class="form-inline">
                     <div class="row" style="width: 100%">
-                        <div class="col-sm-10">
-                            <input v-model="keyword" v-on:click="searchRestaurants()" class="form-control mr-sm-2" type="search" placeholder="Farmacii, doctori si medicamente" aria-label="Search" style="width: 100%">
-                        </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-outline-danger my-2 my-sm-0" type="button">Cauta</button>
+                        <div class="col-md-11">
+                            <input v-model="keyword" v-on:keyup="searchRestaurants()" class="form-control mr-sm-2" type="search" placeholder="Restaurante" aria-label="Search" style="width: 100%">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
         <!-- PREZENTARE RESTAURANTE  -->
+        <div class="mt-3">
+            {{ errorMessage }}
+        </div>
         <div class="row" style="margin-top: 18px">
             <div v-for="restaurant in filtered_restaurants" class="col-xl-3 col-lg-4 col-sm-6 col-xs-6">
                 <div class="card card-stats mb-4 mb-xl-0" style="height: 100%">
@@ -32,7 +31,7 @@
                             </div>
                             <div class="col">
                                 <h3 class="card-title text-uppercase mb-0">{{ restaurant.name }}</h3>
-                                <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> {{ restaurant.city }}</h4>
+                                <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> {{ restaurant.city.name }}</h4>
                                 <button class="btn btn-danger w-100">Pagina restaurantului</button>
                                 <span class="h2 font-weight-bold mb-0"></span>
                             </div>
@@ -49,39 +48,72 @@
         mounted() {
             axios.get('../api/restaurants')
             .then(response => {
-                this.restaurants = response.data,
+                this.restaurants = response.data
                 this.filtered_restaurants = this.restaurants
             })
             .catch(error => {
 
             });
+            // Initialize the restaurants suggestions array with elements
+            // let i;
+            // for (i = 0; i < this.restaurants.length; i++) {
+            //     console.log(i);
+            //     // if(this.restaurants[i].city_id == 1) {
+            //     //     this.filtered_restaurants.push(this.restaurants[i]);
+            //     // }
+            // }
+            // if(this.filtered_restaurants.length == 0) {
+            //     this.errorMessage = 'Nu au fost gasite rezultate conform cautarii!'
+            // }
         },
         data() {
             return {
                 'restaurants': [],
+                'cityId': document.querySelector('meta[name="city_id"]').content,
+                'filterName': 'Restaurante din alte orase',
+                'filterClass': 'btn btn-danger',
                 'filtered_restaurants': [],
+                'errorMessage': '',
                 'keyword': '',
                 'timer': ''
             }
         },
         methods: {
             searchRestaurants() {
-                // if (this.timer) {
-                //     clearTimeout(this.timer);
-                //     this.timer = null;
-                // }
-                // this.timer = setTimeout(() => {
-                //     this.filtered_restaurants = [];
-                //
-                // }, 400);
-                let i;
-                for (i = 0; i < this.restaurants.length; i++) {
-                    if(this.restaurants[i].name.toLowerCase().search(this.keyword) > -1) {
-                        this.filtered_restaurants.push(this.restaurants[i]);
-                    }
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                    this.timer = null;
                 }
-                console.log(this.filtered_restaurants);
-                this.keyword = [];
+                this.timer = setTimeout(() => {
+                    this.errorMessage = '';
+                    this.filtered_restaurants = [];
+                    let i;
+                    for (i = 0; i < this.restaurants.length; i++) {
+                        if(this.restaurants[i].name.toLowerCase().search(this.keyword) > -1) {
+                            if(this.filterClass == 'btn btn-danger') {
+                                // console.log(this.restaurants[i].city_id == this.cityId);
+                                if(this.restaurants[i].city_id == this.cityId) {
+                                    this.filtered_restaurants.push(this.restaurants[i]);
+                                }
+                            } else if(this.filterClass == 'btn btn-success') {
+                                this.filtered_restaurants.push(this.restaurants[i]);
+                            }
+                        }
+                    }
+                    if(this.filtered_restaurants.length == 0) {
+                        this.errorMessage = 'Nu au fost gasite rezultate conform cautarii!'
+                    }
+                    this.keyword = [];
+                }, 800);
+            },
+            restaurantsFilter() {
+                if(this.filterClass == 'btn btn-danger') {
+                    this.filterClass = 'btn btn-success';
+                    this.filterName = 'Restaurante din orasul tau';
+                } else {
+                    this.filterClass = 'btn btn-danger';
+                    this.filterName = 'Restaurante din alte orase';
+                }
             }
         }
     }

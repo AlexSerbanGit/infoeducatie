@@ -16,7 +16,7 @@ class UserProfileController extends Controller
             'phone_number' => 'required|numeric',
             'picture' => 'file|mimes:jpeg,png,jpg,gif,svg',
             'gender' => 'required|min:1|max:2|numeric',
-            'city' => 'sometimes|required|string|min:1',
+            'city_id' => 'sometimes|required|exists:cities,id',
             'country' => 'sometimes|required|string|min:1',
             'age' => 'required|numeric',
             'weight' => 'required|numeric',
@@ -30,7 +30,7 @@ class UserProfileController extends Controller
 
         $user -> phone_number = $request -> phone_number;
 
-        $user -> city = $request -> city ? $request -> city : $user -> city;
+        $user -> city_id = $request -> city_id ? $request -> city_id : $user -> city_id;
 
         $user -> country = $request -> country ? $request -> country : $user -> country;
 

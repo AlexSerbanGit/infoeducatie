@@ -17,6 +17,11 @@ class UserRestaurantsController extends Controller
 
         $restaruants = User::where('role_id', 3) -> get();
 
+        foreach ($restaruants as $key => $restaruant) {
+
+            $restaruant -> city;
+        }
+
         return json_encode($restaruants);
     }
 }

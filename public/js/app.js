@@ -1833,43 +1833,79 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
 
     axios.get('../api/restaurants').then(function (response) {
-      _this.restaurants = response.data, _this.filtered_restaurants = _this.restaurants;
-    })["catch"](function (error) {});
+      _this.restaurants = response.data;
+      _this.filtered_restaurants = _this.restaurants;
+    })["catch"](function (error) {}); // Initialize the restaurants suggestions array with elements
+    // let i;
+    // for (i = 0; i < this.restaurants.length; i++) {
+    //     console.log(i);
+    //     // if(this.restaurants[i].city_id == 1) {
+    //     //     this.filtered_restaurants.push(this.restaurants[i]);
+    //     // }
+    // }
+    // if(this.filtered_restaurants.length == 0) {
+    //     this.errorMessage = 'Nu au fost gasite rezultate conform cautarii!'
+    // }
   },
   data: function data() {
     return {
       'restaurants': [],
+      'cityId': document.querySelector('meta[name="city_id"]').content,
+      'filterName': 'Restaurante din alte orase',
+      'filterClass': 'btn btn-danger',
       'filtered_restaurants': [],
+      'errorMessage': '',
       'keyword': '',
       'timer': ''
     };
   },
   methods: {
     searchRestaurants: function searchRestaurants() {
-      // if (this.timer) {
-      //     clearTimeout(this.timer);
-      //     this.timer = null;
-      // }
-      // this.timer = setTimeout(() => {
-      //     this.filtered_restaurants = [];
-      //
-      // }, 400);
-      var i;
+      var _this2 = this;
 
-      for (i = 0; i < this.restaurants.length; i++) {
-        if (this.restaurants[i].name.toLowerCase().search(this.keyword) > -1) {
-          this.filtered_restaurants.push(this.restaurants[i]);
-        }
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
       }
 
-      console.log(this.filtered_restaurants);
-      this.keyword = [];
+      this.timer = setTimeout(function () {
+        _this2.errorMessage = '';
+        _this2.filtered_restaurants = [];
+        var i;
+
+        for (i = 0; i < _this2.restaurants.length; i++) {
+          if (_this2.restaurants[i].name.toLowerCase().search(_this2.keyword) > -1) {
+            if (_this2.filterClass == 'btn btn-danger') {
+              // console.log(this.restaurants[i].city_id == this.cityId);
+              if (_this2.restaurants[i].city_id == _this2.cityId) {
+                _this2.filtered_restaurants.push(_this2.restaurants[i]);
+              }
+            } else if (_this2.filterClass == 'btn btn-success') {
+              _this2.filtered_restaurants.push(_this2.restaurants[i]);
+            }
+          }
+        }
+
+        if (_this2.filtered_restaurants.length == 0) {
+          _this2.errorMessage = 'Nu au fost gasite rezultate conform cautarii!';
+        }
+
+        _this2.keyword = [];
+      }, 800);
+    },
+    restaurantsFilter: function restaurantsFilter() {
+      if (this.filterClass == 'btn btn-danger') {
+        this.filterClass = 'btn btn-success';
+        this.filterName = 'Restaurante din orasul tau';
+      } else {
+        this.filterClass = 'btn btn-danger';
+        this.filterName = 'Restaurante din alte orase';
+      }
     }
   }
 });
@@ -40953,7 +40989,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row mt-3" }, [
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          staticClass: "col-md-2 col-sm-3 col-xs-12 col-lg-2",
+          staticStyle: { "margin-top": "5px" }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn",
+              class: _vm.filterClass,
+              on: {
+                click: function($event) {
+                  return _vm.restaurantsFilter()
+                }
+              }
+            },
+            [
+              _vm._v(_vm._s(_vm.filterName) + " "),
+              _c("i", { staticClass: "fas fa-chevron-right" })
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("div", {
         staticClass: "col-md-2 col-sm-2 col-xs-2 col-lg-1",
@@ -40963,13 +41023,13 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "col-md-8 col-sm-12 col-xs-8 col-lg-9",
+          staticClass: "col-md-12 col-sm-12 col-xs-8 col-lg-9",
           staticStyle: { "margin-top": "5px" }
         },
         [
-          _c("form", { staticClass: "form-inline ml-2" }, [
+          _c("form", { staticClass: "form-inline" }, [
             _c("div", { staticClass: "row", staticStyle: { width: "100%" } }, [
-              _c("div", { staticClass: "col-sm-10" }, [
+              _c("div", { staticClass: "col-md-11" }, [
                 _c("input", {
                   directives: [
                     {
@@ -40983,12 +41043,12 @@ var render = function() {
                   staticStyle: { width: "100%" },
                   attrs: {
                     type: "search",
-                    placeholder: "Farmacii, doctori si medicamente",
+                    placeholder: "Restaurante",
                     "aria-label": "Search"
                   },
                   domProps: { value: _vm.keyword },
                   on: {
-                    click: function($event) {
+                    keyup: function($event) {
                       return _vm.searchRestaurants()
                     },
                     input: function($event) {
@@ -40999,13 +41059,15 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
+              ])
             ])
           ])
         ]
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mt-3" }, [
+      _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n    ")
     ]),
     _vm._v(" "),
     _c(
@@ -41087,7 +41149,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("h4", { staticClass: "card-title" }, [
                         _c("i", { staticClass: "fas fa-map-marker-alt" }),
-                        _vm._v(" " + _vm._s(restaurant.city))
+                        _vm._v(" " + _vm._s(restaurant.city.name))
                       ]),
                       _vm._v(" "),
                       _c("button", { staticClass: "btn btn-danger w-100" }, [
@@ -41107,40 +41169,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "col-md-2 col-sm-3 col-xs-12 col-lg-2 w-100",
-        staticStyle: { "margin-top": "5px" }
-      },
-      [
-        _c("button", { staticClass: "btn btn-danger" }, [
-          _vm._v("Cel mai aproiat restaurant")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-2" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-danger my-2 my-sm-0",
-          attrs: { type: "button" }
-        },
-        [_vm._v("Cauta")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -57079,14 +57108,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************************!*\
   !*** ./resources/js/components/RestaurantsPageSearchComponent.vue ***!
   \********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RestaurantsPageSearchComponent_vue_vue_type_template_id_f85df3ca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RestaurantsPageSearchComponent.vue?vue&type=template&id=f85df3ca& */ "./resources/js/components/RestaurantsPageSearchComponent.vue?vue&type=template&id=f85df3ca&");
 /* harmony import */ var _RestaurantsPageSearchComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RestaurantsPageSearchComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RestaurantsPageSearchComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _RestaurantsPageSearchComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _RestaurantsPageSearchComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -57116,7 +57146,7 @@ component.options.__file = "resources/js/components/RestaurantsPageSearchCompone
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/RestaurantsPageSearchComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

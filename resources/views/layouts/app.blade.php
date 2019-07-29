@@ -8,6 +8,7 @@
         <script>
             window.Laravel = { csrfToken: '{{ csrf_token() }}' }
         </script>
+        <meta name="city_id" content="{{ Auth::user() -> city_id}}">
 
         <title>Infoeducatie | Scanner</title>
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
@@ -111,48 +112,46 @@
                 </nav>
                 {{-- <scanner-component></scanner-component> --}}
         </div>
-        @if(Auth::user())
-            @include('/parts/profile-part')
-        @endif
-
-            <div class="header-blue" style="min-height: 75vh">
-                @if(Session::has('message'))
-                    <div class="container">
-                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-                            <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+        <div class="header-blue" style="min-height: 75vh">
+            @if(Session::has('message'))
+                <div class="container">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                        <span class="alert-inner--text"><strong></strong>{{Session::get('message')}}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                @endif
-                @if(Session::has('errors'))
-                    <div class="container">
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--icon"><i class="far fa-star"></i></span>
-                            <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                </div>
+            @endif
+            @if(Session::has('errors'))
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span class="alert-inner--icon"><i class="far fa-star"></i></span>
+                        <span class="alert-inner--text"><strong></strong>{{ Session::get('errors') }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                @endif
-                @yield('content')
-            </div>
-            <div class="footer-basic">
-                <footer>
-                    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="{{ url('/') }}">Acasa</a></li>
-                        <li class="list-inline-item"><a href="{{ url('/register')}}">Creare cont</a></li>
-                        <li class="list-inline-item"><a href="{{ url('/login') }}">Inregistrare</a></li>
-                    </ul>
-                    <p class="copyright">GoalsScanner © 2019</p>
-                </footer>
-            </div>
+                </div>
+            @endif
+            @yield('content')
         </div>
-
+        <div class="footer-basic">
+            <footer>
+                <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="{{ url('/') }}">Acasa</a></li>
+                    <li class="list-inline-item"><a href="{{ url('/register')}}">Creare cont</a></li>
+                    <li class="list-inline-item"><a href="{{ url('/login') }}">Inregistrare</a></li>
+                </ul>
+                <p class="copyright">GoalsScanner © 2019</p>
+            </footer>
+        </div>
+    </div>
+    @if(Auth::user())
+        @include('/parts/profile-part')
+    @endif
     <!-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> -->
 
     <!-- Optional JS -->
