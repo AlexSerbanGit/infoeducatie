@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/Header-Blue.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/Highlight-Clean.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
     <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
