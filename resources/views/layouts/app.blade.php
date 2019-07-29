@@ -36,6 +36,9 @@
         html body {
             font-family: 'Oswald', sans-serif;
         }
+        .header-blue, .footer-basic{
+            background: linear-gradient(90deg, #9e6f2d, #f7ae47) !important;
+        }
     </style>
 </head>
 

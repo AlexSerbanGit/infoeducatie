@@ -155,6 +155,10 @@ Route::get('/restaurant', function(){
     return view('restaurant.home');
 })->name('Restaurant acasa');
 
+Route::get('/restaurant_profile', function(){
+    return view('restaurant.profile');
+})->name('Cica design restaurant :))');
+
 // route::get('/lol', function(){
 //     return bcrypt('password');
 // });
