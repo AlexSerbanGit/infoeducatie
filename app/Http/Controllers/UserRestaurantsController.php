@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +16,8 @@ class UserRestaurantsController extends Controller
     }
 
     public function getRestaurants(Request $request) {
+
+        // return json_encode(Auth::user());
 
         $restaruants = User::where('role_id', 3) -> get();
 

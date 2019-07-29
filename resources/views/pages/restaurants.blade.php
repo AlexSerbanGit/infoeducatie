@@ -9,6 +9,10 @@
         }
     </style>
 
+    @if(Auth::user() && isset(Auth::user() -> city_id))
+        <meta name="city_id" content="{{ Auth::user() -> city_id}}">
+    @endif
+
     <div class="container">
         <div class="col-xl-12 col-lg-12">
             <div class="card card-stats mb-4 mb-xl-0" style=" min-height: 80vh">
