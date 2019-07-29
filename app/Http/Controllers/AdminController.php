@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Drug;
 use App\Message;
+use Mail;
 
 
 class AdminController extends Controller
@@ -84,6 +85,43 @@ class AdminController extends Controller
         $messages = Message::paginate(4);
         return view('admin.messages')->with('messages', $messages);
 
+    }
+
+    public function answer(Request $request, $id){
+
+        $message = Message::find($id);
+
+        if(!$message){
+            return redirect()->back()->with('message', 'Mesajul nu a putut fi trimis!');
+        }
+
+        $request->to = $message->message;
+
+        Mail::send('email.answer', ['request' => $request], function ($m) use ($request) {
+            $m->from('contact@beescanner.ro', '🔺Raspuns!🔺');
+
+            $m->to($request->email, $request->name)->subject('🔺Raspuns!🔺');
+        });
+
+        if($request->delete){
+            $message -> delete();
+        }
+
+        return redirect()->back()->with('message', 'Mesajul a fost trimis cu succes!');
+
+    }
+
+    public function deleteMessage($id){
+
+        $message = Message::find($id);
+
+        if($message){
+
+            $message->delete();
+            return redirect()->back()->with('message', 'Mesajul a fost sters cu succes!');
+
+        }
+        return redirect()->back()->with('message', 'Mesajul nu a fost gasit!');
     }
 
     public function notifications(){
