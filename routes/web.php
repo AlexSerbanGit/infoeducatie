@@ -151,6 +151,10 @@ Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact')
 
 Route::get('/lol', 'UserRestaurantsController@user');
 
+Route::get('/restaurant', function(){
+    return view('restaurant.home');
+})->name('Restaurant acasa');
+
 // route::get('/lol', function(){
 //     return bcrypt('password');
 // });
