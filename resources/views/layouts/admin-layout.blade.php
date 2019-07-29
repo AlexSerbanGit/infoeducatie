@@ -147,7 +147,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             </a>
           </li>
 
-          @if(Route::currentRouteName() == "Soferi" )
+          <!-- @if(Route::currentRouteName() == "Soferi" )
             <li class="nav-item active">
             <a class="nav-link" href="#">
           @else
@@ -157,7 +157,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
           <i class="fas fa-car"></i>
           <p>Soferi</p>
             </a>
-          </li>
+          </li> -->
       
         </ul>
       </div>
