@@ -11,6 +11,7 @@ use App\User;
 use App\Drug;
 use App\Message;
 
+
 class AdminController extends Controller
 {
 
