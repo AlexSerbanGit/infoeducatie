@@ -1,20 +1,22 @@
 <template>
-    <div>
-        <div>
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                   <div class="card">
-                        <div class="card-body">
-                            <div :v-bind="code">{{ code }}</div>
-                            <div class="embed-responsive embed-responsive-4by3">
-                                <div class="embed-responsive-item">
-                                    <v-quagga :onDetected="redirectToResults" :readerSize="readerSize" :readerTypes="['ean_reader']" class="embed-responsive-item"></v-quagga>
-                                </div>
-                            </div>
-                        </div>
-                   </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+           <div class="card">
+                <div class="card-header">
+                    Scanner
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
+                <div class="card-body">
+                    <div :v-bind="code">{{ code }}</div>
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <div class="embed-responsive-item">
+                            <v-quagga :onDetected="redirectToResults" :readerSize="readerSize" :readerTypes="['ean_reader']" class="embed-responsive-item"></v-quagga>
+                        </div>
+                    </div>
+                </div>
+           </div>
         </div>
     </div>
 </template>

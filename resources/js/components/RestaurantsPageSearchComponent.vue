@@ -46,6 +46,7 @@
 <script>
     export default {
         mounted() {
+            // console.log({{ Auth::user() }});
             axios.get('../api/restaurants')
                 .then(response => {
                     this.restaurants = response.data
