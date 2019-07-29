@@ -48,32 +48,32 @@
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style=" margin-bottom: 10px">
                     <div class="box" style="height: 100%;" ><i class="fa fa-map-marker icon"></i>
                         <h3 class="name">Functioneaza oriunde</h3>
-                        <p class="description">Functioneaza oriunde in orice moment al zilei</p><a href="{{ url('register') }}" class="learn-more">vreau sa folosesc »</a></div>
+                        <p class="description">Functioneaza oriunde in orice moment al zilei</p><a href="{{ url('/user/login_register') }}" class="learn-more">vreau sa folosesc »</a></div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style=" margin-bottom: 10px">
                     <div class="box" style="height: 100%;"><i class="fa fa-clock-o icon"></i>
                         <h3 class="name">Rapid</h3>
-                        <p class="description">Procesul de scanare si adaugare dureaza cateva secunde.</p><a href="{{ url('register') }}" class="learn-more">vreau sa folosesc »</a></div>
+                        <p class="description">Procesul de scanare si adaugare dureaza cateva secunde.</p><a href="{{ url('/user/login_register') }}" class="learn-more">vreau sa folosesc »</a></div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style=" margin-bottom: 10px">
                     <div class="box" style="height: 100%;"><i class="fa fa-list-alt icon"></i>
                         <h3 class="name">Pentru tine </h3>
-                        <p class="description">Aplicatia genereaza date in functie de nevoile tale.</p><a href="{{ url('register') }}" class="learn-more">vreau sa folosesc »</a></div>
+                        <p class="description">Aplicatia genereaza date in functie de nevoile tale.</p><a href="{{ url('/user/login_register') }}" class="learn-more">vreau sa folosesc »</a></div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style=" margin-bottom: 10px">
                     <div class="box" style="height: 100%;"><i class="fa fa-leaf icon"></i>
                         <h3 class="name">Recomandari </h3>
-                        <p class="description">Aplicatia iti sugereaza produse naturale si sanatoase.</p><a href="{{ url('register') }}" class="learn-more">vreau sa folosesc »</a></div>
+                        <p class="description">Aplicatia iti sugereaza produse naturale si sanatoase.</p><a href="{{ url('/user/login_register') }}" class="learn-more">vreau sa folosesc »</a></div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style=" margin-bottom: 10px">
                     <div class="box" style="height: 100%;"><i class="far fa-chart-bar icon"></i>
                         <h3 class="name">Statistici </h3>
-                        <p class="description">Poti vedea evolutia ta si ce ar trebui sa schimbi la stilul tau de viata.</p><a href="{{ url('register') }}" class="learn-more">vreau sa folosesc »</a></div>
+                        <p class="description">Poti vedea evolutia ta si ce ar trebui sa schimbi la stilul tau de viata.</p><a href="{{ url('/user/login_register') }}" class="learn-more">vreau sa folosesc »</a></div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item"style=" margin-bottom: 10px">
                     <div class="box" style="height: 100%;"><i class="fa fa-phone icon"></i>
                         <h3 class="name">Responsive</h3>
-                        <p class="description">Aplicatia este disponibila pe orice dispozitiv indiferent de marimea acestuia.</p><a href="{{ url('register') }}" class="learn-more">vreau sa folosesc »</a></div>
+                        <p class="description">Aplicatia este disponibila pe orice dispozitiv indiferent de marimea acestuia.</p><a href="{{ url('/user/login_register') }}" class="learn-more">vreau sa folosesc »</a></div>
                 </div>
             </div>
         </div>

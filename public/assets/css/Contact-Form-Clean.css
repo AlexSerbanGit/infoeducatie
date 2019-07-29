@@ -1,7 +1,7 @@
 .contact-clean {
   background:#f1f7fc;
   padding:80px 0;
-  background:linear-gradient(90deg, #172a74, #21a9af);
+  background: linear-gradient(90deg, #9e6f2d, #f7ae47) !important; 
 }
 
 @media (max-width:767px) {
@@ -84,7 +84,7 @@
 }
 
 .contact-clean form .btn-primary {
-  background-color:#055ada !important;
+  background-color:#f7ae47 !important;
   margin-top:15px;
   color:#fff;
 }

@@ -17,8 +17,9 @@ Route::get('/', function () {
 }) -> name('welcome');
 
 // Route::group(['middleware' => ['guest']], function () {
-
+Route::group(['middleware' => ['guesto']], function () {
     Route::get('/user/login_register', 'UserLoginController@loginOrRegister') -> name('login_register');
+});
 // });
 
 Route::get('/test', function() {
@@ -138,10 +139,11 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
     Route::post('/update_user/{user_id}', 'AdminController@updateUser')->name('Midifica utilizator - POST');
 
-    Route::post('/update_user/{user_id}', 'AdminController@updateUser')->name('Midifica utilizator - POST');
-
     Route::get('/ban_user/{user_id}', 'AdminController@banUser')->name('Baneaza / De-baneaza utilizatorul');
 
+    Route::post('/answer_message/{id}', 'AdminController@answer')->name('Raspunde mesajelor utilizatorului');
+
+    Route::get('/delete_message/{id}', 'AdminController@deleteMessage')->name('Sterge mesajul');
 });
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
