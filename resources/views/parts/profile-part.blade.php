@@ -88,7 +88,9 @@
 
                       <label>Oras</label>
                       <select name="city" class="form-control" required>
-                          <option value="{{ Auth::user() -> city_id }}">{{ Auth::user() -> city -> name }}</option>
+                          @if(isset(Auth::user() -> city))
+                              <option value="{{ Auth::user() -> city_id }}">{{ Auth::user() -> city -> name }}</option>
+                          @endif
                           @if(isset($cities))
                               @foreach ($cities as $key => $city)
                                   @if($city -> id != Auth::user() -> city_id)

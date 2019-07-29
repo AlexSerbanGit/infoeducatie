@@ -31,8 +31,8 @@
                             </div>
                             <div class="col">
                                 <h3 class="card-title text-uppercase mb-0">{{ restaurant.name }}</h3>
-                                <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> {{ restaurant.city.name }}</h4>
-                                <button class="btn btn-danger w-100">Pagina restaurantului</button>
+                                <h4 v-if="restaurant.city" class="card-title"><i class="fas fa-map-marker-alt"></i> {{ restaurant.city.name }}</h4>
+                                <button v-href="" class="btn btn-danger w-100">Pagina restaurantului</button>
                                 <span class="h2 font-weight-bold mb-0"></span>
                             </div>
                         </div>
@@ -47,24 +47,14 @@
     export default {
         mounted() {
             axios.get('../api/restaurants')
-            .then(response => {
-                this.restaurants = response.data
-                this.filtered_restaurants = this.restaurants
-            })
-            .catch(error => {
-
-            });
-            // Initialize the restaurants suggestions array with elements
-            // let i;
-            // for (i = 0; i < this.restaurants.length; i++) {
-            //     console.log(i);
-            //     // if(this.restaurants[i].city_id == 1) {
-            //     //     this.filtered_restaurants.push(this.restaurants[i]);
-            //     // }
-            // }
-            // if(this.filtered_restaurants.length == 0) {
-            //     this.errorMessage = 'Nu au fost gasite rezultate conform cautarii!'
-            // }
+                .then(response => {
+                    this.restaurants = response.data
+                })
+            axios.get('../api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants')
+                .then(response => {
+                    this.near_restaurants = response.data,
+                    this.filtered_restaurants = response.data
+                })
         },
         data() {
             return {
@@ -73,6 +63,7 @@
                 'filterName': 'Restaurante din alte orase',
                 'filterClass': 'btn btn-danger',
                 'filtered_restaurants': [],
+                'near_restaurants': [],
                 'errorMessage': '',
                 'keyword': '',
                 'timer': ''
@@ -104,15 +95,17 @@
                         this.errorMessage = 'Nu au fost gasite rezultate conform cautarii!'
                     }
                     this.keyword = [];
-                }, 800);
+                }, 1300);
             },
             restaurantsFilter() {
                 if(this.filterClass == 'btn btn-danger') {
                     this.filterClass = 'btn btn-success';
                     this.filterName = 'Restaurante din orasul tau';
+                    this.filtered_restaurants = this.restaurants;
                 } else {
                     this.filterClass = 'btn btn-danger';
                     this.filterName = 'Restaurante din alte orase';
+                    this.filtered_restaurants = this.near_restaurants;
                 }
             }
         }

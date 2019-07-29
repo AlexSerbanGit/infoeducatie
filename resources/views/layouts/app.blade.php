@@ -8,7 +8,10 @@
         <script>
             window.Laravel = { csrfToken: '{{ csrf_token() }}' }
         </script>
-        <meta name="city_id" content="{{ Auth::user() -> city_id}}">
+
+        @if(Auth::user() && isset(Auth::user() -> city_id))
+            <meta name="city_id" content="{{ Auth::user() -> city_id}}">
+        @endif
 
         <title>Infoeducatie | Scanner</title>
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
