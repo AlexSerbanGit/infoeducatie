@@ -30,7 +30,7 @@ class UserRestaurantsController extends Controller
     }
 
     public function user(){
-        
+
         return Auth::user();
     }
 
@@ -50,5 +50,25 @@ class UserRestaurantsController extends Controller
         }
 
         return json_encode($restaruants);
+    }
+
+    public function readRestaurant($restaurant_id) {
+
+        $restaurant = User::find($restaurant_id);
+
+        if($restaurant == null || $restaurant -> role_id != 3) {
+            return json_encode('Restaruantul solicitat este inexistent!');
+        }
+
+        $restaurant -> city;
+
+        foreach ($restaurant -> products as $key => $product) {
+
+            $product -> allergies;
+
+            $product -> foodType;
+        }
+
+        return view('/restaurant/profile', compact('restaurant'));
     }
 }

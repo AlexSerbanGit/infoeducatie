@@ -30,9 +30,7 @@
 </head>
 
 <body class="">
-<div id="overlayer" style="width: 100vw; z-index: 99998;
-position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
-"></div>
+<div id="overlayer" style="width: 100vw; z-index: 99998;position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;"></div>
 <span class="loader">
 <span class="loader-inner"></span>
 </span>
@@ -94,7 +92,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
               </div>
             </form>
             <ul class="navbar-nav">
-           
+
               <li class="nav-item dropdown">
                 <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -130,13 +128,13 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
         </div>
         @endif
            @yield('content')
-          
+
         </div>
       </div>
-     
+
     </div>
   </div>
-  
+
   <!--   Core JS Files   -->
   <script src="{{ asset('assets-admin/js/core/jquery.min.js')}}"></script>
   <script>

@@ -47,11 +47,6 @@ class User extends Authenticatable
 
     ];
 
-    public function tokens()
-    {
-        return $this->hasMany('App\UserLoginToken', 'user_id', 'id');
-    }
-
     public function stats(){
         return $this->hasOne('App\UserStats', 'user_id');
     }
@@ -78,7 +73,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Location', 'restaurant_id');
     }
 
-    // The city of the user
+    // The city of the user/restaurant
     public function city(){
         return $this->belongsTo('App\City', 'city_id');
     }

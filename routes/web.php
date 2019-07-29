@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/profile/edit', 'UserProfileController@update') -> name('user-update');
 
     Route::get('/restaurants', 'UserRestaurantsController@restaurants') -> name('restaurants');
+
+    Route::get('/restaurant/{restaurant_id}/read', 'UserRestaurantsController@readRestaurant') -> name('read-restaurant');
 });
 
 Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
@@ -144,7 +146,7 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::post('/answer_message/{id}', 'AdminController@answer')->name('Raspunde mesajelor utilizatorului');
 
     Route::get('/delete_message/{id}', 'AdminController@deleteMessage')->name('Sterge mesajul');
-    
+
     Route::post('/add_allergy', 'AdminController@addAllergy');
 
     Route::post('/edit_allergy/{id}', 'AdminController@editAllergy');

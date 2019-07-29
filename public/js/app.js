@@ -1837,7 +1837,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    // console.log({{ Auth::user() }});
     axios.get('./api/restaurants').then(function (response) {
       _this.restaurants = response.data;
     });
@@ -1902,6 +1901,10 @@ __webpack_require__.r(__webpack_exports__);
         this.filterName = 'Restaurante din alte orase';
         this.filtered_restaurants = this.near_restaurants;
       }
+    },
+    restaurantUrl: function restaurantUrl(currentRestaurantID) {
+      window.location.replace("../restaurant/" + currentRestaurantID + '/read');
+      this.currentRestaurantID = '';
     }
   }
 });
@@ -41153,9 +41156,18 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-danger w-100" }, [
-                        _vm._v("Pagina restaurantului")
-                      ]),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger w-100",
+                          on: {
+                            click: function($event) {
+                              return _vm.restaurantUrl(restaurant.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Pagina restaurantului")]
+                      ),
                       _vm._v(" "),
                       _c("span", { staticClass: "h2 font-weight-bold mb-0" })
                     ])
@@ -57328,8 +57340,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

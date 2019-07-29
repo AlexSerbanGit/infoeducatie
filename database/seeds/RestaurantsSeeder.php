@@ -12,6 +12,7 @@ class RestaurantsSeeder extends Seeder
      */
     public function run()
     {
+
         $restaurant = new User();
         $restaurant -> name = 'Mamamia Iasi';
         $restaurant -> city_id = 141;

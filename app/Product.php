@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     public function allergies(){
-        return $this->hasMany('App\ProductToAllergy', 'product_id');
+        return $this->belongsToMany('App\Allergy', 'product_to_allergies', 'product_id', 'allergy_id');
     }
 
     public function menus(){

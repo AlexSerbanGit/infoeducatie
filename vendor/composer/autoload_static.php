@@ -422,6 +422,7 @@ class ComposerStaticInit3c0612e49a67958a2932b41d19dbd0a7
         'App\\Menu' => __DIR__ . '/../..' . '/app/Menu.php',
         'App\\MenuType' => __DIR__ . '/../..' . '/app/MenuType.php',
         'App\\Message' => __DIR__ . '/../..' . '/app/Message.php',
+        'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
         'App\\ProductRequest' => __DIR__ . '/../..' . '/app/ProductRequest.php',
         'App\\ProductToAllergy' => __DIR__ . '/../..' . '/app/ProductToAllergy.php',
