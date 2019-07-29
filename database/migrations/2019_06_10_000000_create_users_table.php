@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table -> integer('role_id') -> default(0); // 0 - user / 1 - profesor / doctor / 2 - admin / 3 - restaurant / 4 - moderator
             $table -> integer('target') -> nullable(); // 1 - slabit / 2 -mentinere / 3 - pune masa
             $table -> string('language') -> default('Romanian'); // Romanian / English
-            $table -> string('city_id') -> nullable();
+            $table -> string('city_id') ->default('141') -> nullable();
             $table -> string('country') -> nullable(); // sau 'Alta';
             $table -> tinyInteger('gender') -> nullable(); // 1 - barbat / 2 - femeie
             $table -> integer('age') -> nullable(); // ani
