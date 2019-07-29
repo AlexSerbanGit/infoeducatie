@@ -7,6 +7,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class UserRestaurantsController extends Controller
 {
@@ -27,6 +28,10 @@ class UserRestaurantsController extends Controller
         }
 
         return json_encode($restaruants);
+    }
+
+    public function user(){
+        return Auth::user();
     }
 
     public function getNearRestaurants($city_id) {

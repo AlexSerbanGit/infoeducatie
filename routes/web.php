@@ -146,6 +146,9 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
 
+
+Route::get('/lol', 'UserRestaurantsController@user');
+
 // route::get('/lol', function(){
 //     return bcrypt('password');
 // });
