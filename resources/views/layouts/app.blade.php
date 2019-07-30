@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
     <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
     <meta name="api-base-url" content="{{ url('/') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
 
     <style>
         html body {
@@ -44,6 +45,12 @@
 </head>
 
 <body>
+<div id="overlayer" style="width: 100vw; z-index: 99998;
+position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
+"></div>
+<span class="loader">
+<span class="loader-inner"></span>
+</span>
     <div id="app">
         <div class="header-blue" style="padding-bottom: 100px">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
@@ -163,6 +170,10 @@
     <script src="{{ asset('/js/app.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
+    <script>
+    $(".loader").delay(500).fadeOut("slow");
+    $("#overlayer").delay(500).fadeOut("slow");
+  </script>
 </body>
 
 </html>
