@@ -49,6 +49,7 @@ return array(
     'App\\MenuType' => $baseDir . '/app/MenuType.php',
     'App\\Message' => $baseDir . '/app/Message.php',
     'App\\Order' => $baseDir . '/app/Order.php',
+    'App\\OrderHasProduct' => $baseDir . '/app/OrderHasProduct.php',
     'App\\Product' => $baseDir . '/app/Product.php',
     'App\\ProductRequest' => $baseDir . '/app/ProductRequest.php',
     'App\\ProductToAllergy' => $baseDir . '/app/ProductToAllergy.php',

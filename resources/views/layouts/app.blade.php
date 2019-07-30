@@ -15,7 +15,7 @@
     {{-- @auth @if(Auth::user() && isset(Auth::user() -> city_id))
     <meta name="city_id" content="{{ Auth::user() -> city_id}}"> @endif @endauth --}}
 
-    <title>Infoeducatie | Scanner</title>
+    <title>BeeScanner</title>
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/ionicons.min.css')}}">
@@ -141,7 +141,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                     </div>
                 </div>
             </nav>
-            <scanner-component></scanner-component> 
+            <scanner-component></scanner-component>
         </div>
         <div class="header-blue" style="min-height: 75vh">
             @if(Session::has('message'))

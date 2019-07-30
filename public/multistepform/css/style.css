@@ -9,9 +9,9 @@
 
 html {
     height: 100%;
-    /* background: #6441A5; /* fallback for old browsers */ */
+    background: #6441A5; /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #6441A5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right bottom, #172b74, #004d90, #006ca2, #008aaa, #23a7af);
+    background: linear-gradient(90deg, #9e6f2d, #f7ae47) !important;
 }
 
 body {
