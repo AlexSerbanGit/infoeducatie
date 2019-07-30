@@ -11,7 +11,8 @@ use App\User;
 use App\Drug;
 use App\Message;
 use Mail;
-
+use App\ProductRequest;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -126,10 +127,13 @@ class AdminController extends Controller
 
     public function notifications(){
 
-        return view('admin.notifications');
+        $productRequests = ProductRequest::all();
+        return view('admin.notifications')->with('productRequests', $productRequests);
 
     }
 
+
+    // Not available :)
     public function drivers()
     {
 
@@ -311,7 +315,8 @@ class AdminController extends Controller
             'category' => 'required|numeric',
             'type' => 'required|numeric',
         ]);
-
+        $productRequests = ProductRequest::find($request->id);
+        $productRequests->delete();
         $product = new Product;
         $product->name = $request->name;
         $product->weight = $request->weight;
@@ -322,6 +327,8 @@ class AdminController extends Controller
         $product->barcode = $request->barcode;
         $product->category = $request->category;
         $product->type = $request->type;
+        $product->description = $request->description;
+        $product->restaurant_id = Auth::user()->id;
         if($file = $request->file('image')){
             $name12 =  str_random(10).'.'.$file->getClientOriginalExtension();
             $file->move('products', $name12);
@@ -330,6 +337,13 @@ class AdminController extends Controller
         $product->save();
 
         return redirect()->back()->with('message', 'Produs adaugat!');
+    }
+
+    public function deleteRequest($id){
+        $request = ProductRequest::find($id);
+        $request->delete();
+
+        return redirect()->back()->with('message', 'Cerere stearsa cu succes!');
     }
 
     public function editProduct(Request $request, $id){

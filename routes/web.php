@@ -105,7 +105,6 @@ Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/admin/products', 'AdminController@products');
 
-    Route::post('/admin_add_product', 'AdminController@addProduct');
 
     Route::post('/admin_edit_product/{id}', 'AdminController@editProduct');
 
@@ -154,6 +153,11 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::get('/delete_allergy/{id}', 'AdminController@deleteAllergy');
 
     Route::get('/restaurant/active/orders', 'AdminOrdersController@activeOrders') -> name('restaruant-active-orders');
+
+    Route::post('/add_product', 'AdminController@addProduct')->name('Adauga produs si sterge cerere');
+
+    Route::get('/delete_product_request/{id}', 'AdminController@deleteRequest')->name('Sterge cerere de produs');
+
 });
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
