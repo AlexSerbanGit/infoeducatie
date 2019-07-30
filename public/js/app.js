@@ -1810,34 +1810,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({// mounted() {
-  //     console.log('App mounted!');
-  //
-  //     localStorage.setItem('cart');
-  //
-  //     if (localStorage.getItem('cart')) {
-  //
-  //         this.todos = JSON.parse(localStorage.getItem('cart'));
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cart: ['item1', 'item2', 'item3']
+    };
+  },
+  mounted: function mounted() {
+    if (localStorage.cart) {
+      this.cart = localStorage.cart;
+    }
+  } // watch: {
+  //     cart(newCart) {
+  //         localStorage.cart = newCart;
   //     }
-  // },
-  // data() {
-  //
   // }
+
 });
 
 /***/ }),
@@ -41052,9 +41040,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _c(
+      "ul",
+      { staticClass: "navbar-nav align-items-center d-none d-md-flex" },
+      [
+        _c("li", { staticClass: "nav-item dropdown" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "dropdown-menu dropdown-menu-arrow dropdown-menu-right",
+              staticStyle: { "margin-top": "10px" }
+            },
+            [
+              _c("div", { staticClass: " dropdown-header noti-title" }, [
+                _vm.cart.length
+                  ? _c("h6", { staticClass: "text-overflow m-0" }, [
+                      _vm._v("Produsele tale")
+                    ])
+                  : _c("h6", { staticClass: "text-overflow m-0" }, [
+                      _vm._v("Nu ati adaudgat produse")
+                    ])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.cart, function(item) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "./examples/profile.html" }
+                  },
+                  [
+                    _c("i", { staticClass: "ni ni-support-16" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(item))])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      {
+        staticClass: "fa-stack has-badge",
+        attrs: {
+          "data-count": "4",
+          href: "#",
+          role: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fa fa-shopping-cart fa-stack-1x fa-inverse" })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -57054,7 +57109,7 @@ function filterStats(result, track, outbound) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // import Vue from 'vue/dist/vue.min.js' 
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // import Vue from 'vue/dist/vue.min.js'
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");

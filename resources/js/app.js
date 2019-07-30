@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-// import Vue from 'vue/dist/vue.min.js' 
+// import Vue from 'vue/dist/vue.min.js'
 
 window.Vue = require('vue');
 

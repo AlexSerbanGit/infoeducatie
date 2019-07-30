@@ -71,7 +71,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                             <li class="nav-item" style="display: inline-block">
                                 <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
                             </li>
-                            
+
                             @endauth
 
                             @auth
