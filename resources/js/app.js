@@ -6,16 +6,15 @@
 
 require('./bootstrap');
 
-// import Vue from 'vue/dist/vue.min.js'
+// import Vue from 'vue/dist/vue.min.js' 
 
 window.Vue = require('vue');
 
 Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
 Vue.component('autocomplete-component', require('./components/AutocompleteComponent.vue').default);
 Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
-// Vue.component('profile-or-logout', require('./components/ProfileOrLogout.vue').default);
 Vue.component('restaurants-search', require('./components/RestaurantsPageSearchComponent.vue').default);
-
+Vue.component('cart-component', require('./components/CartComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
