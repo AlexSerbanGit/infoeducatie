@@ -48,7 +48,6 @@ class UserRestaurantsController extends Controller
 
             $restaruant -> city;
         }
-
         return json_encode($restaruants);
     }
 
