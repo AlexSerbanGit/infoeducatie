@@ -48,27 +48,48 @@
       </div>
       <div class="sidebar-wrapper" style="background-color: white; text-align: left;">
         <ul class="nav" style="min-height: 850px">
-          @if(Route::currentRouteName() == "Restaurant acasa" )
+          @if(Route::currentRouteName() == "Restaurant - acasa" )
             <li class="nav-item active">
             <a class="nav-link" href="#">
           @else
             <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/home') }}">
+            <a class="nav-link" href="{{ url('/restaurant/dashboard') }}">
           @endif
               <i class="material-icons">dashboard</i>
               <p>Acasa</p>
             </a>
           </li>
-          <li class="nav-item">
+          @if(Route::currentRouteName() == "restaruant-active-orders" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
             <a class="nav-link" href="{{ route('restaruant-active-orders') }}">
+          @endif
               <i class="material-icons">watch_later</i>
               <p>Comenzi active</p>
             </a>
           </li>
-          <li class="nav-item">
+          @if(Route::currentRouteName() == "restaruant-history-orders" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
             <a class="nav-link" href="{{ route('restaruant-history-orders') }}">
+          @endif
               <i class="material-icons">history</i>
               <p>Istoric comenzi</p>
+            </a>
+          </li>
+          @if(Route::currentRouteName() == "restaurants-products" )
+            <li class="nav-item active">
+            <a class="nav-link" href="#">
+          @else
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('restaurants-products') }}">
+          @endif
+              <i class="material-icons">list</i>
+              <p>Produse</p>
             </a>
           </li>
         </ul>

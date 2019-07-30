@@ -103,6 +103,14 @@ Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], functio
 
     Route::get('/restaruant/order/{order_id}/delete', 'RestaurantOrdersController@deleteOrder') -> name('restaurant-delete-order');
 
+    Route::get('/restaurant/restaurants-products', 'RestaurantDashboardController@products') -> name('restaurants-products');
+
+    Route::post('/add_product', 'RestaurantDashboardController@addProduct');
+
+    Route::post('/edit_product/{id}', 'RestaurantDashboardController@editProduct');
+
+    Route::get('/delete_product/{id}', 'RestaurantDashboardController@deleteProduct');
+
 });
 
 Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
@@ -121,7 +129,6 @@ Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::post('/admin_edit_product/{id}', 'AdminController@editProduct');
 
-    Route::get('/admin_delete_product/{id}', 'AdminController@deleteProduct');
 
     Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
@@ -164,6 +171,14 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::post('/edit_allergy/{id}', 'AdminController@editAllergy');
 
     Route::get('/delete_allergy/{id}', 'AdminController@deleteAllergy');
+
+    Route::post('/add_product', 'AdminController@addProduct');
+
+    Route::post('/edit_product/{id}', 'AdminController@editProduct');
+
+    Route::get('/delete_product/{id}', 'AdminController@deleteProduct');
+
+    Route::get('/admin/delete_product_request/{id}', 'AdminController@deleteRequest');
 
 });
 
