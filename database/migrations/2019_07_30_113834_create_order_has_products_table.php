@@ -17,6 +17,7 @@ class CreateOrderHasProductsTable extends Migration
             $table -> increments('id');
             $table -> unsignedInteger('order_id');
             $table -> unsignedInteger('product_id');
+            $table -> softDeletes();
             $table -> timestamps();
 
             $table -> foreign('order_id') -> references('id') -> on('orders') -> onDelete('cascade');

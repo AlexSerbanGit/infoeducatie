@@ -91,6 +91,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/restaurant/{restaurant_id}/read', 'UserRestaurantsController@readRestaurant') -> name('read-restaurant');
 });
 
+Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], function () {
+
+    Route::get('/dashboard', 'RestaurantDashboardController@index') -> name('Restaurant - acasa');
+
+    Route::get('/restaurant/active/orders', 'RestaurantOrdersController@activeOrders') -> name('restaruant-active-orders');
+
+    Route::get('/restaruant/order/{order_id}/complete', 'RestaurantOrdersController@completeOrder') -> name('restaurant-complete-order');
+
+    Route::get('/restaurant/history/orders', 'RestaurantOrdersController@historyOrders') -> name('restaruant-history-orders');
+
+    Route::get('/restaruant/order/{order_id}/delete', 'RestaurantOrdersController@deleteOrder') -> name('restaurant-delete-order');
+
+});
+
 Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/admin', 'AdminController@menu');
@@ -103,7 +117,6 @@ Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/admin_delete_allergy/{allergy_id}', 'AdminController@deleteAllergy');
 
-    Route::get('/admin/products', 'AdminController@products');
 
 
     Route::post('/admin_edit_product/{id}', 'AdminController@editProduct');
@@ -152,12 +165,6 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
     Route::get('/delete_allergy/{id}', 'AdminController@deleteAllergy');
 
-    Route::get('/restaurant/active/orders', 'AdminOrdersController@activeOrders') -> name('restaruant-active-orders');
-
-    Route::post('/add_product', 'AdminController@addProduct')->name('Adauga produs si sterge cerere');
-
-    Route::get('/delete_product_request/{id}', 'AdminController@deleteRequest')->name('Sterge cerere de produs');
-
 });
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
@@ -166,13 +173,9 @@ Route::post('/send_request', 'PublicController@sendRequest')->name('Trimite cere
 
 Route::get('/lol', 'UserRestaurantsController@user');
 
-Route::get('/restaurant', function(){
-    return view('restaurant.home');
-})->name('Restaurant acasa');
-
-Route::get('/restaurant_profile', function(){
-    return view('restaurant.profile');
-})->name('Cica design restaurant :))');
+// Route::get('/restaurant_profile', function(){
+//     return view('restaurant.profile');
+// })->name('Cica design restaurant :))');
 
 // route::get('/lol', function(){
 //     return bcrypt('password');
