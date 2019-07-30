@@ -316,8 +316,11 @@ class AdminController extends Controller
             'category' => 'required|numeric',
             'type' => 'required|numeric',
         ]);
-        $productRequests = ProductRequest::find($request->id);
-        $productRequests->delete();
+        if($request->id){
+            $productRequests = ProductRequest::find($request->id);
+            $productRequests->delete();
+        }
+        
         $product = new Product;
         $product->name = $request->name;
         $product->weight = $request->weight;
@@ -349,7 +352,6 @@ class AdminController extends Controller
 
     public function editProduct(Request $request, $id){
 
-
         $request->validate([
             'name' => 'required|string',
             'weight' => 'required|numeric',
@@ -360,6 +362,7 @@ class AdminController extends Controller
             'barcode' => 'required|string',
             'category' => 'required|numeric',
             'type' => 'required|numeric',
+            'description' => 'required|string'
         ]);
 
         $product = Product::find($id);
@@ -372,6 +375,7 @@ class AdminController extends Controller
         $product->barcode = $request->barcode;
         $product->category = $request->category;
         $product->type = $request->type;
+        $product->description = $request->description;
         if($file = $request->file('image')){
             $name12 =  str_random(10).'.'.$file->getClientOriginalExtension();
             $file->move('products', $name12);
