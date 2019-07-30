@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->integer('category'); // 1 - mancare sanatoasa / 2 - intre sanatos si nesanatos / 3 - nesanatoasa
             $table->integer('type'); // 1 - de mancat / 2 - de baut
+            $table -> softDeletes();
             $table->timestamps();
         });
     }

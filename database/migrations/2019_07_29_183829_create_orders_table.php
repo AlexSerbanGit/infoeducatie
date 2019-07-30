@@ -18,7 +18,8 @@ class CreateOrdersTable extends Migration
             $table -> unsignedInteger('user_id');
             $table -> unsignedInteger('restaurant_id');
             $table -> longText('description') -> nullable();
-            $table -> tinyInteger('active');
+            $table -> longText('address') -> nullable();
+            $table -> softDeletes();
             $table -> timestamps();
 
             $table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');

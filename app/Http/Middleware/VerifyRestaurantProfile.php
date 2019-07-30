@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Auth;
 use Closure;
 
 class VerifyRestaurantProfile
@@ -15,10 +16,14 @@ class VerifyRestaurantProfile
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user() && Auth::user() -> role_id == 3){
-            return $next($request);
-        } else return redirect()->back()->with('message', 'Nu poti accesa aceasta pagina');
-
-        return $next($request);
+        if(Auth::user()) {
+            if(Auth::user() -> role_id == 3){
+                return $next($request);
+            } else {
+                return redirect() -> back() -> with('message', 'Nu poti accesa aceasta pagina');
+            }
+        } else {
+            return redirect() -> back() -> with('message', 'Nu poti accesa aceasta pagina');
+        }
     }
 }

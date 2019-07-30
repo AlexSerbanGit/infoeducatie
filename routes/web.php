@@ -90,13 +90,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/restaurant/{restaurant_id}/read', 'UserRestaurantsController@readRestaurant') -> name('read-restaurant');
 });
+
 Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], function () {
 
-    Route::get('/restaurant', function(){
-        return view('restaurant.home');
-    })->name('Restaurant acasa');
+    Route::get('/dashboard', 'RestaurantDashboardController@index') -> name('Restaurant - acasa');
 
-    Route::get('/restaurant/active/orders', 'AdminOrdersController@activeOrders') -> name('restaruant-active-orders');
+    Route::get('/restaurant/active/orders', 'RestaurantOrdersController@activeOrders') -> name('restaruant-active-orders');
+
+    Route::get('/restaruant/order/{order_id}/complete', 'RestaurantOrdersController@completeOrder') -> name('restaurant-complete-order');
+
+    Route::get('/restaurant/history/orders', 'RestaurantOrdersController@historyOrders') -> name('restaruant-history-orders');
+
+    Route::get('/restaruant/order/{order_id}/delete', 'RestaurantOrdersController@deleteOrder') -> name('restaurant-delete-order');
+
 });
 
 Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {

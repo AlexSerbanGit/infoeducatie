@@ -65,6 +65,12 @@
               <p>Comenzi active</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('restaruant-history-orders') }}">
+              <i class="material-icons">history</i>
+              <p>Istoric comenzi</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

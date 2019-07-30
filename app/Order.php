@@ -15,12 +15,16 @@ class Order extends Model
         'user_id',
         'restaurant_id',
         'description',
-        'active'
+        'address'
     ];
 
     protected $dates = ['deleted_at'];
 
     public function products(){
-        return $this->belongsToMany('App\Product', 'order_has_products', 'product_id', 'restaurant_id');
+        return $this -> belongsToMany('App\Product', 'order_has_products', 'order_id', 'product_id');
+    }
+
+    public function user(){
+        return $this -> belongsTo('App\User', 'user_id');
     }
 }
