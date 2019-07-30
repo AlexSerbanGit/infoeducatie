@@ -153,6 +153,7 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
     Route::get('/delete_allergy/{id}', 'AdminController@deleteAllergy');
 
+    Route::get('/restaurant/active/orders', 'AdminOrdersController@activeOrders') -> name('restaruant-active-orders');
 });
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');

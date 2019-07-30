@@ -60,9 +60,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="material-icons">dashboard</i>
-              <p>Acasa</p>
+            <a class="nav-link" href="{{ route('restaruant-active-orders') }}">
+              <i class="material-icons">watch_later</i>
+              <p>Comenzi active</p>
             </a>
           </li>
         </ul>
