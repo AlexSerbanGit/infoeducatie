@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </nav>
-            {{-- <scanner-component></scanner-component> --}}
+            <scanner-component></scanner-component> 
         </div>
         <div class="header-blue" style="min-height: 75vh">
             @if(Session::has('message'))

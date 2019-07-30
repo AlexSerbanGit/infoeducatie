@@ -157,6 +157,7 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
 Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
 
+Route::post('/send_request', 'PublicController@sendRequest')->name('Trimite cerere de adaugare produs');
 
 Route::get('/lol', 'UserRestaurantsController@user');
 
