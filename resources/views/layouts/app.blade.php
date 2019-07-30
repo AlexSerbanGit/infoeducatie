@@ -66,26 +66,21 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <ul class="nav">
+                        <ul class="nav navbar-nav" style="text-align: left">
                             @auth
-                            <ul class="nav navbar-nav">
-                            <li class="nav-item">
+                            <li class="nav-item" style="display: inline-block">
                                 <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
                             </li>
-                            </ul>
+                            
                             @endauth
                       
                             @auth
-                            <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
-                            </ul>
-                            <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/restaurants') }}"><i class="fas fa-utensils"></i> Restaurante</a>
                             </li>
-                            </ul>
                             @endauth
                         </ul>
                         <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
