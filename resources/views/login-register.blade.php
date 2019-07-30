@@ -42,7 +42,7 @@
                     <ul class="navbar-nav ml-auto">
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
+                                <a class="nav-link" style="color: white;" href="{{ route('login_register') }}">Autentificare / Creare cont</a>
                             </li>
                         @endguest
                     </ul>

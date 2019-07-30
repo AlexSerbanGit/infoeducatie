@@ -29,6 +29,7 @@
                             <div class="card" style="width: 90%; margin: auto; background-color: #A1712E; color: white">
                                 <img class="card-img-top" src="{{ asset('/products/' . $product -> image) }}" alt="Card image cap">
                                 <div class="card-body">
+                                    <p class="card-text font-weight-bold">{{ $product -> name }}</p>
                                     <p class="card-text">{{ $product -> description }}</p>
                                     @if($product -> type == 1)
                                         <span class="badge badge-pill badge-dark">Mic dejun</span>
