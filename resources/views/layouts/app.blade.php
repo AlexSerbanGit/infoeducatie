@@ -33,7 +33,7 @@
     <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
     <meta name="api-base-url" content="{{ url('/') }}" />
     <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('/css/cart.css') }}">
     <style>
         html body {
             font-family: 'Oswald', sans-serif;
@@ -66,59 +66,78 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <ul class="nav navbar-nav">
+                        <ul class="nav">
                             @auth
+                            <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
                             </li>
+                            </ul>
                             @endauth
-                        </ul>
-
-                        <ul class="nav navbar-nav">
+                      
                             @auth
+                            <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-barcode"></i> Scaneaza</a>
                             </li>
+                            </ul>
+                            <ul class="nav navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/restaurants') }}"><i class="fas fa-utensils"></i> Restaurante</a>
                             </li>
-                            {{-- @if(Auth::user()->role == 2)
-                            <li class="nav-item">
-                                <a href="{{ url('/admin') }}" class="nav-link">Administrare</a>
-                            </li>
-                            @endif --}} @endauth
+                            </ul>
+                            @endauth
                         </ul>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
+                        <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-xs-6 ml-auto justify-content-center">
                             {{-- @include('/parts/searchbar') --}} {{--
                             <autocomplete-component></autocomplete-component> --}}
-                        </div>
+                        </div> -->
                         <ul class="navbar-nav ml-auto">
-                            @auth {{--
-                            <profile-or-logout></profile-or-logout> --}} @endauth @guest
+                            @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login_register') }}">{{ 'Autentificare / Creare cont' }}</a>
+                                <i class="fas fa-user-edit"></i>dadaada     
                             </li>
                             @else
-                            <!-- <li class="nav-item row" style="margin-top: 10px"> -->
-                            {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a> --}} {{--
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                         
+                        
+                            <ul class="navbar-nav align-items-center d-none d-md-flex">
+                                <li class="nav-item dropdown">
+                                <span class="fa-stack has-badge" data-count="5"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                                </span>  
+                                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" style="margin-top: 10px">
+                                <div class=" dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Carucior cu rotile!</h6>
+                                </div>
+                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <i class="ni ni-support-16"></i>
+                                    <span>ITEM1</span>
                                 </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div> --}}
-
-                            <a class="nav-link" data-toggle="modal" data-target="#profile">
-                                <i class="fas fa-user-edit"></i> {{ Auth::user()->name }}
-                            </a>
+                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <i class="ni ni-support-16"></i>
+                                    <span>ITEM2</span>
+                                </a>
+                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <i class="ni ni-support-16"></i>
+                                    <span>ITEM3</span>
+                                </a>
+                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <i class="ni ni-support-16"></i>
+                                    <span>ITEM4</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#!" class="dropdown-item">
+                                    <span class="btn btn-success btn-block">CART</span>
+                                </a>
+                                </div>
+                                </li>
+                            </ul>
+                           
+                            <li class="nav-item" data-toggle="modal" data-target="#profile">
+                                <i class="fas fa-user-edit"></i> {{ Auth::user()->name }}      
+                            </li>
                             @endguest
-                        </ul>
+                            </ul>
                     </div>
                 </div>
             </nav>
