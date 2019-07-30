@@ -27,6 +27,6 @@ class UserScannerController extends Controller
             }
         }
 
-        return view('/results', compact('product'));
+        return view('/results', compact('product', 'barcode'));
     }
 }

@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div class="header pb-1 pt-5 mb-5">
+<div class="header pb-1 mb-5">
     <section class="section section-lg pt-lg-0 mt--350">
       <div class="container">
         <div class="row justify-content-center" style="margin-top: 0px">
           <div class="col-lg-8">
             <div class="row row-grid">
               <div class="w-100">
-                <div class="card card-lift--hover shadow border-0">
+                <div class="card shadow border-0">
                   <div class="card-body py-5">
 
                       @if(isset($product))
@@ -89,6 +89,60 @@
                       @else
                           <h2 class="text-primary mt-3">
                               Ne pare rau, produsul nu este inregistrat!
+                            @auth
+                                Puteti trimite o cerere de adaugare a produsului completand formularul de mai jos:
+                                <hr>
+                                <form action="{{ url('/send_request') }}" method="POST">
+                                @csrf
+                                <u><h2 class="text-primary text-center">Cerere de adaugare produs</h2></u>
+                                <div class="form-group">
+                                    <label>Denumirea produsului:</label>
+                                    <input type="text" name="name" required class="form-control" placeholder="denumire produs">
+                                </div>
+                                <div class="form-group">
+                                    <label>Greutatea produsului: (in grame)</label>
+                                    <input type="number" min="1" name="weight" required class="form-control" placeholder="in grame">
+                                </div>
+                                <div class="form-group">
+                                    <label>Proteine per 100g:</label>
+                                    <input type="number" min="1" name="protein" class="form-control" required placeholder="in grame">
+                                </div>
+                                <div class="form-group">
+                                    <label>Grasimi per 100g:</label>
+                                    <input type="number" min="1" name="fat" class="form-control" required placeholder="in grame">
+                                </div>
+                                <div class="form-group">
+                                    <label>Carbohidrati per 100g:</label>
+                                    <input type="number" min="1" name="carbo" class="form-control" required placeholder="in grame">
+                                </div>
+                                <div class="form-group">
+                                    <label>Calorii per 100g</label>
+                                    <input type="number" min="1" name="kcal" class="form-control" required placeholder="Kcal">
+                                </div>
+                                <div class="form-group">
+                                    <label>Cod de bare:</label>
+                                    <input type="number" min="1" class="form-control" name="barcode" required placeholder="Cod de bare" value="{{$barcode}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Categorie produs:</label>
+                                    <select name="category" class="form-control">
+                                        <option value="1">Sanatoasa</option>
+                                        <option value="2">Intre</option>
+                                        <option value="3">Nesanatoasa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tip produs:</label>
+                                    <select name="type" class="form-control">
+                                        <option value="1">de mancat</option>
+                                        <option value="2">de baut</option>
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-warning">Trimite cerere</button>
+                                </form>
+                            @endauth
+
                           </h2>
                       @endif
 
