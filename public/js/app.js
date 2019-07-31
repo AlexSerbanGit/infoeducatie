@@ -1810,6 +1810,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1821,13 +1822,20 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/api/user/cart', {// '_token': document.querySelector('meta[name="csrf-token"]').content
     }).then(function (response) {
-      _this.cart = response.data.cart, console.log(_this.cart);
+      _this.cart = response.data.cart; // console.log(this.cart);
     });
   },
   methods: {
     updateCart: function updateCart() {
-      console.log('gg');
+      var _this2 = this;
+
+      axios.get('/api/user/cart', {// '_token': document.querySelector('meta[name="csrf-token"]').content
+      }).then(function (response) {
+        _this2.cart = response.data.cart; // console.log(this.cart);
+      });
     }
+  },
+  created: function created() {// this.$on('add-to-cart', () => alert('Handeled!'));
   }
 });
 
@@ -1887,18 +1895,20 @@ __webpack_require__.r(__webpack_exports__);
       vars[key] = value;
     });
     axios.get('/api/restaurant/' + vars.restaurant + '/products').then(function (response) {
+      // console.log(response);
       _this.products = response.data.products;
     });
   },
   methods: {
     addToCart: function addToCart(productId) {
+      this.$emit('add-to-cart');
+      this.$on('add-to-cart', function () {
+        return alert('Handeled!');
+      });
       axios.post('/api/user/cart/update', {
         'product': productId
-      }).then(function (response) {// if(response.data.success == true) {
-        //
-        // }
+      }).then(function (response) {// if(response.data.success == true)
       });
-      this.$emit('addToCart');
     }
   }
 });
@@ -41121,7 +41131,30 @@ var render = function() {
       { staticClass: "navbar-nav align-items-center d-none d-md-flex" },
       [
         _c("li", { staticClass: "nav-item dropdown" }, [
-          _vm._m(0),
+          _c(
+            "span",
+            {
+              staticClass: "fa-stack has-badge",
+              attrs: {
+                "data-count": "4",
+                href: "#",
+                role: "button",
+                "data-toggle": "dropdown",
+                "aria-haspopup": "true",
+                "aria-expanded": "false"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.updateCart()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-shopping-cart fa-stack-1x fa-inverse"
+              })
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -41145,7 +41178,9 @@ var render = function() {
                 return _c("a", { staticClass: "dropdown-item" }, [
                   _c("i", { staticClass: "ni ni-support-16" }),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(item.product.name))])
+                  _c("span", [_vm._v(_vm._s(item.product.name))]),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "ni ni-support-16" })
                 ])
               })
             ],
@@ -41156,28 +41191,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "fa-stack has-badge",
-        attrs: {
-          "data-count": "4",
-          href: "#",
-          role: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [_c("i", { staticClass: "fa fa-shopping-cart fa-stack-1x fa-inverse" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

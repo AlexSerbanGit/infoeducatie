@@ -2,7 +2,7 @@
     <div>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
-                <span class="fa-stack has-badge" data-count="4"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span v-on:click="updateCart()" class="fa-stack has-badge" data-count="4"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                 </span>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" style="margin-top: 10px">
@@ -13,6 +13,7 @@
                     <a v-for="item in cart" class="dropdown-item">
                         <i class="ni ni-support-16"></i>
                         <span>{{ item.product.name }}</span>
+                        <i class="ni ni-support-16"></i>
                     </a>
                 </div>
             </li>
@@ -32,14 +33,23 @@
                 // '_token': document.querySelector('meta[name="csrf-token"]').content
             })
             .then(response => {
-                this.cart = response.data.cart,
-                console.log(this.cart);
+                this.cart = response.data.cart
+                // console.log(this.cart);
             })
         },
         methods: {
             updateCart() {
-                console.log('gg');
+                axios.get('/api/user/cart', {
+                    // '_token': document.querySelector('meta[name="csrf-token"]').content
+                })
+                .then(response => {
+                    this.cart = response.data.cart
+                    // console.log(this.cart);
+                })
             }
+        },
+        created() {
+            // this.$on('add-to-cart', () => alert('Handeled!'));
         }
     }
 </script>

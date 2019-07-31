@@ -44,20 +44,23 @@
 
             axios.get('/api/restaurant/' + vars.restaurant + '/products')
             .then(response => {
+                // console.log(response);
                 this.products = response.data.products;
             })
         },
         methods: {
             addToCart(productId) {
+
+                this.$emit('add-to-cart');
+
+                this.$on('add-to-cart', () => alert('Handeled!'));
+
                 axios.post('/api/user/cart/update', {
                   'product': productId
                 })
                 .then(response => {
-                    // if(response.data.success == true) {
-                    //
-                    // }
+                    // if(response.data.success == true)
                 })
-                this.$emit('addToCart')
             }
         }
     }
