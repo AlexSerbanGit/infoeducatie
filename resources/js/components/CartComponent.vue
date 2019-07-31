@@ -7,7 +7,7 @@
                 </span>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" style="margin-top: 10px">
                     <div class=" dropdown-header noti-title">
-                        <h6 v-if="cart.length" class="text-overflow m-0">Produsele tale</h6>
+                        <h6 v-if="cart.length > 0" class="text-overflow m-0">Produsele tale</h6>
                         <h6 v-else class="text-overflow m-0">Nu ati adaudgat produse</h6>
                     </div>
                     <a v-for="item in cart" class="dropdown-item">
@@ -56,9 +56,6 @@
                     console.log(this.cart);
                 })
             }
-        },
-        created() {
-            // this.$on('add-to-cart', () => alert('Handeled!'));
         }
     }
 </script>

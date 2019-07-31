@@ -16,8 +16,6 @@ class UserCartController extends Controller
 
         $user = Auth::user();
 
-        return $user;
-
         $user = User::find(18);
 
         $cart = $user -> cart;
@@ -101,7 +99,7 @@ class UserCartController extends Controller
         ]);
     }
 
-    
+
     public function checkout(){
         return view('checkout');
     }

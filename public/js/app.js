@@ -1845,8 +1845,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this3.cart);
       });
     }
-  },
-  created: function created() {// this.$on('add-to-cart', () => alert('Handeled!'));
   }
 });
 
@@ -41175,7 +41173,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: " dropdown-header noti-title" }, [
-                _vm.cart.length
+                _vm.cart.length > 0
                   ? _c("h6", { staticClass: "text-overflow m-0" }, [
                       _vm._v("Produsele tale")
                     ])
@@ -57878,8 +57876,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
