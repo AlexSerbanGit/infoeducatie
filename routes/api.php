@@ -37,4 +37,6 @@ Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
     Route::get('/user/cart', 'UserCartController@get');
 
     Route::post('/user/cart/update', 'UserCartController@update');
+
+    Route::post('/user/cart/item/delete', 'UserCartController@deleteItem');
 // });

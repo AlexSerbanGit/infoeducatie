@@ -50,16 +50,13 @@
         },
         methods: {
             addToCart(productId) {
-<<<<<<< HEAD
 
                 this.$emit('add-to-cart');
 
                 this.$on('add-to-cart', () => alert('Handeled!'));
 
-                axios.post('/api/user/cart/update', {
-=======
+                // axios.post('/api/user/cart/update', {
                 axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart/update', {
->>>>>>> fce4e53b811df86d41bdbecb7bdba709fa8e8b19
                   'product': productId
                 })
                 .then(response => {

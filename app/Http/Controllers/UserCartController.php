@@ -74,4 +74,9 @@ class UserCartController extends Controller
             'messge' => 'Produsul a fost adaugat!'
         ]);
     }
+
+    public function deleteItem() {
+
+
+    }
 }

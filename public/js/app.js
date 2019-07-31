@@ -1811,6 +1811,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1832,6 +1833,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/user/cart', {// '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
         _this2.cart = response.data.cart; // console.log(this.cart);
+      });
+    },
+    deleteCartItem: function deleteCartItem(item) {
+      var _this3 = this;
+
+      axios.post('/api/user/cart/item/delete', {
+        'item_id': item // '_token': document.querySelector('meta[name="csrf-token"]').content
+
+      }).then(function (response) {
+        _this3.cart = response.data.cart; // console.log(this.cart);
       });
     }
   },
@@ -1894,26 +1905,19 @@ __webpack_require__.r(__webpack_exports__);
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
       vars[key] = value;
     });
-<<<<<<< HEAD
-    axios.get('/api/restaurant/' + vars.restaurant + '/products').then(function (response) {
-      // console.log(response);
-=======
     axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/restaurant/' + vars.restaurant + '/products').then(function (response) {
->>>>>>> fce4e53b811df86d41bdbecb7bdba709fa8e8b19
+      // console.log(response);
       _this.products = response.data.products;
     });
   },
   methods: {
     addToCart: function addToCart(productId) {
-<<<<<<< HEAD
       this.$emit('add-to-cart');
       this.$on('add-to-cart', function () {
         return alert('Handeled!');
-      });
-      axios.post('/api/user/cart/update', {
-=======
+      }); // axios.post('/api/user/cart/update', {
+
       axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart/update', {
->>>>>>> fce4e53b811df86d41bdbecb7bdba709fa8e8b19
         'product': productId
       }).then(function (response) {// if(response.data.success == true)
       });
@@ -41184,11 +41188,22 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.cart, function(item) {
                 return _c("a", { staticClass: "dropdown-item" }, [
-                  _c("i", { staticClass: "ni ni-support-16" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(item.product.name))]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "ni ni-support-16" })
+                  _c("div", { staticClass: "row ml-1" }, [
+                    _c("span", [_vm._v(_vm._s(item.product.name))]),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "ni ni-fat-remove float-right",
+                      staticStyle: {
+                        "font-size": "30px",
+                        "mrgin-right": "0px"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteCartItem(item.id)
+                        }
+                      }
+                    })
+                  ])
                 ])
               })
             ],
@@ -57575,14 +57590,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************************!*\
   !*** ./resources/js/components/RestaurantProductsComponent.vue ***!
   \*****************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RestaurantProductsComponent_vue_vue_type_template_id_05bc3521___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RestaurantProductsComponent.vue?vue&type=template&id=05bc3521& */ "./resources/js/components/RestaurantProductsComponent.vue?vue&type=template&id=05bc3521&");
 /* harmony import */ var _RestaurantProductsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RestaurantProductsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RestaurantProductsComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _RestaurantProductsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _RestaurantProductsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -57612,7 +57628,7 @@ component.options.__file = "resources/js/components/RestaurantProductsComponent.
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/RestaurantProductsComponent.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57865,8 +57881,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

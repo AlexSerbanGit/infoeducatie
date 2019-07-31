@@ -11,9 +11,10 @@
                         <h6 v-else class="text-overflow m-0">Nu ati adaudgat produse</h6>
                     </div>
                     <a v-for="item in cart" class="dropdown-item">
-                        <i class="ni ni-support-16"></i>
-                        <span>{{ item.product.name }}</span>
-                        <i class="ni ni-support-16"></i>
+                        <div class="row ml-1">
+                            <span>{{ item.product.name }}</span>
+                            <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-remove float-right" style="font-size: 30px; mrgin-right: 0px;"></i>
+                        </div>
                     </a>
                 </div>
             </li>
@@ -41,6 +42,16 @@
         methods: {
             updateCart() {
                 axios.get('/api/user/cart', {
+                    // '_token': document.querySelector('meta[name="csrf-token"]').content
+                })
+                .then(response => {
+                    this.cart = response.data.cart
+                    // console.log(this.cart);
+                })
+            },
+            deleteCartItem(item) {
+                axios.post('/api/user/cart/item/delete', {
+                    'item_id': item
                     // '_token': document.querySelector('meta[name="csrf-token"]').content
                 })
                 .then(response => {
