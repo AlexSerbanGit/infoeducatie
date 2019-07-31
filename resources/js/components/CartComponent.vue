@@ -42,14 +42,14 @@
         },
         methods: {
             updateCart() {
-                axios.get('/api/user/cart')
+                axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart')
                 .then(response => {
                     this.cart = response.data.cart
                     // console.log(this.cart);
                 })
             },
             deleteCartItem(item) {
-                axios.post('/api/user/cart/item/delete', {
+                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart/item/delete', {
                     'item_id': item
                 })
                 .then(response => {

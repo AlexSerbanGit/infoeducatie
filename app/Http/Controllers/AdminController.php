@@ -23,7 +23,8 @@ class AdminController extends Controller
 
     public function home(){
         $days = Auth::user()->dailyProgresses()->orderBy('id', 'DESC')->get();
-      
+        $arrow[0] = 0;
+        $joke[0] = 0;
         for($i = 0 ; $i <= 6 ; $i++){
             if(isset($days[$i])){
                 $arrow[$i] = $days[$i]->protein;

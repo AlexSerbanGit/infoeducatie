@@ -1832,14 +1832,14 @@ __webpack_require__.r(__webpack_exports__);
     updateCart: function updateCart() {
       var _this2 = this;
 
-      axios.get('/api/user/cart').then(function (response) {
+      axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart').then(function (response) {
         _this2.cart = response.data.cart; // console.log(this.cart);
       });
     },
     deleteCartItem: function deleteCartItem(item) {
       var _this3 = this;
 
-      axios.post('/api/user/cart/item/delete', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart/item/delete', {
         'item_id': item
       }).then(function (response) {
         console.log(_this3.cart);
@@ -57876,8 +57876,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
