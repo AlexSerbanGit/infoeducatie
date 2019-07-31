@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\User;
+use App\Product;
 use App\CartProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,21 +13,28 @@ class UserCartController extends Controller
 {
     public function get() {
 
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        return $user;
+        $user = User::find(18);
 
-        // $cart = $user -> cart;
+        $cart = $user -> cart;
+
+        foreach ($cart as $key => $value) {
+
+            $value -> product;
+        }
 
         return json_encode([
             'success' => true,
-            'cart' => $user
+            'cart' => $cart
         ]);
     }
 
-    public function update() {
+    public function update(Request $request) {
 
-        $user = Auth::user();
+        // $user = Auth::user();
+
+        $user = User::find(18);
 
         $product = Product::find($request -> product);
 
@@ -36,7 +45,7 @@ class UserCartController extends Controller
             ]);
         }
 
-        $already_in_cart = Cart::where('user_id', $user -> id) -> where('product_id', $product -> id);
+        $already_in_cart = CartProduct::where('user_id', $user -> id) -> where('product_id', $product -> id) -> first();
 
         if($already_in_cart) {
 
@@ -52,11 +61,13 @@ class UserCartController extends Controller
 
         $cart_product = new CartProduct();
 
-        $cart_product -> user -> associate($user);
+        $cart_product -> user_id = $user -> id;
 
-        $cart_product -> product -> associate($product);
+        $cart_product -> product_id = $product -> id;
 
         $cart_product -> quantity = 1;
+
+        $cart_product -> save();
 
         return json_encode([
             'success' => true,

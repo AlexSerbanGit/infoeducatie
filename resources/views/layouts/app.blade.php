@@ -94,7 +94,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                                 </li>
                             @else
 
-                            <cart-component></cart-component>
+                            <cart-component @addToCart="updateCart()"></cart-component>
 
                             <li class="nav-item" data-toggle="modal" data-target="#profile">
                                 <i class="fas fa-user-edit"></i> {{ Auth::user()->name }}

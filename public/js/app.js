@@ -1817,9 +1817,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    axios.post('/api/user/cart/get').then(function (response) {
-      console.log(response);
+    var _this = this;
+
+    axios.get('/api/user/cart', {// '_token': document.querySelector('meta[name="csrf-token"]').content
+    }).then(function (response) {
+      _this.cart = response.data.cart, console.log(_this.cart);
     });
+  },
+  methods: {
+    updateCart: function updateCart() {
+      console.log('gg');
+    }
   }
 });
 
@@ -1883,23 +1891,14 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    addToCart: function addToCart(product) {
-      var i;
-      var exists = false; // for (i = 0; i < JSON.parse(localStorage.cart).length; i++) {
-      //     if(localStorage.cart[i] == product) {
-      //         exists = true; break;
-      //     } else {
-      //         this.errorMessage = 'Produsul este deja adaugat in cos!';
-      //     }
-      // }
-
-      if (exists == false) {
-        this.cart = localStorage.cart;
-        this.cart.push(JSON.stringify(product));
-        localStorage.cart = JSON.stringify(this.cart);
-      } // localStorage.cart = this.cart;
-      // console.log(JSON.parse(localStorage.cart).name);
-
+    addToCart: function addToCart(productId) {
+      axios.post('/api/user/cart/update', {
+        'product': productId
+      }).then(function (response) {// if(response.data.success == true) {
+        //
+        // }
+      });
+      this.$emit('addToCart');
     }
   }
 });
@@ -41143,26 +41142,18 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm._l(_vm.cart, function(item) {
-                return _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "./examples/profile.html" }
-                  },
-                  [
-                    _c("i", { staticClass: "ni ni-support-16" }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(item.name))])
-                  ]
-                )
+                return _c("a", { staticClass: "dropdown-item" }, [
+                  _c("i", { staticClass: "ni ni-support-16" }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(item.product.name))])
+                ])
               })
             ],
             2
           )
         ])
       ]
-    ),
-    _vm._v(_vm._s(_vm.cart) + "\n")
+    )
   ])
 }
 var staticRenderFns = [
@@ -41318,7 +41309,7 @@ var render = function() {
                         staticClass: "btn btn-danger w-100",
                         on: {
                           click: function($event) {
-                            return _vm.addToCart(product)
+                            return _vm.addToCart(product.id)
                           }
                         }
                       },

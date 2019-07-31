@@ -79,6 +79,6 @@ class User extends Authenticatable
     }
     // Get the user/'s cart
     public function cart(){
-        return $this->belongsToMany('App\CartProduct', 'user_id');
+        return $this->hasMany('App\CartProduct', 'user_id');
     }
 }

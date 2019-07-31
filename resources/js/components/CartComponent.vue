@@ -10,9 +10,9 @@
                         <h6 v-if="cart.length" class="text-overflow m-0">Produsele tale</h6>
                         <h6 v-else class="text-overflow m-0">Nu ati adaudgat produse</h6>
                     </div>
-                    <a v-for="item in cart" href="./examples/profile.html" class="dropdown-item">
+                    <a v-for="item in cart" class="dropdown-item">
                         <i class="ni ni-support-16"></i>
-                        <span>{{ item.name }}</span>
+                        <span>{{ item.product.name }}</span>
                     </a>
                 </div>
             </li>
@@ -28,10 +28,18 @@
             }
         },
         mounted() {
-            axios.get('/api/user/cart/get')
-            .then(response => {
-                console.log(response);
+            axios.get('/api/user/cart', {
+                // '_token': document.querySelector('meta[name="csrf-token"]').content
             })
+            .then(response => {
+                this.cart = response.data.cart,
+                console.log(this.cart);
+            })
+        },
+        methods: {
+            updateCart() {
+                console.log('gg');
+            }
         }
     }
 </script>

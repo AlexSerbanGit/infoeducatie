@@ -37,24 +37,27 @@
             }
         },
         mounted() {
-            // var vars = {};
-            // var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            //     vars[key] = value;
-            // });
-            //
-            // axios.get('/api/restaurant/' + vars.restaurant + '/products')
-            // .then(response => {
-            //     this.products = response.data.products;
-            // })
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+
+            axios.get('/api/restaurant/' + vars.restaurant + '/products')
+            .then(response => {
+                this.products = response.data.products;
+            })
         },
         methods: {
             addToCart(productId) {
-                axios.post('../api/user/cart/update', {
-                  'products': productId
+                axios.post('/api/user/cart/update', {
+                  'product': productId
                 })
                 .then(response => {
-                    console.log(response);
+                    // if(response.data.success == true) {
+                    //
+                    // }
                 })
+                this.$emit('addToCart')
             }
         }
     }

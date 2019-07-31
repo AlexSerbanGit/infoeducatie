@@ -34,7 +34,7 @@ Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
 
     Route::get('/restaurant/{restaurant_id}/products', 'UserRestaurantsController@getProducts');
 
-    Route::get('/user/cart/get', 'UserCartController@get');
+    Route::get('/user/cart', 'UserCartController@get');
 
     Route::post('/user/cart/update', 'UserCartController@update');
 // });
