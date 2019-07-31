@@ -15,7 +15,7 @@
 
             // Verify if the user is logged in
             if(sessionStorage.getItem("token") != null && sessionStorage.getItem("user_id") != null) {
-                this.url = "./api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
+                this.url = document.head.querySelector('meta[name="api-base-url"]').content+"/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token");
                 this.button = true;
             } else {
                 sessionStorage.removeItem("user_id");
@@ -33,7 +33,7 @@
         },
         methods: {
             logout() {
-                axios.get("./api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"))
+                axios.get(document.head.querySelector('meta[name="api-base-url"]').content+"/api/user/logout" + "?user_id=" + sessionStorage.getItem("user_id") + "&user_agent=" + navigator.userAgent + "&token=" + sessionStorage.getItem("token"))
                     .then(response => {
                         sessionStorage.removeItem("user_id");
                         sessionStorage.removeItem("token");

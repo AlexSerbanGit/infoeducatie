@@ -1761,7 +1761,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.results = [];
-      axios.get('/api/search', {
+      axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/search', {
         params: {
           queryString: this.queryString
         }
@@ -1819,7 +1819,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/user/cart', {// '_token': document.querySelector('meta[name="csrf-token"]').content
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart', {// '_token': document.querySelector('meta[name="csrf-token"]').content
     }).then(function (response) {
       _this.cart = response.data.cart, console.log(_this.cart);
     });
@@ -1886,13 +1886,13 @@ __webpack_require__.r(__webpack_exports__);
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
       vars[key] = value;
     });
-    axios.get('/api/restaurant/' + vars.restaurant + '/products').then(function (response) {
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/restaurant/' + vars.restaurant + '/products').then(function (response) {
       _this.products = response.data.products;
     });
   },
   methods: {
     addToCart: function addToCart(productId) {
-      axios.post('/api/user/cart/update', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart/update', {
         'product': productId
       }).then(function (response) {// if(response.data.success == true) {
         //
@@ -1963,10 +1963,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('./api/restaurants').then(function (response) {
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/restaurants').then(function (response) {
       _this.restaurants = response.data;
     });
-    axios.get('./api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
       _this.near_restaurants = response.data, _this.filtered_restaurants = response.data;
     });
   },
@@ -2256,7 +2256,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     searchByPhoneNumber: function searchByPhoneNumber() {
       var _this = this;
 
-      axios.post('../api/find_user_by_phone_number', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
         // console.log(response.data);
@@ -2266,7 +2266,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post('../api/user/login/sms/send', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/login/sms/send', {
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
@@ -2277,7 +2277,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     registerSendSMS: function registerSendSMS() {
       var _this3 = this;
 
-      axios.post('../api/user/account/add', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/account/add', {
         'name': this.registerName,
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
@@ -41225,7 +41225,7 @@ var render = function() {
               _c("img", {
                 staticClass: "card-img-top",
                 attrs: {
-                  src: "/products/" + product.image,
+                  src: "../../products/" + product.image,
                   alt: "Card image cap"
                 }
               }),
@@ -57843,8 +57843,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

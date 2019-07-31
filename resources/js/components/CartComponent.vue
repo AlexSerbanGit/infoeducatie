@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
     export default {
         data() {
             return {
@@ -28,7 +29,7 @@
             }
         },
         mounted() {
-            axios.get('/api/user/cart', {
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart', {
                 // '_token': document.querySelector('meta[name="csrf-token"]').content
             })
             .then(response => {

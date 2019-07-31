@@ -41,7 +41,7 @@
         methods: {
             getResults() {
                 this.results = [];
-                axios.get('/api/search', {
+                axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/search', {
                     params: {
                         queryString: this.queryString
                     }
