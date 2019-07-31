@@ -11,10 +11,8 @@
                         <h6 v-else class="text-overflow m-0">Nu ati adaudgat produse</h6>
                     </div>
                     <a v-for="item in cart" class="dropdown-item">
-                        <div class="row ml-1">
-                            <span>{{ item.product.name }}</span>
-                            <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-remove float-right" style="font-size: 30px; mrgin-right: 0px;"></i>
-                        </div>
+                        <span>{{ item.product.name }}</span>
+                        <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-remove float-right text-danger" style="font-size: 30px; mrgin-right: 0px;"></i>
                     </a>
                 </div>
             </li>
@@ -32,18 +30,14 @@
         },
         mounted() {
             axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart', {
-                // '_token': document.querySelector('meta[name="csrf-token"]').content
             })
             .then(response => {
                 this.cart = response.data.cart
-                // console.log(this.cart);
             })
         },
         methods: {
             updateCart() {
-                axios.get('/api/user/cart', {
-                    // '_token': document.querySelector('meta[name="csrf-token"]').content
-                })
+                axios.get('/api/user/cart')
                 .then(response => {
                     this.cart = response.data.cart
                     // console.log(this.cart);
@@ -52,11 +46,9 @@
             deleteCartItem(item) {
                 axios.post('/api/user/cart/item/delete', {
                     'item_id': item
-                    // '_token': document.querySelector('meta[name="csrf-token"]').content
                 })
                 .then(response => {
-                    this.cart = response.data.cart
-                    // console.log(this.cart);
+                    console.log(this.cart);
                 })
             }
         },

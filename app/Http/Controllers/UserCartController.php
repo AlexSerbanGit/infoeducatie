@@ -75,8 +75,26 @@ class UserCartController extends Controller
         ]);
     }
 
-    public function deleteItem() {
+    public function deleteItem(Request $request) {
 
+        // $user = Auth::user();
 
+        $user = User::find(18);
+
+        $item = CartProduct::where('user_id', $user -> id) -> where('product_id', $request -> item_id) -> first();
+
+        if($item == null) {
+            return json_encode([
+                'success' => false,
+                'messge' => 'Produs inexistent!'
+            ]);
+        }
+
+        $item -> delete();
+
+        return json_encode([
+            'success' => true,
+            'message' => 'Prodsul a fost eliminat din cos!'
+        ]);
     }
 }
