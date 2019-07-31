@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
+            $table->integer('price');
             $table->integer('restaurant_id'); // id-ul restaurantului care adauga produsul
             $table->integer('weight'); // in grame
             $table->integer('protein'); // per 100 g

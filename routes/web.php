@@ -190,7 +190,7 @@ Route::post('/send_request', 'PublicController@sendRequest')->name('Trimite cere
 
 Route::get('/lol', 'UserRestaurantsController@user');
 
-
+Route::post('/to_checkout', 'CheckoutController@toCheckout');
 // Route::get('/restaurant_profile', function(){
 //     return view('restaurant.profile');
 // })->name('Cica design restaurant :))');

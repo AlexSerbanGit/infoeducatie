@@ -339,6 +339,7 @@ class AdminController extends Controller
             'image' => 'required',
             'category' => 'required|numeric',
             'type' => 'required|numeric',
+            'price' => 'required|numeric',
         ]);
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
@@ -350,6 +351,7 @@ class AdminController extends Controller
         $product->weight = $request->weight;
         $product->protein = $request->protein;
         $product->fat = $request->fat;
+        $product->price = $request->price;
         $product->carbo = $request->carbo;
         $product->kcal = $request->kcal;
         $product->barcode = $request->barcode;
@@ -386,7 +388,8 @@ class AdminController extends Controller
             'barcode' => 'required|string',
             'category' => 'required|numeric',
             'type' => 'required|numeric',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'price' => 'required|numeric',
         ]);
 
         $product = Product::find($id);
@@ -395,6 +398,7 @@ class AdminController extends Controller
         $product->protein = $request->protein;
         $product->fat = $request->fat;
         $product->carbo = $request->carbo;
+        $product->price = $request->price;
         $product->kcal = $request->kcal;
         $product->barcode = $request->barcode;
         $product->category = $request->category;

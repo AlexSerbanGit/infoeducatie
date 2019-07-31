@@ -67,6 +67,10 @@
             <input type="text" name="name" required class="form-control" placeholder="denumire produs" value="{{$request->name}}">
         </div>
         <div class="form-group">
+            <label>Pretul produsului: (lei)</label>
+            <input type="number" name="price" required class="form-control" placeholder="denumire produs">
+        </div>
+        <div class="form-group">
             <input type="text" name="id" value="{{$request->id}}" style="display:none">
         </div>
         <div class="form-group">

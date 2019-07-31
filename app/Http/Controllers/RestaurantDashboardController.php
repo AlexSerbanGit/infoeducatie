@@ -34,6 +34,7 @@ class RestaurantDashboardController extends Controller
             'image' => 'required',
             'category' => 'required|numeric',
             'type' => 'required|numeric',
+            'price' => 'required|numeric'
         ]);
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
@@ -49,6 +50,7 @@ class RestaurantDashboardController extends Controller
         $product->kcal = $request->kcal;
         $product->barcode = $request->barcode;
         $product->category = $request->category;
+        $product->price = $request->price;
         $product->type = $request->type;
         $product->description = $request->description;
         $product->restaurant_id = Auth::user()->id;
@@ -81,7 +83,8 @@ class RestaurantDashboardController extends Controller
             'barcode' => 'required|string',
             'category' => 'required|numeric',
             'type' => 'required|numeric',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'price' => 'required|numeric'
         ]);
 
         $product = Product::find($id);
@@ -90,6 +93,7 @@ class RestaurantDashboardController extends Controller
         $product->protein = $request->protein;
         $product->fat = $request->fat;
         $product->carbo = $request->carbo;
+        $product->price = $request->price;
         $product->kcal = $request->kcal;
         $product->barcode = $request->barcode;
         $product->category = $request->category;

@@ -50,10 +50,10 @@
         @csrf
         <hr class="mb-4">
 
-        <p style="font-size: 20px"><b>Numele tau:</b> <input type="text" name="name" value="{{ Auth::user()->name }}" class="form-control"></p>
-        <p style="font-size: 20px"><b>Adresa ta:</b> <input type="text" name="adress" value="{{ Auth::user()->adress }}" class="form-control"></p>
-        <p style="font-size: 20px"><b>Numarul tau de telefon:</b> <input type="number" value="{{ Auth::user()->phone_number }}" name="phone_number" class="form-control"></p>
-        <p style="font-size: 20px"><b>Emailul tau:</b> <input type="text" name="email" value="{{ Auth::user()->email }}" class="form-control"></p>
+        <p style="font-size: 20px"><b>Numele tau:</b> <input type="text" name="name" value="{{ Auth::user()->name }}" class="form-control" required></p>
+        <p style="font-size: 20px"><b>Adresa ta:</b> <input type="text" name="adress" value="{{ Auth::user()->adress }}" class="form-control" required></p>
+        <p style="font-size: 20px"><b>Numarul tau de telefon:</b> <input type="number" value="{{ Auth::user()->phone_number }}" name="phone_number" class="form-control" required></p>
+        <p style="font-size: 20px"><b>Emailul tau:</b> <input type="text" name="email" value="{{ Auth::user()->email }}" class="form-control" required></p>
 
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block mb-4" type="submit">Confirma datele si du-ma la pagina de plata</button>
