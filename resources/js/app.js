@@ -15,6 +15,7 @@ Vue.component('autocomplete-component', require('./components/AutocompleteCompon
 Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);
 Vue.component('restaurants-search', require('./components/RestaurantsPageSearchComponent.vue').default);
 Vue.component('cart-component', require('./components/CartComponent.vue').default);
+Vue.component('restaurant-products', require('./components/RestaurantProductsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

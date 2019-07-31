@@ -24,10 +24,11 @@
     export default {
         data() {
             return {
-                cart: ['item1', 'item2', 'item3']
+                cart: []
             }
         },
         mounted() {
+            // localStorage.cart = this.cart;
             if(localStorage.cart) {
                 this.cart = localStorage.cart;
             }

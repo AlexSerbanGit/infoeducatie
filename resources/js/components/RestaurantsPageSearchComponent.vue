@@ -109,7 +109,7 @@
                 }
             },
             restaurantUrl(currentRestaurantID) {
-                window.location.replace("../restaurant/" + currentRestaurantID + '/read');
+                window.location.replace("../restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
                 this.currentRestaurantID = '';
             }
         }

@@ -34,7 +34,7 @@
 <span class="loader">
 <span class="loader-inner"></span>
 </span>
-  <div class="wrapper ">
+  <div class="wrapper " id="app">
     <div class="sidebar" data-color="purple" data-background-color="white">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -158,9 +158,8 @@
 
         </div>
       </div>
-
     </div>
-  </div>
+</div>
 
   <!--   Core JS Files   -->
   <script src="{{ asset('assets-admin/js/core/jquery.min.js')}}"></script>
