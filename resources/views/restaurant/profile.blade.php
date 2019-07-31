@@ -21,9 +21,7 @@
 
             <p style="font-size: calc(1em + 1.7vw); font-weight: 300; color: white; font-weight: 400;">Produse vandute de acest restaurant:</p>
 
-            <div class="row">
-                <restaurant-products></restaurant-products>
-            </div>
+            <restaurant-products></restaurant-products>
         </div>
     </div>
 </div>

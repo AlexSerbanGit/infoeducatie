@@ -33,4 +33,8 @@ Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
     Route::get('/city/{city_id}/restaurants', 'UserRestaurantsController@getNearRestaurants') -> name('near-restaurants');
 
     Route::get('/restaurant/{restaurant_id}/products', 'UserRestaurantsController@getProducts');
+
+    Route::get('/user/cart/get', 'UserCartController@get');
+
+    Route::post('/user/cart/update', 'UserCartController@update');
 // });

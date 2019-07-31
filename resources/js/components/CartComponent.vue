@@ -12,7 +12,7 @@
                     </div>
                     <a v-for="item in cart" href="./examples/profile.html" class="dropdown-item">
                         <i class="ni ni-support-16"></i>
-                        <span>{{ item }}</span>
+                        <span>{{ item.name }}</span>
                     </a>
                 </div>
             </li>
@@ -28,15 +28,10 @@
             }
         },
         mounted() {
-            // localStorage.cart = this.cart;
-            if(localStorage.cart) {
-                this.cart = localStorage.cart;
-            }
+            axios.get('/api/user/cart/get')
+            .then(response => {
+                console.log(response);
+            })
         }
-        // watch: {
-        //     cart(newCart) {
-        //         localStorage.cart = newCart;
-        //     }
-        // }
     }
 </script>

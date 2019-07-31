@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-for="product in products" class="col-md-4 col-sm-6" style="margin-bottom: 20px">
+    <div class="row">
+        <div v-for="product in products" class="col-md-4 col-sm-6 " style="margin-bottom: 20px">
             <div class="card" style="width: 90%; margin: auto; background-color: #A1712E; color: white">
                 <img class="card-img-top" v-bind:src="'/products/' + product.image" alt="Card image cap">
                 <div class="card-body">
@@ -17,7 +17,7 @@
                     <span class="badge badge-pill badge-danger">{{ product.kcal }} kcal</span>
                     <span v-for="allergy in product.allergies" class="badge badge-pill badge-primary">{{ allergy.name }}</span>
                     <div class="" style="margin-top: 10px">
-                        <button class="btn btn-danger w-100">
+                        <button v-on:click="addToCart(product.id)" class="btn btn-danger w-100">
                             Adauga in cos
                         </button>
                     </div>
@@ -31,22 +31,31 @@
     export default {
         data() {
             return {
-                products: []
+                errorMessage: '',
+                products: [],
+                cart: []
             }
         },
         mounted() {
-            var vars = {};
-            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-                vars[key] = value;
-            });
-
-            axios.get('/api/restaurant/' + vars.restaurant + '/products')
-            .then(response => {
-                this.products = response.data.products;
-            })
+            // var vars = {};
+            // var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            //     vars[key] = value;
+            // });
+            //
+            // axios.get('/api/restaurant/' + vars.restaurant + '/products')
+            // .then(response => {
+            //     this.products = response.data.products;
+            // })
         },
         methods: {
-
+            addToCart(productId) {
+                axios.post('../api/user/cart/update', {
+                  'products': productId
+                })
+                .then(response => {
+                    console.log(response);
+                })
+            }
         }
     }
 </script>

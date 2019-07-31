@@ -77,4 +77,8 @@ class User extends Authenticatable
     public function city(){
         return $this->belongsTo('App\City', 'city_id');
     }
+    // Get the user/'s cart
+    public function cart(){
+        return $this->belongsToMany('App\CartProduct', 'user_id');
+    }
 }

@@ -1817,16 +1817,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    // localStorage.cart = this.cart;
-    if (localStorage.cart) {
-      this.cart = localStorage.cart;
-    }
-  } // watch: {
-  //     cart(newCart) {
-  //         localStorage.cart = newCart;
-  //     }
-  // }
-
+    axios.post('/api/user/cart/get').then(function (response) {
+      console.log(response);
+    });
+  }
 });
 
 /***/ }),
@@ -1872,7 +1866,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      products: []
+      errorMessage: '',
+      products: [],
+      cart: []
     };
   },
   mounted: function mounted() {
@@ -1886,7 +1882,26 @@ __webpack_require__.r(__webpack_exports__);
       _this.products = response.data.products;
     });
   },
-  methods: {}
+  methods: {
+    addToCart: function addToCart(product) {
+      var i;
+      var exists = false; // for (i = 0; i < JSON.parse(localStorage.cart).length; i++) {
+      //     if(localStorage.cart[i] == product) {
+      //         exists = true; break;
+      //     } else {
+      //         this.errorMessage = 'Produsul este deja adaugat in cos!';
+      //     }
+      // }
+
+      if (exists == false) {
+        this.cart = localStorage.cart;
+        this.cart.push(JSON.stringify(product));
+        localStorage.cart = JSON.stringify(this.cart);
+      } // localStorage.cart = this.cart;
+      // console.log(JSON.parse(localStorage.cart).name);
+
+    }
+  }
 });
 
 /***/ }),
@@ -41137,7 +41152,7 @@ var render = function() {
                   [
                     _c("i", { staticClass: "ni ni-support-16" }),
                     _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(item))])
+                    _c("span", [_vm._v(_vm._s(item.name))])
                   ]
                 )
               })
@@ -41146,7 +41161,8 @@ var render = function() {
           )
         ])
       ]
-    )
+    ),
+    _vm._v(_vm._s(_vm.cart) + "\n")
   ])
 }
 var staticRenderFns = [
@@ -41194,11 +41210,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "row" },
     _vm._l(_vm.products, function(product) {
       return _c(
         "div",
         {
-          staticClass: "col-md-4 col-sm-6",
+          staticClass: "col-md-4 col-sm-6 ",
           staticStyle: { "margin-bottom": "20px" }
         },
         [
@@ -41294,7 +41311,24 @@ var render = function() {
                     )
                   }),
                   _vm._v(" "),
-                  _vm._m(0, true)
+                  _c("div", { staticStyle: { "margin-top": "10px" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger w-100",
+                        on: {
+                          click: function($event) {
+                            return _vm.addToCart(product)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Adauga in cos\n                    "
+                        )
+                      ]
+                    )
+                  ])
                 ],
                 2
               )
@@ -41306,18 +41340,7 @@ var render = function() {
     0
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { "margin-top": "10px" } }, [
-      _c("button", { staticClass: "btn btn-danger w-100" }, [
-        _vm._v("\n                        Adauga in cos\n                    ")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
