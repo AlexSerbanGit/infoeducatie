@@ -40,6 +40,7 @@ class CreateUsersTable extends Migration
             $table -> integer('height') -> nullable(); // cm
             $table -> integer('lifestyle') -> nullable();
             $table -> integer('restaurant_transport_cost') -> nullable();
+            $table -> longText('adress')->nullable();
             $table -> rememberToken();
             $table -> timestamps();
         });

@@ -100,4 +100,9 @@ class UserCartController extends Controller
             'message' => 'Prodsul a fost eliminat din cos!'
         ]);
     }
+
+    
+    public function checkout(){
+        return view('checkout');
+    }
 }

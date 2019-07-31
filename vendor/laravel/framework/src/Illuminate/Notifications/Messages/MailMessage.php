@@ -36,7 +36,7 @@ class MailMessage extends SimpleMessage implements Renderable
      *
      * @var string|null
      */
-    public $theme;
+    public $theme = 'default';
 
     /**
      * The "from" information for the message.

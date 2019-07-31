@@ -2050,7 +2050,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     restaurantUrl: function restaurantUrl(currentRestaurantID) {
-      window.location.replace("../restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
+      window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content + "/restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
       this.currentRestaurantID = '';
     }
   }
@@ -57878,8 +57878,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
