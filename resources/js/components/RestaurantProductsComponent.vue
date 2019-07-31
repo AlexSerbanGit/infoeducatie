@@ -18,7 +18,7 @@
                     <span v-for="allergy in product.allergies" class="badge badge-pill badge-primary">{{ allergy.name }}</span>
                     <div class="" style="margin-top: 10px">
                         <button v-on:click="addToCart(product.id)" class="btn btn-danger w-100">
-                            Adauga in cos
+                            <i class="fas fa-cart-plus"></i> Adauga in cos 
                         </button>
                     </div>
                 </div>
