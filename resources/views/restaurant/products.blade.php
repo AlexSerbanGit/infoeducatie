@@ -67,6 +67,10 @@
           <input type="text" name="name" required class="form-control" placeholder="denumire produs">
       </div>
       <div class="form-group">
+          <label>Pretul produsului: (lei)</label>
+          <input type="number" name="price" required class="form-control" placeholder="denumire produs">
+      </div>
+      <div class="form-group">
         <label>Descrierea produsului:</label>
         <textarea name="description" cols="30" rows="4" class="form-control"></textarea>
       </div>
@@ -154,6 +158,10 @@
         <div class="form-group">
             <label>Denumirea produsului:</label>
             <input type="text" name="name" required class="form-control" placeholder="denumire produs" value="{{$request->name}}">
+        </div>
+        <div class="form-group">
+            <label>Pretul produsului: (lei)</label>
+            <input type="number" name="price" required class="form-control" placeholder="denumire produs" value="{{$request->price}}">
         </div>
         <div class="form-group">
             <label>Descrierea produsului:</label>
