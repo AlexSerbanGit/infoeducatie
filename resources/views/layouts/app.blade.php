@@ -34,6 +34,7 @@
     <meta name="api-base-url" content="{{ url('/') }}" />
     <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/cart.css') }}">
+    <meta name="api-base-url" content="{{ url('/') }}" />
     <style>
         html body {
             font-family: 'Oswald', sans-serif;

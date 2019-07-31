@@ -2,7 +2,7 @@
     <div class="row">
         <div v-for="product in products" class="col-md-4 col-sm-6 " style="margin-bottom: 20px">
             <div class="card" style="width: 90%; margin: auto; background-color: #A1712E; color: white">
-                <img class="card-img-top" v-bind:src="'/products/' + product.image" alt="Card image cap">
+                <img class="card-img-top" v-bind:src="'../../products/' + product.image" alt="Card image cap">
                 <div class="card-body">
                     <p class="card-text font-weight-bold">{{ product.name }}</p>
                     <p class="card-text">{{ product.description }}</p>
@@ -42,7 +42,7 @@
                 vars[key] = value;
             });
 
-            axios.get('/api/restaurant/' + vars.restaurant + '/products')
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/restaurant/' + vars.restaurant + '/products')
             .then(response => {
                 // console.log(response);
                 this.products = response.data.products;
@@ -50,12 +50,16 @@
         },
         methods: {
             addToCart(productId) {
+<<<<<<< HEAD
 
                 this.$emit('add-to-cart');
 
                 this.$on('add-to-cart', () => alert('Handeled!'));
 
                 axios.post('/api/user/cart/update', {
+=======
+                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart/update', {
+>>>>>>> fce4e53b811df86d41bdbecb7bdba709fa8e8b19
                   'product': productId
                 })
                 .then(response => {

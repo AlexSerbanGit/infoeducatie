@@ -53,6 +53,7 @@ class SetUsersProgress extends Command
                     
             }
         }
+        $this->info('Statisticile pe ziua de azi au fost create pentru fiecare utilizator existent');
         
     }
 }

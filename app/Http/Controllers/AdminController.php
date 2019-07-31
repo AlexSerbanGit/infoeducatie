@@ -13,13 +13,36 @@ use App\Message;
 use Mail;
 use App\ProductRequest;
 use Auth;
+use App\Charts\chartStats;
+
+
+
 
 class AdminController extends Controller
 {
 
     public function home(){
+        $days = Auth::user()->dailyProgresses()->orderBy('id', 'DESC')->get();
+      
+        for($i = 0 ; $i <= 6 ; $i++){
+            if(isset($days[$i])){
+                $arrow[$i] = $days[$i]->protein;
+                $joke[$i] = 120;
+            }else{
+                break;
+            }
+        }
+       
+        $chart = new chartStats;
+        $chart->labels(['Acu 2 saptamani', 'Saptamana trecuta', 'Aceasta saptamana']);
 
-        return view('admin.home');
+        $dataset = $chart->dataset('Invitati adaugati', 'line', $arrow);
+        $dataset->backgroundColor(['transparent']);
+        $dataset->color(['green']);
+        $chart->dataset('Invitati adaugati', 'line', $joke);
+
+
+        return view('admin.home')->with('chart', $chart);
 
     }
 
