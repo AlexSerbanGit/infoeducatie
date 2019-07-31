@@ -1824,7 +1824,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart', {}).then(function (response) {
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart', {}).then(function (response) {
       _this.cart = response.data.cart;
     });
   },
@@ -1832,17 +1832,14 @@ __webpack_require__.r(__webpack_exports__);
     updateCart: function updateCart() {
       var _this2 = this;
 
-      axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart').then(function (response) {
+      axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart').then(function (response) {
         _this2.cart = response.data.cart; // console.log(this.cart);
       });
     },
     deleteCartItem: function deleteCartItem(item) {
-      var _this3 = this;
-
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart/item/delete', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart/item/delete', {
         'item_id': item
-      }).then(function (response) {
-        console.log(_this3.cart);
+      }).then(function (response) {// console.log(this.cart);
       });
     }
   }
@@ -1903,7 +1900,7 @@ __webpack_require__.r(__webpack_exports__);
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
       vars[key] = value;
     });
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/restaurant/' + vars.restaurant + '/products').then(function (response) {
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/restaurant/' + vars.restaurant + '/products').then(function (response) {
       // console.log(response);
       _this.products = response.data.products;
     });
@@ -1914,7 +1911,7 @@ __webpack_require__.r(__webpack_exports__);
       //
       // this.$on('add-to-cart', () => alert('Handeled!'));
       // axios.post('/api/user/cart/update', {
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/cart/update', {
+      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart/update', {
         'product': productId
       }).then(function (response) {// if(response.data.success == true)
       });
@@ -1985,7 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/restaurants').then(function (response) {
       _this.restaurants = response.data;
     });
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
+    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
       _this.near_restaurants = response.data, _this.filtered_restaurants = response.data;
     });
   },
@@ -41172,15 +41169,7 @@ var render = function() {
               staticStyle: { "margin-top": "10px" }
             },
             [
-              _c("div", { staticClass: " dropdown-header noti-title" }, [
-                _vm.cart.length > 0
-                  ? _c("h6", { staticClass: "text-overflow m-0" }, [
-                      _vm._v("Produsele tale")
-                    ])
-                  : _c("h6", { staticClass: "text-overflow m-0" }, [
-                      _vm._v("Nu ati adaudgat produse")
-                    ])
-              ]),
+              _c("div", { staticClass: " dropdown-header noti-title" }),
               _vm._v(" "),
               _vm._l(_vm.cart, function(item) {
                 return _c("a", { staticClass: "dropdown-item" }, [
@@ -57876,8 +57865,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\infoeducatie\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/andreipreda/Desktop/projects/Laravel/infoeducatie/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

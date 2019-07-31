@@ -7,8 +7,8 @@
                 </span>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" style="margin-top: 10px">
                     <div class=" dropdown-header noti-title">
-                        <h6 v-if="cart.length > 0" class="text-overflow m-0">Produsele tale</h6>
-                        <h6 v-else class="text-overflow m-0">Nu ati adaudgat produse</h6>
+                        <!-- <h6 v-if="cart.length > 0" class="text-overflow m-0">Produsele tale</h6>
+                        <h6 v-else class="text-overflow m-0">Nu ati adaudgat produse</h6> -->
                     </div>
                     <a v-for="item in cart" class="dropdown-item">
                         <span>{{ item.product.name }}</span>
@@ -34,7 +34,7 @@
             }
         },
         mounted() {
-            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart', {
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart', {
             })
             .then(response => {
                 this.cart = response.data.cart
@@ -42,18 +42,18 @@
         },
         methods: {
             updateCart() {
-                axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart')
+                axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart')
                 .then(response => {
                     this.cart = response.data.cart
                     // console.log(this.cart);
                 })
             },
             deleteCartItem(item) {
-                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart/item/delete', {
+                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart/item/delete', {
                     'item_id': item
                 })
                 .then(response => {
-                    console.log(this.cart);
+                    // console.log(this.cart);
                 })
             }
         }

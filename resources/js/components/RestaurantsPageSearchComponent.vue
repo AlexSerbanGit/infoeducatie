@@ -50,7 +50,7 @@
                 .then(response => {
                     this.restaurants = response.data
                 })
-            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants')
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants')
                 .then(response => {
                     this.near_restaurants = response.data,
                     this.filtered_restaurants = response.data
