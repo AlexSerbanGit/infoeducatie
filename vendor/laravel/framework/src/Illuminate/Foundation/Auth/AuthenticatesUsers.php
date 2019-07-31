@@ -30,6 +30,14 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
+
+        if(!$request->password){
+            return json_encode([
+                'success' => false,
+                'message' => 'Autentificare nereusita!'
+            ]);
+        }
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -44,6 +52,11 @@ trait AuthenticatesUsers
 
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
+        }else{
+            return json_encode([
+                'success' => false,
+                'message' => 'Autentificare nereusita!'
+            ]);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -91,6 +104,9 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
+        if(is_numeric($request->get('email'))){
+            return ['phone_number'=>$request->get('email'),'password'=>$request->get('password')];
+        }
         return $request->only($this->username(), 'password');
     }
 

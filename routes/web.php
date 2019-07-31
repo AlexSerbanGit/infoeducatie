@@ -89,6 +89,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/restaurants', 'UserRestaurantsController@restaurants') -> name('restaurants');
 
     Route::get('/restaurant/{restaurant_id}/read', 'UserRestaurantsController@readRestaurant') -> name('read-restaurant');
+
+    Route::get('/checkout', 'UserCartController@checkout')->name('Pagina checkout');
 });
 
 Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], function () {
@@ -187,6 +189,7 @@ Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact')
 Route::post('/send_request', 'PublicController@sendRequest')->name('Trimite cerere de adaugare produs');
 
 Route::get('/lol', 'UserRestaurantsController@user');
+
 
 // Route::get('/restaurant_profile', function(){
 //     return view('restaurant.profile');

@@ -79,4 +79,9 @@ class UserCartController extends Controller
 
 
     }
+
+    
+    public function checkout(){
+        return view('checkout');
+    }
 }
