@@ -1810,6 +1810,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2272,7 +2277,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     searchByPhoneNumber: function searchByPhoneNumber() {
       var _this = this;
 
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/find_user_by_phone_number', {
+      axios.post('../api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
         // console.log(response.data);
@@ -2282,7 +2287,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/login/sms/send', {
+      axios.post('../api/user/login/sms/send', {
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
@@ -2293,7 +2298,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     registerSendSMS: function registerSendSMS() {
       var _this3 = this;
 
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/api/user/account/add', {
+      axios.post('../api/user/account/add', {
         'name': this.registerName,
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
@@ -2321,6 +2326,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         codeConstruct = codeConstruct + this.sms_numbers[i].toString();
       }
 
+      console.log(document.querySelector('meta[name="csrf-token"]').content);
       axios.post('../user/login', {
         'password': codeConstruct,
         'email': this.phoneNumber,
@@ -41142,8 +41148,6 @@ var render = function() {
             {
               staticClass: "fa-stack has-badge",
               attrs: {
-                "data-count": "4",
-                href: "#",
                 role: "button",
                 "data-toggle": "dropdown",
                 "aria-haspopup": "true",
@@ -41184,15 +41188,20 @@ var render = function() {
                 return _c("a", { staticClass: "dropdown-item" }, [
                   _c("span", [_vm._v(_vm._s(item.product.name))]),
                   _vm._v(" "),
-                  _c("i", {
-                    staticClass: "ni ni-fat-remove float-right text-danger",
-                    staticStyle: { "font-size": "30px", "mrgin-right": "0px" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteCartItem(item.id)
+                  _c("div", { staticClass: "float-right" }, [
+                    _c("i", {
+                      staticClass: "ni ni-fat-remove text-danger",
+                      staticStyle: {
+                        "font-size": "25px",
+                        "mrgin-right": "0px"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteCartItem(item.id)
+                        }
                       }
-                    }
-                  })
+                    })
+                  ])
                 ])
               })
             ],

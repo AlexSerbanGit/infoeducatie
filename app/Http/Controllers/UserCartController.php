@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+// use Auth;
 use App\User;
 use App\Product;
 use App\CartProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserCartController extends Controller
 {
     public function get() {
 
-        // $user = Auth::user();
+        $user = Auth::user();
+
+        return $user;
 
         $user = User::find(18);
 

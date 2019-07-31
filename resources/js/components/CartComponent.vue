@@ -2,7 +2,7 @@
     <div>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
-                <span v-on:click="updateCart()" class="fa-stack has-badge" data-count="4"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span v-on:click="updateCart()" class="fa-stack has-badge" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                 </span>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" style="margin-top: 10px">
@@ -12,7 +12,12 @@
                     </div>
                     <a v-for="item in cart" class="dropdown-item">
                         <span>{{ item.product.name }}</span>
-                        <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-remove float-right text-danger" style="font-size: 30px; mrgin-right: 0px;"></i>
+                        <div class="float-right">
+                            <!-- <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-delete text-danger" style="font-size: 20px; mrgin-right: 0px;"></i> -->
+                            <!-- <i class="ni font-weight-bold" style="font-size: 20px;">5</i> -->
+                            <!-- <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-add" style="font-size: 20px; mrgin-right: 0px;"></i> -->
+                            <i v-on:click="deleteCartItem(item.id)" class="ni ni-fat-remove text-danger" style="font-size: 25px; mrgin-right: 0px;"></i>
+                        </div>
                     </a>
                 </div>
             </li>
