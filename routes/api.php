@@ -25,11 +25,18 @@ Route::post('/user/account/add', 'UserRegisterController@adddAcount');
 
 Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
 
-Route::get('/test', function() {
+Route::post('/test', function() {
     return json_encode([
         'success' => true
     ]);
 });
+
+Route::get('/test2', function() {
+    return json_encode([
+        'success' => Auth::user()
+    ]);
+});
+
 
 
 // API routes for logged users
