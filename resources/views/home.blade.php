@@ -2,28 +2,9 @@
 
 @section('content')
 
-    <search-component></search-component>
-
-    {{-- <div class="container">
-        <div class="header-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="input-group mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="Search" type="text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 @if($user -> stats)
 <!-- Header -->
-<div class="header pb-1 pt-2 ">
+<div class="header pb-1 pt-2">
       <div class="container">
         <div class="header-body">
           <!-- Card stats -->
@@ -585,7 +566,7 @@
                             Punere masa
                           @endif
 
-                          <div class="abolute-right" style="position: absolute; top: 5px; right: 10px">
+                          <div class="abolute-right" style="position: absolute; top: 5px; right: 10px;">
                             <button class="btn btn-info">
                             <script>
                             var date = new Date('{{$target->created_at}}');
@@ -648,7 +629,7 @@
                               Punere masa
                             @endif
 
-                            <div class="abolute-right" style="position: absolute; top: 5px; right: 10px">
+                            <div class="abolute-right" style="position: absolute; top: 5px; right: 10px;">
                               <button class="btn btn-info">
                               <script>
                               var date = new Date('{{$target->created_at}}');

@@ -10,6 +10,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Import vue modlas for user dashboard
+import vmodal from 'vue-js-modal'
+
+Vue.use(vmodal)
+
 Vue.component('scanner-component', require('./components/ScannerComponent.vue').default);
 Vue.component('autocomplete-component', require('./components/AutocompleteComponent.vue').default);
 Vue.component('user-login-register-component', require('./components/UserLoginRegisterComponent.vue').default);

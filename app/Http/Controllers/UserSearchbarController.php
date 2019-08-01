@@ -6,7 +6,7 @@ use App\Product;
 use App\Allergy;
 use Illuminate\Http\Request;
 
-class UserAPISearchbarController extends Controller
+class UserSearchbarController extends Controller
 {
     public function search(Request $request) {
 
@@ -14,11 +14,11 @@ class UserAPISearchbarController extends Controller
 
         $allergies = [];
 
-        $products = Product::where('name', 'like', '%'.$request -> queryString.'%') -> get();
+        $products = Product::where('name', 'like', '%'.$request -> queryString.'%') -> orWhere('barcode', 'like', '%'.$request -> queryString.'%') -> get();
 
         $allergies = Allergy::where('name', 'like', '%'.$request -> queryString.'%') -> get();
 
-        $merged = $products -> merge($allergies);
+        $merged = $allergies -> merge($products);
 
         return response() -> json($merged);
     }

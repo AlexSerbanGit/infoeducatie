@@ -26,6 +26,7 @@
     "dependencies": {
         "bootstrap-vue": "^2.0.0-rc.22",
         "quagga": "^0.12.1",
+        "vue-js-modal": "^1.3.31",
         "vue-quaggajs": "^1.0.10",
         "vue-router": "^3.0.7"
     }

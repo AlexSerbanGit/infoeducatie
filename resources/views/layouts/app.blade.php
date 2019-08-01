@@ -105,7 +105,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                     </div>
                 </div>
             </nav>
-            <scanner-component></scanner-component>
+            {{-- <scanner-component></scanner-component> --}}
         </div>
         <div class="header-blue" style="min-height: 75vh">
             @if(Session::has('message'))
@@ -130,6 +130,9 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                 </div>
             @endif
             @yield('content')
+            @auth
+                <search-component></search-component>
+            @endauth
         </div>
         <div class="footer-basic">
             <footer>

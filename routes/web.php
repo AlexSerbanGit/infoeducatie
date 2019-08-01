@@ -103,6 +103,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/city/{city_id}/restaurants', 'UserRestaurantsController@getNearRestaurants') -> name('near-restaurants');
 
     Route::get('/restaurant/{restaurant_id}/products', 'UserRestaurantsController@getProducts');
+
+    Route::get('/search', 'UserSearchbarController@search');
 });
 
 Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], function () {
