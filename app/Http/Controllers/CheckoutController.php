@@ -27,4 +27,8 @@ class CheckoutController extends Controller
 
         return view('toCheckout');
     }
+
+    public function final(){
+        return redirect('/home')->with('message', 'Multumim pentru ca ati cumparat de la noi! Curierul va va suna cand este in propierea resedintei dumneavoastra!');
+    }
 }

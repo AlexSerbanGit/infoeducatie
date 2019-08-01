@@ -87,6 +87,8 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             </div>
 
             <div class="row">
+            @if(Auth::user()->cart->count() > 0)
+
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Cosul tau</span>
@@ -123,17 +125,42 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                 </li>
                 </ul>
             </div>
+            @else
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Cosul tau</span>
+                <span class="badge badge-secondary badge-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h4 class="my-0">Momentan nu aveti produse in cos</h4>
+                    <small class="text-muted"></small>
+                    </div>
+                    <span class="text-muted"></span>
+                </li>
+
+                </ul>
+            </div>
+            @endif
             <div class="col-md-8 order-md-1">
                 <p class="lead" class="mb-3">{{ Auth::user()->name }}, comanda ta va fi livrata la adresa: {{ Auth::user()->adress }} imediat dupa ce platesti comanda. O factura va fi trimisa pe adresa ta de email: {{ Auth::user()->email }} <br> Curierul te va contacta la numarul: {{ Auth::user()->phone_number }} cand este aproape de resedinta ta.</p>
+                @if(Auth::user()->cart->count() > 0)
                 <div class="links">
                     <div id="paypal-button"></div>
                 </div>
+                @else
+
+                <h1 class="text-danger">Momentan nu aveti produse in cos</h1>
+
+                @endif
             </div>
             </div>
 
         </div>
         </div>
     </div>
+    @if(Auth::user()->cart->count() > 0)
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
       paypal.Button.render({
@@ -161,6 +188,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             .then(function(res) {
               console.log(res);
               alert('Plata realizata cu succes!!');
+              window.location.replace("{{ url('/final_checkout') }}");
             })
             .catch(function(res) {
                 alert('Te rugam sa finalizazi plata!');
@@ -168,6 +196,8 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
         }
       }, '#paypal-button');
     </script>
+    @endif
+
     {{-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     <!-- Optional JS -->
