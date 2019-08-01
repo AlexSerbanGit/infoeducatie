@@ -139,8 +139,6 @@
         }
       },
       searchByPhoneNumber: function() {
-          axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
         axios.post('../api/find_user_by_phone_number', {
           'phone_number': this.phoneNumber
         })
@@ -151,8 +149,6 @@
         })
       },
       loginSendSMS: function() {
-          axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
           axios.post('../api/user/login/sms/send', {
             'phone_number': this.phoneNumber,
             '_token': document.querySelector('meta[name="csrf-token"]').content
@@ -163,8 +159,6 @@
           })
       },
       registerSendSMS: function() {
-          axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
         axios.post('../api/user/account/add', {
           'name': this.registerName,
           'phone_number': this.phoneNumber,
@@ -191,8 +185,9 @@
         for (i = 1; i < this.sms_numbers.length; i++) {
           codeConstruct = codeConstruct + this.sms_numbers[i].toString();
         }
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        axios.post('../user/login', {
+        // console.log(document.querySelector('meta[name="csrf-token"]').content);
+        // axios.post('../user/login', {
+        axios.post('https://scanner.d-soft.ro/user/login', {
           'password': codeConstruct,
           'email': this.phoneNumber,
           '_token': document.querySelector('meta[name="csrf-token"]').content
