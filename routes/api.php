@@ -25,13 +25,7 @@ Route::post('/user/account/add', 'UserRegisterController@adddAcount');
 
 Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
 
-Route::post('/test', function() {
-    return json_encode([
-        'success' => true
-    ]);
-});
-
-Route::get('/test2', function() {
+Route::get('/test', function() {
     return json_encode([
         'success' => Auth::user()
     ]);
