@@ -40,3 +40,9 @@ Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
 
     Route::post('/user/cart/item/delete', 'UserCartController@deleteItem');
 // });
+
+
+Route::post('create-payment/{id}', 'PaymentController@createPayment');
+
+Route::post('execute-payment/{id}', 'PaymentController@executePayment');
+

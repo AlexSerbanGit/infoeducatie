@@ -52,7 +52,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
 <span class="loader">
 <span class="loader-inner"></span>
 </span>
-    <div id="app">
+    <div id="">
         <div class="header-blue" style="padding-bottom: 100px">
         
         </div>
@@ -93,44 +93,81 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                 <span class="badge badge-secondary badge-pill">3</span>
                 </h4>
                 <ul class="list-group mb-3">
+                @php
+                    $total = 0;
+                @endphp
                 @foreach(Auth::user()->cart as $product)
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
                     <h4 class="my-0">{{$product->product->name}}</h4>
-                    <small class="text-muted">Nume restaurant</small>
+                    <small class="text-muted">{{ $product->product->restaurant->name }}</small>
                     </div>
-                    <span class="text-muted">$12</span>
+                    <span class="text-muted">{{$product->product->price * $product->quantity}} lei</span>
+                    @php
+                        $total += $product->product->price * $product->quantity;
+                    @endphp
                 </li>
                 @endforeach
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                    <h4 class="my-0">Produs1</h4>
-                    <small class="text-muted">Nume restaurant</small>
+                    <h4 class="my-0">Transport</h4>
                     </div>
-                    <span class="text-muted">$12</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                    <h4 class="my-0">Produs1</h4>
-                    <small class="text-muted">Nume restaurant</small>
-                    </div>
-                    <span class="text-muted">$12</span>
+                    <span class="text-muted">15 lei</span>
+                    @php
+                        $total += 15;
+                    @endphp
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>$35</strong>
+                    <span>Total </span>
+                    <strong>{{$total}} lei</strong>
                 </li>
                 </ul>
             </div>
             <div class="col-md-8 order-md-1">
                 <p class="lead" class="mb-3">{{ Auth::user()->name }}, comanda ta va fi livrata la adresa: {{ Auth::user()->adress }} imediat dupa ce platesti comanda. O factura va fi trimisa pe adresa ta de email: {{ Auth::user()->email }} <br> Curierul te va contacta la numarul: {{ Auth::user()->phone_number }} cand este aproape de resedinta ta.</p>
-             
+                <div class="links">
+                    <div id="paypal-button"></div>
+                </div>
             </div>
             </div>
 
         </div>
         </div>
     </div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+      paypal.Button.render({
+        env: 'sandbox', // sau 'production'
+        style: {
+          size: 'large',
+          color: 'gold',
+          shape: 'pill',
+          fundingicons: true,
+        },
+        payment: function(data, actions) {
+
+          return actions.request.post(" {{url('/api/create-payment/'.Auth::user()->id)}} ")
+            .then(function(res) {
+              return res.id;
+            });
+        },        
+
+
+        onAuthorize: function(data, actions) {
+          return actions.request.post("{{ url('api/execute-payment/'.Auth::user()->id)}}", {
+            paymentID: data.paymentID,
+            payerID:   data.payerID,
+          })
+            .then(function(res) {
+              console.log(res);
+              alert('Plata realizata cu succes!!');
+            })
+            .catch(function(res) {
+                alert('Te rugam sa finalizazi plata!');
+            });
+        }
+      }, '#paypal-button');
+    </script>
     {{-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     <!-- Optional JS -->
