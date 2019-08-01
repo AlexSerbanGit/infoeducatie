@@ -2318,7 +2318,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         _this2.user = response.data.user;
       });
     },
@@ -2351,10 +2351,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       for (i = 1; i < this.sms_numbers.length; i++) {
         codeConstruct = codeConstruct + this.sms_numbers[i].toString();
-      }
+      } // console.log(document.querySelector('meta[name="csrf-token"]').content);
+      // axios.post('../user/login', {
 
-      console.log(document.querySelector('meta[name="csrf-token"]').content);
-      axios.post('../user/login', {
+
+      axios.post('https://scanner.d-soft.ro/user/login', {
         'password': codeConstruct,
         'email': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
