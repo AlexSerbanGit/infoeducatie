@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\GuestVerification::class,
         'isAdmin' => \App\Http\Middleware\IsAdmin::class,
         'restaurant' => \App\Http\Middleware\VerifyRestaurantProfile::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 
     /**
