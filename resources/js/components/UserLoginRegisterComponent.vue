@@ -139,7 +139,7 @@
         }
       },
       searchByPhoneNumber: function() {
-        axios.post('../api/find_user_by_phone_number', {
+        axios.post('https://scanner.d-soft.ro/api/find_user_by_phone_number', {
           'phone_number': this.phoneNumber
         })
         .then(response => {
@@ -149,7 +149,7 @@
         })
       },
       loginSendSMS: function() {
-          axios.post('../api/user/login/sms/send', {
+          axios.post('https://scanner.d-soft.ro/api/user/login/sms/send', {
             'phone_number': this.phoneNumber,
             '_token': document.querySelector('meta[name="csrf-token"]').content
           })
@@ -159,7 +159,7 @@
           })
       },
       registerSendSMS: function() {
-        axios.post('../api/user/account/add', {
+        axios.post('https://scanner.d-soft.ro/api/user/account/add', {
           'name': this.registerName,
           'phone_number': this.phoneNumber,
           '_token': document.querySelector('meta[name="csrf-token"]').content

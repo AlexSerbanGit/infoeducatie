@@ -1829,7 +1829,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart', {}).then(function (response) {
+    axios.get('https://scanner.d-soft.ro/user/cart', {}).then(function (response) {
       _this.cart = response.data.cart;
       var i;
       _this.price = 0;
@@ -1849,7 +1849,7 @@ __webpack_require__.r(__webpack_exports__);
     updateCart: function updateCart() {
       var _this2 = this;
 
-      axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart').then(function (response) {
+      axios.get('https://scanner.d-soft.ro/user/cart').then(function (response) {
         _this2.cart = response.data.cart;
         var i;
         _this2.price = 0;
@@ -1866,13 +1866,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteCartItem: function deleteCartItem(item) {
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart/item/delete', {
+      axios.post('https://scanner.d-soft.ro/user/cart/item/delete', {
         'item_id': item
       }).then(function (response) {// console.log(this.cart);
       });
     },
     redirectToCheckout: function redirectToCheckout() {
-      return window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content + '/checkout');
+      return window.location.replace('https://scanner.d-soft.ro/checkout');
     }
   }
 });
@@ -1932,7 +1932,7 @@ __webpack_require__.r(__webpack_exports__);
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
       vars[key] = value;
     });
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/restaurant/' + vars.restaurant + '/products').then(function (response) {
+    axios.get('https://scanner.d-soft.ro/restaurant/' + vars.restaurant + '/products').then(function (response) {
       // console.log(response);
       _this.products = response.data.products;
     });
@@ -1943,7 +1943,7 @@ __webpack_require__.r(__webpack_exports__);
       //
       // this.$on('add-to-cart', () => alert('Handeled!'));
       // axios.post('/api/user/cart/update', {
-      axios.post(document.head.querySelector('meta[name="api-base-url"]').content + '/user/cart/update', {
+      axios.post('https://scanner.d-soft.ro/user/cart/update', {
         'product': productId
       }).then(function (response) {// if(response.data.success == true)
       });
@@ -2011,10 +2011,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/api/restaurants').then(function (response) {
+    axios.get('https://scanner.d-soft.ro/api/restaurants').then(function (response) {
       _this.restaurants = response.data;
     });
-    axios.get(document.head.querySelector('meta[name="api-base-url"]').content + '/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants').then(function (response) {
+    axios.get('https://scanner.d-soft.ro/restaurants').then(function (response) {
       _this.near_restaurants = response.data, _this.filtered_restaurants = response.data;
     });
   },
@@ -2077,7 +2077,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     restaurantUrl: function restaurantUrl(currentRestaurantID) {
-      window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content + "/restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
+      window.location.replace("https://scanner.d-soft.ro/restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
       this.currentRestaurantID = '';
     }
   }
@@ -2304,7 +2304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     searchByPhoneNumber: function searchByPhoneNumber() {
       var _this = this;
 
-      axios.post('../api/find_user_by_phone_number', {
+      axios.post('https://scanner.d-soft.ro/api/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
         // console.log(response.data);
@@ -2314,7 +2314,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post('../api/user/login/sms/send', {
+      axios.post('https://scanner.d-soft.ro/api/user/login/sms/send', {
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
@@ -2325,7 +2325,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     registerSendSMS: function registerSendSMS() {
       var _this3 = this;
 
-      axios.post('../api/user/account/add', {
+      axios.post('https://scanner.d-soft.ro/api/user/account/add', {
         'name': this.registerName,
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
@@ -41463,7 +41463,7 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "fas fa-cart-plus" }),
-                        _vm._v(" Adauga in cos \n                    ")
+                        _vm._v(" Adauga in cos\n                    ")
                       ]
                     )
                   ])
