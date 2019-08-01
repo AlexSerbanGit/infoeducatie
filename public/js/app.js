@@ -2242,7 +2242,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    // sessionStorage.removeItem("token");
+    console.log(document.querySelector('meta[name="csrf-token"]').content); // sessionStorage.removeItem("token");
+
     if (sessionStorage.getItem("token") != null) {
       // window.alert('Sunteti deja logat!');
       history.go(-1);
