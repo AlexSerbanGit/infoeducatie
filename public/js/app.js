@@ -1942,7 +1942,7 @@ __webpack_require__.r(__webpack_exports__);
       // this.$emit('add-to-cart');
       //
       // this.$on('add-to-cart', () => alert('Handeled!'));
-      // axios.post('/api/user/cart/update', {
+      // axios.post('/user/cart/update', {
       axios.post('https://scanner.d-soft.ro/user/cart/update', {
         'product': productId
       }).then(function (response) {// if(response.data.success == true)
@@ -2011,7 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('https://scanner.d-soft.ro/api/restaurants').then(function (response) {
+    axios.get('https://scanner.d-soft.ro/restaurants').then(function (response) {
       _this.restaurants = response.data;
     });
     axios.get('https://scanner.d-soft.ro/restaurants').then(function (response) {
@@ -2304,7 +2304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     searchByPhoneNumber: function searchByPhoneNumber() {
       var _this = this;
 
-      axios.post('https://scanner.d-soft.ro/api/find_user_by_phone_number', {
+      axios.post('https://scanner.d-soft.ro/find_user_by_phone_number', {
         'phone_number': this.phoneNumber
       }).then(function (response) {
         // console.log(response.data);
@@ -2314,7 +2314,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loginSendSMS: function loginSendSMS() {
       var _this2 = this;
 
-      axios.post('https://scanner.d-soft.ro/api/user/login/sms/send', {
+      axios.post('https://scanner.d-soft.ro/user/login/sms/send', {
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content
       }).then(function (response) {
@@ -2325,7 +2325,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     registerSendSMS: function registerSendSMS() {
       var _this3 = this;
 
-      axios.post('https://scanner.d-soft.ro/api/user/account/add', {
+      axios.post('https://scanner.d-soft.ro/user/account/add', {
         'name': this.registerName,
         'phone_number': this.phoneNumber,
         '_token': document.querySelector('meta[name="csrf-token"]').content

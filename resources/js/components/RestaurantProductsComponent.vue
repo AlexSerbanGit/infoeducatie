@@ -55,7 +55,7 @@
                 //
                 // this.$on('add-to-cart', () => alert('Handeled!'));
 
-                // axios.post('/api/user/cart/update', {
+                // axios.post('/user/cart/update', {
                 axios.post('https://scanner.d-soft.ro/user/cart/update', {
                   'product': productId
                 })

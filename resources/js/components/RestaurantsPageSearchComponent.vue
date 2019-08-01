@@ -46,7 +46,7 @@
 <script>
     export default {
         mounted() {
-            axios.get('https://scanner.d-soft.ro/api/restaurants')
+            axios.get('https://scanner.d-soft.ro/restaurants')
                 .then(response => {
                     this.restaurants = response.data
                 })
