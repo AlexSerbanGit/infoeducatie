@@ -17,11 +17,11 @@
     </script>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{ URL::secure_asset('/assets/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('/font_awesome/css/all.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/assets/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="{{ secure_asset('/css/preloader.css') }}">
-    <link href="{{ URL::secure_asset('/multistepform/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
+    <link href="{{ URL::asset('/multistepform/css/style.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -67,9 +67,9 @@
 
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 
-    <script src="{{ URL::secure_asset('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ URL::secure_asset('/multistepform/js/msform.js') }}"></script>
+    <script src="{{ URL::asset('/multistepform/js/msform.js') }}"></script>
 
     <script>
     $(".loader").delay(500).fadeOut("slow");
