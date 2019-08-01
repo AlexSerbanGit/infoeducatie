@@ -154,7 +154,7 @@
             '_token': document.querySelector('meta[name="csrf-token"]').content
           })
           .then(response => {
-              console.log(response);
+              // console.log(response);
               this.user = response.data.user
           })
       },
@@ -185,7 +185,7 @@
         for (i = 1; i < this.sms_numbers.length; i++) {
           codeConstruct = codeConstruct + this.sms_numbers[i].toString();
         }
-        console.log(document.querySelector('meta[name="csrf-token"]').content);
+        // console.log(document.querySelector('meta[name="csrf-token"]').content);
         axios.post('../user/login', {
           'password': codeConstruct,
           'email': this.phoneNumber,
