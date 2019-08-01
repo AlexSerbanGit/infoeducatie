@@ -16,24 +16,24 @@
     <meta name="city_id" content="{{ Auth::user() -> city_id}}"> @endif @endauth --}}
 
     <title>BeeScanner</title>
-    <link rel="stylesheet" href="{{ secure_asset('assets/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/fonts/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/fonts/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/ionicons.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/Contact-Form-Clean.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/Features-Boxed.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/Footer-Basic.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/Header-Blue.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/Highlight-Clean.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/styles.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('css/custom.css') }}">
-    <link href="{{ secure_asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ secure_asset('/font_awesome/css/all.css') }}">
-    <link type="text/css" href="{{ secure_asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/Contact-Form-Clean.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Features-Boxed.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Footer-Basic.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Header-Blue.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Highlight-Clean.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link href="{{ asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
+    <link type="text/css" href="{{ asset('assets/css/argon.css?v=1.0.0') }}" rel="stylesheet">
     <meta name="api-base-url" content="{{ url('/') }}" />
-    <link rel="stylesheet" href="{{ secure_asset('/css/preloader.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('/css/cart.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/cart.css') }}">
     <meta name="api-base-url" content="{{ url('https://scanner.d-soft.ro') }}" true/>
     <style>
         html body {
@@ -144,15 +144,15 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
         </div>
     </div>
     @if(Auth::user()) @include('/parts/profile-part') @endif
-    {{-- <script src="{{ secure_asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     <!-- Optional JS -->
-    <script src="{{ secure_asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
-    <script src="{{ secure_asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
+    <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
+    <script src="{{ asset('/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 
-    <script src="{{ secure_asset('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
     <!-- Argon JS -->
-    <script src="{{ secure_asset('/assets/js/argon.js?v=1.0.0') }}"></script>
+    <script src="{{ asset('/assets/js/argon.js?v=1.0.0') }}"></script>
     <script>
     $(".loader").delay(500).fadeOut("slow");
     $("#overlayer").delay(500).fadeOut("slow");
