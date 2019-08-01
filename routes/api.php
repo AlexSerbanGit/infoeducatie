@@ -31,6 +31,22 @@ Route::get('/test', function() {
     ]);
 });
 
+Route::group(['middleware' => 'cors'], function () {
+
+    Route::get('/user/cart', 'UserCartController@get');
+
+    Route::post('/user/cart/update', 'UserCartController@update');
+
+    Route::post('/user/cart/item/delete', 'UserCartController@deleteItem');
+
+    Route::get('/restaurants', 'UserRestaurantsController@getRestaurants') -> name('api-restaurants');
+
+    Route::get('/city/{city_id}/restaurants', 'UserRestaurantsController@getNearRestaurants') -> name('near-restaurants');
+
+    Route::get('/restaurant/{restaurant_id}/products', 'UserRestaurantsController@getProducts');
+
+});
+
 
 
 // API routes for logged users
