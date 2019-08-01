@@ -25,6 +25,13 @@ Route::post('/user/account/add', 'UserRegisterController@adddAcount');
 
 Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
 
+Route::get('/test', function() {
+    return json_encode([
+        'success' => true
+    ]);
+});
+
+
 // API routes for logged users
 // Route::group(['middleware' => ['auth']], function () {
 
@@ -39,4 +46,3 @@ Route::post('/user/login/sms/send', 'UserLoginController@sendSms');
 Route::post('create-payment/{id}', 'PaymentController@createPayment');
 
 Route::post('execute-payment/{id}', 'PaymentController@executePayment');
-
