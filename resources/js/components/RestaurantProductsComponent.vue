@@ -18,7 +18,7 @@
                     <span v-for="allergy in product.allergies" class="badge badge-pill badge-primary">{{ allergy.name }}</span>
                     <div class="" style="margin-top: 10px">
                         <button v-on:click="addToCart(product.id)" class="btn btn-danger w-100">
-                            Adauga in cos
+                            <i class="fas fa-cart-plus"></i> Adauga in cos 
                         </button>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 vars[key] = value;
             });
 
-            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/restaurant/' + vars.restaurant + '/products')
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/restaurant/' + vars.restaurant + '/products')
             .then(response => {
                 // console.log(response);
                 this.products = response.data.products;
@@ -56,7 +56,7 @@
                 // this.$on('add-to-cart', () => alert('Handeled!'));
 
                 // axios.post('/api/user/cart/update', {
-                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/api/user/cart/update', {
+                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart/update', {
                   'product': productId
                 })
                 .then(response => {

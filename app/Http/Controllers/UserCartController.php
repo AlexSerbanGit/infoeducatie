@@ -12,11 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserCartController extends Controller
 {
-    public function get() {
+    public function get(Request $request) {
 
         $user = Auth::user();
-
-        $user = User::find(18);
 
         $cart = $user -> cart;
 
@@ -33,9 +31,7 @@ class UserCartController extends Controller
 
     public function update(Request $request) {
 
-        // $user = Auth::user();
-
-        $user = User::find(18);
+        $user = Auth::user();
 
         $product = Product::find($request -> product);
 
@@ -78,13 +74,11 @@ class UserCartController extends Controller
 
     public function deleteItem(Request $request) {
 
-        // $user = Auth::user();
+        $user = Auth::user();
 
-        $user = User::find(18);
+        $item = CartProduct::find($request -> item_id);
 
-        $item = CartProduct::where('user_id', $user -> id) -> where('product_id', $request -> item_id) -> first();
-
-        if($item == null) {
+        if($item == null || $item -> user_id != $user -> id) {
             return json_encode([
                 'success' => false,
                 'messge' => 'Produs inexistent!'

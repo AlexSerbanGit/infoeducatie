@@ -8,7 +8,7 @@
 
     @endforeach
 
-  
+
 
     <div>
         <div class="header-blue" style="padding-bottom: 0px;">
@@ -18,8 +18,7 @@
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
                         <h1>Goals Scanner</h1>
                         <p>O aplicatie care te ajuta sa-ti mentii/imbunatatesti startea de sanatate si aspectul fizic luand in considerare nevoile tale. </p><button class="btn btn-light btn-lg action-button" type="button" href="{{ url('/regiester') }}">Vreau sa folosesc</button></div>
-                    <div
-                        class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
+                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
                         <div class="iphone-mockup"><img src="assets/img/iphone.svg" class="device">
                             <!-- <div class="screen"></div> -->
                         </div>
