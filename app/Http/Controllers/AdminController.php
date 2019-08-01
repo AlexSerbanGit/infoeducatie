@@ -69,7 +69,6 @@ class AdminController extends Controller
     }
 
     public function addRestaurant(Request $request){
-
         $validator = Validator::make($request->all(), [
             'phone_number' => 'required|numeric',
             'name' => 'required|string',
@@ -200,12 +199,12 @@ class AdminController extends Controller
     }
 
     public function updateUser(Request $request, $id){
-        
+
         $validator = Validator::make($request->all(), [
             'phone_number' => 'required|numeric',
             'name' => 'required|string',
             'language' => 'required|string',
-            'role_id' => 'required|numeric',
+            'email' => 'required|email',
         ]);
 
         if($validator -> fails()){
@@ -221,7 +220,6 @@ class AdminController extends Controller
                 $user->name = $request->name;
                 $user->language = $request->language;
                 $user->email = $request->email;
-                $user->role_id = $request->role_id;
                 $user->save(); 
                 return redirect()->back()->with('message', 'Utilizator modificat cu succes!');  
 
