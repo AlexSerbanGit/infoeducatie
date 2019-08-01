@@ -42,7 +42,7 @@
                 vars[key] = value;
             });
 
-            axios.get('https://scanner.d-soft.ro/restaurant/' + vars.restaurant + '/products')
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/restaurant/' + vars.restaurant + '/products')
             .then(response => {
                 // console.log(response);
                 this.products = response.data.products;
@@ -56,7 +56,7 @@
                 // this.$on('add-to-cart', () => alert('Handeled!'));
 
                 // axios.post('/user/cart/update', {
-                axios.post('https://scanner.d-soft.ro/user/cart/update', {
+                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart/update', {
                   'product': productId
                 })
                 .then(response => {

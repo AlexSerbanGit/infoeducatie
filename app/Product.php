@@ -26,7 +26,7 @@ class Product extends Model
     ];
 
     protected $dates = ['deleted_at'];
-    
+
     public function allergies(){
         return $this->belongsToMany('App\Allergy', 'product_to_allergies', 'product_id', 'allergy_id');
     }

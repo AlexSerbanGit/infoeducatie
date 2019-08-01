@@ -46,11 +46,11 @@
 <script>
     export default {
         mounted() {
-            axios.get('https://scanner.d-soft.ro/restaurants')
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/api/restaurants')
                 .then(response => {
                     this.restaurants = response.data
                 })
-            axios.get('https://scanner.d-soft.ro/restaurants')
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/city/' + document.querySelector('meta[name="city_id"]').content + '/restaurants')
                 .then(response => {
                     this.near_restaurants = response.data,
                     this.filtered_restaurants = response.data
@@ -109,7 +109,7 @@
                 }
             },
             restaurantUrl(currentRestaurantID) {
-                window.location.replace("https://scanner.d-soft.ro/restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
+                window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content+"/restaurant/" + currentRestaurantID + '/read?restaurant=' + currentRestaurantID);
                 this.currentRestaurantID = '';
             }
         }

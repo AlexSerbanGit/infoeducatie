@@ -39,7 +39,7 @@
             }
         },
         mounted() {
-            axios.get('https://scanner.d-soft.ro/user/cart', {
+            axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart', {
             })
             .then(response => {
                 this.cart = response.data.cart;
@@ -57,7 +57,7 @@
         },
         methods: {
             updateCart() {
-                axios.get('https://scanner.d-soft.ro/user/cart')
+                axios.get('/user/cart')
                 .then(response => {
                     this.cart = response.data.cart;
                     let i;
@@ -73,7 +73,7 @@
                 })
             },
             deleteCartItem(item) {
-                axios.post('https://scanner.d-soft.ro/user/cart/item/delete', {
+                axios.post(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart/item/delete', {
                     'item_id': item
                 })
                 .then(response => {
@@ -81,7 +81,7 @@
                 })
             },
             redirectToCheckout() {
-                return window.location.replace('https://scanner.d-soft.ro/checkout')
+                return window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content+'/checkout')
             }
         }
     }
