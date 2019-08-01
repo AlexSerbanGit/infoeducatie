@@ -32,7 +32,7 @@ Route::get('/sanatate', function() {
 
 // Start user's auth routes
 Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('cors');
-Route::post('/user/login', 'Auth\LoginController@login')->middleware('cors');
+Route::post('/user/login', 'Auth\LoginController@login');
 Route::post('/user/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/user/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

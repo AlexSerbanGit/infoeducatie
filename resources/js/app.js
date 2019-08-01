@@ -16,6 +16,7 @@ Vue.component('user-login-register-component', require('./components/UserLoginRe
 Vue.component('restaurants-search', require('./components/RestaurantsPageSearchComponent.vue').default);
 Vue.component('cart-component', require('./components/CartComponent.vue').default);
 Vue.component('restaurant-products', require('./components/RestaurantProductsComponent.vue').default);
+Vue.component('search-component', require('./components/SearchComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

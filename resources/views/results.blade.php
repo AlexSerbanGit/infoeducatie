@@ -14,16 +14,16 @@
 
                       @if(isset($product))
                           @if($product -> type == 1)
-                              <div class="icon icon-shape icon-shape-primary rounded-circle">
+                              <div class="icon icon-shape icon-shape-primary rounded-circle mb-3">
                                   <i class="fas fa-pizza-slice"></i>
                               </div>
                           @elseif($product -> type == 2)
-                              <div class="icon icon-shape icon-shape-primary rounded-circle">
+                              <div class="icon icon-shape icon-shape-primary rounded-circle mb-3">
                                   <i class="fas fa-wine-bottle"></i>
                               </div>
                           @endif
                           <div class="px-0">
-                            <img src="{{ asset('/products/' . $product -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="width: 250px; height: 250px; border-radius: 50%;">
+                            <img src="{{ asset('/products/' . $product -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="max-width: 300px; max-height: 300px; border-radius: 5%;">
                           </div>
 
                           <div class="row">
@@ -57,6 +57,9 @@
                                       <h3 class="text-primary mt-3">
                                           Categorie: {{ $product -> category }}
                                       </h3>
+                                      <h3 class="text-primary mt-3">
+                                          Pret: {{ $product -> price }} lei
+                                      </h3>
                                   </div>
                               @elseif($product -> type == 2)
                                   <div class="col-md-6">
@@ -82,6 +85,9 @@
                                       </h3>
                                       <h3 class="text-primary mt-3">
                                           Categorie: {{ $product -> category }}
+                                      </h3>
+                                      <h3 class="text-primary mt-3">
+                                          Pret: {{ $product -> price }} lei
                                       </h3>
                                   </div>
                               @endif
@@ -146,7 +152,7 @@
                           </h2>
                       @endif
 
-                    {{-- <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#add-target">Adauga target nou</a> --}}
+                    <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#add-target">Adauga target nou</a>
                   </div>
                 </div>
               </div>
@@ -202,6 +208,7 @@
           <div class="col-lg-12">
             <div class="row row-grid">
                 @if(isset($product -> allergies))
+                    {{-- {{dd($product -> allergies[0]['name'])}} --}}
                     @foreach ($product -> allergies as $key => $allergy)
                         <div class="col-lg-4">
                           <div class="card card-lift--hover shadow border-0">
@@ -212,9 +219,9 @@
                                     </div>
                                   {{-- <img src="{{ asset('/products/' . $allergy -> image) }}" class="img-center img-fluid shadow shadow-lg--hover" style="width: 150px; height: 150px; border-radius: 50%;"> --}}
                                 </div>
-                                <h2 class="text-success text-uppercase text-center mt-3">{{ $allergy -> allergy -> name }}</h2>
-                                @if(isset($allergy -> allergy -> description))
-                                    <p class="description mt-3">{{ $allergy -> allergy -> description }}</p>
+                                <h2 class="text-success text-uppercase text-center mt-3">{{ $allergy -> name }}</h2>
+                                @if(isset($allergy -> description))
+                                    <p class="description mt-3">{{ $allergy -> description }}</p>
                                 @endif
                                 {{-- <div>
                                   <span class="badge badge-pill badge-warning">mancare</span>

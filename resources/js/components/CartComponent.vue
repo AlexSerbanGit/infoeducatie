@@ -57,7 +57,7 @@
         },
         methods: {
             updateCart() {
-                axios.get(document.head.querySelector('meta[name="api-base-url"]').content+'/user/cart')
+                axios.get('/user/cart')
                 .then(response => {
                     this.cart = response.data.cart;
                     let i;
@@ -81,7 +81,7 @@
                 })
             },
             redirectToCheckout() {
-                return window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content + '/checkout')
+                return window.location.replace(document.head.querySelector('meta[name="api-base-url"]').content+'/checkout')
             }
         }
     }
