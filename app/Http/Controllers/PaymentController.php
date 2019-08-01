@@ -18,6 +18,8 @@ use Auth;
 use App\User;
 use App\OldOrder;
 use App\OldProduct;
+use PDF;
+use Mail;
 
 class PaymentController extends Controller
 {
@@ -111,7 +113,22 @@ class PaymentController extends Controller
             echo $ex;
             exit(1);
         }
-    
+        $user = User::find($id);
+        $products = $user->cart;
+        $data = [
+            'products' => $products,
+        ];
+        $pdf = PDF::loadView('checkout.invoice', $data);
+        $email = $user->email;
+        $name = $user->name;
+        Mail::send('email.invoice', ['user' => $user], function ($m) use ($pdf, $user) {
+            $m->from('contact@beescanner.ro', '🔺Factura!🔺');
+
+            $m->to($user->email, $user->email)
+                ->subject('🔺Factura!🔺')
+                ->attachData($pdf->output(), "invoice.pdf");
+        });
+
         $user = User::find($id);
         $command = new OldOrder;
         $command->user_id = $user->id;
@@ -129,4 +146,20 @@ class PaymentController extends Controller
 
         return $result;
     }
+
+    // public function sendInvoice($id){
+        
+    //     $user = User::find($id);
+    //     $products = $user->cart;
+
+    //     $pdf = PDF::loadView('checkout.invoice', $products);
+
+    //     Mail::send('email.invoice', $user, function ($m) use ($pdf) {
+    //         $m->from('contact@beescanner.ro', '🔺Factura!🔺');
+
+    //         $m->to($user->email, $request->name)->subject('🔺Factura!🔺');
+    //     });
+    //     return 1;
+
+    // }
 }

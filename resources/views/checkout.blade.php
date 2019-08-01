@@ -10,42 +10,62 @@
     </div>
 
     <div class="row">
-    <div class="col-md-4 order-md-2 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Cosul tau</span>
-                <span class="badge badge-secondary badge-pill">3</span>
-                </h4>
-                <ul class="list-group mb-3">
-                @php
-                    $total = 0;
-                @endphp
-                @foreach(Auth::user()->cart as $product)
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                    <h4 class="my-0">{{$product->product->name}}</h4>
-                    <small class="text-muted">{{ $product->product->restaurant->name }}</small>
-                    </div>
-                    <span class="text-muted">{{$product->product->price * $product->quantity}} lei</span>
-                    @php
-                        $total += $product->product->price * $product->quantity;
-                    @endphp
-                </li>
-                @endforeach
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                    <h4 class="my-0">Transport</h4>
-                    </div>
-                    <span class="text-muted">15 lei</span>
-                    @php
-                        $total += 15;
-                    @endphp
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total </span>
-                    <strong>{{$total}} lei</strong>
-                </li>
-                </ul>
-            </div>
+    @if(Auth::user()->cart->count() > 0)
+
+<div class="col-md-4 order-md-2 mb-4">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-muted">Cosul tau</span>
+    <span class="badge badge-secondary badge-pill">3</span>
+    </h4>
+    <ul class="list-group mb-3">
+    @php
+        $total = 0;
+    @endphp
+    @foreach(Auth::user()->cart as $product)
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+        <h4 class="my-0">{{$product->product->name}} x {{$product->quantity}}</h4>
+        <small class="text-muted">{{ $product->product->restaurant->name }}</small>
+        </div>
+        <span class="text-muted">{{$product->product->price * $product->quantity}} lei</span>
+        @php
+            $total += $product->product->price * $product->quantity;
+        @endphp
+    </li>
+    @endforeach
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+        <h4 class="my-0">Transport</h4>
+        </div>
+        <span class="text-muted">15 lei</span>
+        @php
+            $total += 15;
+        @endphp
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total </span>
+        <strong>{{$total}} lei</strong>
+    </li>
+    </ul>
+</div>
+@else
+<div class="col-md-4 order-md-2 mb-4">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-muted">Cosul tau</span>
+    <span class="badge badge-secondary badge-pill">3</span>
+    </h4>
+    <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+        <h4 class="my-0">Momentan nu aveti produse in cos</h4>
+        <small class="text-muted"></small>
+        </div>
+        <span class="text-muted"></span>
+    </li>
+
+    </ul>
+</div>
+@endif
     <div class="col-md-8 order-md-1">
         <h1 class="mb-3">Datele tale:</h1>
         <p style="font-size: 20px">Asigura-te ca ai introdus datele bine. Daca datele nu sunt introduse bine te rugam sa le editezi din meniul lateral!</p>
