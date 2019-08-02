@@ -25,43 +25,10 @@
                 @foreach($products as $product)
                     
 
-                    @if($product->foodType->count() > 0)
-                        
-                        @foreach($product->foodType as $type)
-
-                            @if($type->type == 1)
-
-                                @php
-                                    $ok = 1;
-                                @endphp
-
-                                @if($product->category == 1)
-
-                                @php
-                                    $verif = 1;
-                                @endphp
-
-                            
-                                @foreach($product->allergies as $allergy)
-
-                                    @foreach(Auth::user()->allergies as $algo)
-                                        
-                                        @if($algo->allergy_id == $allergy->allergy_id)
-
-                                            @php
-
-                                                $verif = 0;
-                                                break;
-
-                                            @endphp
-
-                                        @endif
-
-                                    @endforeach
-
-                                @endforeach
-
-                                @if($verif == 1)
+                    @if($product->product_type == 1)
+                        @php
+                            $ok = 1;
+                        @endphp
                                 <div class="col-lg-4" style="margin-top: 10px">
                                     <div class="card alert-primary shadow border-0">
                                     <div class="card-body py-5">
@@ -72,14 +39,15 @@
                                         <div>
                                         <span class="badge badge-pill badge-primary">produs</span>
                                         </div>
-                                            <a class="btn btn-primary mt-4" data-toggle="modal" data-target="#eat-pro{{$product->id}}">Adauga</a>
+                                            <a class="btn btn-primary mt-4" data-toggle="modal" data-target="#eat-pro1{{$product->id}}">Adauga</a>
 
-                                            <a class="btn btn-success mt-4" data-toggle="modal" data-target="#about-pro{{$product->id}}">Despre</a>
+                                            <a class="btn btn-success mt-4" data-toggle="modal" data-target="#about-pro1{{$product->id}}">Despre</a>
                                     </div>
                                     </div>
-                                </div>
+                                </div>        
 
-                                <div class="modal fade" id="about-pro{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+                                <div class="modal fade" id="about-pro1{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                     <div class="modal-content">
 
@@ -106,15 +74,35 @@
                                     </div>
                                 </div>
                                 </div>
-                                @endif
 
-                                
-                                @endif
+                                <div class="modal fade" id="eat-pro1{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                    <div class="modal-content">
 
-                            @endif
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="modal-title-default">Adaugi acest produs la target-ul tau?</h2>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
 
-                        @endforeach
-                        
+                                        <div class="modal-body">
+
+                                            <h2>Doresti sa adaugi acest produs la target-ul tau?</h2>
+                                            
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <a href="{{ url('/add_to_your_target/'.$product->id) }}">
+                                                <button type="button" class="btn btn-primary">Da</button>
+                                            </a>
+                                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Incide</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </div>
+             
 
                     @endif                    
 
@@ -139,10 +127,7 @@
                 <div class="row">
                 @foreach($products as $product)
                    
-                @if($product->foodType->count() > 0)
-                       
-                        @foreach($product->foodType as $type)
-                        @if($type -> type == 1)
+                @if($product->product_type == 1)
                                 <div class="col-lg-4" style="margin-top: 10px">
                                     <div class="card alert-primary shadow border-0">
                                     <div class="card-body py-5">
@@ -216,8 +201,6 @@
                                     </div>
                                 </div>
                                 </div>
-                            @endif
-                        @endforeach
                     @endif
                               
 

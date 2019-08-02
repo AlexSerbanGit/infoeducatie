@@ -11,7 +11,11 @@
             csrfToken: '{{ csrf_token() }}'
         }
     </script>
-
+<style>
+    ul{
+        overflow: hidden !important;
+    }
+</style>
     {{-- @auth @if(Auth::user() && isset(Auth::user() -> city_id))
     <meta name="city_id" content="{{ Auth::user() -> city_id}}"> @endif @endauth --}}
 

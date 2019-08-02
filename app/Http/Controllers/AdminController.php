@@ -345,8 +345,6 @@ class AdminController extends Controller
             'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
 
-        return $request;
-
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
@@ -361,6 +359,7 @@ class AdminController extends Controller
         $product->carbo = $request->carbo;
         $product->kcal = $request->kcal;
         $product->barcode = $request->barcode;
+        $product->product_type = $request->product_type;
         $product->category = $request->category;
         $product->type = $request->type;
         $product->description = $request->description;
@@ -388,6 +387,7 @@ class AdminController extends Controller
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
+            'product_type' => 'required|numeric',
             'fat' => 'required|numeric',
             'carbo' => 'required|numeric',
             'kcal' => 'required|numeric',
@@ -406,6 +406,7 @@ class AdminController extends Controller
         $product->carbo = $request->carbo;
         $product->price = $request->price;
         $product->kcal = $request->kcal;
+        $product->product_type = $request->product_type;
         $product->barcode = $request->barcode;
         $product->category = $request->category;
         $product->type = $request->type;

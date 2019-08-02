@@ -24,6 +24,7 @@ class RestaurantDashboardController extends Controller
     public function addProduct(Request $request){
 
         $request->validate([
+            'product_type' => 'required|numeric',
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
@@ -34,8 +35,10 @@ class RestaurantDashboardController extends Controller
             'image' => 'required',
             'category' => 'required|numeric',
             'type' => 'required|numeric',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
+
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
@@ -46,11 +49,12 @@ class RestaurantDashboardController extends Controller
         $product->weight = $request->weight;
         $product->protein = $request->protein;
         $product->fat = $request->fat;
+        $product->price = $request->price;
         $product->carbo = $request->carbo;
         $product->kcal = $request->kcal;
         $product->barcode = $request->barcode;
+        $product->product_type = $request->product_type;
         $product->category = $request->category;
-        $product->price = $request->price;
         $product->type = $request->type;
         $product->description = $request->description;
         $product->restaurant_id = Auth::user()->id;
@@ -77,6 +81,7 @@ class RestaurantDashboardController extends Controller
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
+            'product_type' => 'required|numeric',
             'fat' => 'required|numeric',
             'carbo' => 'required|numeric',
             'kcal' => 'required|numeric',
@@ -84,7 +89,7 @@ class RestaurantDashboardController extends Controller
             'category' => 'required|numeric',
             'type' => 'required|numeric',
             'description' => 'required|string',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
         ]);
 
         $product = Product::find($id);
@@ -95,6 +100,7 @@ class RestaurantDashboardController extends Controller
         $product->carbo = $request->carbo;
         $product->price = $request->price;
         $product->kcal = $request->kcal;
+        $product->product_type = $request->product_type;
         $product->barcode = $request->barcode;
         $product->category = $request->category;
         $product->type = $request->type;

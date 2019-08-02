@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+    ul{
+        overflow: hidden !important;
+    }
+</style>
 <div class="container card">
     <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="{{ asset('/images/beescanner.png') }}" alt="" width="200" height="auto">
