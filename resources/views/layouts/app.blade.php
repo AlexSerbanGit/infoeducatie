@@ -139,10 +139,9 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                 <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="{{ url('/') }}">Acasa</a></li>
-                    <li class="list-inline-item"><a href="{{ url('/register')}}">Creare cont</a></li>
-                    <li class="list-inline-item"><a href="{{ url('/login') }}">Inregistrare</a></li>
+                    <li class="list-inline-item"><a href="{{ url('/user/login_register')}}">Creare cont / Autentificare</a></li>
                 </ul>
-                <p class="copyright">GoalsScanner © 2019</p>
+                <p class="copyright text-dark">GoalsScanner © 2019</p>
             </footer>
         </div>
     </div>

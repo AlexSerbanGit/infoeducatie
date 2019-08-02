@@ -99,6 +99,10 @@
     .v--modal-overlay[data-modal="search"] {
       background: rgba(0, 0, 0, 0.6);
     }
+    .v--modal-box {
+        /* margin-left: 10px; */
+        margin-right: 10px;
+    }
     .list-group{
         height: 100%;
         /* margin-bottom: 10px; */

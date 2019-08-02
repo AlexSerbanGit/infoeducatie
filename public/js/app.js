@@ -6973,7 +6973,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v--modal-overlay[data-modal=\"search\"] {\n  background: rgba(0, 0, 0, 0.6);\n}\n.list-group{\n    height: 100%;\n    /* margin-bottom: 10px; */\n    overflow: scroll;\n    -webkit-overflow-scrolling: touch;\n}\n.brown-text {\n    color: #D9993F;\n}\n.search-image {\n    width: 50px;\n    height: auto;\n}\n", ""]);
+exports.push([module.i, "\n.v--modal-overlay[data-modal=\"search\"] {\n  background: rgba(0, 0, 0, 0.6);\n}\n.v--modal-box {\n    /* margin-left: 10px; */\n    margin-right: 10px;\n}\n.list-group{\n    height: 100%;\n    /* margin-bottom: 10px; */\n    overflow: scroll;\n    -webkit-overflow-scrolling: touch;\n}\n.brown-text {\n    color: #D9993F;\n}\n.search-image {\n    width: 50px;\n    height: auto;\n}\n", ""]);
 
 // exports
 

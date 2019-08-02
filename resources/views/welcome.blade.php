@@ -17,11 +17,22 @@
                 <div class="row">
                     <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
                         <h1>Bee Scanner</h1>
-                        <p>O aplicatie care te ajuta sa-ti mentii/imbunatatesti startea de sanatate si aspectul fizic luand in considerare nevoile tale. </p><button class="btn btn-light btn-lg action-button" type="button" href="{{ url('/regiester') }}">Vreau sa folosesc</button></div>
-                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
-                        <div class="iphone-mockup"><img src="assets/img/iphone.svg" class="device">
-                            <!-- <div class="screen"></div> -->
-                        </div>
+                        <p>O aplicatie care te ajuta sa-ti mentii/imbunatatesti startea de sanatate si aspectul fizic luand in considerare nevoile tale. </p>
+                        @guest
+                            <a href="{{ url('/useer/login_register') }}">
+                                <button class="btn btn-light btn-lg action-button" type="button">Vreau sa folosesc</button>
+                            </a>
+                        @endguest
+                        @auth
+                            <a href="{{ url('/home') }}">
+                                <button class="btn btn-light btn-lg action-button" type="button" >Contul meu</button>
+                            </a>
+                        @endauth
+                    </div>
+                <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder mt-5">
+                    <div class="iphone-mockup"><img src="assets/img/iphone_10_white.png" class="device">
+                        <!-- <div class="screen"></div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,7 +44,12 @@
                 <h2 class="text-center">Ce face?</h2>
                 <p class="text-center">Te ajuta sa-ti consrtuiesti o diesta si un stil de viata in functie de nevoile tale. </p>
             </div>
-            <div class="buttons"><a class="btn btn-primary" role="button" href="{{ url('/register') }}">Sign-up</a><button class="btn btn-secondary" type="button">Login</button></div>
+            @guest
+                <div class="buttons">
+                    <a class="btn btn-primary" role="button" href="{{ url('/user/login_register') }}">Creare cont</a>
+                    <a class="btn btn-secondary" role="button" href="{{ url('/user/login_register') }}">Autentificare</a>
+                </div>
+            @endguest
         </div>
     </div>
 
