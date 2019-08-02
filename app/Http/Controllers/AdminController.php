@@ -330,6 +330,7 @@ class AdminController extends Controller
     public function addProduct(Request $request){
 
         $request->validate([
+            'product_type' => 'required|numeric',
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
@@ -343,6 +344,9 @@ class AdminController extends Controller
             'price' => 'required|numeric',
             'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
+
+        return $request;
+
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();

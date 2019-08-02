@@ -26,9 +26,6 @@
   .sidebar li.active>a {
     background-color: red !important;
   }
-  label{
-    color: black !important;
-  }
   </style>
 </head>
 
