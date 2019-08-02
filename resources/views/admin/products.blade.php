@@ -1,4 +1,4 @@
-0@extends('layouts.admin-layout')
+@extends('layouts.admin-layout')
 
 @section('content')
 <style>
@@ -128,6 +128,20 @@
         </span>
     </div>
     </div>
+    </div>
+    <div class="form-group">
+        <label class="w-100 col-form-label">Asociaza alergii</label>
+        <div class="form-check">
+            @foreach ($allergies as $key => $allergy)
+                <label class="form-check-label mt-2 ml-2" style="background-color: #E8ECEF; border-radius: 2px;">
+                    <input class="form-check-input" name="allergies[]" type="checkbox" value="{{ $allergy -> id }}">
+                        {{ $allergy -> name }}
+                    <span class="form-check-sign">
+                        <span class="check"></span>
+                    </span>
+                </label>
+            @endforeach
+        </div>
     </div>
 
       </div>

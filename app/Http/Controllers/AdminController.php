@@ -33,7 +33,7 @@ class AdminController extends Controller
                 break;
             }
         }
-       
+
         $chart = new chartStats;
         $chart->labels(['Acu 2 saptamani', 'Saptamana trecuta', 'Aceasta saptamana']);
 
@@ -101,7 +101,10 @@ class AdminController extends Controller
     public function products(){
 
         $products = Product::all();
-        return view('admin.products')->with('products', $products);
+
+        $allergies = Product::all();
+
+        return view('admin.products', compact('products', 'allergies'));
 
     }
 
@@ -179,7 +182,7 @@ class AdminController extends Controller
     public function contactUs(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:190', 
+            'name' => 'required|string|max:190',
             'email' => 'required|email|max:190',
             'message' => 'required|string|max:511',
         ]);
@@ -189,7 +192,7 @@ class AdminController extends Controller
         }
 
         $message = new Message;
-        $message->name = $request->name; 
+        $message->name = $request->name;
         $message->email = $request->email;
         $message->message = $request->message;
         $message->save();
@@ -220,15 +223,15 @@ class AdminController extends Controller
                 $user->name = $request->name;
                 $user->language = $request->language;
                 $user->email = $request->email;
-                $user->save(); 
-                return redirect()->back()->with('message', 'Utilizator modificat cu succes!');  
+                $user->save();
+                return redirect()->back()->with('message', 'Utilizator modificat cu succes!');
 
             }else{
 
                 return redirect()->back()->with('message', 'Nu aveti voie sa modificati administratori');
 
             }
-           
+
         }else{
 
             return redirect()->back()->with('message', 'Utilizatorul nu a fost gasit');
@@ -338,12 +341,13 @@ class AdminController extends Controller
             'category' => 'required|numeric',
             'type' => 'required|numeric',
             'price' => 'required|numeric',
+            'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
         }
-        
+
         $product = new Product;
         $product->name = $request->name;
         $product->weight = $request->weight;

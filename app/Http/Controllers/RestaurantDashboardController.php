@@ -10,7 +10,7 @@ use Auth;
 class RestaurantDashboardController extends Controller
 {
     public function index() {
-        
+
         return view('/restaurant/home');
     }
 
@@ -40,7 +40,7 @@ class RestaurantDashboardController extends Controller
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
         }
-        
+
         $product = new Product;
         $product->name = $request->name;
         $product->weight = $request->weight;
@@ -123,5 +123,55 @@ class RestaurantDashboardController extends Controller
 
         return redirect()->back()->with('message', 'Produst invalid!');
 
+    }
+
+    public function parseCSV(Request $request) {
+
+        $error_messages = [
+                'csv-file.required' => 'Fisierul csv este necesar!',
+                'csv-file.mimes' => 'Fisierul trebuie sa fie de tip csv!',
+        ];
+
+        $validator = Validator::make($request -> all(), [
+            'csv-file' => 'required|file|mimes:csv,txt'
+        ], $error_messages);
+
+        if($validator -> fails()) {
+            return redirect() -> back() -> withErrors($validator);
+        }
+
+        if ($request-> hasFile('csv-file')) {
+
+            $file = $request -> file('csv-file');
+            $csv_data = file_get_contents($file);
+            $rows = array_map('str_getcsv', explode("\n", $csv_data));
+
+            $CSV_rows_number = count($rows);
+
+            $header = explode(";", implode(array_shift($rows)));
+
+            foreach ($rows as $key => $row) {
+                $content[$key] = explode(";", implode(array_shift($rows)));
+            }
+
+            for($i = 0; $i < $CSV_rows_number; $i++) {
+
+                $product = new Product();
+                $product -> name = $content[$key][1];
+                $product -> weight = $content[$key][2];
+                $product -> protein = $content[$key][3];
+                $product -> fat = $content[$key][4];
+                $product -> carbo = $content[$key][5];
+                $product -> kcal = $content[$key][6];
+                $product -> barcode = $content[$key][7];
+                $product -> image = 'default_picture.jpg';
+                $product -> category = 1;
+                $product -> type = 1;
+                $product -> save();
+            }
+            return redirect() -> back() -> with('message', 'Fisierul a fost parsat cu succes!');
+        } else {
+            return redirect() -> back() -> with('message', 'A aparutt o problema la parsare!');
+        }
     }
 }

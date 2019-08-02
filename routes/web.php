@@ -111,21 +111,23 @@ Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], functio
 
     Route::get('/dashboard', 'RestaurantDashboardController@index') -> name('Restaurant - acasa');
 
-    Route::get('/restaurant/active/orders', 'RestaurantOrdersController@activeOrders') -> name('restaruant-active-orders');
+    Route::get('/active/orders', 'RestaurantOrdersController@activeOrders') -> name('restaruant-active-orders');
 
-    Route::get('/restaruant/order/{order_id}/complete', 'RestaurantOrdersController@completeOrder') -> name('restaurant-complete-order');
+    Route::get('/order/{order_id}/complete', 'RestaurantOrdersController@completeOrder') -> name('restaurant-complete-order');
 
-    Route::get('/restaurant/history/orders', 'RestaurantOrdersController@historyOrders') -> name('restaruant-history-orders');
+    Route::get('/history/orders', 'RestaurantOrdersController@historyOrders') -> name('restaruant-history-orders');
 
-    Route::get('/restaruant/order/{order_id}/delete', 'RestaurantOrdersController@deleteOrder') -> name('restaurant-delete-order');
+    Route::get('/order/{order_id}/delete', 'RestaurantOrdersController@deleteOrder') -> name('restaurant-delete-order');
 
-    Route::get('/restaurant/restaurants-products', 'RestaurantDashboardController@products') -> name('restaurants-products');
+    Route::get('/products', 'RestaurantDashboardController@products') -> name('restaurants-products');
 
     Route::post('/add_product', 'RestaurantDashboardController@addProduct');
 
     Route::post('/edit_product/{id}', 'RestaurantDashboardController@editProduct');
 
     Route::get('/delete_product/{id}', 'RestaurantDashboardController@deleteProduct');
+
+    Route::post('/add/products/csv', 'RestaurantDashboardController@parseCSV');
 
 });
 
@@ -144,9 +146,6 @@ Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
 
     Route::post('/admin_edit_product/{id}', 'AdminController@editProduct');
-
-
-    Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
 });
 
@@ -195,6 +194,8 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::get('/delete_product/{id}', 'AdminController@deleteProduct');
 
     Route::get('/admin/delete_product_request/{id}', 'AdminController@deleteRequest');
+
+    Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
 
 });
 

@@ -42,7 +42,8 @@
     @endforeach
     </tbody>
 </table>
-<button class="btn btn-warning" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
+<button class="btn btn-warning" data-toggle="modal" data-target="#addProduct"><i class="far fa-plus-square"></i> Adauga produs</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addProductByCsv"><i class="fas fa-file-csv"></i> Adauga CSV cu produse</button>
 </div>
 
 </div>
@@ -134,6 +135,34 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
         <button type="" class="btn btn-primary">Adauga produs</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal add product-->
+<div class="modal fade" id="addProductByCsv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{{ url('restaurant/add/products/csv') }}" method="POST">
+      @csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adauga produs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      <div class="form-group">
+          <label>Fisier csv:</label>
+          <input type="file" name="" value="">
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="" class="btn btn-primary">Parseaza fisierul</button>
       </div>
     </form>
     </div>
@@ -238,7 +267,6 @@
         </div>
         </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
