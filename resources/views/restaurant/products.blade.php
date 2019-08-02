@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.restaurant-layout')
 
 @section('content')
 <style>
@@ -43,12 +43,8 @@
     @endforeach
     </tbody>
 </table>
-<<<<<<< HEAD
 <button class="btn btn-danger" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
 <button class="btn btn-primary" data-toggle="modal" data-target="#addProductFromCsv">Adauga produse din csv</button>
-=======
-<button class="btn btn-warning" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
->>>>>>> 644a524410978219a0c9b03251aa962f907fff3f
 </div>
 
 </div>
@@ -172,16 +168,19 @@
 <div class="modal fade" id="addProductFromCsv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form action="{{ url('restaurant/add_product') }}" method="POST" enctype='multipart/form-data'>
+    <form action="{{ url('/restaurant/add/products/csv') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Adauga produs</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Adauga produse din csv</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
+          <span>Adauga csv / txt</span>
+          <div class="">
+              <input type="file" name="csv" style="display:block !important;">
+          </div>
           {{-- <div class="form-group form-file-upload form-file-multiple">
        <input type="file" multiple="" class="inputFileHidden">
        <div class="input-group">
@@ -197,7 +196,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
-        <button type="" class="btn btn-primary">Adauga produs</button>
+        <button type="" class="btn btn-primary">Parseaza fisierul</button>
       </div>
     </form>
     </div>
@@ -217,6 +216,7 @@
       </div>
       <div class="modal-body">
         Aici alergii
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

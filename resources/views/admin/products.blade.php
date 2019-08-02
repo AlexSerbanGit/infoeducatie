@@ -44,6 +44,7 @@
     </tbody>
 </table>
 <button class="btn btn-warning" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addProductFromCsv">Adauga produse din csv</button>
 </div>
 
 </div>
@@ -175,11 +176,19 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        Aici alergii
-        <div class="">
-         <input type="file" class="" style="display:block !important;">
-        </div>
+      <div class="modal-body">{{$request -> allergies}}
+          <ul class="list-group ml-3 mr-3">
+              @foreach ($allergies as $key => $allergy)
+                  {{-- @php $ok = false; @endphp --}}
+                  @foreach ($allergy -> products as $key => $allergy_product)
+                      @if($allergy_product-> id == $request -> id)
+                          dddd
+                      @else
+                          aaa
+                      @endif
+                  @endforeach
+              @endforeach
+          </ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -323,6 +332,31 @@
   </div>
 </div>
 
+<div class="modal fade" id="addProductFromCsv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{{ url('/admin/add/products/csv') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adauga produse din csv</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <span>Adauga csv / txt</span>
+          <div class="">
+              <input type="file" name="csv" style="display:block !important;">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="" class="btn btn-primary">Parseaza fisierul</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="delete{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

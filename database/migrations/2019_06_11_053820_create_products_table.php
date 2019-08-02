@@ -16,9 +16,9 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description') -> nullable();
             $table->integer('price');
-            $table->integer('restaurant_id'); // id-ul restaurantului care adauga produsul
+            $table->integer('restaurant_id') -> nullable(); // id-ul restaurantului care adauga produsul
             $table->integer('weight'); // in grame
             $table->integer('protein'); // per 100 g
             $table->integer('fat'); // per 100 g

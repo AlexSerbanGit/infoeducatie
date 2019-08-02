@@ -195,7 +195,7 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
     Route::get('/admin/delete_product_request/{id}', 'AdminController@deleteRequest');
 
-    Route::post('/admin/add/products/csv', 'AdminController@parseCSV');
+    Route::post('/add/products/csv', 'AdminController@parseCSV') -> name('admin-parse-csv');
 
 });
 

@@ -103,8 +103,11 @@ class AdminController extends Controller
 
         $products = Product::all();
 
-        $allergies = Product::all();
+        $allergies = Allergy::all();
 
+        foreach ($products as $key => $product) {
+            $product -> allergies;
+        }
         return view('admin.products', compact('products', 'allergies'));
 
     }
@@ -330,12 +333,8 @@ class AdminController extends Controller
 
     public function addProduct(Request $request){
 
-<<<<<<< HEAD
         $validator = Validator::make($request -> all(), [
-=======
-        $request->validate([
             'product_type' => 'required|numeric',
->>>>>>> 644a524410978219a0c9b03251aa962f907fff3f
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
@@ -349,15 +348,12 @@ class AdminController extends Controller
             'price' => 'required|numeric',
             'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
-<<<<<<< HEAD
         if($validator -> fails()) {
             return redirect() -> back() -> with('message', 'Datele au fost introduse gresit!');
         }
-=======
 
         return $request;
 
->>>>>>> 644a524410978219a0c9b03251aa962f907fff3f
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
@@ -479,21 +475,21 @@ class AdminController extends Controller
     public function parseCSV(Request $request) {
 
         $error_messages = [
-                'csv-file.required' => 'Fisierul csv este necesar!',
-                'csv-file.mimes' => 'Fisierul trebuie sa fie de tip csv!',
-            ];
+            'csv.required' => 'Fisierul csv este necesar!',
+            'csv.mimes' => 'Fisierul trebuie sa fie de tip csv!',
+        ];
 
         $validator = Validator::make($request -> all(), [
-            'csv-file' => 'required|file|mimes:csv,txt'
+            'csv' => 'required|mimes:csv,txt'
         ], $error_messages);
 
         if($validator -> fails()) {
-            return redirect() -> back() -> withErrors($validator);
+            return redirect() -> back() -> with('message', $validator -> errors());
         }
 
-        if ($request-> hasFile('csv-file')) {
+        if ($request-> hasFile('csv')) {
 
-            $file = $request -> file('csv-file');
+            $file = $request -> file('csv');
             $csv_data = file_get_contents($file);
             $rows = array_map('str_getcsv', explode("\n", $csv_data));
 
@@ -522,7 +518,7 @@ class AdminController extends Controller
             }
             return redirect() -> back() -> with('message', 'Fisierul a fost parsat cu succes!');
         } else {
-            return redirect() -> back() -> with('message', 'A aparutt o problema la parsare!');
+            return redirect() -> back() -> with('message', 'A aparut o problema la parsare!');
         }
     }
 }
