@@ -177,6 +177,9 @@
       </div>
       <div class="modal-body">
         Aici alergii
+        <div class="">
+         <input type="file" class="" style="display:block !important;">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
