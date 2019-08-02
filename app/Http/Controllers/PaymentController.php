@@ -20,6 +20,7 @@ use App\OldOrder;
 use App\OldProduct;
 use PDF;
 use Mail;
+use App\Product;
 
 class PaymentController extends Controller
 {
@@ -146,6 +147,18 @@ class PaymentController extends Controller
 
         return $result;
     }
+
+    // public function exemplu($id){
+
+    //     $product = Product::find($id);
+        
+    //     foreach($product->allergies as $allergy){
+
+    //         echo $allergy->allergy->name;
+
+    //     }
+
+    // }
 
     // public function sendInvoice($id){
         

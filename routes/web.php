@@ -216,3 +216,5 @@ Route::get('/final_checkout', 'CheckoutController@final');
 // route::get('/lol', function(){
 //     return bcrypt('password');
 // });
+
+// Route::get('/exemplu/{id}', 'PaymentController@exemplu');
