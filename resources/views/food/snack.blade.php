@@ -13,7 +13,7 @@
               <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
               <i class="fas fa-bacon"></i>
               </div>
-              <h1 class="text-primary text-uppercase">Mic dejun</h1>
+              <h1 class="text-primary text-uppercase">Snack</h1>
 
                 <h2>Mancaruri sugerate:</h2>
                 @if($products->count() > 0)
