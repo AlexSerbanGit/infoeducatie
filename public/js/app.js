@@ -42311,12 +42311,12 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("input", {
-            staticClass: "next action-button-xl",
+            staticClass: "next action-button",
             class: { disabled: _vm.validateRegisterFields() },
             attrs: {
               type: "button",
               name: "next",
-              value: "Trimite-mi sms",
+              value: "sms",
               disabled: _vm.validateRegisterFields()
             },
             on: {

@@ -19,7 +19,7 @@
                         <h1>Bee Scanner</h1>
                         <p>O aplicatie care te ajuta sa-ti mentii/imbunatatesti startea de sanatate si aspectul fizic luand in considerare nevoile tale. </p>
                         @guest
-                            <a href="{{ url('/useer/login_register') }}">
+                            <a href="{{ url('/user/login_register') }}">
                                 <button class="btn btn-light btn-lg action-button" type="button">Vreau sa folosesc</button>
                             </a>
                         @endguest

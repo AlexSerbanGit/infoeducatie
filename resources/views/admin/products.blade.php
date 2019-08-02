@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+0@extends('layouts.admin-layout')
 
 @section('content')
 <style>
@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
     <div class="row">
-<div class="container-fluid"> 
+<div class="container-fluid">
 <div class="table-responsive">
     <table class="table">
     <thead>
@@ -39,7 +39,7 @@
                 </button>
             </td>
         </tr>
-    @endforeach 
+    @endforeach
     </tbody>
 </table>
 <button class="btn btn-warning" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
@@ -61,7 +61,7 @@
         </button>
       </div>
       <div class="modal-body">
-    
+
       <div class="form-group">
           <label>Denumirea produsului:</label>
           <input type="text" name="name" required class="form-control" placeholder="denumire produs">
@@ -76,23 +76,23 @@
       </div>
       <div class="form-group">
           <label>Greutatea produsului: (in grame)</label>
-          <input type="number" min="1" name="weight" required class="form-control" placeholder="in grame">
+          <input type="number" min="0" name="weight" required class="form-control" placeholder="in grame">
       </div>
       <div class="form-group">
           <label>Proteine per 100g:</label>
-          <input type="number" min="1" name="protein" class="form-control" required placeholder="in grame">
+          <input type="number" min="0" name="protein" class="form-control" required placeholder="in grame">
       </div>
       <div class="form-group">
           <label>Grasimi per 100g:</label>
-          <input type="number" min="1" name="fat" class="form-control" required placeholder="in grame">
+          <input type="number" min="0" name="fat" class="form-control" required placeholder="in grame">
       </div>
       <div class="form-group">
           <label>Carbohidrati per 100g:</label>
-          <input type="number" min="1" name="carbo" class="form-control" required placeholder="in grame">
+          <input type="number" min="0" name="carbo" class="form-control" required placeholder="in grame">
       </div>
       <div class="form-group">
           <label>Calorii per 100g</label>
-          <input type="number" min="1" name="kcal" class="form-control" required placeholder="Kcal">
+          <input type="number" min="0" name="kcal" class="form-control" required placeholder="Kcal">
       </div>
       <div class="form-group">
           <label>Cod de bare:</label>
@@ -123,7 +123,7 @@
         <span class="btn btn-raised btn-round btn-default btn-file">
             <!-- <span class="">Selecteaza imagine</span> -->
             <!-- <span class="fileinput-exists">Schimba</span> -->
-            
+
             <input class="fileinput-new" type="file" name="image" style="height: 30px" required/>
         </span>
     </div>
@@ -154,7 +154,7 @@
         </button>
       </div>
       <div class="modal-body">
-        
+
         <div class="form-group">
             <label>Denumirea produsului:</label>
             <input type="text" name="name" required class="form-control" placeholder="denumire produs" value="{{$request->name}}">
@@ -207,7 +207,7 @@
                 <option value="2">Intre</option>
                 <option value="1">Sanatoasa</option>
             @endif
-                
+
             </select>
         </div>
         <div class="form-group">
@@ -232,13 +232,13 @@
             <span class="btn btn-raised btn-round btn-default btn-file">
                 <!-- <span class="">Selecteaza imagine</span> -->
                 <!-- <span class="fileinput-exists">Schimba</span> -->
-                
+
                 <input class="fileinput-new" type="file" name="image" style="height: 30px"/>
             </span>
         </div>
         </div>
         </div>
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>

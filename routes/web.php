@@ -35,12 +35,12 @@ Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('login')->
 Route::post('/user/login', 'Auth\LoginController@login');
 Route::post('/user/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/user/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('/user/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('/user/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('/user/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-Route::get('/user/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('/user/register', 'Auth\RegisterController@register');
+// Route::get('/user/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Route::post('/user/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// Route::get('/user/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::post('/user/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+// Route::get('/user/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('/user/register', 'Auth\RegisterController@register');
 // Stop user's auth routes
 
 // Start admin's auth routes
@@ -48,10 +48,10 @@ Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/admin/login', 'Auth\LoginController@login');
 Route::post('/admin/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('/admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('/admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('/admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+// Route::get('/admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Route::post('/admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// Route::get('/admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::post('/admin/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 // Start admin's auth routes
 
 Route::group(['middleware' => ['auth']], function () {

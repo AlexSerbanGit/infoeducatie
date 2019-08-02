@@ -34,7 +34,7 @@
       <input type="text" name="phone_number" v-model="phoneNumber"/>
        <h3 class="fs-subtitle text-danger">{{ errorMessage }}</h3>
       <input type="button" name="previous" class="previous action-button-previous" value="Inapoi"/>
-      <input type="button" name="next" class="next action-button-xl" value="Trimite-mi sms"
+      <input type="button" name="next" class="next action-button" value="sms"
         v-on:click="registerSendSMS()"
         v-on:click.prevent="validateRegisterFields()"
         :class="{ disabled: validateRegisterFields() }" :disabled="validateRegisterFields()"
