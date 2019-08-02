@@ -43,6 +43,7 @@
     </tbody>
 </table>
 <button class="btn btn-danger" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addProductFromCsv">Adauga produse din csv</button>
 </div>
 
 </div>
@@ -152,6 +153,41 @@
             @endforeach
         </div>
     </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="" class="btn btn-primary">Adauga produs</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addProductFromCsv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{{ url('restaurant/add_product') }}" method="POST" enctype='multipart/form-data'>
+      @csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adauga produs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          {{-- <div class="form-group form-file-upload form-file-multiple">
+       <input type="file" multiple="" class="inputFileHidden">
+       <div class="input-group">
+           <input type="text" class="form-control inputFileVisible" placeholder="Multiple Files" multiple>
+           <span class="input-group-btn">
+               <button type="button" class="btn btn-fab btn-round btn-info">
+                   <i class="material-icons">layers</i>
+               </button>
+           </span>
+       </div>
+     </div> --}}
 
       </div>
       <div class="modal-footer">

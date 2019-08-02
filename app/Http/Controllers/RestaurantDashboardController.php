@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Allergy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -17,7 +18,10 @@ class RestaurantDashboardController extends Controller
     public function products(){
 
         $products = Product::where('restaurant_id', '=', Auth::user()->id)->get();
-        return view('restaurant.products')->with('products', $products);
+
+        $allergies = Allergy::all();
+
+        return view('restaurant.products', compact('products', 'allergies'));
 
     }
 
