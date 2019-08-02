@@ -1,4 +1,4 @@
-@extends('layouts.restaurant-layout')
+@extends('layouts.admin-layout')
 
 @section('content')
 <style>
@@ -7,7 +7,7 @@
     }
 </style>
 <div class="card" style="text-align: left">
-    <div class="card-header card-header-danger">
+    <div class="card-header card-header-warning">
     <h2>
         <b>Produse</b>
     </h2>
@@ -34,6 +34,7 @@
             <td>@if($request->type == 1)de mancat @else de baut @endif</td>
             <td class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#edit{{$request->id}}">Vezi</button></td>
             <td class="td-actions text-right">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#allergies{{$request->id}}">Alergii</button>
                 <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$request->id}}">
                     <i class="material-icons">close</i>
                 </button>
@@ -42,8 +43,12 @@
     @endforeach
     </tbody>
 </table>
+<<<<<<< HEAD
 <button class="btn btn-danger" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
 <button class="btn btn-primary" data-toggle="modal" data-target="#addProductFromCsv">Adauga produse din csv</button>
+=======
+<button class="btn btn-warning" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
+>>>>>>> 644a524410978219a0c9b03251aa962f907fff3f
 </div>
 
 </div>
@@ -53,7 +58,7 @@
 <div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form action="{{ url('restaurant/add_product') }}" method="POST" enctype='multipart/form-data'>
+    <form action="{{ url('admin/add_product') }}" method="POST" enctype='multipart/form-data'>
       @csrf
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Adauga produs</h5>
@@ -200,6 +205,27 @@
 </div>
 
 @foreach($products as $request)
+<!-- Modal alergies -->
+<div class="modal fade" id="allergies{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Asociaza alergii</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Aici alergii
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal edit product -->
 <div class="modal fade" id="edit{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

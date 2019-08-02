@@ -330,7 +330,12 @@ class AdminController extends Controller
 
     public function addProduct(Request $request){
 
+<<<<<<< HEAD
         $validator = Validator::make($request -> all(), [
+=======
+        $request->validate([
+            'product_type' => 'required|numeric',
+>>>>>>> 644a524410978219a0c9b03251aa962f907fff3f
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
@@ -344,9 +349,15 @@ class AdminController extends Controller
             'price' => 'required|numeric',
             'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
+<<<<<<< HEAD
         if($validator -> fails()) {
             return redirect() -> back() -> with('message', 'Datele au fost introduse gresit!');
         }
+=======
+
+        return $request;
+
+>>>>>>> 644a524410978219a0c9b03251aa962f907fff3f
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
