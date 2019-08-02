@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.restaurant-layout')
 
 @section('content')
 <style>
@@ -43,7 +43,8 @@
     @endforeach
     </tbody>
 </table>
-<button class="btn btn-warning" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
+<button class="btn btn-danger" data-toggle="modal" data-target="#addProduct">Adauga produs</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addProductFromCsv">Adauga produse din csv</button>
 </div>
 
 </div>
@@ -164,6 +165,44 @@
   </div>
 </div>
 
+<div class="modal fade" id="addProductFromCsv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{{ url('/restaurant/add/products/csv') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adauga produse din csv</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <span>Adauga csv / txt</span>
+          <div class="">
+              <input type="file" name="csv" style="display:block !important;">
+          </div>
+          {{-- <div class="form-group form-file-upload form-file-multiple">
+       <input type="file" multiple="" class="inputFileHidden">
+       <div class="input-group">
+           <input type="text" class="form-control inputFileVisible" placeholder="Multiple Files" multiple>
+           <span class="input-group-btn">
+               <button type="button" class="btn btn-fab btn-round btn-info">
+                   <i class="material-icons">layers</i>
+               </button>
+           </span>
+       </div>
+     </div> --}}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="" class="btn btn-primary">Parseaza fisierul</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
 @foreach($products as $request)
 <!-- Modal alergies -->
 <div class="modal fade" id="allergies{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -177,9 +216,13 @@
       </div>
       <div class="modal-body">
         Aici alergii
+<<<<<<< HEAD
+
+=======
         <div class="">
          <input type="file" class="" style="display:block !important;">
         </div>
+>>>>>>> 29b24b01c88609e0bf23799ed3d8e84dab03e7db
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

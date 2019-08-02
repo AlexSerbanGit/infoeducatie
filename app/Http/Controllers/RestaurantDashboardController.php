@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Allergy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantDashboardController extends Controller
 {
@@ -17,7 +19,10 @@ class RestaurantDashboardController extends Controller
     public function products(){
 
         $products = Product::where('restaurant_id', '=', Auth::user()->id)->get();
-        return view('restaurant.products')->with('products', $products);
+
+        $allergies = Allergy::all();
+
+        return view('restaurant.products', compact('products', 'allergies'));
 
     }
 
@@ -134,21 +139,21 @@ class RestaurantDashboardController extends Controller
     public function parseCSV(Request $request) {
 
         $error_messages = [
-                'csv-file.required' => 'Fisierul csv este necesar!',
-                'csv-file.mimes' => 'Fisierul trebuie sa fie de tip csv!',
+            'csv.required' => 'Fisierul csv este necesar!',
+            'csv.mimes' => 'Fisierul trebuie sa fie de tip csv!',
         ];
 
         $validator = Validator::make($request -> all(), [
-            'csv-file' => 'required|file|mimes:csv,txt'
+            'csv' => 'required|mimes:csv,txt'
         ], $error_messages);
 
         if($validator -> fails()) {
-            return redirect() -> back() -> withErrors($validator);
+            return redirect() -> back() -> with('message', $validator -> errors());
         }
 
-        if ($request-> hasFile('csv-file')) {
+        if ($request-> hasFile('csv')) {
 
-            $file = $request -> file('csv-file');
+            $file = $request -> file('csv');
             $csv_data = file_get_contents($file);
             $rows = array_map('str_getcsv', explode("\n", $csv_data));
 
@@ -163,6 +168,7 @@ class RestaurantDashboardController extends Controller
             for($i = 0; $i < $CSV_rows_number; $i++) {
 
                 $product = new Product();
+                $product -> restaurant_id = Auth::user() -> id;
                 $product -> name = $content[$key][1];
                 $product -> weight = $content[$key][2];
                 $product -> protein = $content[$key][3];
@@ -177,7 +183,7 @@ class RestaurantDashboardController extends Controller
             }
             return redirect() -> back() -> with('message', 'Fisierul a fost parsat cu succes!');
         } else {
-            return redirect() -> back() -> with('message', 'A aparutt o problema la parsare!');
+            return redirect() -> back() -> with('message', 'A aparut o problema la parsare!');
         }
     }
 }
