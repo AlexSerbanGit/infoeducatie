@@ -23,7 +23,11 @@
 
   <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-
+  <style>
+    label{
+      color: black !important;
+    }
+  </style>
 </head>
 
 <body class="">
