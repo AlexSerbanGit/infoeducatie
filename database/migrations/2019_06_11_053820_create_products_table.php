@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->integer('carbo'); // per 100 g
             $table->integer('kcal'); // per 100 g
             $table->string('barcode');
-            $table->integer('product_type')->default(1); // 1 - mic dejum / 2 - amiaza / 3 - cina
+            $table->integer('product_type')->default(1); // 1 - mic dejum / 2 - amiaza / 3 - cina / 4 - snack
             $table->string('image') -> default('product_picture.png');
             $table->integer('category'); // 1 - mancare sanatoasa / 2 - intre sanatos si nesanatos / 3 - nesanatoasa
             $table->integer('type'); // 1 - de mancat / 2 - de baut

@@ -75,6 +75,15 @@
         <textarea name="description" cols="30" rows="4" class="form-control"></textarea>
       </div>
       <div class="form-group">
+        <label>Masa:</label>
+        <select name="product_type" class="form-control" required min="1" max="4">
+            <option value="1">Mic dejun</option>
+            <option value="2">Pranz</option>
+            <option value="3">Cina</option>
+            <option value="4">Gustare</option>
+        </select>
+      </div>
+      <div class="form-group">
           <label>Greutatea produsului: (in grame)</label>
           <input type="number" min="0" name="weight" required class="form-control" placeholder="in grame">
       </div>
@@ -181,6 +190,32 @@
             <label>Descrierea produsului:</label>
             <textarea name="description" cols="30" rows="4" class="form-control">{{$request->description}}</textarea>
         </div>
+        <div class="form-group">
+        <label>Masa:</label>
+        <select name="product_type" class="form-control" required min="1" max="4">
+            @if($request->product_type == 1)
+            <option value="1">Mic dejun</option>
+            <option value="2">Pranz</option>
+            <option value="3">Cina</option>
+            <option value="4">Gustare</option>
+            @elseif($request->product_type == 2)
+            <option value="2">Pranz</option>
+            <option value="3">Cina</option>
+            <option value="4">Gustare</option>
+            <option value="1">Mic dejun</option>
+            @elseif($request->product_type == 3)
+            <option value="3">Cina</option>
+            <option value="4">Gustare</option>
+            <option value="2">Pranz</option>
+            <option value="1">Mic dejun</option>
+            @else
+            <option value="4">Gustare</option>
+            <option value="1">Mic dejun</option>
+            <option value="2">Pranz</option>
+            <option value="3">Cina</option>
+            @endif
+        </select>
+      </div>
         <div class="form-group">
             <label>Greutatea produsului: (in grame)</label>
             <input type="number" min="1" name="weight" required class="form-control" placeholder="in grame" value="{{$request->weight}}">
