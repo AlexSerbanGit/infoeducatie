@@ -216,7 +216,13 @@
       </div>
       <div class="modal-body">
         Aici alergii
+<<<<<<< HEAD
 
+=======
+        <div class="">
+         <input type="file" class="" style="display:block !important;">
+        </div>
+>>>>>>> 29b24b01c88609e0bf23799ed3d8e84dab03e7db
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
