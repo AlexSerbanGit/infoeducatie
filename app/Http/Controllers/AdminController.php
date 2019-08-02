@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Drug;
 use App\Message;
+use App\ProductToAllergy;
 use Mail;
 use App\ProductRequest;
 use Auth;
@@ -329,7 +330,7 @@ class AdminController extends Controller
 
     public function addProduct(Request $request){
 
-        $request->validate([
+        $validator = Validator::make($request -> all(), [
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
@@ -343,6 +344,9 @@ class AdminController extends Controller
             'price' => 'required|numeric',
             'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
+        if($validator -> fails()) {
+            return redirect() -> back() -> with('message', 'Datele au fost introduse gresit!');
+        }
         if($request->id){
             $productRequests = ProductRequest::find($request->id);
             $productRequests->delete();
@@ -361,6 +365,14 @@ class AdminController extends Controller
         $product->type = $request->type;
         $product->description = $request->description;
         $product->restaurant_id = Auth::user()->id;
+
+        // foreach ($request -> allergies as $key => $allergy) {
+        //     $product_to_allergy = new ProductToAllergy();
+        //     $product_to_allergy -> allergy_id = $allergy;
+        //     $product_to_allergy -> product_id = $product -> id;
+        //     $product_to_allergy -> save();
+        // }
+
         if($file = $request->file('image')){
             $name12 =  str_random(10).'.'.$file->getClientOriginalExtension();
             $file->move('products', $name12);
@@ -380,7 +392,7 @@ class AdminController extends Controller
 
     public function editProduct(Request $request, $id){
 
-        $request->validate([
+        $validator = Validator::make($request -> all(), [
             'name' => 'required|string',
             'weight' => 'required|numeric',
             'protein' => 'required|numeric',
@@ -392,7 +404,12 @@ class AdminController extends Controller
             'type' => 'required|numeric',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'allergies' => 'sometimes|required|exists:allergies,id'
         ]);
+
+        if($validator -> fails()) {
+            return redirect() -> back() -> with('message', 'Datele au fost introduse gresit!');
+        }
 
         $product = Product::find($id);
         $product->name = $request->name;
@@ -406,6 +423,22 @@ class AdminController extends Controller
         $product->category = $request->category;
         $product->type = $request->type;
         $product->description = $request->description;
+
+        // $dp = ProductToAllergy::where('product_id', $product -> id) -> get();
+        //
+        // foreach ($dp as $key => $value) {
+        //     $value -> delete;
+        // }
+        //
+        // if(isset($request -> allergies) && $request -> allergies) {
+        //     foreach ($request -> allergies as $key => $allergy) {
+        //         $product_to_allergy = new ProductToAllergy();
+        //         $product_to_allergy -> allergy_id = $allergy;
+        //         $product_to_allergy -> product_id = $product -> id;
+        //         $product_to_allergy -> save();
+        //     }
+        // }
+
         if($file = $request->file('image')){
             $name12 =  str_random(10).'.'.$file->getClientOriginalExtension();
             $file->move('products', $name12);

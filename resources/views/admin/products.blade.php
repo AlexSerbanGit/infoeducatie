@@ -129,7 +129,7 @@
     </div>
     </div>
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label class="w-100 col-form-label">Asociaza alergii</label>
         <div class="form-check">
             @foreach ($allergies as $key => $allergy)
@@ -142,7 +142,7 @@
                 </label>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
       </div>
       <div class="modal-footer">
