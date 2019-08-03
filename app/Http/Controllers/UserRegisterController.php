@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserRegisterController extends Controller
 {
+    // Private code
 
     private function sendSmsCode($phone_number, $code) {
 
@@ -33,6 +34,8 @@ class UserRegisterController extends Controller
         // close the connection, release resources used
         curl_close($ch);
     }
+
+    // Private code
 
     public function adddAcount(Request $request) {
 
@@ -64,7 +67,7 @@ class UserRegisterController extends Controller
 
         $user -> save();
 
-        // $this -> sendSmsCode($user -> phone_number, $user -> code);
+        $this -> sendSmsCode($user -> phone_number, $user -> code);
 
         return json_encode([
             'succes' => true,

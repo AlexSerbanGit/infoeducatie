@@ -126,11 +126,15 @@ class AdminController extends Controller
 
         $request->to = $message->message;
 
-        Mail::send('email.answer', ['request' => $request], function ($m) use ($request) {
-            $m->from('contact@beescanner.ro', '🔺Raspuns!🔺');
+        try {
+            Mail::send('email.answer', ['request' => $request], function ($m) use ($request) {
+                $m->from('contact@beescanner.ro', '🔺Raspuns!🔺');
 
-            $m->to($request->email, $request->name)->subject('🔺Raspuns!🔺');
-        });
+                $m->to($request->email, $request->name)->subject('🔺Raspuns!🔺');
+            });
+        } catch(Exception $e) {
+            return redirect()->back()->with('message', 'A aparut o eroare la email!');
+        }
 
         if($request->delete){
             $message -> delete();
