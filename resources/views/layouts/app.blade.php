@@ -16,6 +16,7 @@
     <meta name="city_id" content="{{ Auth::user() -> city_id}}"> @endif @endauth --}}
 
     <title>BeeScanner</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/beescanner.png')}}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/ionicons.min.css')}}">

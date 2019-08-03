@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\GuestVerification::class,
         'isAdmin' => \App\Http\Middleware\IsAdmin::class,
         'restaurant' => \App\Http\Middleware\VerifyRestaurantProfile::class,
+        'banned' => \App\Http\Middleware\Ban::class,
     ];
 
     /**

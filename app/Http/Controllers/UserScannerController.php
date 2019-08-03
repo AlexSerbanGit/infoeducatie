@@ -25,8 +25,10 @@ class UserScannerController extends Controller
 
                 $allergy -> allergy;
             }
-        }
+            return view('/results', compact('product', 'barcode'));
 
+        }
         return view('/results', compact('product', 'barcode'));
+
     }
 }

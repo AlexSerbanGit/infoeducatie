@@ -7,7 +7,7 @@
     }
 </style>
 <div class="card" style="text-align: left">
-    <div class="card-header card-header-warning">
+    <div class="card-header card-header-danger">
     <h2>
         <b>Produse</b>
     </h2>

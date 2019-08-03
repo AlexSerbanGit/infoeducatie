@@ -6,6 +6,8 @@ use Auth;
 use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\OldOrder;
+use App\OldProduct;
 
 class RestaurantOrdersController extends Controller
 {
@@ -13,7 +15,7 @@ class RestaurantOrdersController extends Controller
 
         $restaurant = Auth::user();
 
-        $orders = Order::where('restaurant_id', $restaurant -> id) -> get();
+        $orders = OldOrder::all();
 
         return view('/restaurant/active-orders', compact('orders'));
     }
@@ -22,14 +24,31 @@ class RestaurantOrdersController extends Controller
 
         $restaurant = Auth::user();
 
-        $orders = Order::onlyTrashed() -> where('restaurant_id', $restaurant -> id) -> get();
+        $orders = OldOrder::all();
 
         return view('/restaurant/history-orders', compact('orders'));
     }
 
     public function completeOrder($order_id) {
 
-        $order = Order::find($order_id);
+        $order = OldOrder::find($order_id);
+
+        if($order == null) {
+            return back() -> withErrors('Comanda solicitata este invalida!');
+        }
+
+        if($order -> restaurant_id != Auth::user() -> id) {
+            return back() -> withErrors('Comanda solicitata este asociata altui restaurant!');
+        }
+
+        $order -> finished = 1;
+
+        return back() -> with('Comanda a fost finalizata si adaugata la istoric!');
+    }
+
+    public function deleteOrder($order_id) {
+
+        $order = OldOrder::find($order_id);
 
         if($order == null) {
             return back() -> withErrors('Comanda solicitata este invalida!');
@@ -40,27 +59,6 @@ class RestaurantOrdersController extends Controller
         }
 
         $order -> delete();
-
-        return back() -> with('Comanda a fost finalizata si adaugata la istoric!');
-    }
-
-    public function deleteOrder($order_id) {
-
-        $order = Order::onlyTrashed() -> find($order_id);
-
-        if($order == null) {
-            return back() -> withErrors('Comanda solicitata este invalida!');
-        }
-
-        if($order -> restaurant_id != Auth::user() -> id) {
-            return back() -> withErrors('Comanda solicitata este asociata altui restaurant!');
-        }
-
-        if($order -> deleted_at == null) {
-            return back() -> withErrors('Comanda solicitata este activa!');
-        }
-
-        $order -> forceDelete();
 
         return back() -> with('Comanda a fost eliminata din istoric!');
     }

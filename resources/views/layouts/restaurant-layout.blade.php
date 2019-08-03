@@ -9,6 +9,7 @@
   <title>
   {{ Route::currentRouteName() }}
   </title>
+  <link rel="icon" type="image/png" href="{{ asset('images/beescanner.png')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -55,7 +56,7 @@
             <li class="nav-item">
             <a class="nav-link" href="{{ url('/restaurant/dashboard') }}">
           @endif
-              <i class="material-icons">dashboard</i>
+          <i class="fas fa-tachometer-alt"></i>
               <p>Acasa</p>
             </a>
           </li>
@@ -66,7 +67,7 @@
             <li class="nav-item">
             <a class="nav-link" href="{{ route('restaruant-active-orders') }}">
           @endif
-              <i class="material-icons">watch_later</i>
+              <i class="fas fa-list-ol"></i>
               <p>Comenzi active</p>
             </a>
           </li>
@@ -77,7 +78,7 @@
             <li class="nav-item">
             <a class="nav-link" href="{{ route('restaruant-history-orders') }}">
           @endif
-              <i class="material-icons">history</i>
+              <i class="fas fa-list-ol"></i>
               <p>Istoric comenzi</p>
             </a>
           </li>
@@ -88,7 +89,7 @@
             <li class="nav-item">
             <a class="nav-link" href="{{ route('restaurants-products') }}">
           @endif
-              <i class="material-icons">list</i>
+              <i class="fas fa-list-ol"></i>
               <p>Produse</p>
             </a>
           </li>
@@ -109,15 +110,6 @@
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
-                  <div class="ripple-container"></div>
-                </button>
-              </div>
-            </form>
             <ul class="navbar-nav">
 
               <li class="nav-item dropdown">

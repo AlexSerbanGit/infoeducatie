@@ -17,6 +17,7 @@ Route::get('/', function () {
 }) -> name('welcome');
 
 // Route::group(['middleware' => ['guest']], function () {
+Route::group(['middleware' => ['banned']], function () {
 Route::group(['middleware' => ['guesto']], function () {
     Route::get('/user/login_register', 'UserLoginController@loginOrRegister') -> name('login_register');
 });
@@ -30,11 +31,6 @@ Route::get('/sanatate', function() {
     return view('health.home');
 });
 
-// Start user's auth routes
-Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('cors');
-Route::post('/user/login', 'Auth\LoginController@login');
-Route::post('/user/logout', 'Auth\LoginController@logout')->name('logout');
-
 // Route::get('/user/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 // Route::post('/user/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 // Route::get('/user/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
@@ -43,10 +39,6 @@ Route::post('/user/logout', 'Auth\LoginController@logout')->name('logout');
 // Route::post('/user/register', 'Auth\RegisterController@register');
 // Stop user's auth routes
 
-// Start admin's auth routes
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/admin/login', 'Auth\LoginController@login');
-Route::post('/admin/logout', 'Auth\LoginController@logout')->name('logout');
 
 // Route::get('/admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 // Route::post('/admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -151,6 +143,16 @@ Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
 
 });
 
+Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
+
+Route::post('/send_request', 'PublicController@sendRequest')->name('Trimite cerere de adaugare produs');
+
+Route::get('/lol', 'UserRestaurantsController@user');
+
+Route::post('/to_checkout', 'CheckoutController@toCheckout');
+
+Route::get('/final_checkout', 'CheckoutController@final');
+
 Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], function () {
 
     Route::get('/home', 'AdminController@home')->name('Panou de administrare');
@@ -203,15 +205,19 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
 
 });
 
-Route::post('/contact_us', 'AdminController@contactUs')->name('Form de contact');
+});
 
-Route::post('/send_request', 'PublicController@sendRequest')->name('Trimite cerere de adaugare produs');
 
-Route::get('/lol', 'UserRestaurantsController@user');
 
-Route::post('/to_checkout', 'CheckoutController@toCheckout');
+// Start admin's auth routes
+Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/admin/login', 'Auth\LoginController@login');
+Route::post('/admin/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/final_checkout', 'CheckoutController@final');
+// Start user's auth routes
+Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('cors');
+Route::post('/user/login', 'Auth\LoginController@login');
+Route::post('/user/logout', 'Auth\LoginController@logout')->name('logout');
 
 // Route::get('/restaurant_profile', function(){
 //     return view('restaurant.profile');

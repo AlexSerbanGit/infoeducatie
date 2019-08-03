@@ -16,7 +16,7 @@ class CreateOldOrdersTable extends Migration
         Schema::create('old_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('finished')->default(0); // 0 - comanda ne finalizata / 1 - comanda finalizata 
+            $table->integer('finished')->default(0); // 0 - comanda nefinalizata / 1 - comanda finalizata 
             $table->timestamps();
         });
     }
