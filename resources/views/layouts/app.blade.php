@@ -141,7 +141,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                     <li class="list-inline-item"><a href="{{ url('/') }}">Acasa</a></li>
                     <li class="list-inline-item"><a href="{{ url('/user/login_register')}}">Creare cont / Autentificare</a></li>
                 </ul>
-                <p class="copyright text-dark">GoalsScanner © 2019</p>
+                <p class="copyright text-dark">BeeScanner © 2019</p>
             </footer>
         </div>
     </div>

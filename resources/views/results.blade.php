@@ -60,6 +60,13 @@
                                       <h3 class="text-primary mt-3">
                                           Pret: {{ $product -> price }} lei
                                       </h3>
+                                      <h3 class="text-primary mt-3">
+                                          @if($product -> restaurant_id == null)
+                                              Adaugat de administrator <span class="text-danger">BeeScanner</span>
+                                          @else
+                                              Adaugat de restaurantul {{ $product -> restaurant -> name }}
+                                          @endif
+                                      </h3>
                                   </div>
                               @elseif($product -> type == 2)
                                   <div class="col-md-6">
@@ -151,36 +158,37 @@
 
                           </h2>
                       @endif
+                      @if(isset($product -> id))
+                          {{-- <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#add-target">Adauga target nou</a> --}}
+                          <a class="btn btn-primary mt-4" data-toggle="modal" data-target="#eat-pro{{$product->id}}">Adauga la progres</a>
+                          <div class="modal fade" id="eat-pro{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                              <div class="modal-content">
 
-                    {{-- <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#add-target">Adauga target nou</a> --}}
-                    <a class="btn btn-primary mt-4" data-toggle="modal" data-target="#eat-pro{{$product->id}}">Adauga la progres</a>
-                    <div class="modal fade" id="eat-pro{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                        <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h2 class="modal-title" id="modal-title-default">Adaugi acest produs la target-ul tau?</h2>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">×</span>
+                                      </button>
+                                  </div>
 
-                            <div class="modal-header">
-                                <h2 class="modal-title" id="modal-title-default">Adaugi acest produs la target-ul tau?</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
+                                  <div class="modal-body">
 
-                            <div class="modal-body">
+                                      <h2>Doresti sa adaugi acest produs la target-ul tau?</h2>
 
-                                <h2>Doresti sa adaugi acest produs la target-ul tau?</h2>
+                                  </div>
 
-                            </div>
+                                  <div class="modal-footer">
+                                      <a href="{{ url('/add_to_your_target/'.$product->id) }}">
+                                          <button type="button" class="btn btn-primary">Da</button>
+                                      </a>
+                                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Incide</button>
+                                  </div>
 
-                            <div class="modal-footer">
-                                <a href="{{ url('/add_to_your_target/'.$product->id) }}">
-                                    <button type="button" class="btn btn-primary">Da</button>
-                                </a>
-                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Incide</button>
-                            </div>
-
-                        </div>
-                    </div>
-                    </div>
+                              </div>
+                          </div>
+                          </div>
+                      @endif
                   </div>
                 </div>
               </div>

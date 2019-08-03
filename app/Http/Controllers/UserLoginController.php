@@ -33,6 +33,8 @@ class UserLoginController extends Controller
         ]);
     }
 
+    // Private code
+
     private function sendSmsCode($phone_number, $code) {
 
         //The message sent to the user
@@ -55,6 +57,8 @@ class UserLoginController extends Controller
         curl_close($ch);
     }
 
+    // Private code
+
     public function sendSms(Request $request) {
 
         $user = User::where('phone_number', $request -> phone_number) -> first();
@@ -65,7 +69,7 @@ class UserLoginController extends Controller
 
         $user -> save();
 
-        // $this -> sendSmsCode($user -> phone_number, $user -> code);
+        $this -> sendSmsCode($user -> phone_number, $user -> code);
 
         return json_encode([
             'succes' => true,

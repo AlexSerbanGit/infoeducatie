@@ -57,7 +57,7 @@
         <div class="container">
             <div class="intro">
                 <h2 class="text-center">Avantaje</h2>
-                <p class="text-center">Avantajele platformei GoalsScanner.</p>
+                <p class="text-center">Avantajele platformei BeeScanner.</p>
             </div>
             <div class="row justify-content-center features">
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style=" margin-bottom: 10px">
