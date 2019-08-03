@@ -13,7 +13,7 @@
               <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
               <i class="fas fa-bacon"></i>
               </div>
-              <h1 class="text-primary text-uppercase">Snack</h1>
+              <h1 class="text-primary text-uppercase">Mic dejun</h1>
 
                 <h2>Mancaruri sugerate:</h2>
                 @if($products->count() > 0)
@@ -27,13 +27,46 @@
 
                     @if($product->product_type == 4)
                         @php
+                            $valid = 1;
+                            $valid2 = 1;
+                        @endphp
+                        @foreach(Auth::user()->allergies as $allergy)
+
+                            @foreach($allergy->allergy->products as $eq)
+
+                                @if($eq->product->id == $product->id)
+                                    @php
+                                        $valid = 0;
+                                        break;
+                                    @endphp
+                                    
+                                @endif
+
+                            @endforeach
+                            
+                            @if($valid == 0)
+                                @php
+                                    $valid2 = 0;
+                                    break;
+                                @endphp
+                            @endif
+
+                        @endforeach
+
+                        @php
                             $ok = 1;
                         @endphp
                                 <div class="col-lg-4" style="margin-top: 10px">
+                                @if($valid2 == 0)
+                                    <div class="card alert-danger shadow border-0">
+                                @else
                                     <div class="card alert-primary shadow border-0">
+                                @endif
                                     <div class="card-body py-5">
                                         <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                                        <i style="color: white" class="fas fa-bacon"></i>
+
+                                        <img src="{{ asset('/product/'.$product->image) }}" alt="">
+
                                         </div>
                                         <h2 class="text-uppercase" style="color: white">{{$product->name}}</h2>
                                         <div>
@@ -127,9 +160,43 @@
                 <div class="row">
                 @foreach($products as $product)
                    
-                @if($product->product_type == 1)
+                @if($product->product_type == 4)
+                @php
+                            $valid = 1;
+                            $valid2 = 1;
+                        @endphp
+                        @foreach(Auth::user()->allergies as $allergy)
+
+                            @foreach($allergy->allergy->products as $eq)
+
+                                @if($eq->product->id == $product->id)
+                                    @php
+                                        $valid = 0;
+                                        break;
+                                    @endphp
+                                    
+                                @endif
+
+                            @endforeach
+                            
+                            @if($valid == 0)
+                                @php
+                                    $valid2 = 0;
+                                    break;
+                                @endphp
+                            @endif
+
+                        @endforeach
+
+                        @php
+                            $ok = 1;
+                        @endphp
                                 <div class="col-lg-4" style="margin-top: 10px">
+                                @if($valid2 == 0)
+                                    <div class="card alert-danger shadow border-0">
+                                @else
                                     <div class="card alert-primary shadow border-0">
+                                @endif
                                     <div class="card-body py-5">
                                         <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
                                         <i style="color: white" class="fas fa-bacon"></i>

@@ -65,7 +65,7 @@
               <div class="card card-lift--hover card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col">
+                    <div class="col" style="text-align: left !important;">
                       <h5 class="card-title text-uppercase text-muted mb-0">Proteine</h5>
                       <span class="h2 font-weight-bold mb-0">{{$user -> stats->protein}}</span>
                     </div>
@@ -86,7 +86,7 @@
               <div class="card card-lift--hover  card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col">
+                    <div class="col" style="text-align: left !important;">
                       <h5 class="card-title text-uppercase text-muted mb-0">Carbohidrati</h5>
                       <span class="h2 font-weight-bold mb-0">@php echo (int)$carbo @endphp</span>
                     </div>
@@ -107,7 +107,7 @@
               <div class="card card-lift--hover  card-stats mb-4 mb-xl-0"style="margin-top: 30px">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col">
+                    <div class="col" style="text-align: left !important;">
                       <h5 class="card-title text-uppercase text-muted mb-0">Grasimi</h5>
                       <span class="h2 font-weight-bold mb-0">@php echo (int)$fat @endphp</span>
                     </div>
@@ -128,7 +128,7 @@
               <div class="card card-lift--hover  card-stats mb-4 mb-xl-0"style="margin-top: 30px">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col">
+                    <div class="col" style="text-align: left !important;">
                       <h5 class="card-title text-uppercase text-muted mb-0">Calorii</h5>
                       <span class="h2 font-weight-bold mb-0">@php echo (int)$kcal @endphp</span>
                     </div>

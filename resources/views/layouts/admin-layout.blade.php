@@ -12,9 +12,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
   <!-- CSS Files -->
   <link href="{{ asset('assets-admin/css/material-dashboard.css')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -22,7 +20,7 @@
   <link rel="stylesheet" href="{{ asset('/css/preloader.css') }}">
 
   <link rel="stylesheet" href="{{ asset('/font_awesome/css/all.css') }}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+  <script src="{{asset('/js/charts.js')}}" charset="utf-8"></script>
   <style>
     label{
       color: black !important;
@@ -58,7 +56,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin/home') }}">
           @endif
-              <i class="material-icons">dashboard</i>
+          <i class="fas fa-tachometer-alt"></i>
               <p>Acasa</p>
             </a>
           </li>
@@ -69,7 +67,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin/users') }}">
           @endif
-              <i class="material-icons">person</i>
+              <i class="fa fa-user"></i>
               <p>Utilizatori</p>
             </a>
           </li>
@@ -181,15 +179,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
-                  <div class="ripple-container"></div>
-                </button>
-              </div>
-            </form>
+            
             <ul class="navbar-nav">
            
               <li class="nav-item dropdown">
@@ -200,9 +190,6 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Settings</a>
-                  <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

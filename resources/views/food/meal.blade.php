@@ -27,13 +27,46 @@
 
                     @if($product->product_type == 2)
                         @php
+                            $valid = 1;
+                            $valid2 = 1;
+                        @endphp
+                        @foreach(Auth::user()->allergies as $allergy)
+
+                            @foreach($allergy->allergy->products as $eq)
+
+                                @if($eq->product->id == $product->id)
+                                    @php
+                                        $valid = 0;
+                                        break;
+                                    @endphp
+                                    
+                                @endif
+
+                            @endforeach
+                            
+                            @if($valid == 0)
+                                @php
+                                    $valid2 = 0;
+                                    break;
+                                @endphp
+                            @endif
+
+                        @endforeach
+
+                        @php
                             $ok = 1;
                         @endphp
-                                <div class="col-lg-4" style="margin-top: 10px">
+                                <div class="col-lg-4" style="margin-top: 10px; height: 100%">
+                                @if($valid2 == 0)
+                                    <div class="card alert-danger shadow border-0" style="height: 100%">
+                                @else
                                     <div class="card alert-primary shadow border-0">
+                                @endif
                                     <div class="card-body py-5">
-                                        <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                                        <i style="color: white" class="fas fa-bacon"></i>
+                                        <div class="">
+
+                                        <img src="{{ asset('/products/'.$product->image) }}" alt="{{ $product->name }}" style="width: 100%; hieght: 100%; max-width: 100%; max-height: 100%; height: auto">
+
                                         </div>
                                         <h2 class="text-uppercase" style="color: white">{{$product->name}}</h2>
                                         <div>
@@ -127,12 +160,48 @@
                 <div class="row">
                 @foreach($products as $product)
                    
-                @if($product->product_type == 1)
-                                <div class="col-lg-4" style="margin-top: 10px">
+                @if($product->product_type == 2)
+                @php
+                            $valid = 1;
+                            $valid2 = 1;
+                        @endphp
+                        @foreach(Auth::user()->allergies as $allergy)
+
+                            @foreach($allergy->allergy->products as $eq)
+
+                                @if($eq->product->id == $product->id)
+                                    @php
+                                        $valid = 0;
+                                        break;
+                                    @endphp
+                                    
+                                @endif
+
+                            @endforeach
+                            
+                            @if($valid == 0)
+                                @php
+                                    $valid2 = 0;
+                                    break;
+                                @endphp
+                            @endif
+
+                        @endforeach
+
+                        @php
+                            $ok = 1;
+                        @endphp
+                        <div class="col-lg-4" style="margin-top: 10px; height: 100%">
+                                @if($valid2 == 0)
+                                    <div class="card alert-danger shadow border-0" style="height: 100%">
+                                @else
                                     <div class="card alert-primary shadow border-0">
+                                @endif
                                     <div class="card-body py-5">
-                                        <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                                        <i style="color: white" class="fas fa-bacon"></i>
+                                        <div class="">
+
+                                        <img src="{{ asset('/products/'.$product->image) }}" alt="{{ $product->name }}" style="width: 100%; hieght: 100%; max-width: 100%; max-height: 100%; height: auto">
+
                                         </div>
                                         <h2 class="text-uppercase" style="color: white">{{$product->name}}</h2>
                                         <div>
