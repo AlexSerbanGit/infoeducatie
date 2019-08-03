@@ -133,8 +133,8 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
             <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin/notifications') }}">
           @endif
-              <i class="material-icons">notifications</i>
-              <p>Cereri de produse</p>
+          <i class="fas fa-align-justify"></i>
+            <p>Cereri de produse</p>
             </a>
           </li>
 
@@ -184,7 +184,7 @@ position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%;
            
               <li class="nav-item dropdown">
                 <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">person</i>
+                <i class="fa fa-user"></i>
                   <p class="d-lg-none d-md-block">
                     Account
                   </p>

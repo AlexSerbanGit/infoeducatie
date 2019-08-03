@@ -78,7 +78,7 @@
 						<tr>
 							<td class="img-flex" align="center">
 								<a style="text-decoration:none;" href="{{ url('/') }}">
-									<img editable="true" src="{{ $message->embed(public_path().'/images/beescanner.png') }}" width="600" style="font:40px/44px Arial, Helvetica, sans-serif; color:#000; vertical-align:top;" alt="Avtei o invitatie la nunta!" />
+									<img editable="true" src="{{ $message->embed(public_path().'/images/beescanner.png') }}" width="600" style="font:40px/44px Arial, Helvetica, sans-serif; color:#000; vertical-align:top;" alt="" />
 								</a>
 							</td>
 						</tr>

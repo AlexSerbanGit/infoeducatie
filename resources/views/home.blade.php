@@ -75,10 +75,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -96,10 +96,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -117,10 +117,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -138,10 +138,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -163,10 +163,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -184,10 +184,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -205,10 +205,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -226,10 +226,10 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
+                  <!-- <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
                     <span class="text-nowrap">Fata de ieri</span>
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
