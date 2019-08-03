@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Allergy;
+use App\Product;
+use App\ProductToAllergy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Product;
-use Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RestaurantDashboardController extends Controller
@@ -185,5 +186,42 @@ class RestaurantDashboardController extends Controller
         } else {
             return redirect() -> back() -> with('message', 'A aparut o problema la parsare!');
         }
+    }
+
+    public function associateAllergiesToProduct(Request $request) {
+
+        $validator = Validator::make($request -> all(), [
+            'allergies' => 'sometimes|required',
+            'allergies.*' => 'required|exists:allergies,id',
+            'product_id' => 'required|exists:products,id'
+        ]);
+
+        if($validator -> fails()) {
+            return redirect() -> back() -> with('message', 'Datele au fost introduse gresit!');
+        }
+
+        $product = Product::find($request -> product_id);
+
+        foreach ($product -> allergies as $key => $value) {
+            $value -> delete();
+        }
+
+        if(isset($request -> allergies) && $request -> allergies) {
+
+            $all = Allergy::find($request -> allergies);
+
+            foreach ($all as $key => $allergy) {
+
+                $product_to_allergy = new ProductToAllergy();
+
+                $product_to_allergy -> allergy_id = $allergy -> id;
+
+                $product_to_allergy -> product_id = $product -> id;
+
+                $product_to_allergy -> save();
+            }
+        }
+
+        return redirect() -> back() -> with('message', 'Alergiile au fost asociate cu succes la produs!');
     }
 }

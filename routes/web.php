@@ -129,6 +129,8 @@ Route::group(['middleware' => ['restaurant'], 'prefix' => 'restaurant'], functio
 
     Route::post('/add/products/csv', 'RestaurantDashboardController@parseCSV');
 
+    Route::post('/associate/allergies/product', 'RestaurantDashboardController@associateAllergiesToProduct') -> name('restaurant-associate-alleries-to-product');
+
 });
 
 Route::group(['middleware' => ['isAdmin'], 'prefix'=>'admin'], function () {
@@ -196,6 +198,8 @@ Route::group(['middleware' => ['auth', 'admin', 'isAdmin'], 'prefix'=>'admin'], 
     Route::get('/admin/delete_product_request/{id}', 'AdminController@deleteRequest');
 
     Route::post('/add/products/csv', 'AdminController@parseCSV') -> name('admin-parse-csv');
+
+    Route::post('/associate/allergies/product', 'AdminController@associateAllergiesToProduct') -> name('admin-associate-alleries-to-product');
 
 });
 

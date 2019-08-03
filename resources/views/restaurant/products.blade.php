@@ -204,34 +204,60 @@
 </div>
 
 @foreach($products as $request)
-<!-- Modal alergies -->
-<div class="modal fade" id="allergies{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Asociaza alergii</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Aici alergii
-<<<<<<< HEAD
+    <div class="modal fade" id="allergies{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Asociaza alergii</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <form action="{{ route('restaurant-associate-alleries-to-product') }}" method="post">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $request -> id }}">
+              <div class="modal-body">
+                  <ul class="list-group ml-3 mr-3">
+                      @foreach ($allergies as $key => $allergy)
+                          @php $ok = false; @endphp
+                          @foreach ($allergy -> products as $key => $value)
+                              @if($value -> product_id == $request -> id)
+                                  @php $ok = true; break @endphp
+                              @endif
+                          @endforeach
 
-=======
-        <div class="">
-         <input type="file" class="" style="display:block !important;">
+                          @if($ok == true)
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                    <input checked name="allergies[]" class="form-check-input" type="checkbox" value="{{ $allergy -> id }}">
+                                        {{ $allergy -> name }}
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                             </div>
+                          @else
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                    <input name="allergies[]" class="form-check-input" type="checkbox" value="{{ $allergy -> id }}">
+                                        {{ $allergy -> name }}
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                             </div>
+                          @endif
+                      @endforeach
+                  </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+          </form>
         </div>
->>>>>>> 29b24b01c88609e0bf23799ed3d8e84dab03e7db
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
-  </div>
-</div>
-
 <!-- Modal edit product -->
 <div class="modal fade" id="edit{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

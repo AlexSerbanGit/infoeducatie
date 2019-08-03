@@ -166,7 +166,6 @@
 </div>
 
 @foreach($products as $request)
-<!-- Modal alergies -->
 <div class="modal fade" id="allergies{{$request->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -176,24 +175,48 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">{{$request -> allergies}}
-          <ul class="list-group ml-3 mr-3">
-              @foreach ($allergies as $key => $allergy)
-                  {{-- @php $ok = false; @endphp --}}
-                  @foreach ($allergy -> products as $key => $allergy_product)
-                      @if($allergy_product-> id == $request -> id)
-                          dddd
+        <form action="{{ route('admin-associate-alleries-to-product') }}" method="post">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $request -> id }}">
+          <div class="modal-body">
+              <ul class="list-group ml-3 mr-3">
+                  @foreach ($allergies as $key => $allergy)
+                      @php $ok = false; @endphp
+                      @foreach ($allergy -> products as $key => $value)
+                          @if($value -> product_id == $request -> id)
+                              @php $ok = true; break @endphp
+                          @endif
+                      @endforeach
+
+                      @if($ok == true)
+                          <div class="form-check">
+                            <label class="form-check-label">
+                                <input checked name="allergies[]" class="form-check-input" type="checkbox" value="{{ $allergy -> id }}">
+                                    {{ $allergy -> name }}
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                         </div>
                       @else
-                          aaa
+                          <div class="form-check">
+                            <label class="form-check-label">
+                                <input name="allergies[]" class="form-check-input" type="checkbox" value="{{ $allergy -> id }}">
+                                    {{ $allergy -> name }}
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                         </div>
                       @endif
                   @endforeach
-              @endforeach
-          </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+              </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+      </form>
     </div>
   </div>
 </div>
